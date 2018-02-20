@@ -118,7 +118,6 @@ void SwSpiClkLow (SPI_PERIPHERAL phrType)
             break;
     }
 }
-// </editor-fold>
 
 void SwSpiSetClock(SPI_PERIPHERAL phrType)
 {
@@ -141,3 +140,5 @@ void SwSpiSetClock(SPI_PERIPHERAL phrType)
     SwSpiClkLow(phrType);
 
 }
+// </editor-fold>
+
