@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/ftmul.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SystemStatus.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/nbproject/Makefile-default.mk</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/GroupsCommon.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/eusart1.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SystemCommon.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/interrupt_manager.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SystemCommon.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/interrupt_manager.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/eusart1.h</file>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/ftneg.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/mcc.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/mcc.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SystemSettings.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/adc.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/FlashApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/tmr0.h</file>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/memset.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/adc.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/EusartApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SystemStatus.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/memory.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SevenSegmentApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/pin_manager.h</file>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/lwmod.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/AdcApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SyntApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/tmr0.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/LedsApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/EusartApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SevenSegmentApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/FlashApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/MessageFunctions.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/memory.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/mcc_generated_files/pin_manager.c</file>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/include/pic18f45k22.h</file>
+            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/exp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/MessageFunctions.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/LedsApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SyntApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/DacApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SwSpiApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/main.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SwSpiApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/SytstemSettings.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/AdcApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531.X/DacApp.c</file>
+        </group>
+    </open-files>
+</project-private>
