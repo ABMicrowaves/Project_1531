@@ -2,10 +2,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "35 AdcApp.h
 [c E7090 4 5 6 7 10 13 25 29 30 31 .. ]
 [n E7090 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
-[v F7279 `(v ~T0 @X0 0 tf ]
+[v F7282 `(v ~T0 @X0 0 tf ]
 "28 MessageFunctions.h
-[c E7171 16 17 18 19 20 21 22 33 34 35 36 37 49 50 51 65 66 81 82 83 84 97 .. ]
-[n E7171 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_RESET_CPLD CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION STATUS_GET_CPLD_FW_VERSION STATUS_SET_MCU_FW_VERSION STATUS_SET_CPLD_FW_VERSION ADC_OPERATION ADC_CHANNEL_MODE ADC_CONVERSION_MODE SYNTH_DOWN_SET SYNTH_UP_SET FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA DAC_SET_VALUE  ]
+[c E7171 16 17 18 19 20 21 22 33 34 35 36 37 49 50 51 64 65 66 67 81 82 83 84 85 97 .. ]
+[n E7171 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_RESET_CPLD CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION STATUS_GET_CPLD_FW_VERSION STATUS_SET_MCU_FW_VERSION STATUS_SET_CPLD_FW_VERSION ADC_OPERATION ADC_CHANNEL_MODE ADC_CONVERSION_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE  ]
 "18
 [v _GroupControlMcu `(v ~T0 @X0 0 ef2`E7171`*uc ]
 "19
@@ -19,8 +19,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "23
 [v _GroupDAC `(v ~T0 @X0 0 ef2`E7171`*uc ]
 "15 EusartApp.c
-[c E7527 0 1 2 3 4 5 6 7 .. ]
-[n E7527 . START_RX_MESSAGE_READ FIND_MAGIC READ_GROUP READ_REQUEST READ_DATA_SIZE READ_DATA CHECK_CRC JUMP_FUNCTION  ]
+[c E7545 0 1 2 3 4 5 6 7 .. ]
+[n E7545 . START_RX_MESSAGE_READ FIND_MAGIC READ_GROUP READ_REQUEST READ_DATA_SIZE READ_DATA CHECK_CRC JUMP_FUNCTION  ]
 "16
 [c E7163 1 2 3 4 5 6 .. ]
 [n E7163 . CONTROL_MSG MCU_STATUS_VERSION_MSG ADC_MSG SYNTH_MSG FLASH_MSG DAC_MSG  ]
@@ -30,9 +30,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _InitRxMessageParams `(v ~T0 @X0 0 ef ]
 "125 mcc_generated_files/eusart1.h
 [v _EUSART1_Read `(uc ~T0 @X0 0 ef ]
-"41 SystemCommon.h
+"43 SystemCommon.h
 [v _ZeroArray `(v ~T0 @X0 0 ef2`*uc`i ]
-"39
+"41
 [v _crc8 `(uc ~T0 @X0 0 ef2`*uc`i ]
 "145 mcc_generated_files/eusart1.h
 [v _EUSART1_Write `(v ~T0 @X0 0 ef1`uc ]
@@ -6747,14 +6747,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;GroupsCommon.h: 62: ADC_OPERATION = 0x31,
 [; ;GroupsCommon.h: 63: ADC_CHANNEL_MODE = 0x32,
 [; ;GroupsCommon.h: 64: ADC_CONVERSION_MODE = 0x33,
-[; ;GroupsCommon.h: 67: SYNTH_DOWN_SET = 0x41,
-[; ;GroupsCommon.h: 68: SYNTH_UP_SET = 0x42,
-[; ;GroupsCommon.h: 71: FLASH_EREASE_MEMORY = 0x51,
-[; ;GroupsCommon.h: 72: FLASH_READ_CONDITION = 0x52,
-[; ;GroupsCommon.h: 73: FLASH_REQUEST_RAW_DATA = 0x53,
-[; ;GroupsCommon.h: 74: FLASH_SEND_RAW_DATA = 0x54,
-[; ;GroupsCommon.h: 77: DAC_SET_VALUE = 0x61,
-[; ;GroupsCommon.h: 78: }MSG_REQUEST;
+[; ;GroupsCommon.h: 67: SYNTH_TX_INIT_SET = 0x40,
+[; ;GroupsCommon.h: 68: SYNTH_RX_INIT_SET = 0x41,
+[; ;GroupsCommon.h: 69: SYNTH_DOWN_SET = 0x42,
+[; ;GroupsCommon.h: 70: SYNTH_UP_SET = 0x43,
+[; ;GroupsCommon.h: 73: FLASH_EREASE_MEMORY = 0x51,
+[; ;GroupsCommon.h: 74: FLASH_READ_CONDITION = 0x52,
+[; ;GroupsCommon.h: 75: FLASH_REQUEST_RAW_DATA = 0x53,
+[; ;GroupsCommon.h: 76: FLASH_SEND_RAW_DATA = 0x54,
+[; ;GroupsCommon.h: 77: FLASH_NO_SAMPLE_YET = 0x55,
+[; ;GroupsCommon.h: 80: DAC_SET_VALUE = 0x61,
+[; ;GroupsCommon.h: 81: }MSG_REQUEST;
 [; ;SystemStatus.h: 27: void SetMcuFwVersion(char* data);
 [; ;SystemStatus.h: 28: void SetCpldFwVersion(char* data);
 [; ;SystemStatus.h: 30: void GetMcuFwVersion();
@@ -6838,21 +6841,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 22: void GroupFlashMemory(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 23: void GroupDAC(MSG_REQUEST request, char* data);
 "26 MessageFunctions.h
-[v _groupsArray `*F7279 ~T0 @X0 -> 6 `i e ]
+[v _groupsArray `*F7282 ~T0 @X0 -> 6 `i e ]
 [i _groupsArray
 :U ..
 "28
--> &U _GroupControlMcu `*F7279
+-> &U _GroupControlMcu `*F7282
 "29
--> &U _GroupStatusAndVersion `*F7279
+-> &U _GroupStatusAndVersion `*F7282
 "30
--> &U _GroupAdc `*F7279
+-> &U _GroupAdc `*F7282
 "31
--> &U _GroupSynthesizers `*F7279
+-> &U _GroupSynthesizers `*F7282
 "32
--> &U _GroupFlashMemory `*F7279
+-> &U _GroupFlashMemory `*F7282
 "33
--> &U _GroupDAC `*F7279
+-> &U _GroupDAC `*F7282
 ..
 ]
 [; ;MessageFunctions.h: 26: void (*groupsArray[(6)])() =
@@ -6890,59 +6893,64 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;math.h: 53: extern double fmod(double, double);
 [; ;math.h: 54: extern double trunc(double);
 [; ;math.h: 55: extern double round(double);
+[; ;DacApp.h: 23: void DacInit(void);
 [; ;DacApp.h: 24: void DacSetValue(char* data);
 [; ;DacApp.h: 27: void DacTest(void);
 [; ;SevenSegmentApp.h: 19: void segmentCounter(void);
 [; ;SevenSegmentApp.h: 20: unsigned short mask(unsigned short num);
 [; ;SevenSegmentApp.h: 21: void InitSevenSegment(void);
 "20 SyntApp.h
-[v _PLL_REGISTERS `Cul ~T0 @X0 -> 12 `i e ]
-[i _PLL_REGISTERS
+[v _PLL_INIT_REGISTERS `Cul ~T0 @X0 -> 13 `i e ]
+[i _PLL_INIT_REGISTERS
 :U ..
 "22
--> -> 745474 `l `ul
+-> -> 66588 `l `ul
 "23
--> -> -> 0 `i `l `ul
+-> -> 6369291 `l `ul
 "24
--> -> -> 33 `i `l `ul
+-> -> 12595770 `l `ul
 "25
--> -> -> 3 `i `l `ul
+-> -> 572636361 `l `ul
 "26
--> -> 1220018211 `l `ul
+-> -> 271385640 `l `ul
 "27
--> -> 5373960 `l `ul
+-> -> 301990119 `l `ul
 "28
--> -> 1728188499 `l `ul
+-> -> 889544822 `l `ul
 "29
--> -> 74565 `l `ul
+-> -> 8388645 `l `ul
 "30
--> -> 74565 `l `ul
+-> -> 872455044 `l `ul
 "31
--> -> 74565 `l `ul
+-> -> -> 3 `i `l `ul
 "32
--> -> 74565 `l `ul
-"34
--> -> 74565 `l `ul
+-> -> -> 18 `i `l `ul
+"33
+-> -> 100663297 `l `ul
+"35
+-> -> 2097984 `l `ul
 ..
 ]
-[; ;SyntApp.h: 20: const uint32_t PLL_REGISTERS[12] =
+[; ;SyntApp.h: 20: const uint32_t PLL_INIT_REGISTERS[13] =
 [; ;SyntApp.h: 21: {
-[; ;SyntApp.h: 22: 0x0B6002,
-[; ;SyntApp.h: 23: 0x0,
-[; ;SyntApp.h: 24: 0x21,
-[; ;SyntApp.h: 25: 0x3,
-[; ;SyntApp.h: 26: 0x48B80023,
-[; ;SyntApp.h: 27: 0x520008,
-[; ;SyntApp.h: 28: 0x67021053,
-[; ;SyntApp.h: 29: 0x12345,
-[; ;SyntApp.h: 30: 0x12345,
-[; ;SyntApp.h: 31: 0x12345,
-[; ;SyntApp.h: 32: 0x12345,
-[; ;SyntApp.h: 33: 0x12345
-[; ;SyntApp.h: 34: };
-[; ;SyntApp.h: 36: void InitSynthesizers(void);
-[; ;SyntApp.h: 39: void UpdateTxFreq(char* data);
-[; ;SyntApp.h: 40: void UpdateRxFreq(char* data);
+[; ;SyntApp.h: 22: 0x0001041C,
+[; ;SyntApp.h: 23: 0x0061300B,
+[; ;SyntApp.h: 24: 0x00C0323A,
+[; ;SyntApp.h: 25: 0x2221BCC9,
+[; ;SyntApp.h: 26: 0x102D0428,
+[; ;SyntApp.h: 27: 0x120000E7,
+[; ;SyntApp.h: 28: 0x35056076,
+[; ;SyntApp.h: 29: 0x00800025,
+[; ;SyntApp.h: 30: 0x34009B84,
+[; ;SyntApp.h: 31: 0x00000003,
+[; ;SyntApp.h: 32: 0x00000012,
+[; ;SyntApp.h: 33: 0x06000001,
+[; ;SyntApp.h: 34: 0x00200340
+[; ;SyntApp.h: 35: };
+[; ;SyntApp.h: 37: void PLLUartInitialize(char* data);
+[; ;SyntApp.h: 38: void PLLInitialize(void);
+[; ;SyntApp.h: 40: void UpdateTxFreq(char* data);
+[; ;SyntApp.h: 41: void UpdateRxFreq(char* data);
 [; ;SyntApp.h: 43: void SYNTH_ISR(void);
 [; ;SwSpiApp.h: 14: typedef enum
 [; ;SwSpiApp.h: 15: {
@@ -6950,27 +6958,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SwSpiApp.h: 17: SYNTH_RX,
 [; ;SwSpiApp.h: 18: EXT_DAC
 [; ;SwSpiApp.h: 19: } SPI_PERIPHERAL;
-[; ;SwSpiApp.h: 21: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
-[; ;SwSpiApp.h: 22: void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
-[; ;SwSpiApp.h: 24: void SwSpiDataLow (SPI_PERIPHERAL type);
-[; ;SwSpiApp.h: 25: void SwSpiDataHigh (SPI_PERIPHERAL type);
-[; ;SwSpiApp.h: 26: void SwSpiClkLow (SPI_PERIPHERAL phrType);
-[; ;SwSpiApp.h: 27: void SwSpiClkHigh (SPI_PERIPHERAL phrType);
-[; ;SwSpiApp.h: 28: void SwSpiSetClock(SPI_PERIPHERAL phrType);
-[; ;SystemCommon.h: 30: typedef enum
-[; ;SystemCommon.h: 31: {
-[; ;SystemCommon.h: 32: START_SYSTEM = 0,
-[; ;SystemCommon.h: 33: ADC_DAC,
-[; ;SystemCommon.h: 34: FLASH,
-[; ;SystemCommon.h: 35: EUSART,
-[; ;SystemCommon.h: 36: FINISH_ROUND
-[; ;SystemCommon.h: 37: }SYSTEM_STATE;
-[; ;SystemCommon.h: 39: unsigned char crc8(char* dataArray, int dataSize);
-[; ;SystemCommon.h: 40: uint8_t make8(uint16_t data, uint8_t dataLocation);
-[; ;SystemCommon.h: 41: void ZeroArray(char* array, int size);
-[; ;SystemCommon.h: 42: void ResetMcu(void);
-[; ;SystemCommon.h: 43: void ResetCpld(void);
-[; ;SystemCommon.h: 44: void SendSystemStartAck(void);
+[; ;SwSpiApp.h: 22: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
+[; ;SwSpiApp.h: 23: void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
+[; ;SwSpiApp.h: 25: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 26: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 28: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 31: void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
+[; ;SwSpiApp.h: 32: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 35: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
+[; ;SystemCommon.h: 32: typedef enum
+[; ;SystemCommon.h: 33: {
+[; ;SystemCommon.h: 34: START_SYSTEM = 0,
+[; ;SystemCommon.h: 35: ADC_DAC,
+[; ;SystemCommon.h: 36: FLASH,
+[; ;SystemCommon.h: 37: EUSART,
+[; ;SystemCommon.h: 38: FINISH_ROUND
+[; ;SystemCommon.h: 39: }SYSTEM_STATE;
+[; ;SystemCommon.h: 41: unsigned char crc8(char* dataArray, int dataSize);
+[; ;SystemCommon.h: 42: uint8_t make8(uint32_t data, uint8_t dataLocation);
+[; ;SystemCommon.h: 43: void ZeroArray(char* array, int size);
+[; ;SystemCommon.h: 44: int GCD(int num1, int num2);
+[; ;SystemCommon.h: 45: uint32_t GetIntFromUartData(char* data);
+[; ;SystemCommon.h: 48: void ResetMcu(void);
+[; ;SystemCommon.h: 49: void ResetCpld(void);
+[; ;SystemCommon.h: 50: void SendSystemStartAck(void);
 [; ;stdlib.h: 7: typedef unsigned short wchar_t;
 [; ;stdlib.h: 15: typedef struct {
 [; ;stdlib.h: 16: int rem;
@@ -7037,9 +7048,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;EusartApp.h: 33: void WriteUartMessage(char* dataBuf, int dataSize);
 [; ;EusartApp.h: 34: void SendAckMessage(MSG_GROUPS inGroup, MSG_REQUEST inRequest);
 "15 EusartApp.c
-[v _cState `E7527 ~T0 @X0 1 s ]
+[v _cState `E7545 ~T0 @X0 1 s ]
 [i _cState
-. `E7527 0
+. `E7545 0
 ]
 [; ;EusartApp.c: 15: static UART_READ_STATE cState = START_RX_MESSAGE_READ;
 "16
@@ -7109,409 +7120,409 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;EusartApp.c: 34: case START_RX_MESSAGE_READ:
 "34
 [e :U 854 ]
-[; ;EusartApp.c: 38: if(eusart1RxCount > (4))
-"38
+[; ;EusartApp.c: 37: if(eusart1RxCount > (4))
+"37
 [e $ ! > -> _eusart1RxCount `i -> 4 `i 855  ]
-[; ;EusartApp.c: 39: {
-"39
+[; ;EusartApp.c: 38: {
+"38
 {
-[; ;EusartApp.c: 40: cState = FIND_MAGIC;
+[; ;EusartApp.c: 39: cState = FIND_MAGIC;
+"39
+[e = _cState . `E7545 1 ]
 "40
-[e = _cState . `E7527 1 ]
-"41
 }
 [e :U 855 ]
-[; ;EusartApp.c: 41: }
-[; ;EusartApp.c: 42: return;
-"42
+[; ;EusartApp.c: 40: }
+[; ;EusartApp.c: 41: return;
+"41
 [e $UE 851  ]
-[; ;EusartApp.c: 44: case FIND_MAGIC:
-"44
+[; ;EusartApp.c: 43: case FIND_MAGIC:
+"43
 [e :U 856 ]
-[; ;EusartApp.c: 46: InitRxMessageParams();
-"46
+[; ;EusartApp.c: 45: InitRxMessageParams();
+"45
 [e ( _InitRxMessageParams ..  ]
-[; ;EusartApp.c: 47: msgCount = 0;
-"47
+[; ;EusartApp.c: 46: msgCount = 0;
+"46
 [e = _msgCount -> -> 0 `i `uc ]
-[; ;EusartApp.c: 48: if(eusart1RxCount > 1)
-"48
+[; ;EusartApp.c: 47: if(eusart1RxCount > 1)
+"47
 [e $ ! > -> _eusart1RxCount `i -> 1 `i 857  ]
-[; ;EusartApp.c: 49: {
+[; ;EusartApp.c: 48: {
+"48
+{
+[; ;EusartApp.c: 49: chRec = EUSART1_Read();
 "49
-{
-[; ;EusartApp.c: 50: chRec = EUSART1_Read();
-"50
 [e = _chRec ( _EUSART1_Read ..  ]
-[; ;EusartApp.c: 51: rxMsgQueue[(0)] = chRec;
-"51
+[; ;EusartApp.c: 50: rxMsgQueue[(0)] = chRec;
+"50
 [e = *U + &U _rxMsgQueue * -> -> -> 0 `i `ui `ux -> -> # *U &U _rxMsgQueue `ui `ux _chRec ]
-[; ;EusartApp.c: 52: if(chRec == (0x24))
-"52
+[; ;EusartApp.c: 51: if(chRec == (0x24))
+"51
 [e $ ! == -> _chRec `i -> 36 `i 858  ]
-[; ;EusartApp.c: 53: {
-"53
+[; ;EusartApp.c: 52: {
+"52
 {
-[; ;EusartApp.c: 54: cState = READ_GROUP;
+[; ;EusartApp.c: 53: cState = READ_GROUP;
+"53
+[e = _cState . `E7545 2 ]
 "54
-[e = _cState . `E7527 2 ]
-"55
 }
 [e :U 858 ]
-"56
+"55
 }
+[; ;EusartApp.c: 54: }
 [; ;EusartApp.c: 55: }
-[; ;EusartApp.c: 56: }
 [e $U 859  ]
-"57
+"56
 [e :U 857 ]
-[; ;EusartApp.c: 57: else
-[; ;EusartApp.c: 58: {
-"58
+[; ;EusartApp.c: 56: else
+[; ;EusartApp.c: 57: {
+"57
 {
-[; ;EusartApp.c: 59: cState = START_RX_MESSAGE_READ;
+[; ;EusartApp.c: 58: cState = START_RX_MESSAGE_READ;
+"58
+[e = _cState . `E7545 0 ]
 "59
-[e = _cState . `E7527 0 ]
-"60
 }
 [e :U 859 ]
-[; ;EusartApp.c: 60: }
-[; ;EusartApp.c: 62: break;
-"62
+[; ;EusartApp.c: 59: }
+[; ;EusartApp.c: 61: break;
+"61
 [e $U 852  ]
-[; ;EusartApp.c: 64: case READ_GROUP:
-"64
+[; ;EusartApp.c: 63: case READ_GROUP:
+"63
 [e :U 860 ]
-[; ;EusartApp.c: 66: if(eusart1RxCount > 1)
-"66
+[; ;EusartApp.c: 65: if(eusart1RxCount > 1)
+"65
 [e $ ! > -> _eusart1RxCount `i -> 1 `i 861  ]
-[; ;EusartApp.c: 67: {
-"67
+[; ;EusartApp.c: 66: {
+"66
 {
-[; ;EusartApp.c: 68: group = EUSART1_Read();
-"68
+[; ;EusartApp.c: 67: group = EUSART1_Read();
+"67
 [e = _group -> ( _EUSART1_Read ..  `E7163 ]
-[; ;EusartApp.c: 69: rxMsgQueue[(1)] = group;
-"69
+[; ;EusartApp.c: 68: rxMsgQueue[(1)] = group;
+"68
 [e = *U + &U _rxMsgQueue * -> -> -> 1 `i `ui `ux -> -> # *U &U _rxMsgQueue `ui `ux -> _group `uc ]
-[; ;EusartApp.c: 70: cState = READ_REQUEST;
+[; ;EusartApp.c: 69: cState = READ_REQUEST;
+"69
+[e = _cState . `E7545 3 ]
 "70
-[e = _cState . `E7527 3 ]
-"71
 }
 [e :U 861 ]
-[; ;EusartApp.c: 71: }
-[; ;EusartApp.c: 72: break;
-"72
+[; ;EusartApp.c: 70: }
+[; ;EusartApp.c: 71: break;
+"71
 [e $U 852  ]
-[; ;EusartApp.c: 74: case READ_REQUEST:
-"74
+[; ;EusartApp.c: 73: case READ_REQUEST:
+"73
 [e :U 862 ]
-[; ;EusartApp.c: 76: if(eusart1RxCount > 1)
-"76
+[; ;EusartApp.c: 75: if(eusart1RxCount > 1)
+"75
 [e $ ! > -> _eusart1RxCount `i -> 1 `i 863  ]
-[; ;EusartApp.c: 77: {
-"77
+[; ;EusartApp.c: 76: {
+"76
 {
-[; ;EusartApp.c: 78: request = EUSART1_Read();
-"78
+[; ;EusartApp.c: 77: request = EUSART1_Read();
+"77
 [e = _request -> ( _EUSART1_Read ..  `E7171 ]
-[; ;EusartApp.c: 79: rxMsgQueue[(2)] = request;
-"79
+[; ;EusartApp.c: 78: rxMsgQueue[(2)] = request;
+"78
 [e = *U + &U _rxMsgQueue * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxMsgQueue `ui `ux -> _request `uc ]
-[; ;EusartApp.c: 80: cState = READ_DATA_SIZE;
+[; ;EusartApp.c: 79: cState = READ_DATA_SIZE;
+"79
+[e = _cState . `E7545 4 ]
 "80
-[e = _cState . `E7527 4 ]
-"81
 }
 [e :U 863 ]
-[; ;EusartApp.c: 81: }
-[; ;EusartApp.c: 82: break;
-"82
+[; ;EusartApp.c: 80: }
+[; ;EusartApp.c: 81: break;
+"81
 [e $U 852  ]
-[; ;EusartApp.c: 84: case READ_DATA_SIZE:
-"84
+[; ;EusartApp.c: 83: case READ_DATA_SIZE:
+"83
 [e :U 864 ]
-[; ;EusartApp.c: 85: if(eusart1RxCount > 1)
-"85
+[; ;EusartApp.c: 84: if(eusart1RxCount > 1)
+"84
 [e $ ! > -> _eusart1RxCount `i -> 1 `i 865  ]
-[; ;EusartApp.c: 86: {
+[; ;EusartApp.c: 85: {
+"85
+{
+[; ;EusartApp.c: 86: dataSize = EUSART1_Read();
 "86
-{
-[; ;EusartApp.c: 87: dataSize = EUSART1_Read();
-"87
 [e = _dataSize ( _EUSART1_Read ..  ]
-[; ;EusartApp.c: 88: rxMsgQueue[(3)] = dataSize;
-"88
+[; ;EusartApp.c: 87: rxMsgQueue[(3)] = dataSize;
+"87
 [e = *U + &U _rxMsgQueue * -> -> -> 3 `i `ui `ux -> -> # *U &U _rxMsgQueue `ui `ux _dataSize ]
-[; ;EusartApp.c: 89: if(dataSize == 0)
-"89
+[; ;EusartApp.c: 88: if(dataSize == 0)
+"88
 [e $ ! == -> _dataSize `i -> 0 `i 866  ]
-[; ;EusartApp.c: 90: {
+[; ;EusartApp.c: 89: {
+"89
+{
+[; ;EusartApp.c: 90: cState = CHECK_CRC;
 "90
-{
-[; ;EusartApp.c: 91: cState = CHECK_CRC;
+[e = _cState . `E7545 6 ]
 "91
-[e = _cState . `E7527 6 ]
-"92
 }
-[; ;EusartApp.c: 92: }
+[; ;EusartApp.c: 91: }
 [e $U 867  ]
-"93
+"92
 [e :U 866 ]
-[; ;EusartApp.c: 93: else
-[; ;EusartApp.c: 94: {
-"94
+[; ;EusartApp.c: 92: else
+[; ;EusartApp.c: 93: {
+"93
 {
-[; ;EusartApp.c: 95: cState = READ_DATA;
+[; ;EusartApp.c: 94: cState = READ_DATA;
+"94
+[e = _cState . `E7545 5 ]
 "95
-[e = _cState . `E7527 5 ]
-"96
 }
 [e :U 867 ]
-"98
+"97
 }
 [e :U 865 ]
-[; ;EusartApp.c: 96: }
-[; ;EusartApp.c: 98: }
-[; ;EusartApp.c: 100: break;
-"100
+[; ;EusartApp.c: 95: }
+[; ;EusartApp.c: 97: }
+[; ;EusartApp.c: 99: break;
+"99
 [e $U 852  ]
-[; ;EusartApp.c: 102: case READ_DATA:
-"102
+[; ;EusartApp.c: 101: case READ_DATA:
+"101
 [e :U 868 ]
-[; ;EusartApp.c: 104: if(eusart1RxCount >= dataSize)
-"104
+[; ;EusartApp.c: 103: if(eusart1RxCount >= dataSize)
+"103
 [e $ ! >= -> _eusart1RxCount `i -> _dataSize `i 869  ]
-[; ;EusartApp.c: 105: {
-"105
+[; ;EusartApp.c: 104: {
+"104
 {
-[; ;EusartApp.c: 106: ZeroArray(rxMsgData, (0x14));
-"106
+[; ;EusartApp.c: 105: ZeroArray(rxMsgData, (0x14));
+"105
 [e ( _ZeroArray (2 , &U _rxMsgData -> 20 `i ]
-[; ;EusartApp.c: 108: for(int idx = 0; idx < dataSize; idx++)
-"108
+[; ;EusartApp.c: 107: for(int idx = 0; idx < dataSize; idx++)
+"107
 {
 [v _idx `i ~T0 @X0 1 a ]
 [e = _idx -> 0 `i ]
 [e $U 873  ]
-"109
-[e :U 870 ]
-[; ;EusartApp.c: 109: {
-{
-[; ;EusartApp.c: 110: chRec = EUSART1_Read();
-"110
-[e = _chRec ( _EUSART1_Read ..  ]
-[; ;EusartApp.c: 111: rxMsgQueue[(0x4) + msgCount++] = chRec;
-"111
-[e = *U + &U _rxMsgQueue * -> -> + -> 4 `i -> ++ _msgCount -> -> 1 `i `uc `i `ui `ux -> -> # *U &U _rxMsgQueue `ui `ux _chRec ]
-[; ;EusartApp.c: 112: rxMsgData[idx] = chRec;
-"112
-[e = *U + &U _rxMsgData * -> -> _idx `ui `ux -> -> # *U &U _rxMsgData `ui `ux _chRec ]
-"113
-}
 "108
+[e :U 870 ]
+[; ;EusartApp.c: 108: {
+{
+[; ;EusartApp.c: 109: chRec = EUSART1_Read();
+"109
+[e = _chRec ( _EUSART1_Read ..  ]
+[; ;EusartApp.c: 110: rxMsgQueue[(0x4) + msgCount++] = chRec;
+"110
+[e = *U + &U _rxMsgQueue * -> -> + -> 4 `i -> ++ _msgCount -> -> 1 `i `uc `i `ui `ux -> -> # *U &U _rxMsgQueue `ui `ux _chRec ]
+[; ;EusartApp.c: 111: rxMsgData[idx] = chRec;
+"111
+[e = *U + &U _rxMsgData * -> -> _idx `ui `ux -> -> # *U &U _rxMsgData `ui `ux _chRec ]
+"112
+}
+"107
 [e ++ _idx -> 1 `i ]
 [e :U 873 ]
 [e $ < _idx -> _dataSize `i 870  ]
 [e :U 871 ]
-"113
+"112
 }
-[; ;EusartApp.c: 113: }
-[; ;EusartApp.c: 115: cState = CHECK_CRC;
+[; ;EusartApp.c: 112: }
+[; ;EusartApp.c: 114: cState = CHECK_CRC;
+"114
+[e = _cState . `E7545 6 ]
 "115
-[e = _cState . `E7527 6 ]
-"116
 }
 [e :U 869 ]
-[; ;EusartApp.c: 116: }
-[; ;EusartApp.c: 117: break;
-"117
+[; ;EusartApp.c: 115: }
+[; ;EusartApp.c: 116: break;
+"116
 [e $U 852  ]
-[; ;EusartApp.c: 119: case CHECK_CRC:
-"119
+[; ;EusartApp.c: 118: case CHECK_CRC:
+"118
 [e :U 874 ]
-[; ;EusartApp.c: 120: if(eusart1RxCount >= 1)
-"120
+[; ;EusartApp.c: 119: if(eusart1RxCount >= 1)
+"119
 [e $ ! >= -> _eusart1RxCount `i -> 1 `i 875  ]
-[; ;EusartApp.c: 121: {
+[; ;EusartApp.c: 120: {
+"120
+{
+[; ;EusartApp.c: 121: crcGiven = EUSART1_Read();
 "121
-{
-[; ;EusartApp.c: 122: crcGiven = EUSART1_Read();
-"122
 [e = _crcGiven ( _EUSART1_Read ..  ]
-[; ;EusartApp.c: 123: crcCalc = crc8(rxMsgQueue, (0x4) + msgCount);
-"123
+[; ;EusartApp.c: 122: crcCalc = crc8(rxMsgQueue, (0x4) + msgCount);
+"122
 [e = _crcCalc ( _crc8 (2 , &U _rxMsgQueue + -> 4 `i -> _msgCount `i ]
-[; ;EusartApp.c: 125: if(crcGiven == crcCalc)
-"125
+[; ;EusartApp.c: 124: if(crcGiven == crcCalc)
+"124
 [e $ ! == -> _crcGiven `i -> _crcCalc `i 876  ]
-[; ;EusartApp.c: 126: {
+[; ;EusartApp.c: 125: {
+"125
+{
+[; ;EusartApp.c: 126: cState = JUMP_FUNCTION;
 "126
-{
-[; ;EusartApp.c: 127: cState = JUMP_FUNCTION;
+[e = _cState . `E7545 7 ]
 "127
-[e = _cState . `E7527 7 ]
-"128
 }
-[; ;EusartApp.c: 128: }
+[; ;EusartApp.c: 127: }
 [e $U 877  ]
-"129
+"128
 [e :U 876 ]
-[; ;EusartApp.c: 129: else
-[; ;EusartApp.c: 130: {
-"130
+[; ;EusartApp.c: 128: else
+[; ;EusartApp.c: 129: {
+"129
 {
-[; ;EusartApp.c: 131: cState = START_RX_MESSAGE_READ;
+[; ;EusartApp.c: 130: cState = START_RX_MESSAGE_READ;
+"130
+[e = _cState . `E7545 0 ]
 "131
-[e = _cState . `E7527 0 ]
-"132
 }
 [e :U 877 ]
-"133
+"132
 }
 [e :U 875 ]
+[; ;EusartApp.c: 131: }
 [; ;EusartApp.c: 132: }
-[; ;EusartApp.c: 133: }
-[; ;EusartApp.c: 134: break;
-"134
+[; ;EusartApp.c: 133: break;
+"133
 [e $U 852  ]
-[; ;EusartApp.c: 136: case JUMP_FUNCTION:
-"136
+[; ;EusartApp.c: 135: case JUMP_FUNCTION:
+"135
 [e :U 878 ]
-[; ;EusartApp.c: 137: groupsArray[group - 1](request, rxMsgData);
-"137
+[; ;EusartApp.c: 136: groupsArray[group - 1](request, rxMsgData);
+"136
 [e ( *U *U + &U _groupsArray * -> -> - -> _group `i -> 1 `i `ui `ux -> -> # *U &U _groupsArray `ui `ux , -> _request `i &U _rxMsgData ]
-[; ;EusartApp.c: 138: cState = START_RX_MESSAGE_READ;
+[; ;EusartApp.c: 137: cState = START_RX_MESSAGE_READ;
+"137
+[e = _cState . `E7545 0 ]
+[; ;EusartApp.c: 138: break;
 "138
-[e = _cState . `E7527 0 ]
-[; ;EusartApp.c: 139: break;
-"139
 [e $U 852  ]
-"140
+"139
 }
-[; ;EusartApp.c: 140: }
+[; ;EusartApp.c: 139: }
 [e $U 852  ]
 "32
 [e :U 853 ]
-[e [\ _cState , $ . `E7527 0 854
- , $ . `E7527 1 856
- , $ . `E7527 2 860
- , $ . `E7527 3 862
- , $ . `E7527 4 864
- , $ . `E7527 5 868
- , $ . `E7527 6 874
- , $ . `E7527 7 878
+[e [\ _cState , $ . `E7545 0 854
+ , $ . `E7545 1 856
+ , $ . `E7545 2 860
+ , $ . `E7545 3 862
+ , $ . `E7545 4 864
+ , $ . `E7545 5 868
+ , $ . `E7545 6 874
+ , $ . `E7545 7 878
  852 ]
-"140
+"139
 [e :U 852 ]
-[; ;EusartApp.c: 141: }
-"141
+[; ;EusartApp.c: 140: }
+"140
 [e :UE 851 ]
 }
-"143
+"142
 [v _InitRxMessageParams `(v ~T0 @X0 1 ef ]
-"144
+"143
 {
-[; ;EusartApp.c: 143: void InitRxMessageParams(void)
-[; ;EusartApp.c: 144: {
+[; ;EusartApp.c: 142: void InitRxMessageParams(void)
+[; ;EusartApp.c: 143: {
 [e :U _InitRxMessageParams ]
 [f ]
-[; ;EusartApp.c: 147: dataSize = 0;
-"147
+[; ;EusartApp.c: 146: dataSize = 0;
+"146
 [e = _dataSize -> -> 0 `i `uc ]
-[; ;EusartApp.c: 148: crcCalc = 0;
-"148
+[; ;EusartApp.c: 147: crcCalc = 0;
+"147
 [e = _crcCalc -> -> 0 `i `uc ]
-[; ;EusartApp.c: 149: crcGiven = 0;
-"149
+[; ;EusartApp.c: 148: crcGiven = 0;
+"148
 [e = _crcGiven -> -> 0 `i `uc ]
-[; ;EusartApp.c: 150: msgCount = 0;
-"150
+[; ;EusartApp.c: 149: msgCount = 0;
+"149
 [e = _msgCount -> -> 0 `i `uc ]
-[; ;EusartApp.c: 151: ZeroArray(rxMsgQueue, (0x14));
-"151
+[; ;EusartApp.c: 150: ZeroArray(rxMsgQueue, (0x14));
+"150
 [e ( _ZeroArray (2 , &U _rxMsgQueue -> 20 `i ]
-[; ;EusartApp.c: 152: }
-"152
+[; ;EusartApp.c: 151: }
+"151
 [e :UE 879 ]
 }
-"159
+"158
 [v _WriteUartMessage `(v ~T0 @X0 1 ef2`*uc`i ]
-"160
-{
-[; ;EusartApp.c: 159: void WriteUartMessage(char* dataBuf, int dataSize)
-[; ;EusartApp.c: 160: {
-[e :U _WriteUartMessage ]
 "159
+{
+[; ;EusartApp.c: 158: void WriteUartMessage(char* dataBuf, int dataSize)
+[; ;EusartApp.c: 159: {
+[e :U _WriteUartMessage ]
+"158
 [v _dataBuf `*uc ~T0 @X0 1 r1 ]
 [v _dataSize `i ~T0 @X0 1 r2 ]
-"160
+"159
 [f ]
-[; ;EusartApp.c: 161: for(int idx = 0; idx < dataSize; idx++)
-"161
+[; ;EusartApp.c: 160: for(int idx = 0; idx < dataSize; idx++)
+"160
 {
 [v _idx `i ~T0 @X0 1 a ]
 [e = _idx -> 0 `i ]
 [e $U 884  ]
-"162
-[e :U 881 ]
-[; ;EusartApp.c: 162: {
-{
-[; ;EusartApp.c: 163: EUSART1_Write(dataBuf[idx]);
-"163
-[e ( _EUSART1_Write (1 *U + _dataBuf * -> _idx `x -> -> # *U _dataBuf `i `x ]
-"164
-}
 "161
+[e :U 881 ]
+[; ;EusartApp.c: 161: {
+{
+[; ;EusartApp.c: 162: EUSART1_Write(dataBuf[idx]);
+"162
+[e ( _EUSART1_Write (1 *U + _dataBuf * -> _idx `x -> -> # *U _dataBuf `i `x ]
+"163
+}
+"160
 [e ++ _idx -> 1 `i ]
 [e :U 884 ]
 [e $ < _idx _dataSize 881  ]
 [e :U 882 ]
-"164
+"163
 }
+[; ;EusartApp.c: 163: }
 [; ;EusartApp.c: 164: }
-[; ;EusartApp.c: 165: }
-"165
+"164
 [e :UE 880 ]
 }
-"172
+"171
 [v _SendAckMessage `(v ~T0 @X0 1 ef2`E7163`E7171 ]
-"173
-{
-[; ;EusartApp.c: 172: void SendAckMessage(MSG_GROUPS inGroup, MSG_REQUEST inRequest)
-[; ;EusartApp.c: 173: {
-[e :U _SendAckMessage ]
 "172
+{
+[; ;EusartApp.c: 171: void SendAckMessage(MSG_GROUPS inGroup, MSG_REQUEST inRequest)
+[; ;EusartApp.c: 172: {
+[e :U _SendAckMessage ]
+"171
 [v _inGroup `E7163 ~T0 @X0 1 r1 ]
 [v _inRequest `E7171 ~T0 @X0 1 r2 ]
-"173
+"172
 [f ]
-"175
+"174
 [v _TxMsg `uc ~T0 @X0 + -> 5 `i -> 1 `i a ]
-[; ;EusartApp.c: 175: char TxMsg[(0x5) + 1];
-[; ;EusartApp.c: 176: ZeroArray(TxMsg, (0x5) + 1);
-"176
+[; ;EusartApp.c: 174: char TxMsg[(0x5) + 1];
+[; ;EusartApp.c: 175: ZeroArray(TxMsg, (0x5) + 1);
+"175
 [e ( _ZeroArray (2 , &U _TxMsg + -> 5 `i -> 1 `i ]
-[; ;EusartApp.c: 179: TxMsg[(0)] = (0x24);
-"179
+[; ;EusartApp.c: 178: TxMsg[(0)] = (0x24);
+"178
 [e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
-[; ;EusartApp.c: 180: TxMsg[(1)] = inGroup;
-"180
+[; ;EusartApp.c: 179: TxMsg[(1)] = inGroup;
+"179
 [e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> _inGroup `uc ]
-[; ;EusartApp.c: 181: TxMsg[(2)] = inRequest;
-"181
+[; ;EusartApp.c: 180: TxMsg[(2)] = inRequest;
+"180
 [e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> _inRequest `uc ]
-[; ;EusartApp.c: 182: TxMsg[(3)] = 0;
-"182
+[; ;EusartApp.c: 181: TxMsg[(3)] = 0;
+"181
 [e = *U + &U _TxMsg * -> -> -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 0 `i `uc ]
-[; ;EusartApp.c: 184: TxMsg[(0x5)] = crc8(TxMsg, (0x5));
-"184
+[; ;EusartApp.c: 183: TxMsg[(0x5)] = crc8(TxMsg, (0x5));
+"183
 [e = *U + &U _TxMsg * -> -> -> 5 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg -> 5 `i ]
-[; ;EusartApp.c: 186: WriteUartMessage(TxMsg, (0x5) + 1);
-"186
+[; ;EusartApp.c: 185: WriteUartMessage(TxMsg, (0x5) + 1);
+"185
 [e ( _WriteUartMessage (2 , &U _TxMsg + -> 5 `i -> 1 `i ]
-[; ;EusartApp.c: 187: }
-"187
+[; ;EusartApp.c: 186: }
+"186
 [e :UE 885 ]
 }

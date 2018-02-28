@@ -21,33 +21,19 @@ void DacTest(void)
 }
 // </editor-fold>
 
+void DacInit(void)
+{
+    SWSPI_send_word(EXT_DAC, DAC_A_INIT_VAL, 1);
+    SWSPI_send_word(EXT_DAC, DAC_B_INIT_VAL, 1);
+    SWSPI_send_word(EXT_DAC, DAC_C_INIT_VAL, 1);
+    SWSPI_send_word(EXT_DAC, DAC_D_INIT_VAL, 1);
+}
 // <editor-fold defaultstate="collapsed" desc="DAC Convert">
 
 void DacSetValue(char* data)
 {
-    int digitalVal = 0, dataCnt = 0;
-    uint8_t vout = 0;
-
-    double dVout = 0;
-    char tempArr[DAC_BYTES_IN_VAL];
-    for(int idx = 0; idx < DAC_BYTES_IN_VAL; idx++)
-    { 
-        if(data[idx] != 0x2e)
-        {
-            tempArr[dataCnt++] = data[idx];
-        }
-    }
-    
-    for(int idx = 0; idx < DAC_BYTES_IN_VAL - 1; idx++)
-    { 
-        digitalVal += tempArr[DAC_BYTES_IN_VAL - 2 - idx]*pow(10,idx);
-    }
-  
-    dVout =  (digitalVal - VSOURCEMINUS) * pow(2,DAC_BITS) / (VSOURCEPLUS - VSOURCEMINUS); 
-    vout = (uint8_t)dVout;
-
-    //digitalVal++;
-    //DAC_SetOutput(vout);
+    uint16_t regData = GetIntFromUartData(data);
+    SWSPI_send_word(EXT_DAC, regData, 1);
     
     // Transmit ACK signal to serial:
     SendAckMessage((MSG_GROUPS)DAC_MSG, (MSG_REQUEST)DAC_SET_VALUE);

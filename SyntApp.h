@@ -13,35 +13,34 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 #define SYNTH_DELAY_BETWEEN_WORDS_MSEC 250
 
-#define FREQ_SIZE_BYTES 4
-#define NUM_OF_REGISTERS 12
+#define REG_DATA_BYTES_SIZE 6
+#define NUM_OF_REGISTERS 13
 
 // Registers will be write on opposite direction.
-const uint32_t PLL_REGISTERS[12] = 
+const uint32_t PLL_INIT_REGISTERS[13] = 
 {
-    0x0B6002,   /* Ro0  */
-    0x0,        /* R01  */
-    0x21,       /* R02  */
-    0x3,        /* R03  */
-    0x48B80023, /* R04  */
-    0x520008,   /* R05  */
-    0x67021053, /* R06  */
-    0x12345,    /* R07  */
-    0x12345,    /* R08  */
-    0x12345,    /* R09  */
-    0x12345,    /* R10  */
-    0x12345     /* R11  */
+    0x0001041C,     /* R12  */
+    0x0061300B,     /* R11  */
+    0x00C0323A,     /* R10  */
+    0x2221BCC9,     /* R09  */
+    0x102D0428,     /* R08  */
+    0x120000E7,     /* R07  */
+    0x35056076,     /* R06  */
+    0x00800025,     /* R05  */
+    0x34009B84,     /* R04  */
+    0x00000003,     /* R03  */
+    0x00000012,     /* R02  */
+    0x06000001,     /* R01  */
+    0x00200340      /* R00  */
 };  
 
-void InitSynthesizers(void);
-//void PLL_initialize(SPI_PERIPHERAL phrType);
+void PLLUartInitialize(char* data);
+void PLLInitialize(void);
 
 void UpdateTxFreq(char* data);
 void UpdateRxFreq(char* data);
 
-
 void SYNTH_ISR(void);
-
 
 #endif	/* SYNTAPP_H */
 

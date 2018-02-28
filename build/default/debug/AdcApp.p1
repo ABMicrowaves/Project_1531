@@ -1,8 +1,8 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[v F7177 `(v ~T0 @X0 0 tf ]
+[v F7180 `(v ~T0 @X0 0 tf ]
 "28 MessageFunctions.h
-[c E7086 16 17 18 19 20 21 22 33 34 35 36 37 49 50 51 65 66 81 82 83 84 97 .. ]
-[n E7086 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_RESET_CPLD CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION STATUS_GET_CPLD_FW_VERSION STATUS_SET_MCU_FW_VERSION STATUS_SET_CPLD_FW_VERSION ADC_OPERATION ADC_CHANNEL_MODE ADC_CONVERSION_MODE SYNTH_DOWN_SET SYNTH_UP_SET FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA DAC_SET_VALUE  ]
+[c E7086 16 17 18 19 20 21 22 33 34 35 36 37 49 50 51 64 65 66 67 81 82 83 84 85 97 .. ]
+[n E7086 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_RESET_CPLD CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION STATUS_GET_CPLD_FW_VERSION STATUS_SET_MCU_FW_VERSION STATUS_SET_CPLD_FW_VERSION ADC_OPERATION ADC_CHANNEL_MODE ADC_CONVERSION_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE  ]
 "18
 [v _GroupControlMcu `(v ~T0 @X0 0 ef2`E7086`*uc ]
 "19
@@ -19,11 +19,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [c E7005 4 5 6 7 10 13 25 29 30 31 .. ]
 [n E7005 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
 "13 AdcApp.c
-[c E7530 0 1 .. ]
-[n E7530 . CONVERSION_LEFT_FORAMT CONVERSION_RIGHT_FORAMT  ]
+[c E7548 0 1 .. ]
+[n E7548 . CONVERSION_LEFT_FORAMT CONVERSION_RIGHT_FORAMT  ]
 "14
-[c E7534 0 1 .. ]
-[n E7534 . CIRCULAR SINGLE_CHANNEL  ]
+[c E7552 0 1 .. ]
+[n E7552 . CIRCULAR SINGLE_CHANNEL  ]
 "35
 [c E7078 1 2 3 4 5 6 .. ]
 [n E7078 . CONTROL_MSG MCU_STATUS_VERSION_MSG ADC_MSG SYNTH_MSG FLASH_MSG DAC_MSG  ]
@@ -6723,14 +6723,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;GroupsCommon.h: 62: ADC_OPERATION = 0x31,
 [; ;GroupsCommon.h: 63: ADC_CHANNEL_MODE = 0x32,
 [; ;GroupsCommon.h: 64: ADC_CONVERSION_MODE = 0x33,
-[; ;GroupsCommon.h: 67: SYNTH_DOWN_SET = 0x41,
-[; ;GroupsCommon.h: 68: SYNTH_UP_SET = 0x42,
-[; ;GroupsCommon.h: 71: FLASH_EREASE_MEMORY = 0x51,
-[; ;GroupsCommon.h: 72: FLASH_READ_CONDITION = 0x52,
-[; ;GroupsCommon.h: 73: FLASH_REQUEST_RAW_DATA = 0x53,
-[; ;GroupsCommon.h: 74: FLASH_SEND_RAW_DATA = 0x54,
-[; ;GroupsCommon.h: 77: DAC_SET_VALUE = 0x61,
-[; ;GroupsCommon.h: 78: }MSG_REQUEST;
+[; ;GroupsCommon.h: 67: SYNTH_TX_INIT_SET = 0x40,
+[; ;GroupsCommon.h: 68: SYNTH_RX_INIT_SET = 0x41,
+[; ;GroupsCommon.h: 69: SYNTH_DOWN_SET = 0x42,
+[; ;GroupsCommon.h: 70: SYNTH_UP_SET = 0x43,
+[; ;GroupsCommon.h: 73: FLASH_EREASE_MEMORY = 0x51,
+[; ;GroupsCommon.h: 74: FLASH_READ_CONDITION = 0x52,
+[; ;GroupsCommon.h: 75: FLASH_REQUEST_RAW_DATA = 0x53,
+[; ;GroupsCommon.h: 76: FLASH_SEND_RAW_DATA = 0x54,
+[; ;GroupsCommon.h: 77: FLASH_NO_SAMPLE_YET = 0x55,
+[; ;GroupsCommon.h: 80: DAC_SET_VALUE = 0x61,
+[; ;GroupsCommon.h: 81: }MSG_REQUEST;
 [; ;SystemStatus.h: 27: void SetMcuFwVersion(char* data);
 [; ;SystemStatus.h: 28: void SetCpldFwVersion(char* data);
 [; ;SystemStatus.h: 30: void GetMcuFwVersion();
@@ -6769,21 +6772,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 22: void GroupFlashMemory(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 23: void GroupDAC(MSG_REQUEST request, char* data);
 "26 MessageFunctions.h
-[v _groupsArray `*F7177 ~T0 @X0 -> 6 `i e ]
+[v _groupsArray `*F7180 ~T0 @X0 -> 6 `i e ]
 [i _groupsArray
 :U ..
 "28
--> &U _GroupControlMcu `*F7177
+-> &U _GroupControlMcu `*F7180
 "29
--> &U _GroupStatusAndVersion `*F7177
+-> &U _GroupStatusAndVersion `*F7180
 "30
--> &U _GroupAdc `*F7177
+-> &U _GroupAdc `*F7180
 "31
--> &U _GroupSynthesizers `*F7177
+-> &U _GroupSynthesizers `*F7180
 "32
--> &U _GroupFlashMemory `*F7177
+-> &U _GroupFlashMemory `*F7180
 "33
--> &U _GroupDAC `*F7177
+-> &U _GroupDAC `*F7180
 ..
 ]
 [; ;MessageFunctions.h: 26: void (*groupsArray[(6)])() =
@@ -6821,6 +6824,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;math.h: 53: extern double fmod(double, double);
 [; ;math.h: 54: extern double trunc(double);
 [; ;math.h: 55: extern double round(double);
+[; ;DacApp.h: 23: void DacInit(void);
 [; ;DacApp.h: 24: void DacSetValue(char* data);
 [; ;DacApp.h: 27: void DacTest(void);
 [; ;__size_t.h: 4: typedef unsigned size_t;
@@ -6919,53 +6923,57 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SevenSegmentApp.h: 20: unsigned short mask(unsigned short num);
 [; ;SevenSegmentApp.h: 21: void InitSevenSegment(void);
 "20 SyntApp.h
-[v _PLL_REGISTERS `Cul ~T0 @X0 -> 12 `i e ]
-[i _PLL_REGISTERS
+[v _PLL_INIT_REGISTERS `Cul ~T0 @X0 -> 13 `i e ]
+[i _PLL_INIT_REGISTERS
 :U ..
 "22
--> -> 745474 `l `ul
+-> -> 66588 `l `ul
 "23
--> -> -> 0 `i `l `ul
+-> -> 6369291 `l `ul
 "24
--> -> -> 33 `i `l `ul
+-> -> 12595770 `l `ul
 "25
--> -> -> 3 `i `l `ul
+-> -> 572636361 `l `ul
 "26
--> -> 1220018211 `l `ul
+-> -> 271385640 `l `ul
 "27
--> -> 5373960 `l `ul
+-> -> 301990119 `l `ul
 "28
--> -> 1728188499 `l `ul
+-> -> 889544822 `l `ul
 "29
--> -> 74565 `l `ul
+-> -> 8388645 `l `ul
 "30
--> -> 74565 `l `ul
+-> -> 872455044 `l `ul
 "31
--> -> 74565 `l `ul
+-> -> -> 3 `i `l `ul
 "32
--> -> 74565 `l `ul
-"34
--> -> 74565 `l `ul
+-> -> -> 18 `i `l `ul
+"33
+-> -> 100663297 `l `ul
+"35
+-> -> 2097984 `l `ul
 ..
 ]
-[; ;SyntApp.h: 20: const uint32_t PLL_REGISTERS[12] =
+[; ;SyntApp.h: 20: const uint32_t PLL_INIT_REGISTERS[13] =
 [; ;SyntApp.h: 21: {
-[; ;SyntApp.h: 22: 0x0B6002,
-[; ;SyntApp.h: 23: 0x0,
-[; ;SyntApp.h: 24: 0x21,
-[; ;SyntApp.h: 25: 0x3,
-[; ;SyntApp.h: 26: 0x48B80023,
-[; ;SyntApp.h: 27: 0x520008,
-[; ;SyntApp.h: 28: 0x67021053,
-[; ;SyntApp.h: 29: 0x12345,
-[; ;SyntApp.h: 30: 0x12345,
-[; ;SyntApp.h: 31: 0x12345,
-[; ;SyntApp.h: 32: 0x12345,
-[; ;SyntApp.h: 33: 0x12345
-[; ;SyntApp.h: 34: };
-[; ;SyntApp.h: 36: void InitSynthesizers(void);
-[; ;SyntApp.h: 39: void UpdateTxFreq(char* data);
-[; ;SyntApp.h: 40: void UpdateRxFreq(char* data);
+[; ;SyntApp.h: 22: 0x0001041C,
+[; ;SyntApp.h: 23: 0x0061300B,
+[; ;SyntApp.h: 24: 0x00C0323A,
+[; ;SyntApp.h: 25: 0x2221BCC9,
+[; ;SyntApp.h: 26: 0x102D0428,
+[; ;SyntApp.h: 27: 0x120000E7,
+[; ;SyntApp.h: 28: 0x35056076,
+[; ;SyntApp.h: 29: 0x00800025,
+[; ;SyntApp.h: 30: 0x34009B84,
+[; ;SyntApp.h: 31: 0x00000003,
+[; ;SyntApp.h: 32: 0x00000012,
+[; ;SyntApp.h: 33: 0x06000001,
+[; ;SyntApp.h: 34: 0x00200340
+[; ;SyntApp.h: 35: };
+[; ;SyntApp.h: 37: void PLLUartInitialize(char* data);
+[; ;SyntApp.h: 38: void PLLInitialize(void);
+[; ;SyntApp.h: 40: void UpdateTxFreq(char* data);
+[; ;SyntApp.h: 41: void UpdateRxFreq(char* data);
 [; ;SyntApp.h: 43: void SYNTH_ISR(void);
 [; ;SwSpiApp.h: 14: typedef enum
 [; ;SwSpiApp.h: 15: {
@@ -6973,27 +6981,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SwSpiApp.h: 17: SYNTH_RX,
 [; ;SwSpiApp.h: 18: EXT_DAC
 [; ;SwSpiApp.h: 19: } SPI_PERIPHERAL;
-[; ;SwSpiApp.h: 21: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
-[; ;SwSpiApp.h: 22: void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
-[; ;SwSpiApp.h: 24: void SwSpiDataLow (SPI_PERIPHERAL type);
-[; ;SwSpiApp.h: 25: void SwSpiDataHigh (SPI_PERIPHERAL type);
-[; ;SwSpiApp.h: 26: void SwSpiClkLow (SPI_PERIPHERAL phrType);
-[; ;SwSpiApp.h: 27: void SwSpiClkHigh (SPI_PERIPHERAL phrType);
-[; ;SwSpiApp.h: 28: void SwSpiSetClock(SPI_PERIPHERAL phrType);
-[; ;SystemCommon.h: 30: typedef enum
-[; ;SystemCommon.h: 31: {
-[; ;SystemCommon.h: 32: START_SYSTEM = 0,
-[; ;SystemCommon.h: 33: ADC_DAC,
-[; ;SystemCommon.h: 34: FLASH,
-[; ;SystemCommon.h: 35: EUSART,
-[; ;SystemCommon.h: 36: FINISH_ROUND
-[; ;SystemCommon.h: 37: }SYSTEM_STATE;
-[; ;SystemCommon.h: 39: unsigned char crc8(char* dataArray, int dataSize);
-[; ;SystemCommon.h: 40: uint8_t make8(uint16_t data, uint8_t dataLocation);
-[; ;SystemCommon.h: 41: void ZeroArray(char* array, int size);
-[; ;SystemCommon.h: 42: void ResetMcu(void);
-[; ;SystemCommon.h: 43: void ResetCpld(void);
-[; ;SystemCommon.h: 44: void SendSystemStartAck(void);
+[; ;SwSpiApp.h: 22: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
+[; ;SwSpiApp.h: 23: void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
+[; ;SwSpiApp.h: 25: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 26: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 28: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 31: void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
+[; ;SwSpiApp.h: 32: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 35: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
+[; ;SystemCommon.h: 32: typedef enum
+[; ;SystemCommon.h: 33: {
+[; ;SystemCommon.h: 34: START_SYSTEM = 0,
+[; ;SystemCommon.h: 35: ADC_DAC,
+[; ;SystemCommon.h: 36: FLASH,
+[; ;SystemCommon.h: 37: EUSART,
+[; ;SystemCommon.h: 38: FINISH_ROUND
+[; ;SystemCommon.h: 39: }SYSTEM_STATE;
+[; ;SystemCommon.h: 41: unsigned char crc8(char* dataArray, int dataSize);
+[; ;SystemCommon.h: 42: uint8_t make8(uint32_t data, uint8_t dataLocation);
+[; ;SystemCommon.h: 43: void ZeroArray(char* array, int size);
+[; ;SystemCommon.h: 44: int GCD(int num1, int num2);
+[; ;SystemCommon.h: 45: uint32_t GetIntFromUartData(char* data);
+[; ;SystemCommon.h: 48: void ResetMcu(void);
+[; ;SystemCommon.h: 49: void ResetCpld(void);
+[; ;SystemCommon.h: 50: void SendSystemStartAck(void);
 [; ;AdcApp.h: 22: typedef enum
 [; ;AdcApp.h: 23: {
 [; ;AdcApp.h: 24: CONVERSION_LEFT_FORAMT = 0,
@@ -7040,15 +7051,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;AdcApp.h: 49: void InitAdcApplicationMgr();
 [; ;AdcApp.h: 50: void AdcConvert();
 "13 AdcApp.c
-[v _conversionFormat `E7530 ~T0 @X0 1 e ]
+[v _conversionFormat `E7548 ~T0 @X0 1 e ]
 [i _conversionFormat
-. `E7530 0
+. `E7548 0
 ]
 [; ;AdcApp.c: 13: ADC_CONVERSION_FORMAT conversionFormat = CONVERSION_LEFT_FORAMT;
 "14
-[v _adcSampleMode `E7534 ~T0 @X0 1 e ]
+[v _adcSampleMode `E7552 ~T0 @X0 1 e ]
 [i _adcSampleMode
-. `E7534 0
+. `E7552 0
 ]
 [; ;AdcApp.c: 14: ADC_SAMPLE_MODE adcSampleMode = CIRCULAR;
 "15
@@ -7073,10 +7084,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;AdcApp.c: 24: conversionFormat = CONVERSION_LEFT_FORAMT;
 "24
-[e = _conversionFormat . `E7530 0 ]
+[e = _conversionFormat . `E7548 0 ]
 [; ;AdcApp.c: 25: adcSampleMode = CIRCULAR;
 "25
-[e = _adcSampleMode . `E7534 0 ]
+[e = _adcSampleMode . `E7552 0 ]
 [v _channel `uc ~T0 @X0 1 a ]
 [; ;AdcApp.c: 26: char channel = 0;
 "26
@@ -7134,10 +7145,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;AdcApp.c: 45: adcSampleMode = data[0];
 "45
-[e = _adcSampleMode -> *U + _data * -> -> 0 `i `x -> -> # *U _data `i `x `E7534 ]
+[e = _adcSampleMode -> *U + _data * -> -> 0 `i `x -> -> # *U _data `i `x `E7552 ]
 [; ;AdcApp.c: 46: if (adcSampleMode == SINGLE_CHANNEL)
 "46
-[e $ ! == -> _adcSampleMode `i -> . `E7534 1 `i 855  ]
+[e $ ! == -> _adcSampleMode `i -> . `E7552 1 `i 855  ]
 [; ;AdcApp.c: 47: {
 "47
 {
@@ -7169,7 +7180,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _adcRes -> -> 0 `i `ui ]
 [; ;AdcApp.c: 63: if (adcSampleMode == CIRCULAR)
 "63
-[e $ ! == -> _adcSampleMode `i -> . `E7534 0 `i 857  ]
+[e $ ! == -> _adcSampleMode `i -> . `E7552 0 `i 857  ]
 [; ;AdcApp.c: 64: {
 "64
 {
@@ -7213,7 +7224,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "73
 [e :U 857 ]
 [; ;AdcApp.c: 73: else if (adcSampleMode == SINGLE_CHANNEL)
-[e $ ! == -> _adcSampleMode `i -> . `E7534 1 `i 862  ]
+[e $ ! == -> _adcSampleMode `i -> . `E7552 1 `i 862  ]
 [; ;AdcApp.c: 74: {
 "74
 {

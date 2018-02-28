@@ -64,14 +64,17 @@ typedef enum
     ADC_CONVERSION_MODE         = 0x33,
     
     // Synthesizer (Up / Down):
-    SYNTH_DOWN_SET              = 0x41,
-    SYNTH_UP_SET                = 0x42,
+    SYNTH_TX_INIT_SET           = 0x40,
+    SYNTH_RX_INIT_SET           = 0x41,
+    SYNTH_DOWN_SET              = 0x42,
+    SYNTH_UP_SET                = 0x43,
 
     // Flash memory
     FLASH_EREASE_MEMORY         = 0x51,
     FLASH_READ_CONDITION        = 0x52,
     FLASH_REQUEST_RAW_DATA      = 0x53,
     FLASH_SEND_RAW_DATA         = 0x54,
+    FLASH_NO_SAMPLE_YET         = 0x55,
 
     //DAC
     DAC_SET_VALUE               = 0x61,

@@ -115,7 +115,11 @@ void FlashReadUart(int numOfSampleToRead)
         else
         {
             if(numOfValidateSamples == 0)
+            {
+                SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_NO_SAMPLE_YET);
                 return;
+            }
+                
         }
     }
 

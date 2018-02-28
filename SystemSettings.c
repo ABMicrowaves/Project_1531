@@ -42,10 +42,13 @@ void InitSystemApplicationManagers(void)
     InitSevenSegment();
     
     // Initialize Synthesizers
-    InitSynthesizers();
+    PLLInitialize();
     
     // Clear MCU run - time
     ClearMcuRunTime();
+    
+    // Initialize DAC
+    DacInit();
 }
 
 

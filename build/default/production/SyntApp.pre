@@ -8732,8 +8732,10 @@ ADC_CHANNEL_MODE = 0x32,
 ADC_CONVERSION_MODE = 0x33,
 
 
-SYNTH_DOWN_SET = 0x41,
-SYNTH_UP_SET = 0x42,
+SYNTH_TX_INIT_SET = 0x40,
+SYNTH_RX_INIT_SET = 0x41,
+SYNTH_DOWN_SET = 0x42,
+SYNTH_UP_SET = 0x43,
 
 
 FLASH_EREASE_MEMORY = 0x51,
@@ -9014,16 +9016,23 @@ SYNTH_RX,
 EXT_DAC
 } SPI_PERIPHERAL;
 
+
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
 void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 
-void SwSpiDataLow (SPI_PERIPHERAL type);
-void SwSpiDataHigh (SPI_PERIPHERAL type);
-void SwSpiClkLow (SPI_PERIPHERAL phrType);
-void SwSpiClkHigh (SPI_PERIPHERAL phrType);
-void SwSpiSetClock(SPI_PERIPHERAL phrType);
+void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+void SwSpi_Set_Clock(SPI_PERIPHERAL phrType);
+void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 
-# 30 "SystemCommon.h"
+
+void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
+
+
+void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
+void SwSpi_Set_Dac_Ldac_Pin(bool cPinMode);
+
+# 32 "SystemCommon.h"
 typedef enum
 {
 START_SYSTEM = 0,
@@ -9034,68 +9043,98 @@ FINISH_ROUND
 }SYSTEM_STATE;
 
 unsigned char crc8(char* dataArray, int dataSize);
-uint8_t make8(uint16_t data, uint8_t dataLocation);
+uint8_t make8(uint32_t data, uint8_t dataLocation);
 void ZeroArray(char* array, int size);
+int GCD(int num1, int num2);
+uint32_t GetIntFromUartData(char* data);
+
+
 void ResetMcu(void);
 void ResetCpld(void);
 void SendSystemStartAck(void);
 
 # 20 "SyntApp.h"
-const uint32_t PLL_REGISTERS[12] =
+const uint32_t PLL_INIT_REGISTERS[13] =
 {
-0x0B6002,
-0x0,
-0x21,
-0x3,
-0x48B80023,
-0x520008,
-0x67021053,
-0x12345,
-0x12345,
-0x12345,
-0x12345,
-0x12345
+0x0001041C,
+0x0061300B,
+0x00C0323A,
+0x2221BCC9,
+0x102D0428,
+0x120000E7,
+0x35056076,
+0x00800025,
+0x34009B84,
+0x00000003,
+0x00000012,
+0x06000001,
+0x00200340
 };
 
-void InitSynthesizers(void);
-
+void PLLUartInitialize(char* data);
+void PLLInitialize(void);
 
 void UpdateTxFreq(char* data);
 void UpdateRxFreq(char* data);
 
-
 void SYNTH_ISR(void);
 
-# 13 "SyntApp.c"
-void InitSynthesizers()
+# 14 "SyntApp.c"
+void PLLInitialize()
 {
 
 IOCB = 0b10000000;
 
-# 24
+
+SwSpi_Set_CE_Pin(SYNTH_TX, 1);
+
+
+
+for(int idx = 0; idx < 13; idx++)
+{
+SWSPI_send_word(SYNTH_TX, PLL_INIT_REGISTERS[idx], 3);
 }
 
-# 45
+
+SWSPI_send_word(SYNTH_TX, PLL_INIT_REGISTERS[4], 3);
+SWSPI_send_word(SYNTH_TX, PLL_INIT_REGISTERS[2], 3);
+SWSPI_send_word(SYNTH_TX, PLL_INIT_REGISTERS[1], 3);
+SWSPI_send_word(SYNTH_TX, PLL_INIT_REGISTERS[0], 3);
+
+
+SwSpi_Set_CE_Pin(SYNTH_RX, 1);
+
+
+for(int idx = 0; idx < 13; idx++)
+{
+SWSPI_send_word(SYNTH_RX, PLL_INIT_REGISTERS[idx], 3);
+}
+
+
+SWSPI_send_word(SYNTH_RX, PLL_INIT_REGISTERS[4], 3);
+SWSPI_send_word(SYNTH_RX, PLL_INIT_REGISTERS[2], 3);
+SWSPI_send_word(SYNTH_RX, PLL_INIT_REGISTERS[1], 3);
+SWSPI_send_word(SYNTH_RX, PLL_INIT_REGISTERS[0], 3);
+}
+
+void PLLUartInitialize(char* data)
+{
+
+}
+
+# 60
 void UpdateTxFreq(char* data)
 {
+uint32_t regData = GetIntFromUartData(data);
+SWSPI_send_word(SYNTH_TX, regData, 3);
 
 
-uint32_t freqVal = 0;
 
-for(uint8_t idx = 0; idx < 4; idx++)
-{
-freqVal += data[idx]*pow(10,4 - idx - 1);
-}
-
-# 62
-SWSPI_send_word(SYNTH_TX, 0x78, 0);
-
-# 72
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
 
 }
 
-# 80
+# 75
 void UpdateRxFreq(char* data)
 {
 uint32_t send = 0x87654321;
@@ -9104,7 +9143,7 @@ uint32_t send = 0x87654321;
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_SET);
 }
 
-# 95
+# 90
 void SYNTH_ISR(void)
 {
 

@@ -32,7 +32,6 @@ void readUartMessage(void)
     switch(cState)
     {
         case START_RX_MESSAGE_READ:
-
             
             // Check to see if there is more or equal bytes of message size:
             if(eusart1RxCount > MIN_RX_MSG_SIZE)

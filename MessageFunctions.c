@@ -88,6 +88,14 @@ void GroupSynthesizers(MSG_REQUEST request, char* data)
 {
     switch (request)
     {
+        case SYNTH_TX_INIT_SET:
+            PLLUartInitialize(data);
+            break;
+        
+        case SYNTH_RX_INIT_SET:
+            PLLUartInitialize(data);
+            break;
+            
         case SYNTH_DOWN_SET:
             UpdateTxFreq(data);
             break;

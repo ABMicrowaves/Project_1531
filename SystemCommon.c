@@ -26,7 +26,40 @@ void ZeroArray(char* array, int size)
     memset(array, 0x0, size);
 }
 
-uint8_t make8(uint16_t data, uint8_t dataLocation)
+int GCD(int num1, int num2) 
+{
+  while (num2 != 0)  
+  {
+    int temp = num2;
+    num2 = num1 % num2;
+    num1 = temp;
+  }
+  return num1;
+}
+
+uint32_t GetIntFromUartData(char* data)
+{
+    char dataRegArr[MAX_UART_BYTES_SIZE];
+    ZeroArray(dataRegArr, MAX_UART_BYTES_SIZE);
+    
+    for(int idx = 0; idx < MAX_UART_BYTES_SIZE; idx++)
+    {
+        char c = data[idx] + '0';
+        if(c == END_UART_STREAM_CHAR)   // @ -> End of UART stream.
+        {
+            break;
+        }
+        else
+        {
+            dataRegArr[idx] = data[idx] + '0';
+        }
+        
+    }
+    
+    return strtol(dataRegArr, NULL, 16);
+}
+
+uint8_t make8(uint32_t data, uint8_t dataLocation)
 {
     switch(dataLocation)
     {

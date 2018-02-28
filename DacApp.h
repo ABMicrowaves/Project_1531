@@ -12,21 +12,18 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #include "SystemCommon.h"
 #include <math.h>
 
-#define DAC_BYTES_IN_VAL    5       // [X.YZW VDC]
-
-#define VSOURCEPLUS         5500    // V referance in mili volts
-#define VSOURCEMINUS        0
-#define DAC_BITS            10
-//#define RESOLUTION (VREF / pow(2,DAC_BITS))
+// At system start: set all DACs to 1 VDC.
+#define DAC_A_INIT_VAL      (0x2344)
+#define DAC_B_INIT_VAL      (0x6344)
+#define DAC_C_INIT_VAL      (0xA344)
+#define DAC_D_INIT_VAL      (0xE344)
 
 #define DAC_TEST_DELAY_MSEC 20
 
+void DacInit(void);
 void DacSetValue(char* data);
 
 // Test functions
 void DacTest(void);
 
-
-
 #endif	/* DACAPP_H */
-
