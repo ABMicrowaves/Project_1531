@@ -25,9 +25,9 @@ Author: RoeeZ (Comm-IT).                                                    ****
 // define special types
 #define ULONG uint32_t
 #define UCHAR uint8_t
-#define MAX_UART_BYTES_SIZE 8
+#define MAX_UART_BYTES_SIZE 9
 #define END_UART_STREAM_CHAR 0x40
-
+#define NUM_OF_BITS_SYNTH_REG 32
 // MCU Main program FSM:    
 typedef enum
 {
@@ -40,7 +40,9 @@ typedef enum
 
 unsigned char crc8(char* dataArray, int dataSize);
 uint8_t make8(uint32_t data, uint8_t dataLocation);
+void Make32bitsArray(bool* array, uint32_t data);
 void ZeroArray(char* array, int size);
+void ZeroBitsArray(bool* array);
 int GCD(int num1, int num2); 
 uint32_t GetIntFromUartData(char* data);
 

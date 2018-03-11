@@ -19,8 +19,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "23
 [v _GroupDAC `(v ~T0 @X0 0 ef2`E7086`*uc ]
 "18 SwSpiApp.c
-[c E7537 0 1 2 .. ]
-[n E7537 . SYNTH_TX SYNTH_RX EXT_DAC  ]
+[c E7543 0 1 2 .. ]
+[n E7543 . SYNTH_TX SYNTH_RX EXT_DAC  ]
 "16896 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f45k22.h
 [s S818 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S818 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
@@ -36,17 +36,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 "16922
 [v _INTCONbits `VS817 ~T0 @X0 0 e@4082 ]
 "32 SwSpiApp.h
-[v _SwSpi_Set_Synth_Le_Pin `(v ~T0 @X0 0 ef2`E7537`uc ]
-"35
+[v _SwSpi_Set_Synth_Le_Pin `(v ~T0 @X0 0 ef2`E7543`uc ]
+"30
+[v _SWSPI_Synth_send_bits `(v ~T0 @X0 0 ef2`E7543`ul ]
+"36
 [v _SwSpi_Set_Dac_Sync_Pin `(v ~T0 @X0 0 ef1`uc ]
 "42 SystemCommon.h
 [v _make8 `(uc ~T0 @X0 0 ef2`ul`uc ]
-"23 SwSpiApp.h
-[v _SWSPI_send_bits `(v ~T0 @X0 0 ef2`E7537`uc ]
-"26
-[v _SwSpi_Clk_Pin `(v ~T0 @X0 0 ef2`E7537`uc ]
+"35 SwSpiApp.h
+[v _SWSPI_DAC_send_bits `(v ~T0 @X0 0 ef2`E7543`uc ]
 "25
-[v _SwSpi_Data_Pin `(v ~T0 @X0 0 ef2`E7537`uc ]
+[v _SwSpi_Clk_Pin `(v ~T0 @X0 0 ef2`E7543`uc ]
+"24
+[v _SwSpi_Data_Pin `(v ~T0 @X0 0 ef2`E7543`uc ]
+"45 SystemCommon.h
+[v _ZeroBitsArray `(v ~T0 @X0 0 ef1`*uc ]
+"43
+[v _Make32bitsArray `(v ~T0 @X0 0 ef2`*uc`ul ]
 "7900 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f45k22.h
 [s S384 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S384 . LATD0 LATD1 LATD2 LATD3 LATD4 LATD5 LATD6 LATD7 ]
@@ -7029,7 +7035,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "27
 -> -> 301990119 `l `ul
 "28
--> -> 889544822 `l `ul
+-> -> 889266294 `l `ul
 "29
 -> -> 8388645 `l `ul
 "30
@@ -7052,7 +7058,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 25: 0x2221BCC9,
 [; ;SyntApp.h: 26: 0x102D0428,
 [; ;SyntApp.h: 27: 0x120000E7,
-[; ;SyntApp.h: 28: 0x35056076,
+[; ;SyntApp.h: 28: 0x35012076,
 [; ;SyntApp.h: 29: 0x00800025,
 [; ;SyntApp.h: 30: 0x34009B84,
 [; ;SyntApp.h: 31: 0x00000003,
@@ -7060,11 +7066,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 33: 0x06000001,
 [; ;SyntApp.h: 34: 0x00200340
 [; ;SyntApp.h: 35: };
-[; ;SyntApp.h: 37: void PLLUartInitialize(char* data);
-[; ;SyntApp.h: 38: void PLLInitialize(void);
-[; ;SyntApp.h: 40: void UpdateTxFreq(char* data);
-[; ;SyntApp.h: 41: void UpdateRxFreq(char* data);
-[; ;SyntApp.h: 43: void SYNTH_ISR(void);
+"37
+[v _TEST_PLL_REGISTERS `Cul ~T0 @X0 -> 13 `i e ]
+[i _TEST_PLL_REGISTERS
+:U ..
+"39
+-> -> 66588 `l `ul
+"40
+-> -> 6369291 `l `ul
+"41
+-> -> 12592826 `l `ul
+"42
+-> -> 437910729 `l `ul
+"43
+-> -> 271385640 `l `ul
+"44
+-> -> 301990119 `l `ul
+"45
+-> -> 889544822 `l `ul
+"46
+-> -> 8388645 `l `ul
+"47
+-> -> 838896516 `l `ul
+"48
+-> -> -> 3 `i `l `ul
+"49
+-> -> 524338 `l `ul
+"50
+-> -> 27962017 `l `ul
+"52
+-> -> 200410 `l `ul
+..
+]
+[; ;SyntApp.h: 37: const uint32_t TEST_PLL_REGISTERS[13] =
+[; ;SyntApp.h: 38: {
+[; ;SyntApp.h: 39: 0x1041C,
+[; ;SyntApp.h: 40: 0x61300B,
+[; ;SyntApp.h: 41: 0xC026BA,
+[; ;SyntApp.h: 42: 0x1A19FCC9,
+[; ;SyntApp.h: 43: 0x102D0428,
+[; ;SyntApp.h: 44: 0x120000E7,
+[; ;SyntApp.h: 45: 0x35056076,
+[; ;SyntApp.h: 46: 0x800025,
+[; ;SyntApp.h: 47: 0x32008B84,
+[; ;SyntApp.h: 48: 0x3,
+[; ;SyntApp.h: 49: 0x80032,
+[; ;SyntApp.h: 50: 0x1AAAAA1,
+[; ;SyntApp.h: 51: 200410
+[; ;SyntApp.h: 52: };
+[; ;SyntApp.h: 57: void PLLUartInitialize(char* data);
+[; ;SyntApp.h: 58: void PLLInitialize(void);
+[; ;SyntApp.h: 60: void UpdateTxFreq(char* data);
+[; ;SyntApp.h: 61: void UpdateRxFreq(char* data);
+[; ;SyntApp.h: 63: void SYNTH_ISR(void);
 [; ;SystemCommon.h: 32: typedef enum
 [; ;SystemCommon.h: 33: {
 [; ;SystemCommon.h: 34: START_SYSTEM = 0,
@@ -7075,12 +7129,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SystemCommon.h: 39: }SYSTEM_STATE;
 [; ;SystemCommon.h: 41: unsigned char crc8(char* dataArray, int dataSize);
 [; ;SystemCommon.h: 42: uint8_t make8(uint32_t data, uint8_t dataLocation);
-[; ;SystemCommon.h: 43: void ZeroArray(char* array, int size);
-[; ;SystemCommon.h: 44: int GCD(int num1, int num2);
-[; ;SystemCommon.h: 45: uint32_t GetIntFromUartData(char* data);
-[; ;SystemCommon.h: 48: void ResetMcu(void);
-[; ;SystemCommon.h: 49: void ResetCpld(void);
-[; ;SystemCommon.h: 50: void SendSystemStartAck(void);
+[; ;SystemCommon.h: 43: void Make32bitsArray(bool* array, uint32_t data);
+[; ;SystemCommon.h: 44: void ZeroArray(char* array, int size);
+[; ;SystemCommon.h: 45: void ZeroBitsArray(bool* array);
+[; ;SystemCommon.h: 46: int GCD(int num1, int num2);
+[; ;SystemCommon.h: 47: uint32_t GetIntFromUartData(char* data);
+[; ;SystemCommon.h: 50: void ResetMcu(void);
+[; ;SystemCommon.h: 51: void ResetCpld(void);
+[; ;SystemCommon.h: 52: void SendSystemStartAck(void);
 [; ;SwSpiApp.h: 14: typedef enum
 [; ;SwSpiApp.h: 15: {
 [; ;SwSpiApp.h: 16: SYNTH_TX = 0,
@@ -7088,22 +7144,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SwSpiApp.h: 18: EXT_DAC
 [; ;SwSpiApp.h: 19: } SPI_PERIPHERAL;
 [; ;SwSpiApp.h: 22: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
-[; ;SwSpiApp.h: 23: void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
-[; ;SwSpiApp.h: 25: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 26: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 28: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 24: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 25: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 27: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 30: void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data);
 [; ;SwSpiApp.h: 31: void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
 [; ;SwSpiApp.h: 32: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 35: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
+[; ;SwSpiApp.h: 35: void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
+[; ;SwSpiApp.h: 36: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 "17 SwSpiApp.c
-[v _SWSPI_send_word `(v ~T0 @X0 1 ef3`E7537`ul`uc ]
+[v _SWSPI_send_word `(v ~T0 @X0 1 ef3`E7543`ul`uc ]
 "18
 {
 [; ;SwSpiApp.c: 17: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize)
 [; ;SwSpiApp.c: 18: {
 [e :U _SWSPI_send_word ]
 "17
-[v _phrType `E7537 ~T0 @X0 1 r1 ]
+[v _phrType `E7543 ~T0 @X0 1 r1 ]
 [v _data `ul ~T0 @X0 1 r2 ]
 [v _dataSize `uc ~T0 @X0 1 r3 ]
 "18
@@ -7113,847 +7170,911 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
 [; ;SwSpiApp.c: 23: if(phrType == SYNTH_TX || phrType == SYNTH_RX)
 "23
-[e $ ! || == -> _phrType `i -> . `E7537 0 `i == -> _phrType `i -> . `E7537 1 `i 852  ]
+[e $ ! || == -> _phrType `i -> . `E7543 0 `i == -> _phrType `i -> . `E7543 1 `i 852  ]
 [; ;SwSpiApp.c: 24: {
 "24
 {
 [; ;SwSpiApp.c: 25: SwSpi_Set_Synth_Le_Pin(phrType, 0);
 "25
 [e ( _SwSpi_Set_Synth_Le_Pin (2 , _phrType -> -> 0 `i `uc ]
+[; ;SwSpiApp.c: 26: SWSPI_Synth_send_bits(phrType, data);
 "26
-}
-[; ;SwSpiApp.c: 26: }
-[e $U 853  ]
+[e ( _SWSPI_Synth_send_bits (2 , _phrType _data ]
+[; ;SwSpiApp.c: 27: SwSpi_Set_Synth_Le_Pin(phrType, 1);
 "27
-[e :U 852 ]
-[; ;SwSpiApp.c: 27: else if(phrType == EXT_DAC)
-[e $ ! == -> _phrType `i -> . `E7537 2 `i 854  ]
-[; ;SwSpiApp.c: 28: {
-"28
-{
-[; ;SwSpiApp.c: 29: SwSpi_Set_Dac_Sync_Pin(0);
+[e ( _SwSpi_Set_Synth_Le_Pin (2 , _phrType -> -> 1 `i `uc ]
 "29
-[e ( _SwSpi_Set_Dac_Sync_Pin (1 -> -> 0 `i `uc ]
-"30
 }
-[e :U 854 ]
-"35
-[e :U 853 ]
-[; ;SwSpiApp.c: 30: }
-[; ;SwSpiApp.c: 35: for(int idx = dataSize + 1; idx > 0; idx--)
+[; ;SwSpiApp.c: 29: }
+[e $U 853  ]
+"30
+[e :U 852 ]
+[; ;SwSpiApp.c: 30: else if(phrType == EXT_DAC)
+[e $ ! == -> _phrType `i -> . `E7543 2 `i 854  ]
+[; ;SwSpiApp.c: 31: {
+"31
+{
+[; ;SwSpiApp.c: 32: SwSpi_Set_Dac_Sync_Pin(0);
+"32
+[e ( _SwSpi_Set_Dac_Sync_Pin (1 -> -> 0 `i `uc ]
+[; ;SwSpiApp.c: 33: for(int idx = dataSize + 1; idx > 0; idx--)
+"33
 {
 [v _idx `i ~T0 @X0 1 a ]
 [e = _idx + -> _dataSize `i -> 1 `i ]
 [e $ > _idx -> 0 `i 855  ]
 [e $U 856  ]
-"36
+"34
 [e :U 855 ]
-[; ;SwSpiApp.c: 36: {
+[; ;SwSpiApp.c: 34: {
 {
-"37
-[v _datac `uc ~T0 @X0 1 a ]
-[; ;SwSpiApp.c: 37: uint8_t datac = make8(data, idx - 1);
-[e = _datac ( _make8 (2 , _data -> - _idx -> 1 `i `uc ]
-[; ;SwSpiApp.c: 38: SWSPI_send_bits(phrType, datac);
-"38
-[e ( _SWSPI_send_bits (2 , _phrType _datac ]
-"39
-}
 "35
+[v _datac `uc ~T0 @X0 1 a ]
+[; ;SwSpiApp.c: 35: uint8_t datac = make8(data, idx - 1);
+[e = _datac ( _make8 (2 , _data -> - _idx -> 1 `i `uc ]
+[; ;SwSpiApp.c: 36: SWSPI_DAC_send_bits(phrType, datac);
+"36
+[e ( _SWSPI_DAC_send_bits (2 , _phrType _datac ]
+"37
+}
+"33
 [e -- _idx -> 1 `i ]
 [e $ > _idx -> 0 `i 855  ]
 [e :U 856 ]
+"37
+}
+[; ;SwSpiApp.c: 37: }
+[; ;SwSpiApp.c: 38: SwSpi_Set_Dac_Sync_Pin(1);
+"38
+[e ( _SwSpi_Set_Dac_Sync_Pin (1 -> -> 1 `i `uc ]
 "39
 }
+[e :U 854 ]
+"41
+[e :U 853 ]
 [; ;SwSpiApp.c: 39: }
-[; ;SwSpiApp.c: 44: if(phrType == SYNTH_TX || phrType == SYNTH_RX)
-"44
-[e $ ! || == -> _phrType `i -> . `E7537 0 `i == -> _phrType `i -> . `E7537 1 `i 858  ]
-[; ;SwSpiApp.c: 45: {
-"45
-{
-[; ;SwSpiApp.c: 46: SwSpi_Set_Synth_Le_Pin(phrType, 1);
-"46
-[e ( _SwSpi_Set_Synth_Le_Pin (2 , _phrType -> -> 1 `i `uc ]
-"47
-}
-[; ;SwSpiApp.c: 47: }
-[e $U 859  ]
-"48
-[e :U 858 ]
-[; ;SwSpiApp.c: 48: else if(phrType == EXT_DAC)
-[e $ ! == -> _phrType `i -> . `E7537 2 `i 860  ]
-[; ;SwSpiApp.c: 49: {
-"49
-{
-[; ;SwSpiApp.c: 50: SwSpi_Set_Dac_Sync_Pin(1);
-"50
-[e ( _SwSpi_Set_Dac_Sync_Pin (1 -> -> 1 `i `uc ]
-"51
-}
-[e :U 860 ]
-"54
-[e :U 859 ]
-[; ;SwSpiApp.c: 51: }
-[; ;SwSpiApp.c: 54: (INTCONbits.GIE = 1);
+[; ;SwSpiApp.c: 41: (INTCONbits.GIE = 1);
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;SwSpiApp.c: 55: }
-"55
+[; ;SwSpiApp.c: 42: }
+"42
 [e :UE 851 ]
 }
-"57
-[v _SWSPI_send_bits `(v ~T0 @X0 1 ef2`E7537`uc ]
-"58
+"44
+[v _SWSPI_DAC_send_bits `(v ~T0 @X0 1 ef2`E7543`uc ]
+"45
 {
-[; ;SwSpiApp.c: 57: void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data)
-[; ;SwSpiApp.c: 58: {
-[e :U _SWSPI_send_bits ]
-"57
-[v _phrType `E7537 ~T0 @X0 1 r1 ]
+[; ;SwSpiApp.c: 44: void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data)
+[; ;SwSpiApp.c: 45: {
+[e :U _SWSPI_DAC_send_bits ]
+"44
+[v _phrType `E7543 ~T0 @X0 1 r1 ]
 [v _data `uc ~T0 @X0 1 r2 ]
-"58
+"45
 [f ]
-"59
+"46
 [v _count `uc ~T0 @X0 1 a ]
-[; ;SwSpiApp.c: 59: uint8_t count;
-[; ;SwSpiApp.c: 60: for (count = 8; count ; count--, data <<= 1)
-"60
+[; ;SwSpiApp.c: 46: uint8_t count;
+[; ;SwSpiApp.c: 47: for (count = 8; count ; count--, data <<= 1)
+"47
 {
 [e = _count -> -> 8 `i `uc ]
-[e $U 865  ]
-"61
-[e :U 862 ]
-[; ;SwSpiApp.c: 61: {
+[e $U 862  ]
+"48
+[e :U 859 ]
+[; ;SwSpiApp.c: 48: {
 {
-[; ;SwSpiApp.c: 63: {
-"63
-{
-[; ;SwSpiApp.c: 64: SwSpi_Clk_Pin(phrType, 1);
-"64
+[; ;SwSpiApp.c: 49: SwSpi_Clk_Pin(phrType, 1);
+"49
 [e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 1 `i `uc ]
-"65
-}
-[; ;SwSpiApp.c: 65: }
-[; ;SwSpiApp.c: 67: if (data & 0X80)
-"67
-[e $ ! != & -> _data `i -> 128 `i -> 0 `i 866  ]
-[; ;SwSpiApp.c: 68: {
-"68
+[; ;SwSpiApp.c: 51: if (data & 0X80)
+"51
+[e $ ! != & -> _data `i -> 128 `i -> 0 `i 863  ]
+[; ;SwSpiApp.c: 52: {
+"52
 {
-[; ;SwSpiApp.c: 70: SwSpi_Data_Pin(phrType, 1);
-"70
+[; ;SwSpiApp.c: 54: SwSpi_Data_Pin(phrType, 1);
+"54
 [e ( _SwSpi_Data_Pin (2 , _phrType -> -> 1 `i `uc ]
-"71
+"55
 }
-[; ;SwSpiApp.c: 71: }
-[e $U 867  ]
-"72
-[e :U 866 ]
-[; ;SwSpiApp.c: 72: else
-[; ;SwSpiApp.c: 73: {
-"73
-{
-[; ;SwSpiApp.c: 74: SwSpi_Data_Pin(phrType, 0);
-"74
-[e ( _SwSpi_Data_Pin (2 , _phrType -> -> 0 `i `uc ]
-"75
-}
-[e :U 867 ]
-[; ;SwSpiApp.c: 75: }
-[; ;SwSpiApp.c: 77: SwSpi_Clk_Pin(phrType, 0);
-"77
-[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 0 `i `uc ]
-"85
-}
-"60
-[e ; -- _count -> -> 1 `i `uc =<< _data -> 1 `i ]
-[e :U 865 ]
-[e $ != -> _count `i -> -> -> 0 `i `uc `i 862  ]
+[; ;SwSpiApp.c: 55: }
+[e $U 864  ]
+"56
 [e :U 863 ]
-"85
-}
-[; ;SwSpiApp.c: 85: }
-[; ;SwSpiApp.c: 87: SwSpi_Data_Pin(phrType, 0);
-"87
+[; ;SwSpiApp.c: 56: else
+[; ;SwSpiApp.c: 57: {
+"57
+{
+[; ;SwSpiApp.c: 58: SwSpi_Data_Pin(phrType, 0);
+"58
 [e ( _SwSpi_Data_Pin (2 , _phrType -> -> 0 `i `uc ]
-[; ;SwSpiApp.c: 88: SwSpi_Clk_Pin(phrType, 0);
-"88
-[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 0 `i `uc ]
-[; ;SwSpiApp.c: 89: }
-"89
-[e :UE 861 ]
+"59
 }
-"95
-[v _SwSpi_Data_Pin `(v ~T0 @X0 1 ef2`E7537`uc ]
-"96
+[e :U 864 ]
+[; ;SwSpiApp.c: 59: }
+[; ;SwSpiApp.c: 61: SwSpi_Clk_Pin(phrType, 0);
+"61
+[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 0 `i `uc ]
+"62
+}
+"47
+[e ; -- _count -> -> 1 `i `uc =<< _data -> 1 `i ]
+[e :U 862 ]
+[e $ != -> _count `i -> -> -> 0 `i `uc `i 859  ]
+[e :U 860 ]
+"62
+}
+[; ;SwSpiApp.c: 62: }
+[; ;SwSpiApp.c: 64: SwSpi_Data_Pin(phrType, 0);
+"64
+[e ( _SwSpi_Data_Pin (2 , _phrType -> -> 0 `i `uc ]
+[; ;SwSpiApp.c: 65: SwSpi_Clk_Pin(phrType, 0);
+"65
+[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 0 `i `uc ]
+[; ;SwSpiApp.c: 66: }
+"66
+[e :UE 858 ]
+}
+"68
+[v _SWSPI_Synth_send_bits `(v ~T0 @X0 1 ef2`E7543`ul ]
+"69
 {
-[; ;SwSpiApp.c: 95: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode)
-[; ;SwSpiApp.c: 96: {
-[e :U _SwSpi_Data_Pin ]
-"95
-[v _phrType `E7537 ~T0 @X0 1 r1 ]
-[v _cPinMode `uc ~T0 @X0 1 r2 ]
-"96
+[; ;SwSpiApp.c: 68: void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data)
+[; ;SwSpiApp.c: 69: {
+[e :U _SWSPI_Synth_send_bits ]
+"68
+[v _phrType `E7543 ~T0 @X0 1 r1 ]
+[v _data `ul ~T0 @X0 1 r2 ]
+"69
 [f ]
-[; ;SwSpiApp.c: 97: switch(phrType)
-"97
+"70
+[v _count `uc ~T0 @X0 1 a ]
+[v _mask `ul ~T0 @X0 1 a ]
+[; ;SwSpiApp.c: 70: uint8_t count;
+[; ;SwSpiApp.c: 71: uint32_t mask = 0x1;
+"71
+[e = _mask -> -> -> 1 `i `l `ul ]
+"73
+[v _bitArray `uc ~T0 @X0 -> 32 `i a ]
+[; ;SwSpiApp.c: 73: bool bitArray[32];
+[; ;SwSpiApp.c: 74: ZeroBitsArray(bitArray);
+"74
+[e ( _ZeroBitsArray (1 &U _bitArray ]
+[; ;SwSpiApp.c: 76: Make32bitsArray(bitArray, data);
+"76
+[e ( _Make32bitsArray (2 , &U _bitArray _data ]
+[; ;SwSpiApp.c: 78: for (count = 0; count <= 31 ; count++)
+"78
+{
+[e = _count -> -> 0 `i `uc ]
+[e $ <= -> _count `i -> 31 `i 866  ]
+[e $U 867  ]
+"79
+[e :U 866 ]
+[; ;SwSpiApp.c: 79: {
+{
+[; ;SwSpiApp.c: 81: SwSpi_Clk_Pin(phrType, 0);
+"81
+[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 0 `i `uc ]
+[; ;SwSpiApp.c: 83: if (bitArray[count])
+"83
+[e $ ! != -> *U + &U _bitArray * -> _count `ux -> -> # *U &U _bitArray `ui `ux `i -> -> -> 0 `i `uc `i 869  ]
+[; ;SwSpiApp.c: 84: {
+"84
+{
+[; ;SwSpiApp.c: 85: SwSpi_Data_Pin(phrType, 1);
+"85
+[e ( _SwSpi_Data_Pin (2 , _phrType -> -> 1 `i `uc ]
+"86
+}
+[; ;SwSpiApp.c: 86: }
 [e $U 870  ]
-[; ;SwSpiApp.c: 98: {
-"98
+"87
+[e :U 869 ]
+[; ;SwSpiApp.c: 87: else
+[; ;SwSpiApp.c: 88: {
+"88
 {
-[; ;SwSpiApp.c: 99: case SYNTH_TX:
-"99
-[e :U 871 ]
-[; ;SwSpiApp.c: 100: if(cPinMode == 1)
-"100
-[e $ ! == -> _cPinMode `i -> 1 `i 872  ]
-[; ;SwSpiApp.c: 101: {
-"101
+[; ;SwSpiApp.c: 89: SwSpi_Data_Pin(phrType, 0);
+"89
+[e ( _SwSpi_Data_Pin (2 , _phrType -> -> 0 `i `uc ]
+"90
+}
+[e :U 870 ]
+[; ;SwSpiApp.c: 90: }
+[; ;SwSpiApp.c: 92: SwSpi_Clk_Pin(phrType, 1);
+"92
+[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 1 `i `uc ]
+"93
+}
+"78
+[e ++ _count -> -> 1 `i `uc ]
+[e $ <= -> _count `i -> 31 `i 866  ]
+[e :U 867 ]
+"93
+}
+[; ;SwSpiApp.c: 93: }
+[; ;SwSpiApp.c: 95: SwSpi_Data_Pin(phrType, 0);
+"95
+[e ( _SwSpi_Data_Pin (2 , _phrType -> -> 0 `i `uc ]
+[; ;SwSpiApp.c: 96: SwSpi_Clk_Pin(phrType, 0);
+"96
+[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 0 `i `uc ]
+[; ;SwSpiApp.c: 97: }
+"97
+[e :UE 865 ]
+}
+"103
+[v _SwSpi_Data_Pin `(v ~T0 @X0 1 ef2`E7543`uc ]
+"104
 {
-[; ;SwSpiApp.c: 102: do { LATDbits.LATD0 = 1; } while(0);
-"102
-[e :U 875 ]
+[; ;SwSpiApp.c: 103: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode)
+[; ;SwSpiApp.c: 104: {
+[e :U _SwSpi_Data_Pin ]
+"103
+[v _phrType `E7543 ~T0 @X0 1 r1 ]
+[v _cPinMode `uc ~T0 @X0 1 r2 ]
+"104
+[f ]
+[; ;SwSpiApp.c: 105: switch(phrType)
+"105
+[e $U 873  ]
+[; ;SwSpiApp.c: 106: {
+"106
+{
+[; ;SwSpiApp.c: 107: case SYNTH_TX:
+"107
+[e :U 874 ]
+[; ;SwSpiApp.c: 108: if(cPinMode == 1)
+"108
+[e $ ! == -> _cPinMode `i -> 1 `i 875  ]
+[; ;SwSpiApp.c: 109: {
+"109
+{
+[; ;SwSpiApp.c: 110: do { LATDbits.LATD0 = 1; } while(0);
+"110
+[e :U 878 ]
 {
 [e = . . _LATDbits 0 0 -> -> 1 `i `uc ]
 }
-[e :U 874 ]
-"103
+[e :U 877 ]
+"111
 }
-[; ;SwSpiApp.c: 103: }
-[e $U 876  ]
-"104
-[e :U 872 ]
-[; ;SwSpiApp.c: 104: else if (cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 877  ]
-[; ;SwSpiApp.c: 105: {
-"105
+[; ;SwSpiApp.c: 111: }
+[e $U 879  ]
+"112
+[e :U 875 ]
+[; ;SwSpiApp.c: 112: else if (cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 880  ]
+[; ;SwSpiApp.c: 113: {
+"113
 {
-[; ;SwSpiApp.c: 106: do { LATDbits.LATD0 = 0; } while(0);
-"106
-[e :U 880 ]
+[; ;SwSpiApp.c: 114: do { LATDbits.LATD0 = 0; } while(0);
+"114
+[e :U 883 ]
 {
 [e = . . _LATDbits 0 0 -> -> 0 `i `uc ]
 }
-[e :U 879 ]
-"107
+[e :U 882 ]
+"115
 }
-[e :U 877 ]
-"108
-[e :U 876 ]
-[; ;SwSpiApp.c: 107: }
-[; ;SwSpiApp.c: 108: break;
-[e $U 869  ]
-[; ;SwSpiApp.c: 110: case SYNTH_RX:
-"110
-[e :U 881 ]
-[; ;SwSpiApp.c: 111: if(cPinMode == 1)
-"111
-[e $ ! == -> _cPinMode `i -> 1 `i 882  ]
-[; ;SwSpiApp.c: 112: {
-"112
+[e :U 880 ]
+"116
+[e :U 879 ]
+[; ;SwSpiApp.c: 115: }
+[; ;SwSpiApp.c: 116: break;
+[e $U 872  ]
+[; ;SwSpiApp.c: 118: case SYNTH_RX:
+"118
+[e :U 884 ]
+[; ;SwSpiApp.c: 119: if(cPinMode == 1)
+"119
+[e $ ! == -> _cPinMode `i -> 1 `i 885  ]
+[; ;SwSpiApp.c: 120: {
+"120
 {
-[; ;SwSpiApp.c: 113: do { LATCbits.LATC5 = 1; } while(0);
-"113
-[e :U 885 ]
+[; ;SwSpiApp.c: 121: do { LATCbits.LATC5 = 1; } while(0);
+"121
+[e :U 888 ]
 {
 [e = . . _LATCbits 0 5 -> -> 1 `i `uc ]
 }
-[e :U 884 ]
-"114
+[e :U 887 ]
+"122
 }
-[; ;SwSpiApp.c: 114: }
-[e $U 886  ]
-"115
-[e :U 882 ]
-[; ;SwSpiApp.c: 115: else if (cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 887  ]
-[; ;SwSpiApp.c: 116: {
-"116
+[; ;SwSpiApp.c: 122: }
+[e $U 889  ]
+"123
+[e :U 885 ]
+[; ;SwSpiApp.c: 123: else if (cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 890  ]
+[; ;SwSpiApp.c: 124: {
+"124
 {
-[; ;SwSpiApp.c: 117: do { LATCbits.LATC5 = 0; } while(0);
-"117
-[e :U 890 ]
+[; ;SwSpiApp.c: 125: do { LATCbits.LATC5 = 0; } while(0);
+"125
+[e :U 893 ]
 {
 [e = . . _LATCbits 0 5 -> -> 0 `i `uc ]
 }
-[e :U 889 ]
-"118
+[e :U 892 ]
+"126
 }
-[e :U 887 ]
-"119
-[e :U 886 ]
-[; ;SwSpiApp.c: 118: }
-[; ;SwSpiApp.c: 119: break;
-[e $U 869  ]
-[; ;SwSpiApp.c: 121: case EXT_DAC:
-"121
-[e :U 891 ]
-[; ;SwSpiApp.c: 122: if(cPinMode == 1)
-"122
-[e $ ! == -> _cPinMode `i -> 1 `i 892  ]
-[; ;SwSpiApp.c: 123: {
-"123
+[e :U 890 ]
+"127
+[e :U 889 ]
+[; ;SwSpiApp.c: 126: }
+[; ;SwSpiApp.c: 127: break;
+[e $U 872  ]
+[; ;SwSpiApp.c: 129: case EXT_DAC:
+"129
+[e :U 894 ]
+[; ;SwSpiApp.c: 130: if(cPinMode == 1)
+"130
+[e $ ! == -> _cPinMode `i -> 1 `i 895  ]
+[; ;SwSpiApp.c: 131: {
+"131
 {
-[; ;SwSpiApp.c: 124: do { LATAbits.LATA4 = 1; } while(0);
-"124
-[e :U 895 ]
+[; ;SwSpiApp.c: 132: do { LATAbits.LATA4 = 1; } while(0);
+"132
+[e :U 898 ]
 {
 [e = . . _LATAbits 0 4 -> -> 1 `i `uc ]
 }
-[e :U 894 ]
-"125
+[e :U 897 ]
+"133
 }
-[; ;SwSpiApp.c: 125: }
-[e $U 896  ]
-"126
-[e :U 892 ]
-[; ;SwSpiApp.c: 126: else if (cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 897  ]
-[; ;SwSpiApp.c: 127: {
-"127
+[; ;SwSpiApp.c: 133: }
+[e $U 899  ]
+"134
+[e :U 895 ]
+[; ;SwSpiApp.c: 134: else if (cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 900  ]
+[; ;SwSpiApp.c: 135: {
+"135
 {
-[; ;SwSpiApp.c: 128: do { LATAbits.LATA4 = 0; } while(0);
-"128
-[e :U 900 ]
+[; ;SwSpiApp.c: 136: do { LATAbits.LATA4 = 0; } while(0);
+"136
+[e :U 903 ]
 {
 [e = . . _LATAbits 0 4 -> -> 0 `i `uc ]
 }
-[e :U 899 ]
-"129
-}
-[e :U 897 ]
-"130
-[e :U 896 ]
-[; ;SwSpiApp.c: 129: }
-[; ;SwSpiApp.c: 130: break;
-[e $U 869  ]
-"131
-}
-[; ;SwSpiApp.c: 131: }
-[e $U 869  ]
-"97
-[e :U 870 ]
-[e [\ _phrType , $ . `E7537 0 871
- , $ . `E7537 1 881
- , $ . `E7537 2 891
- 869 ]
-"131
-[e :U 869 ]
-[; ;SwSpiApp.c: 132: }
-"132
-[e :UE 868 ]
-}
-"134
-[v _SwSpi_Clk_Pin `(v ~T0 @X0 1 ef2`E7537`uc ]
-"135
-{
-[; ;SwSpiApp.c: 134: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode)
-[; ;SwSpiApp.c: 135: {
-[e :U _SwSpi_Clk_Pin ]
-"134
-[v _phrType `E7537 ~T0 @X0 1 r1 ]
-[v _cPinMode `uc ~T0 @X0 1 r2 ]
-"135
-[f ]
-[; ;SwSpiApp.c: 136: switch(phrType)
-"136
-[e $U 903  ]
-[; ;SwSpiApp.c: 137: {
+[e :U 902 ]
 "137
-{
-[; ;SwSpiApp.c: 138: case SYNTH_TX:
+}
+[e :U 900 ]
 "138
-[e :U 904 ]
-[; ;SwSpiApp.c: 139: if(cPinMode == 1)
+[e :U 899 ]
+[; ;SwSpiApp.c: 137: }
+[; ;SwSpiApp.c: 138: break;
+[e $U 872  ]
 "139
-[e $ ! == -> _cPinMode `i -> 1 `i 905  ]
-[; ;SwSpiApp.c: 140: {
+}
+[; ;SwSpiApp.c: 139: }
+[e $U 872  ]
+"105
+[e :U 873 ]
+[e [\ _phrType , $ . `E7543 0 874
+ , $ . `E7543 1 884
+ , $ . `E7543 2 894
+ 872 ]
+"139
+[e :U 872 ]
+[; ;SwSpiApp.c: 140: }
 "140
+[e :UE 871 ]
+}
+"142
+[v _SwSpi_Clk_Pin `(v ~T0 @X0 1 ef2`E7543`uc ]
+"143
 {
-[; ;SwSpiApp.c: 141: do { LATCbits.LATC3 = 1; } while(0);
-"141
-[e :U 908 ]
+[; ;SwSpiApp.c: 142: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode)
+[; ;SwSpiApp.c: 143: {
+[e :U _SwSpi_Clk_Pin ]
+"142
+[v _phrType `E7543 ~T0 @X0 1 r1 ]
+[v _cPinMode `uc ~T0 @X0 1 r2 ]
+"143
+[f ]
+[; ;SwSpiApp.c: 144: switch(phrType)
+"144
+[e $U 906  ]
+[; ;SwSpiApp.c: 145: {
+"145
+{
+[; ;SwSpiApp.c: 146: case SYNTH_TX:
+"146
+[e :U 907 ]
+[; ;SwSpiApp.c: 147: if(cPinMode == 1)
+"147
+[e $ ! == -> _cPinMode `i -> 1 `i 908  ]
+[; ;SwSpiApp.c: 148: {
+"148
+{
+[; ;SwSpiApp.c: 149: do { LATCbits.LATC3 = 1; } while(0);
+"149
+[e :U 911 ]
 {
 [e = . . _LATCbits 0 3 -> -> 1 `i `uc ]
 }
-[e :U 907 ]
-"142
+[e :U 910 ]
+"150
 }
-[; ;SwSpiApp.c: 142: }
-[e $U 909  ]
-"143
-[e :U 905 ]
-[; ;SwSpiApp.c: 143: else if (cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 910  ]
-[; ;SwSpiApp.c: 144: {
-"144
+[; ;SwSpiApp.c: 150: }
+[e $U 912  ]
+"151
+[e :U 908 ]
+[; ;SwSpiApp.c: 151: else if (cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 913  ]
+[; ;SwSpiApp.c: 152: {
+"152
 {
-[; ;SwSpiApp.c: 145: do { LATCbits.LATC3 = 0; } while(0);
-"145
-[e :U 913 ]
+[; ;SwSpiApp.c: 153: do { LATCbits.LATC3 = 0; } while(0);
+"153
+[e :U 916 ]
 {
 [e = . . _LATCbits 0 3 -> -> 0 `i `uc ]
 }
-[e :U 912 ]
-"146
+[e :U 915 ]
+"154
 }
-[e :U 910 ]
-"147
-[e :U 909 ]
-[; ;SwSpiApp.c: 146: }
-[; ;SwSpiApp.c: 147: break;
-[e $U 902  ]
-[; ;SwSpiApp.c: 149: case SYNTH_RX:
-"149
-[e :U 914 ]
-[; ;SwSpiApp.c: 150: if(cPinMode == 1)
-"150
-[e $ ! == -> _cPinMode `i -> 1 `i 915  ]
-[; ;SwSpiApp.c: 151: {
-"151
+[e :U 913 ]
+"155
+[e :U 912 ]
+[; ;SwSpiApp.c: 154: }
+[; ;SwSpiApp.c: 155: break;
+[e $U 905  ]
+[; ;SwSpiApp.c: 157: case SYNTH_RX:
+"157
+[e :U 917 ]
+[; ;SwSpiApp.c: 158: if(cPinMode == 1)
+"158
+[e $ ! == -> _cPinMode `i -> 1 `i 918  ]
+[; ;SwSpiApp.c: 159: {
+"159
 {
-[; ;SwSpiApp.c: 152: do { LATCbits.LATC4 = 1; } while(0);
-"152
-[e :U 918 ]
+[; ;SwSpiApp.c: 160: do { LATCbits.LATC4 = 1; } while(0);
+"160
+[e :U 921 ]
 {
 [e = . . _LATCbits 0 4 -> -> 1 `i `uc ]
 }
-[e :U 917 ]
-"153
-}
-[; ;SwSpiApp.c: 153: }
-[e $U 919  ]
-"154
-[e :U 915 ]
-[; ;SwSpiApp.c: 154: else if (cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 920  ]
-[; ;SwSpiApp.c: 155: {
-"155
-{
-[; ;SwSpiApp.c: 156: do { LATCbits.LATC4 = 0; } while(0);
-"156
-[e :U 923 ]
-{
-[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
-}
-[e :U 922 ]
-"157
-}
 [e :U 920 ]
-"159
-[e :U 919 ]
-[; ;SwSpiApp.c: 157: }
-[; ;SwSpiApp.c: 159: break;
-[e $U 902  ]
-[; ;SwSpiApp.c: 161: case EXT_DAC:
 "161
-[e :U 924 ]
-[; ;SwSpiApp.c: 162: if(cPinMode == 1)
+}
+[; ;SwSpiApp.c: 161: }
+[e $U 922  ]
 "162
-[e $ ! == -> _cPinMode `i -> 1 `i 925  ]
+[e :U 918 ]
+[; ;SwSpiApp.c: 162: else if (cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 923  ]
 [; ;SwSpiApp.c: 163: {
 "163
 {
-[; ;SwSpiApp.c: 164: do { LATAbits.LATA3 = 1; } while(0);
+[; ;SwSpiApp.c: 164: do { LATCbits.LATC4 = 0; } while(0);
 "164
-[e :U 928 ]
+[e :U 926 ]
+{
+[e = . . _LATCbits 0 4 -> -> 0 `i `uc ]
+}
+[e :U 925 ]
+"165
+}
+[e :U 923 ]
+"167
+[e :U 922 ]
+[; ;SwSpiApp.c: 165: }
+[; ;SwSpiApp.c: 167: break;
+[e $U 905  ]
+[; ;SwSpiApp.c: 169: case EXT_DAC:
+"169
+[e :U 927 ]
+[; ;SwSpiApp.c: 170: if(cPinMode == 1)
+"170
+[e $ ! == -> _cPinMode `i -> 1 `i 928  ]
+[; ;SwSpiApp.c: 171: {
+"171
+{
+[; ;SwSpiApp.c: 172: do { LATAbits.LATA3 = 1; } while(0);
+"172
+[e :U 931 ]
 {
 [e = . . _LATAbits 0 3 -> -> 1 `i `uc ]
 }
-[e :U 927 ]
-"165
+[e :U 930 ]
+"173
 }
-[; ;SwSpiApp.c: 165: }
-[e $U 929  ]
-"166
-[e :U 925 ]
-[; ;SwSpiApp.c: 166: else if (cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 930  ]
-[; ;SwSpiApp.c: 167: {
-"167
+[; ;SwSpiApp.c: 173: }
+[e $U 932  ]
+"174
+[e :U 928 ]
+[; ;SwSpiApp.c: 174: else if (cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 933  ]
+[; ;SwSpiApp.c: 175: {
+"175
 {
-[; ;SwSpiApp.c: 168: do { LATAbits.LATA3 = 0; } while(0);
-"168
-[e :U 933 ]
+[; ;SwSpiApp.c: 176: do { LATAbits.LATA3 = 0; } while(0);
+"176
+[e :U 936 ]
 {
 [e = . . _LATAbits 0 3 -> -> 0 `i `uc ]
 }
-[e :U 932 ]
-"169
+[e :U 935 ]
+"177
 }
-[e :U 930 ]
-"170
-[e :U 929 ]
-[; ;SwSpiApp.c: 169: }
-[; ;SwSpiApp.c: 170: break;
-[e $U 902  ]
-"171
-}
-[; ;SwSpiApp.c: 171: }
-[e $U 902  ]
-"136
-[e :U 903 ]
-[e [\ _phrType , $ . `E7537 0 904
- , $ . `E7537 1 914
- , $ . `E7537 2 924
- 902 ]
-"171
-[e :U 902 ]
-[; ;SwSpiApp.c: 172: }
-"172
-[e :UE 901 ]
-}
-"174
-[v _SwSpi_Synth_Toggle_Clock `(v ~T0 @X0 1 ef1`E7537 ]
-"175
-{
-[; ;SwSpiApp.c: 174: void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType)
-[; ;SwSpiApp.c: 175: {
-[e :U _SwSpi_Synth_Toggle_Clock ]
-"174
-[v _phrType `E7537 ~T0 @X0 1 r1 ]
-"175
-[f ]
-[; ;SwSpiApp.c: 176: SwSpi_Clk_Pin(phrType, 1);
-"176
-[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 1 `i `uc ]
-[; ;SwSpiApp.c: 178: switch(phrType)
+[e :U 933 ]
 "178
-[e $U 936  ]
-[; ;SwSpiApp.c: 179: {
+[e :U 932 ]
+[; ;SwSpiApp.c: 177: }
+[; ;SwSpiApp.c: 178: break;
+[e $U 905  ]
 "179
-{
-[; ;SwSpiApp.c: 180: case SYNTH_TX:
+}
+[; ;SwSpiApp.c: 179: }
+[e $U 905  ]
+"144
+[e :U 906 ]
+[e [\ _phrType , $ . `E7543 0 907
+ , $ . `E7543 1 917
+ , $ . `E7543 2 927
+ 905 ]
+"179
+[e :U 905 ]
+[; ;SwSpiApp.c: 180: }
 "180
-[e :U 937 ]
-[; ;SwSpiApp.c: 181: _delay((unsigned long)((500)*(8000000/4000000.0)));
-"181
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-[; ;SwSpiApp.c: 182: break;
+[e :UE 904 ]
+}
 "182
-[e $U 935  ]
-[; ;SwSpiApp.c: 183: case SYNTH_RX:
+[v _SwSpi_Synth_Toggle_Clock `(v ~T0 @X0 1 ef1`E7543 ]
 "183
-[e :U 938 ]
-[; ;SwSpiApp.c: 184: _delay((unsigned long)((500)*(8000000/4000000.0)));
+{
+[; ;SwSpiApp.c: 182: void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType)
+[; ;SwSpiApp.c: 183: {
+[e :U _SwSpi_Synth_Toggle_Clock ]
+"182
+[v _phrType `E7543 ~T0 @X0 1 r1 ]
+"183
+[f ]
+[; ;SwSpiApp.c: 184: SwSpi_Clk_Pin(phrType, 1);
 "184
+[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 1 `i `uc ]
+[; ;SwSpiApp.c: 186: switch(phrType)
+"186
+[e $U 939  ]
+[; ;SwSpiApp.c: 187: {
+"187
+{
+[; ;SwSpiApp.c: 188: case SYNTH_TX:
+"188
+[e :U 940 ]
+[; ;SwSpiApp.c: 189: _delay((unsigned long)((500)*(8000000/4000000.0)));
+"189
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-[; ;SwSpiApp.c: 185: break;
-"185
-[e $U 935  ]
-[; ;SwSpiApp.c: 186: default:
+[; ;SwSpiApp.c: 190: break;
+"190
+[e $U 938  ]
+[; ;SwSpiApp.c: 191: case SYNTH_RX:
+"191
+[e :U 941 ]
+[; ;SwSpiApp.c: 192: _delay((unsigned long)((500)*(8000000/4000000.0)));
+"192
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+[; ;SwSpiApp.c: 193: break;
+"193
+[e $U 938  ]
+[; ;SwSpiApp.c: 194: default:
+"194
+[e :U 942 ]
+[; ;SwSpiApp.c: 195: _delay((unsigned long)((500)*(8000000/4000000.0)));
+"195
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
+"196
+}
+[; ;SwSpiApp.c: 196: }
+[e $U 938  ]
 "186
 [e :U 939 ]
-[; ;SwSpiApp.c: 187: _delay((unsigned long)((500)*(8000000/4000000.0)));
-"187
-[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 8000000 `l `d .4000000.0 `ul ]
-"188
-}
-[; ;SwSpiApp.c: 188: }
-[e $U 935  ]
-"178
-[e :U 936 ]
-[e [\ _phrType , $ . `E7537 0 937
- , $ . `E7537 1 938
- 939 ]
-"188
-[e :U 935 ]
-[; ;SwSpiApp.c: 190: SwSpi_Clk_Pin(phrType, 0);
-"190
-[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 0 `i `uc ]
-[; ;SwSpiApp.c: 191: }
-"191
-[e :UE 934 ]
-}
-"193
-[v _SwSpi_Set_CE_Pin `(v ~T0 @X0 1 ef2`E7537`uc ]
-"194
-{
-[; ;SwSpiApp.c: 193: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode)
-[; ;SwSpiApp.c: 194: {
-[e :U _SwSpi_Set_CE_Pin ]
-"193
-[v _phrType `E7537 ~T0 @X0 1 r1 ]
-[v _cPinMode `uc ~T0 @X0 1 r2 ]
-"194
-[f ]
-[; ;SwSpiApp.c: 195: switch(phrType)
-"195
-[e $U 942  ]
-[; ;SwSpiApp.c: 196: {
+[e [\ _phrType , $ . `E7543 0 940
+ , $ . `E7543 1 941
+ 942 ]
 "196
-{
-[; ;SwSpiApp.c: 197: case SYNTH_TX:
-"197
-[e :U 943 ]
-[; ;SwSpiApp.c: 198: if(cPinMode == 1)
+[e :U 938 ]
+[; ;SwSpiApp.c: 198: SwSpi_Clk_Pin(phrType, 0);
 "198
-[e $ ! == -> _cPinMode `i -> 1 `i 944  ]
-[; ;SwSpiApp.c: 199: {
+[e ( _SwSpi_Clk_Pin (2 , _phrType -> -> 0 `i `uc ]
+[; ;SwSpiApp.c: 199: }
 "199
+[e :UE 937 ]
+}
+"201
+[v _SwSpi_Set_CE_Pin `(v ~T0 @X0 1 ef2`E7543`uc ]
+"202
 {
-[; ;SwSpiApp.c: 200: do { LATCbits.LATC1 = 1; } while(0);
-"200
-[e :U 947 ]
+[; ;SwSpiApp.c: 201: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode)
+[; ;SwSpiApp.c: 202: {
+[e :U _SwSpi_Set_CE_Pin ]
+"201
+[v _phrType `E7543 ~T0 @X0 1 r1 ]
+[v _cPinMode `uc ~T0 @X0 1 r2 ]
+"202
+[f ]
+[; ;SwSpiApp.c: 203: switch(phrType)
+"203
+[e $U 945  ]
+[; ;SwSpiApp.c: 204: {
+"204
+{
+[; ;SwSpiApp.c: 205: case SYNTH_TX:
+"205
+[e :U 946 ]
+[; ;SwSpiApp.c: 206: if(cPinMode == 1)
+"206
+[e $ ! == -> _cPinMode `i -> 1 `i 947  ]
+[; ;SwSpiApp.c: 207: {
+"207
+{
+[; ;SwSpiApp.c: 208: do { LATCbits.LATC1 = 1; } while(0);
+"208
+[e :U 950 ]
 {
 [e = . . _LATCbits 0 1 -> -> 1 `i `uc ]
 }
-[e :U 946 ]
-"201
+[e :U 949 ]
+"209
 }
-[; ;SwSpiApp.c: 201: }
-[e $U 948  ]
-"202
-[e :U 944 ]
-[; ;SwSpiApp.c: 202: else if(cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 949  ]
-[; ;SwSpiApp.c: 203: {
-"203
+[; ;SwSpiApp.c: 209: }
+[e $U 951  ]
+"210
+[e :U 947 ]
+[; ;SwSpiApp.c: 210: else if(cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 952  ]
+[; ;SwSpiApp.c: 211: {
+"211
 {
-[; ;SwSpiApp.c: 204: do { LATCbits.LATC1 = 0; } while(0);
-"204
-[e :U 952 ]
+[; ;SwSpiApp.c: 212: do { LATCbits.LATC1 = 0; } while(0);
+"212
+[e :U 955 ]
 {
 [e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
 }
-[e :U 951 ]
-"205
+[e :U 954 ]
+"213
 }
-[e :U 949 ]
-"206
-[e :U 948 ]
-[; ;SwSpiApp.c: 205: }
-[; ;SwSpiApp.c: 206: break;
-[e $U 941  ]
-[; ;SwSpiApp.c: 208: case SYNTH_RX:
-"208
-[e :U 953 ]
-[; ;SwSpiApp.c: 209: if(cPinMode == 1)
-"209
-[e $ ! == -> _cPinMode `i -> 1 `i 954  ]
-[; ;SwSpiApp.c: 210: {
-"210
+[e :U 952 ]
+"214
+[e :U 951 ]
+[; ;SwSpiApp.c: 213: }
+[; ;SwSpiApp.c: 214: break;
+[e $U 944  ]
+[; ;SwSpiApp.c: 216: case SYNTH_RX:
+"216
+[e :U 956 ]
+[; ;SwSpiApp.c: 217: if(cPinMode == 1)
+"217
+[e $ ! == -> _cPinMode `i -> 1 `i 957  ]
+[; ;SwSpiApp.c: 218: {
+"218
 {
-[; ;SwSpiApp.c: 211: do { LATDbits.LATD2 = 1; } while(0);
-"211
-[e :U 957 ]
+[; ;SwSpiApp.c: 219: do { LATDbits.LATD2 = 1; } while(0);
+"219
+[e :U 960 ]
 {
 [e = . . _LATDbits 0 2 -> -> 1 `i `uc ]
 }
-[e :U 956 ]
-"212
+[e :U 959 ]
+"220
 }
-[; ;SwSpiApp.c: 212: }
-[e $U 958  ]
-"213
-[e :U 954 ]
-[; ;SwSpiApp.c: 213: else if(cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 959  ]
-[; ;SwSpiApp.c: 214: {
-"214
+[; ;SwSpiApp.c: 220: }
+[e $U 961  ]
+"221
+[e :U 957 ]
+[; ;SwSpiApp.c: 221: else if(cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 962  ]
+[; ;SwSpiApp.c: 222: {
+"222
 {
-[; ;SwSpiApp.c: 215: do { LATCbits.LATC1 = 0; } while(0);
-"215
-[e :U 962 ]
+[; ;SwSpiApp.c: 223: do { LATCbits.LATC1 = 0; } while(0);
+"223
+[e :U 965 ]
 {
 [e = . . _LATCbits 0 1 -> -> 0 `i `uc ]
 }
+[e :U 964 ]
+"224
+}
+[e :U 962 ]
+"225
 [e :U 961 ]
-"216
-}
-[e :U 959 ]
-"217
-[e :U 958 ]
-[; ;SwSpiApp.c: 216: }
-[; ;SwSpiApp.c: 217: break;
-[e $U 941  ]
-"218
-}
-[; ;SwSpiApp.c: 218: }
-[e $U 941  ]
-"195
-[e :U 942 ]
-[e [\ _phrType , $ . `E7537 0 943
- , $ . `E7537 1 953
- 941 ]
-"218
-[e :U 941 ]
-[; ;SwSpiApp.c: 219: }
-"219
-[e :UE 940 ]
-}
-"224
-[v _SwSpi_Set_Synth_Le_Pin `(v ~T0 @X0 1 ef2`E7537`uc ]
-"225
-{
-[; ;SwSpiApp.c: 224: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode)
-[; ;SwSpiApp.c: 225: {
-[e :U _SwSpi_Set_Synth_Le_Pin ]
-"224
-[v _phrType `E7537 ~T0 @X0 1 r1 ]
-[v _cPinMode `uc ~T0 @X0 1 r2 ]
-"225
-[f ]
-[; ;SwSpiApp.c: 226: switch(phrType)
+[; ;SwSpiApp.c: 224: }
+[; ;SwSpiApp.c: 225: break;
+[e $U 944  ]
 "226
-[e $U 965  ]
-[; ;SwSpiApp.c: 227: {
+}
+[; ;SwSpiApp.c: 226: }
+[e $U 944  ]
+"203
+[e :U 945 ]
+[e [\ _phrType , $ . `E7543 0 946
+ , $ . `E7543 1 956
+ 944 ]
+"226
+[e :U 944 ]
+[; ;SwSpiApp.c: 227: }
 "227
+[e :UE 943 ]
+}
+"232
+[v _SwSpi_Set_Synth_Le_Pin `(v ~T0 @X0 1 ef2`E7543`uc ]
+"233
 {
-[; ;SwSpiApp.c: 228: case SYNTH_TX:
-"228
-[e :U 966 ]
-[; ;SwSpiApp.c: 229: if(cPinMode == 1)
-"229
-[e $ ! == -> _cPinMode `i -> 1 `i 967  ]
-[; ;SwSpiApp.c: 230: {
-"230
+[; ;SwSpiApp.c: 232: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode)
+[; ;SwSpiApp.c: 233: {
+[e :U _SwSpi_Set_Synth_Le_Pin ]
+"232
+[v _phrType `E7543 ~T0 @X0 1 r1 ]
+[v _cPinMode `uc ~T0 @X0 1 r2 ]
+"233
+[f ]
+[; ;SwSpiApp.c: 234: switch(phrType)
+"234
+[e $U 968  ]
+[; ;SwSpiApp.c: 235: {
+"235
 {
-[; ;SwSpiApp.c: 231: do { LATCbits.LATC2 = 1; } while(0);
-"231
-[e :U 970 ]
+[; ;SwSpiApp.c: 236: case SYNTH_TX:
+"236
+[e :U 969 ]
+[; ;SwSpiApp.c: 237: if(cPinMode == 1)
+"237
+[e $ ! == -> _cPinMode `i -> 1 `i 970  ]
+[; ;SwSpiApp.c: 238: {
+"238
+{
+[; ;SwSpiApp.c: 239: do { LATCbits.LATC2 = 1; } while(0);
+"239
+[e :U 973 ]
 {
 [e = . . _LATCbits 0 2 -> -> 1 `i `uc ]
 }
-[e :U 969 ]
-"232
+[e :U 972 ]
+"240
 }
-[; ;SwSpiApp.c: 232: }
-[e $U 971  ]
-"233
-[e :U 967 ]
-[; ;SwSpiApp.c: 233: else if(cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 972  ]
-[; ;SwSpiApp.c: 234: {
-"234
+[; ;SwSpiApp.c: 240: }
+[e $U 974  ]
+"241
+[e :U 970 ]
+[; ;SwSpiApp.c: 241: else if(cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 975  ]
+[; ;SwSpiApp.c: 242: {
+"242
 {
-[; ;SwSpiApp.c: 235: do { LATCbits.LATC2 = 0; } while(0);
-"235
-[e :U 975 ]
+[; ;SwSpiApp.c: 243: do { LATCbits.LATC2 = 0; } while(0);
+"243
+[e :U 978 ]
 {
 [e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
 }
-[e :U 974 ]
-"236
+[e :U 977 ]
+"244
 }
-[e :U 972 ]
-"237
-[e :U 971 ]
-[; ;SwSpiApp.c: 236: }
-[; ;SwSpiApp.c: 237: break;
-[e $U 964  ]
-[; ;SwSpiApp.c: 239: case SYNTH_RX:
-"239
-[e :U 976 ]
-[; ;SwSpiApp.c: 240: if(cPinMode == 1)
-"240
-[e $ ! == -> _cPinMode `i -> 1 `i 977  ]
-[; ;SwSpiApp.c: 241: {
-"241
+[e :U 975 ]
+"245
+[e :U 974 ]
+[; ;SwSpiApp.c: 244: }
+[; ;SwSpiApp.c: 245: break;
+[e $U 967  ]
+[; ;SwSpiApp.c: 247: case SYNTH_RX:
+"247
+[e :U 979 ]
+[; ;SwSpiApp.c: 248: if(cPinMode == 1)
+"248
+[e $ ! == -> _cPinMode `i -> 1 `i 980  ]
+[; ;SwSpiApp.c: 249: {
+"249
 {
-[; ;SwSpiApp.c: 242: do { LATDbits.LATD3 = 1; } while(0);
-"242
-[e :U 980 ]
+[; ;SwSpiApp.c: 250: do { LATDbits.LATD3 = 1; } while(0);
+"250
+[e :U 983 ]
 {
 [e = . . _LATDbits 0 3 -> -> 1 `i `uc ]
 }
-[e :U 979 ]
-"243
+[e :U 982 ]
+"251
 }
-[; ;SwSpiApp.c: 243: }
-[e $U 981  ]
-"244
-[e :U 977 ]
-[; ;SwSpiApp.c: 244: else if(cPinMode == 0)
-[e $ ! == -> _cPinMode `i -> 0 `i 982  ]
-[; ;SwSpiApp.c: 245: {
-"245
+[; ;SwSpiApp.c: 251: }
+[e $U 984  ]
+"252
+[e :U 980 ]
+[; ;SwSpiApp.c: 252: else if(cPinMode == 0)
+[e $ ! == -> _cPinMode `i -> 0 `i 985  ]
+[; ;SwSpiApp.c: 253: {
+"253
 {
-[; ;SwSpiApp.c: 246: do { LATDbits.LATD3 = 0; } while(0);
-"246
-[e :U 985 ]
+[; ;SwSpiApp.c: 254: do { LATDbits.LATD3 = 0; } while(0);
+"254
+[e :U 988 ]
 {
 [e = . . _LATDbits 0 3 -> -> 0 `i `uc ]
 }
-[e :U 984 ]
-"247
-}
-[e :U 982 ]
-"248
-[e :U 981 ]
-[; ;SwSpiApp.c: 247: }
-[; ;SwSpiApp.c: 248: break;
-[e $U 964  ]
-"249
-}
-[; ;SwSpiApp.c: 249: }
-[e $U 964  ]
-"226
-[e :U 965 ]
-[e [\ _phrType , $ . `E7537 0 966
- , $ . `E7537 1 976
- 964 ]
-"249
-[e :U 964 ]
-[; ;SwSpiApp.c: 250: }
-"250
-[e :UE 963 ]
-}
-"252
-[v _SwSpi_Set_Dac_Sync_Pin `(v ~T0 @X0 1 ef1`uc ]
-"253
-{
-[; ;SwSpiApp.c: 252: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode)
-[; ;SwSpiApp.c: 253: {
-[e :U _SwSpi_Set_Dac_Sync_Pin ]
-"252
-[v _cPinMode `uc ~T0 @X0 1 r1 ]
-"253
-[f ]
-[; ;SwSpiApp.c: 254: switch(cPinMode)
-"254
-[e $U 988  ]
-[; ;SwSpiApp.c: 255: {
+[e :U 987 ]
 "255
-{
-[; ;SwSpiApp.c: 256: case 0:
+}
+[e :U 985 ]
 "256
-[e :U 989 ]
-[; ;SwSpiApp.c: 257: do { LATAbits.LATA2 = 0; } while(0);
+[e :U 984 ]
+[; ;SwSpiApp.c: 255: }
+[; ;SwSpiApp.c: 256: break;
+[e $U 967  ]
 "257
+}
+[; ;SwSpiApp.c: 257: }
+[e $U 967  ]
+"234
+[e :U 968 ]
+[e [\ _phrType , $ . `E7543 0 969
+ , $ . `E7543 1 979
+ 967 ]
+"257
+[e :U 967 ]
+[; ;SwSpiApp.c: 258: }
+"258
+[e :UE 966 ]
+}
+"260
+[v _SwSpi_Set_Dac_Sync_Pin `(v ~T0 @X0 1 ef1`uc ]
+"261
+{
+[; ;SwSpiApp.c: 260: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode)
+[; ;SwSpiApp.c: 261: {
+[e :U _SwSpi_Set_Dac_Sync_Pin ]
+"260
+[v _cPinMode `uc ~T0 @X0 1 r1 ]
+"261
+[f ]
+[; ;SwSpiApp.c: 262: switch(cPinMode)
+"262
+[e $U 991  ]
+[; ;SwSpiApp.c: 263: {
+"263
+{
+[; ;SwSpiApp.c: 264: case 0:
+"264
 [e :U 992 ]
+[; ;SwSpiApp.c: 265: do { LATAbits.LATA2 = 0; } while(0);
+"265
+[e :U 995 ]
 {
 [e = . . _LATAbits 0 2 -> -> 0 `i `uc ]
 }
-[e :U 991 ]
-[; ;SwSpiApp.c: 258: break;
-"258
-[e $U 987  ]
-[; ;SwSpiApp.c: 260: case 1:
-"260
-[e :U 993 ]
-[; ;SwSpiApp.c: 261: do { LATAbits.LATA2 = 1; } while(0);
-"261
+[e :U 994 ]
+[; ;SwSpiApp.c: 266: break;
+"266
+[e $U 990  ]
+[; ;SwSpiApp.c: 268: case 1:
+"268
 [e :U 996 ]
+[; ;SwSpiApp.c: 269: do { LATAbits.LATA2 = 1; } while(0);
+"269
+[e :U 999 ]
 {
 [e = . . _LATAbits 0 2 -> -> 1 `i `uc ]
 }
-[e :U 995 ]
-[; ;SwSpiApp.c: 262: break;
-"262
-[e $U 987  ]
-"263
+[e :U 998 ]
+[; ;SwSpiApp.c: 270: break;
+"270
+[e $U 990  ]
+"271
 }
-[; ;SwSpiApp.c: 263: }
-[e $U 987  ]
-"254
-[e :U 988 ]
-[e [\ _cPinMode , $ -> -> 0 `i `uc 989
- , $ -> -> 1 `i `uc 993
- 987 ]
-"263
-[e :U 987 ]
-[; ;SwSpiApp.c: 264: }
-"264
-[e :UE 986 ]
+[; ;SwSpiApp.c: 271: }
+[e $U 990  ]
+"262
+[e :U 991 ]
+[e [\ _cPinMode , $ -> -> 0 `i `uc 992
+ , $ -> -> 1 `i `uc 996
+ 990 ]
+"271
+[e :U 990 ]
+[; ;SwSpiApp.c: 272: }
+"272
+[e :UE 989 ]
 }

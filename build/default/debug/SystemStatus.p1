@@ -25,7 +25,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n E7078 . CONTROL_MSG MCU_STATUS_VERSION_MSG ADC_MSG SYNTH_MSG FLASH_MSG DAC_MSG  ]
 "34 EusartApp.h
 [v _SendAckMessage `(v ~T0 @X0 0 ef2`E7078`E7086 ]
-"43 SystemCommon.h
+"44 SystemCommon.h
 [v _ZeroArray `(v ~T0 @X0 0 ef2`*uc`i ]
 "38 FlashApp.h
 [v _EepromRead `(uc ~T0 @X0 0 ef1`uc ]
@@ -6970,7 +6970,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "27
 -> -> 301990119 `l `ul
 "28
--> -> 889544822 `l `ul
+-> -> 889266294 `l `ul
 "29
 -> -> 8388645 `l `ul
 "30
@@ -6993,7 +6993,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 25: 0x2221BCC9,
 [; ;SyntApp.h: 26: 0x102D0428,
 [; ;SyntApp.h: 27: 0x120000E7,
-[; ;SyntApp.h: 28: 0x35056076,
+[; ;SyntApp.h: 28: 0x35012076,
 [; ;SyntApp.h: 29: 0x00800025,
 [; ;SyntApp.h: 30: 0x34009B84,
 [; ;SyntApp.h: 31: 0x00000003,
@@ -7001,11 +7001,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 33: 0x06000001,
 [; ;SyntApp.h: 34: 0x00200340
 [; ;SyntApp.h: 35: };
-[; ;SyntApp.h: 37: void PLLUartInitialize(char* data);
-[; ;SyntApp.h: 38: void PLLInitialize(void);
-[; ;SyntApp.h: 40: void UpdateTxFreq(char* data);
-[; ;SyntApp.h: 41: void UpdateRxFreq(char* data);
-[; ;SyntApp.h: 43: void SYNTH_ISR(void);
+"37
+[v _TEST_PLL_REGISTERS `Cul ~T0 @X0 -> 13 `i e ]
+[i _TEST_PLL_REGISTERS
+:U ..
+"39
+-> -> 66588 `l `ul
+"40
+-> -> 6369291 `l `ul
+"41
+-> -> 12592826 `l `ul
+"42
+-> -> 437910729 `l `ul
+"43
+-> -> 271385640 `l `ul
+"44
+-> -> 301990119 `l `ul
+"45
+-> -> 889544822 `l `ul
+"46
+-> -> 8388645 `l `ul
+"47
+-> -> 838896516 `l `ul
+"48
+-> -> -> 3 `i `l `ul
+"49
+-> -> 524338 `l `ul
+"50
+-> -> 27962017 `l `ul
+"52
+-> -> 200410 `l `ul
+..
+]
+[; ;SyntApp.h: 37: const uint32_t TEST_PLL_REGISTERS[13] =
+[; ;SyntApp.h: 38: {
+[; ;SyntApp.h: 39: 0x1041C,
+[; ;SyntApp.h: 40: 0x61300B,
+[; ;SyntApp.h: 41: 0xC026BA,
+[; ;SyntApp.h: 42: 0x1A19FCC9,
+[; ;SyntApp.h: 43: 0x102D0428,
+[; ;SyntApp.h: 44: 0x120000E7,
+[; ;SyntApp.h: 45: 0x35056076,
+[; ;SyntApp.h: 46: 0x800025,
+[; ;SyntApp.h: 47: 0x32008B84,
+[; ;SyntApp.h: 48: 0x3,
+[; ;SyntApp.h: 49: 0x80032,
+[; ;SyntApp.h: 50: 0x1AAAAA1,
+[; ;SyntApp.h: 51: 200410
+[; ;SyntApp.h: 52: };
+[; ;SyntApp.h: 57: void PLLUartInitialize(char* data);
+[; ;SyntApp.h: 58: void PLLInitialize(void);
+[; ;SyntApp.h: 60: void UpdateTxFreq(char* data);
+[; ;SyntApp.h: 61: void UpdateRxFreq(char* data);
+[; ;SyntApp.h: 63: void SYNTH_ISR(void);
 [; ;SwSpiApp.h: 14: typedef enum
 [; ;SwSpiApp.h: 15: {
 [; ;SwSpiApp.h: 16: SYNTH_TX = 0,
@@ -7013,13 +7061,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SwSpiApp.h: 18: EXT_DAC
 [; ;SwSpiApp.h: 19: } SPI_PERIPHERAL;
 [; ;SwSpiApp.h: 22: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
-[; ;SwSpiApp.h: 23: void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
-[; ;SwSpiApp.h: 25: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 26: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 28: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 24: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 25: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 27: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 30: void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data);
 [; ;SwSpiApp.h: 31: void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
 [; ;SwSpiApp.h: 32: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 35: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
+[; ;SwSpiApp.h: 35: void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
+[; ;SwSpiApp.h: 36: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 [; ;SystemCommon.h: 32: typedef enum
 [; ;SystemCommon.h: 33: {
 [; ;SystemCommon.h: 34: START_SYSTEM = 0,
@@ -7030,12 +7079,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SystemCommon.h: 39: }SYSTEM_STATE;
 [; ;SystemCommon.h: 41: unsigned char crc8(char* dataArray, int dataSize);
 [; ;SystemCommon.h: 42: uint8_t make8(uint32_t data, uint8_t dataLocation);
-[; ;SystemCommon.h: 43: void ZeroArray(char* array, int size);
-[; ;SystemCommon.h: 44: int GCD(int num1, int num2);
-[; ;SystemCommon.h: 45: uint32_t GetIntFromUartData(char* data);
-[; ;SystemCommon.h: 48: void ResetMcu(void);
-[; ;SystemCommon.h: 49: void ResetCpld(void);
-[; ;SystemCommon.h: 50: void SendSystemStartAck(void);
+[; ;SystemCommon.h: 43: void Make32bitsArray(bool* array, uint32_t data);
+[; ;SystemCommon.h: 44: void ZeroArray(char* array, int size);
+[; ;SystemCommon.h: 45: void ZeroBitsArray(bool* array);
+[; ;SystemCommon.h: 46: int GCD(int num1, int num2);
+[; ;SystemCommon.h: 47: uint32_t GetIntFromUartData(char* data);
+[; ;SystemCommon.h: 50: void ResetMcu(void);
+[; ;SystemCommon.h: 51: void ResetCpld(void);
+[; ;SystemCommon.h: 52: void SendSystemStartAck(void);
 [; ;SystemStatus.h: 27: void SetMcuFwVersion(char* data);
 [; ;SystemStatus.h: 28: void SetCpldFwVersion(char* data);
 [; ;SystemStatus.h: 30: void GetMcuFwVersion();

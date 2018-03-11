@@ -23,11 +23,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v __delay `JF6934 ~T0 @X0 0 e ]
 [p i __delay ]
 "26 DacApp.c
-[c E7445 0 1 2 .. ]
-[n E7445 . SYNTH_TX SYNTH_RX EXT_DAC  ]
+[c E7446 0 1 2 .. ]
+[n E7446 . SYNTH_TX SYNTH_RX EXT_DAC  ]
 "22 SwSpiApp.h
-[v _SWSPI_send_word `(v ~T0 @X0 0 ef3`E7445`ul`uc ]
-"45 SystemCommon.h
+[v _SWSPI_send_word `(v ~T0 @X0 0 ef3`E7446`ul`uc ]
+"47 SystemCommon.h
 [v _GetIntFromUartData `(ul ~T0 @X0 0 ef1`*uc ]
 "39 DacApp.c
 [c E7078 1 2 3 4 5 6 .. ]
@@ -6950,7 +6950,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "27
 -> -> 301990119 `l `ul
 "28
--> -> 889544822 `l `ul
+-> -> 889266294 `l `ul
 "29
 -> -> 8388645 `l `ul
 "30
@@ -6973,7 +6973,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 25: 0x2221BCC9,
 [; ;SyntApp.h: 26: 0x102D0428,
 [; ;SyntApp.h: 27: 0x120000E7,
-[; ;SyntApp.h: 28: 0x35056076,
+[; ;SyntApp.h: 28: 0x35012076,
 [; ;SyntApp.h: 29: 0x00800025,
 [; ;SyntApp.h: 30: 0x34009B84,
 [; ;SyntApp.h: 31: 0x00000003,
@@ -6981,11 +6981,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 33: 0x06000001,
 [; ;SyntApp.h: 34: 0x00200340
 [; ;SyntApp.h: 35: };
-[; ;SyntApp.h: 37: void PLLUartInitialize(char* data);
-[; ;SyntApp.h: 38: void PLLInitialize(void);
-[; ;SyntApp.h: 40: void UpdateTxFreq(char* data);
-[; ;SyntApp.h: 41: void UpdateRxFreq(char* data);
-[; ;SyntApp.h: 43: void SYNTH_ISR(void);
+"37
+[v _TEST_PLL_REGISTERS `Cul ~T0 @X0 -> 13 `i e ]
+[i _TEST_PLL_REGISTERS
+:U ..
+"39
+-> -> 66588 `l `ul
+"40
+-> -> 6369291 `l `ul
+"41
+-> -> 12592826 `l `ul
+"42
+-> -> 437910729 `l `ul
+"43
+-> -> 271385640 `l `ul
+"44
+-> -> 301990119 `l `ul
+"45
+-> -> 889544822 `l `ul
+"46
+-> -> 8388645 `l `ul
+"47
+-> -> 838896516 `l `ul
+"48
+-> -> -> 3 `i `l `ul
+"49
+-> -> 524338 `l `ul
+"50
+-> -> 27962017 `l `ul
+"52
+-> -> 200410 `l `ul
+..
+]
+[; ;SyntApp.h: 37: const uint32_t TEST_PLL_REGISTERS[13] =
+[; ;SyntApp.h: 38: {
+[; ;SyntApp.h: 39: 0x1041C,
+[; ;SyntApp.h: 40: 0x61300B,
+[; ;SyntApp.h: 41: 0xC026BA,
+[; ;SyntApp.h: 42: 0x1A19FCC9,
+[; ;SyntApp.h: 43: 0x102D0428,
+[; ;SyntApp.h: 44: 0x120000E7,
+[; ;SyntApp.h: 45: 0x35056076,
+[; ;SyntApp.h: 46: 0x800025,
+[; ;SyntApp.h: 47: 0x32008B84,
+[; ;SyntApp.h: 48: 0x3,
+[; ;SyntApp.h: 49: 0x80032,
+[; ;SyntApp.h: 50: 0x1AAAAA1,
+[; ;SyntApp.h: 51: 200410
+[; ;SyntApp.h: 52: };
+[; ;SyntApp.h: 57: void PLLUartInitialize(char* data);
+[; ;SyntApp.h: 58: void PLLInitialize(void);
+[; ;SyntApp.h: 60: void UpdateTxFreq(char* data);
+[; ;SyntApp.h: 61: void UpdateRxFreq(char* data);
+[; ;SyntApp.h: 63: void SYNTH_ISR(void);
 [; ;SwSpiApp.h: 14: typedef enum
 [; ;SwSpiApp.h: 15: {
 [; ;SwSpiApp.h: 16: SYNTH_TX = 0,
@@ -6993,13 +7041,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SwSpiApp.h: 18: EXT_DAC
 [; ;SwSpiApp.h: 19: } SPI_PERIPHERAL;
 [; ;SwSpiApp.h: 22: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
-[; ;SwSpiApp.h: 23: void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
-[; ;SwSpiApp.h: 25: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 26: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 28: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 24: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 25: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 27: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 30: void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data);
 [; ;SwSpiApp.h: 31: void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
 [; ;SwSpiApp.h: 32: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 35: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
+[; ;SwSpiApp.h: 35: void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
+[; ;SwSpiApp.h: 36: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 [; ;SystemCommon.h: 32: typedef enum
 [; ;SystemCommon.h: 33: {
 [; ;SystemCommon.h: 34: START_SYSTEM = 0,
@@ -7010,12 +7059,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SystemCommon.h: 39: }SYSTEM_STATE;
 [; ;SystemCommon.h: 41: unsigned char crc8(char* dataArray, int dataSize);
 [; ;SystemCommon.h: 42: uint8_t make8(uint32_t data, uint8_t dataLocation);
-[; ;SystemCommon.h: 43: void ZeroArray(char* array, int size);
-[; ;SystemCommon.h: 44: int GCD(int num1, int num2);
-[; ;SystemCommon.h: 45: uint32_t GetIntFromUartData(char* data);
-[; ;SystemCommon.h: 48: void ResetMcu(void);
-[; ;SystemCommon.h: 49: void ResetCpld(void);
-[; ;SystemCommon.h: 50: void SendSystemStartAck(void);
+[; ;SystemCommon.h: 43: void Make32bitsArray(bool* array, uint32_t data);
+[; ;SystemCommon.h: 44: void ZeroArray(char* array, int size);
+[; ;SystemCommon.h: 45: void ZeroBitsArray(bool* array);
+[; ;SystemCommon.h: 46: int GCD(int num1, int num2);
+[; ;SystemCommon.h: 47: uint32_t GetIntFromUartData(char* data);
+[; ;SystemCommon.h: 50: void ResetMcu(void);
+[; ;SystemCommon.h: 51: void ResetCpld(void);
+[; ;SystemCommon.h: 52: void SendSystemStartAck(void);
 [; ;math.h: 30: extern double fabs(double);
 [; ;math.h: 31: extern double floor(double);
 [; ;math.h: 32: extern double ceil(double);
@@ -7093,16 +7144,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;DacApp.c: 26: SWSPI_send_word(EXT_DAC, (0x2344), 1);
 "26
-[e ( _SWSPI_send_word (3 , , . `E7445 2 -> -> -> 9028 `i `l `ul -> -> 1 `i `uc ]
+[e ( _SWSPI_send_word (3 , , . `E7446 2 -> -> -> 9028 `i `l `ul -> -> 1 `i `uc ]
 [; ;DacApp.c: 27: SWSPI_send_word(EXT_DAC, (0x6344), 1);
 "27
-[e ( _SWSPI_send_word (3 , , . `E7445 2 -> -> -> 25412 `i `l `ul -> -> 1 `i `uc ]
+[e ( _SWSPI_send_word (3 , , . `E7446 2 -> -> -> 25412 `i `l `ul -> -> 1 `i `uc ]
 [; ;DacApp.c: 28: SWSPI_send_word(EXT_DAC, (0xA344), 1);
 "28
-[e ( _SWSPI_send_word (3 , , . `E7445 2 -> -> 41796 `ui `ul -> -> 1 `i `uc ]
+[e ( _SWSPI_send_word (3 , , . `E7446 2 -> -> 41796 `ui `ul -> -> 1 `i `uc ]
 [; ;DacApp.c: 29: SWSPI_send_word(EXT_DAC, (0xE344), 1);
 "29
-[e ( _SWSPI_send_word (3 , , . `E7445 2 -> -> 58180 `ui `ul -> -> 1 `i `uc ]
+[e ( _SWSPI_send_word (3 , , . `E7446 2 -> -> 58180 `ui `ul -> -> 1 `i `uc ]
 [; ;DacApp.c: 30: }
 "30
 [e :UE 855 ]
@@ -7124,7 +7175,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _regData -> ( _GetIntFromUartData (1 _data `ui ]
 [; ;DacApp.c: 36: SWSPI_send_word(EXT_DAC, regData, 1);
 "36
-[e ( _SWSPI_send_word (3 , , . `E7445 2 -> _regData `ul -> -> 1 `i `uc ]
+[e ( _SWSPI_send_word (3 , , . `E7446 2 -> _regData `ul -> -> 1 `i `uc ]
 [; ;DacApp.c: 39: SendAckMessage((MSG_GROUPS)DAC_MSG, (MSG_REQUEST)DAC_SET_VALUE);
 "39
 [e ( _SendAckMessage (2 , . `E7078 5 . `E7086 24 ]

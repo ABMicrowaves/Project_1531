@@ -23,46 +23,30 @@ void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize)
     if(phrType == SYNTH_TX || phrType == SYNTH_RX)
     {
         SwSpi_Set_Synth_Le_Pin(phrType, LOW);
+        SWSPI_Synth_send_bits(phrType, data);
+        SwSpi_Set_Synth_Le_Pin(phrType, HIGH);
+        //__delay_us(50);
     }
     else if(phrType == EXT_DAC)
     {  
         SwSpi_Set_Dac_Sync_Pin(LOW);
-    }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Send word (2 bytes)">
-    
-    for(int idx = dataSize + 1; idx > 0; idx--)
-    {
-        uint8_t datac = make8(data, idx - 1);
-        SWSPI_send_bits(phrType, datac);
-    }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="End cycle">
-    
-    if(phrType == SYNTH_TX || phrType == SYNTH_RX)
-    {
-        SwSpi_Set_Synth_Le_Pin(phrType, HIGH);
-    }
-    else if(phrType == EXT_DAC)
-    {
+        for(int idx = dataSize + 1; idx > 0; idx--)
+        {
+            uint8_t datac = make8(data, idx - 1);
+            SWSPI_DAC_send_bits(phrType, datac);
+        }
         SwSpi_Set_Dac_Sync_Pin(HIGH);
     }
-    // </editor-fold>
     
     INTERRUPT_GlobalInterruptEnable();
 }
 
-void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data)
+void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data)
 {
     UCHAR count;
     for (count = 8; count ; count--, data <<= 1)
     {
-        //if(phrType == EXT_DAC)
-        {
-            SwSpi_Clk_Pin(phrType, HIGH);
-        }
+        SwSpi_Clk_Pin(phrType, HIGH);
         
         if (data & 0X80)
         {
@@ -75,13 +59,37 @@ void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data)
         }
         
         SwSpi_Clk_Pin(phrType, LOW);
+    }
+    
+    SwSpi_Data_Pin(phrType, LOW);
+    SwSpi_Clk_Pin(phrType, LOW);
+}
+
+void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data)
+{
+    UCHAR count;
+    uint32_t mask = 0x1;
+    
+    bool bitArray[32];
+    ZeroBitsArray(bitArray);
+    
+    Make32bitsArray(bitArray, data);
+    
+    for (count = 0; count <= 31 ; count++)
+    {
         
-//        if(phrType == SYNTH_TX || phrType == SYNTH_RX)
-//        {
-//            __delay_us(10);
-//            SwSpi_Synth_Toggle_Clock(phrType);
-//            __delay_us(25);
-//        }
+        SwSpi_Clk_Pin(phrType, LOW);
+        
+        if (bitArray[count])
+        {
+            SwSpi_Data_Pin(phrType, HIGH);
+        } 
+        else
+        {
+            SwSpi_Data_Pin(phrType, LOW);
+        }
+        
+        SwSpi_Clk_Pin(phrType, HIGH);
     }
     
     SwSpi_Data_Pin(phrType, LOW);

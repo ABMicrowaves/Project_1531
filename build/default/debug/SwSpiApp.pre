@@ -9019,7 +9019,7 @@ const uint32_t PLL_INIT_REGISTERS[13] =
 0x2221BCC9,
 0x102D0428,
 0x120000E7,
-0x35056076,
+0x35012076,
 0x00800025,
 0x34009B84,
 0x00000003,
@@ -9027,6 +9027,26 @@ const uint32_t PLL_INIT_REGISTERS[13] =
 0x06000001,
 0x00200340
 };
+
+const uint32_t TEST_PLL_REGISTERS[13] =
+{
+0x1041C,
+0x61300B,
+0xC026BA,
+0x1A19FCC9,
+0x102D0428,
+0x120000E7,
+0x35056076,
+0x800025,
+0x32008B84,
+0x3,
+0x80032,
+0x1AAAAA1,
+200410
+};
+
+
+
 
 void PLLUartInitialize(char* data);
 void PLLInitialize(void);
@@ -9048,7 +9068,9 @@ FINISH_ROUND
 
 unsigned char crc8(char* dataArray, int dataSize);
 uint8_t make8(uint32_t data, uint8_t dataLocation);
+void Make32bitsArray(bool* array, uint32_t data);
 void ZeroArray(char* array, int size);
+void ZeroBitsArray(bool* array);
 int GCD(int num1, int num2);
 uint32_t GetIntFromUartData(char* data);
 
@@ -9067,7 +9089,6 @@ EXT_DAC
 
 
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
-void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
@@ -9075,10 +9096,12 @@ void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 
 
+void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data);
 void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
 void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 
 
+void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 
 # 17 "SwSpiApp.c"
@@ -9091,46 +9114,30 @@ void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize)
 if(phrType == SYNTH_TX || phrType == SYNTH_RX)
 {
 SwSpi_Set_Synth_Le_Pin(phrType, 0);
+SWSPI_Synth_send_bits(phrType, data);
+SwSpi_Set_Synth_Le_Pin(phrType, 1);
+
 }
 else if(phrType == EXT_DAC)
 {
 SwSpi_Set_Dac_Sync_Pin(0);
-}
-
-
-
-
 for(int idx = dataSize + 1; idx > 0; idx--)
 {
 uint8_t datac = make8(data, idx - 1);
-SWSPI_send_bits(phrType, datac);
+SWSPI_DAC_send_bits(phrType, datac);
 }
-
-
-
-
-if(phrType == SYNTH_TX || phrType == SYNTH_RX)
-{
-SwSpi_Set_Synth_Le_Pin(phrType, 1);
-}
-else if(phrType == EXT_DAC)
-{
 SwSpi_Set_Dac_Sync_Pin(1);
 }
-
 
 (INTCONbits.GIE = 1);
 }
 
-void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data)
+void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data)
 {
 uint8_t count;
 for (count = 8; count ; count--, data <<= 1)
 {
-
-{
 SwSpi_Clk_Pin(phrType, 1);
-}
 
 if (data & 0X80)
 {
@@ -9143,15 +9150,44 @@ SwSpi_Data_Pin(phrType, 0);
 }
 
 SwSpi_Clk_Pin(phrType, 0);
-
-# 85
 }
 
 SwSpi_Data_Pin(phrType, 0);
 SwSpi_Clk_Pin(phrType, 0);
 }
 
-# 95
+void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data)
+{
+uint8_t count;
+uint32_t mask = 0x1;
+
+bool bitArray[32];
+ZeroBitsArray(bitArray);
+
+Make32bitsArray(bitArray, data);
+
+for (count = 0; count <= 31 ; count++)
+{
+
+SwSpi_Clk_Pin(phrType, 0);
+
+if (bitArray[count])
+{
+SwSpi_Data_Pin(phrType, 1);
+}
+else
+{
+SwSpi_Data_Pin(phrType, 0);
+}
+
+SwSpi_Clk_Pin(phrType, 1);
+}
+
+SwSpi_Data_Pin(phrType, 0);
+SwSpi_Clk_Pin(phrType, 0);
+}
+
+# 103
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode)
 {
 switch(phrType)

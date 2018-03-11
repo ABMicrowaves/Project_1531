@@ -6647,9 +6647,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pin_manager.c: 70: TRISD = 0xF2;
 "70
 [e = _TRISD -> -> 242 `i `uc ]
-[; ;pin_manager.c: 75: ANSELC = 0x30;
+[; ;pin_manager.c: 75: ANSELC = 0x34;
 "75
-[e = _ANSELC -> -> 48 `i `uc ]
+[e = _ANSELC -> -> 52 `i `uc ]
 [; ;pin_manager.c: 76: ANSELB = 0x33;
 "76
 [e = _ANSELB -> -> 51 `i `uc ]

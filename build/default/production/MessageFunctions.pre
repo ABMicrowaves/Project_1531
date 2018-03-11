@@ -51,6 +51,7 @@ FLASH_EREASE_MEMORY = 0x51,
 FLASH_READ_CONDITION = 0x52,
 FLASH_REQUEST_RAW_DATA = 0x53,
 FLASH_SEND_RAW_DATA = 0x54,
+FLASH_NO_SAMPLE_YET = 0x55,
 
 
 DAC_SET_VALUE = 0x61,
@@ -8821,7 +8822,8 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 24 "DacApp.h"
+# 23 "DacApp.h"
+void DacInit(void);
 void DacSetValue(char* data);
 
 
@@ -8966,13 +8968,30 @@ const uint32_t PLL_INIT_REGISTERS[13] =
 0x2221BCC9,
 0x102D0428,
 0x120000E7,
-0x35056076,
+0x3500A076,
 0x00800025,
 0x34009B84,
 0x00000003,
 0x00000012,
 0x06000001,
 0x00200340
+};
+
+const uint32_t TEST_PLL_REGISTERS[13] =
+{
+0x0001041C,
+0x0061300B,
+0x00C0323A,
+0x2221BCC9,
+0x102D0428,
+0x120000E7,
+0x35056076,
+0x00800025,
+0x32008B84,
+0x00000003,
+0x00000012,
+0x06000001,
+
 };
 
 void PLLUartInitialize(char* data);
@@ -9017,15 +9036,15 @@ void SWSPI_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-void SwSpi_Set_Clock(SPI_PERIPHERAL phrType);
+
 void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 
 
+void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
 void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 
 
 void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
-void SwSpi_Set_Dac_Ldac_Pin(bool cPinMode);
 
 # 32 "SystemCommon.h"
 typedef enum
