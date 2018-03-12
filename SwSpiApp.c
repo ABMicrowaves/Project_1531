@@ -25,7 +25,6 @@ void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize)
         SwSpi_Set_Synth_Le_Pin(phrType, LOW);
         SWSPI_Synth_send_bits(phrType, data);
         SwSpi_Set_Synth_Le_Pin(phrType, HIGH);
-        //__delay_us(50);
     }
     else if(phrType == EXT_DAC)
     {  
@@ -92,6 +91,7 @@ void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data)
         SwSpi_Clk_Pin(phrType, HIGH);
     }
     
+    __delay_us(50);
     SwSpi_Data_Pin(phrType, LOW);
     SwSpi_Clk_Pin(phrType, LOW);
 }

@@ -10,7 +10,6 @@
         <itemPath>FlashApp.h</itemPath>
         <itemPath>DacApp.h</itemPath>
         <itemPath>EusartApp.h</itemPath>
-        <itemPath>SevenSegmentApp.h</itemPath>
         <itemPath>SyntApp.h</itemPath>
         <itemPath>SwSpiApp.h</itemPath>
       </logicalFolder>
@@ -46,7 +45,6 @@
         <itemPath>EusartApp.c</itemPath>
         <itemPath>FlashApp.c</itemPath>
         <itemPath>DacApp.c</itemPath>
-        <itemPath>SevenSegmentApp.c</itemPath>
         <itemPath>SyntApp.c</itemPath>
         <itemPath>SwSpiApp.c</itemPath>
       </logicalFolder>
@@ -225,7 +223,7 @@
       </ICD4Tool>
       <PICkit3PlatformTool>
         <property key="AutoSelectMemRanges" value="auto"/>
-        <property key="Freeze Peripherals" value="true"/>
+        <property key="Freeze Peripherals" value="false"/>
         <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
@@ -263,7 +261,7 @@
         <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
         <property key="programoptions.usehighvoltageonmclr" value="false"/>
         <property key="programoptions.uselvpprogramming" value="false"/>
-        <property key="voltagevalue" value="4.75"/>
+        <property key="voltagevalue" value="5.0"/>
       </PICkit3PlatformTool>
       <XC8-config-global>
         <property key="advanced-elf" value="true"/>

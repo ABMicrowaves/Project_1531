@@ -31,19 +31,9 @@ void ZeroBitsArray(bool* array)
     memset(array, 0x0, 32);
 }
 
-int GCD(int num1, int num2) 
+uint32_t GetIntFromUartData(int8_t num, char* data)
 {
-  while (num2 != 0)  
-  {
-    int temp = num2;
-    num2 = num1 % num2;
-    num1 = temp;
-  }
-  return num1;
-}
-
-uint32_t GetIntFromUartData(char* data)
-{
+    uint32_t retVal = 0;
     char dataRegArr[MAX_UART_BYTES_SIZE];
     ZeroArray(dataRegArr, MAX_UART_BYTES_SIZE);
     
@@ -60,8 +50,9 @@ uint32_t GetIntFromUartData(char* data)
         }
         
     }
-    uint32_t t = strtol(dataRegArr, NULL, 16);
-    return strtol(dataRegArr, NULL, 16);
+    retVal = strtol(dataRegArr, NULL, num);
+    
+    return retVal;
 }
 
 uint8_t make8(uint32_t data, uint8_t dataLocation)
@@ -92,9 +83,33 @@ void Make32bitsArray(bool* array, uint32_t data)
         array[NUM_OF_BITS_SYNTH_REG - idx - 1] = data % 2;
         data /= 2;
     }
-    
 }
 
+void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes)
+{
+    for(uint8_t idx = numOfByes; idx; idx--)
+    {
+        uint8_t val = make8(data, idx - 1);
+        EepromWrite(address - idx, val);
+    }
+}
+
+uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes)
+{
+    uint32_t retVal = 0x00;
+    
+    if(numOfByes == 2)
+    {
+        retVal = (EepromRead(address + 0) << 8) | (EepromRead(address + 1));
+    }
+    else if (numOfByes == 4)
+    {
+        
+    }
+    
+    
+    return retVal;
+}
 
 void ResetMcu()
 {

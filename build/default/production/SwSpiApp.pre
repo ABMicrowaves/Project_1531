@@ -8452,10 +8452,10 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 448 "mcc_generated_files/pin_manager.h"
+# 465 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 460
+# 477
 void PIN_MANAGER_IOC(void);
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdint.h"
@@ -8811,7 +8811,7 @@ void SetChannelMode(char* data);
 void InitAdcApplicationMgr();
 void AdcConvert();
 
-# 31 "FlashApp.h"
+# 36 "FlashApp.h"
 void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
 void FlashReadUart(int numOfSampleToRead);
 void FlashEreaseMem(void);
@@ -8873,7 +8873,14 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 23 "DacApp.h"
+# 24 "DacApp.h"
+const uint8_t DAC_ADDRES[(4)] =
+{
+0x0,
+0x2,
+0x4,
+0x8,
+};
 void DacInit(void);
 void DacSetValue(char* data);
 
@@ -9010,43 +9017,23 @@ void segmentCounter(void);
 unsigned short mask(unsigned short num);
 void InitSevenSegment(void);
 
-# 20 "SyntApp.h"
-const uint32_t PLL_INIT_REGISTERS[13] =
-{
-0x0001041C,
-0x0061300B,
-0x00C0323A,
-0x2221BCC9,
-0x102D0428,
-0x120000E7,
-0x35012076,
-0x00800025,
-0x34009B84,
-0x00000003,
-0x00000012,
-0x06000001,
-0x00200340
-};
-
-const uint32_t TEST_PLL_REGISTERS[13] =
+# 23 "SyntApp.h"
+const uint32_t SYNTH_REGS[13] =
 {
 0x1041C,
 0x61300B,
-0xC026BA,
-0x1A19FCC9,
+0xC0193A,
+0x1110FCC9,
 0x102D0428,
 0x120000E7,
-0x35056076,
+0x35006076,
 0x800025,
-0x32008B84,
+0x30008384,
 0x3,
-0x80032,
-0x1AAAAA1,
-200410
+0x12,
+0x1,
+0x200640
 };
-
-
-
 
 void PLLUartInitialize(char* data);
 void PLLInitialize(void);
@@ -9068,9 +9055,12 @@ FINISH_ROUND
 
 unsigned char crc8(char* dataArray, int dataSize);
 uint8_t make8(uint32_t data, uint8_t dataLocation);
+void Make32bitsArray(bool* array, uint32_t data);
 void ZeroArray(char* array, int size);
-int GCD(int num1, int num2);
-uint32_t GetIntFromUartData(char* data);
+void ZeroBitsArray(bool* array);
+uint32_t GetIntFromUartData(int8_t num, char* data);
+void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
+uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
 
 
 void ResetMcu(void);
@@ -9094,7 +9084,7 @@ void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 
 
-void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
+void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data);
 void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
 void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 
@@ -9112,41 +9102,19 @@ void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize)
 if(phrType == SYNTH_TX || phrType == SYNTH_RX)
 {
 SwSpi_Set_Synth_Le_Pin(phrType, 0);
+SWSPI_Synth_send_bits(phrType, data);
+SwSpi_Set_Synth_Le_Pin(phrType, 1);
 }
-if(phrType == EXT_DAC)
+else if(phrType == EXT_DAC)
 {
 SwSpi_Set_Dac_Sync_Pin(0);
-}
-
-
-
-
 for(int idx = dataSize + 1; idx > 0; idx--)
 {
 uint8_t datac = make8(data, idx - 1);
-
-if(phrType == SYNTH_TX || phrType == SYNTH_RX)
-{
-SWSPI_Synth_send_bits(phrType, datac);
-}
-else if (phrType == EXT_DAC)
-{
 SWSPI_DAC_send_bits(phrType, datac);
 }
-}
-
-
-
-
-if(phrType == EXT_DAC)
-{
 SwSpi_Set_Dac_Sync_Pin(1);
 }
-else if(phrType == SYNTH_TX || phrType == SYNTH_RX)
-{
-SwSpi_Set_Synth_Le_Pin(phrType, 1);
-}
-
 
 (INTCONbits.GIE = 1);
 }
@@ -9175,16 +9143,23 @@ SwSpi_Data_Pin(phrType, 0);
 SwSpi_Clk_Pin(phrType, 0);
 }
 
-void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint8_t data)
+void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data)
 {
 uint8_t count;
-for (count = 8; count ; count--, data <<= 1)
-{
-SwSpi_Clk_Pin(phrType, 1);
+uint32_t mask = 0x1;
 
-if (data & 0X80)
+bool bitArray[32];
+ZeroBitsArray(bitArray);
+
+Make32bitsArray(bitArray, data);
+
+for (count = 0; count <= 31 ; count++)
 {
 
+SwSpi_Clk_Pin(phrType, 0);
+
+if (bitArray[count])
+{
 SwSpi_Data_Pin(phrType, 1);
 }
 else
@@ -9192,20 +9167,15 @@ else
 SwSpi_Data_Pin(phrType, 0);
 }
 
-SwSpi_Clk_Pin(phrType, 0);
-
-
-
-_delay((unsigned long)((10)*(8000000/4000000.0)));
-SwSpi_Synth_Toggle_Clock(phrType);
-_delay((unsigned long)((25)*(8000000/4000000.0)));
+SwSpi_Clk_Pin(phrType, 1);
 }
 
+_delay((unsigned long)((50)*(8000000/4000000.0)));
 SwSpi_Data_Pin(phrType, 0);
 SwSpi_Clk_Pin(phrType, 0);
 }
 
-# 123
+# 103
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode)
 {
 switch(phrType)

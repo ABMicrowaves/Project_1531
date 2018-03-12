@@ -8452,10 +8452,10 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 448 "mcc_generated_files/pin_manager.h"
+# 465 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 460
+# 477
 void PIN_MANAGER_IOC(void);
 
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdint.h"
@@ -8780,7 +8780,7 @@ void BlinkErrorLeds(LED_OK_INTICATION state);
 void BlinkOkLeds(LED_ERR_INTICATION state);
 void keepAliveSignalLed(void);
 
-# 31 "FlashApp.h"
+# 36 "FlashApp.h"
 void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
 void FlashReadUart(int numOfSampleToRead);
 void FlashEreaseMem(void);
@@ -8979,43 +8979,23 @@ void segmentCounter(void);
 unsigned short mask(unsigned short num);
 void InitSevenSegment(void);
 
-# 20 "SyntApp.h"
-const uint32_t PLL_INIT_REGISTERS[13] =
-{
-0x0001041C,
-0x0061300B,
-0x00C0323A,
-0x2221BCC9,
-0x102D0428,
-0x120000E7,
-0x35012076,
-0x00800025,
-0x34009B84,
-0x00000003,
-0x00000012,
-0x06000001,
-0x00200340
-};
-
-const uint32_t TEST_PLL_REGISTERS[13] =
+# 23 "SyntApp.h"
+const uint32_t SYNTH_REGS[13] =
 {
 0x1041C,
 0x61300B,
-0xC026BA,
-0x1A19FCC9,
+0xC0193A,
+0x1110FCC9,
 0x102D0428,
 0x120000E7,
-0x35056076,
+0x35006076,
 0x800025,
-0x32008B84,
+0x30008384,
 0x3,
-0x80032,
-0x1AAAAA1,
-200410
+0x12,
+0x1,
+0x200640
 };
-
-
-
 
 void PLLUartInitialize(char* data);
 void PLLInitialize(void);
@@ -9065,8 +9045,9 @@ uint8_t make8(uint32_t data, uint8_t dataLocation);
 void Make32bitsArray(bool* array, uint32_t data);
 void ZeroArray(char* array, int size);
 void ZeroBitsArray(bool* array);
-int GCD(int num1, int num2);
-uint32_t GetIntFromUartData(char* data);
+uint32_t GetIntFromUartData(int8_t num, char* data);
+void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
+uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
 
 
 void ResetMcu(void);

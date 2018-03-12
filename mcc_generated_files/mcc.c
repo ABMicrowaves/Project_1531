@@ -53,13 +53,13 @@
 #pragma config IESO = OFF    // Internal/External Oscillator Switchover bit->Oscillator Switchover mode disabled
 
 // CONFIG2L
-#pragma config PWRTEN = OFF    // Power-up Timer Enable bit->Power up timer disabled
-#pragma config BOREN = SBORDIS    // Brown-out Reset Enable bits->Brown-out Reset enabled in hardware only (SBOREN is disabled)
+#pragma config PWRTEN = ON    // Power-up Timer Enable bit->Power up timer enabled
+#pragma config BOREN = OFF    // Brown-out Reset Enable bits->Brown-out Reset disabled in hardware and software
 #pragma config BORV = 190    // Brown Out Reset Voltage bits->VBOR set to 1.90 V nominal
 
 // CONFIG2H
 #pragma config WDTEN = OFF    // Watchdog Timer Enable bits->Watch dog timer is always disabled. SWDTEN has no effect.
-#pragma config WDTPS = 32768    // Watchdog Timer Postscale Select bits->1:32768
+#pragma config WDTPS = 16384    // Watchdog Timer Postscale Select bits->1:16384
 
 // CONFIG3H
 #pragma config CCP2MX = PORTC1    // CCP2 MUX bit->CCP2 input/output is multiplexed with RC1
@@ -71,8 +71,8 @@
 #pragma config MCLRE = EXTMCLR    // MCLR Pin Enable bit->MCLR pin enabled, RE3 input pin disabled
 
 // CONFIG4L
-#pragma config STVREN = ON    // Stack Full/Underflow Reset Enable bit->Stack full/underflow will cause Reset
-#pragma config LVP = ON    // Single-Supply ICSP Enable bit->Single-Supply ICSP enabled if MCLRE is also 1
+#pragma config STVREN = OFF    // Stack Full/Underflow Reset Enable bit->Stack full/underflow will not cause Reset
+#pragma config LVP = OFF    // Single-Supply ICSP Enable bit->Single-Supply ICSP disabled
 #pragma config XINST = OFF    // Extended Instruction Set Enable bit->Instruction set extension and Indexed Addressing mode disabled (Legacy mode)
 #pragma config DEBUG = OFF    // Background Debug->Disabled
 
@@ -125,8 +125,8 @@ void OSCILLATOR_Initialize(void)
     OSCCON = 0x60;
     // PRISD enabled; SOSCGO disabled; MFIOSEL disabled; 
     OSCCON2 = 0x04;
-    // INTSRC disabled; PLLEN disabled; TUN 0; 
-    OSCTUNE = 0x00;
+    // INTSRC enabled; PLLEN disabled; TUN 0; 
+    OSCTUNE = 0x80;
 }
 
 

@@ -22,14 +22,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 "164 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h
 [v __delay `JF6934 ~T0 @X0 0 e ]
 [p i __delay ]
-"26 DacApp.c
-[c E7446 0 1 2 .. ]
-[n E7446 . SYNTH_TX SYNTH_RX EXT_DAC  ]
+"48 SystemCommon.h
+[v _ReadIntFromEeprom `(ul ~T0 @X0 0 ef2`uc`i ]
+"29 DacApp.c
+[c E7445 0 1 2 .. ]
+[n E7445 . SYNTH_TX SYNTH_RX EXT_DAC  ]
 "22 SwSpiApp.h
-[v _SWSPI_send_word `(v ~T0 @X0 0 ef3`E7446`ul`uc ]
-"47 SystemCommon.h
-[v _GetIntFromUartData `(ul ~T0 @X0 0 ef1`*uc ]
-"39 DacApp.c
+[v _SWSPI_send_word `(v ~T0 @X0 0 ef3`E7445`ul`uc ]
+"46 SystemCommon.h
+[v _GetIntFromUartData `(ul ~T0 @X0 0 ef2`c`*uc ]
+"47
+[v _StoreIntInEeprom `(v ~T0 @X0 0 ef3`ul`uc`i ]
+"47 DacApp.c
 [c E7078 1 2 3 4 5 6 .. ]
 [n E7078 . CONTROL_MSG MCU_STATUS_VERSION_MSG ADC_MSG SYNTH_MSG FLASH_MSG DAC_MSG  ]
 "34 EusartApp.h
@@ -6581,8 +6585,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 164: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 166: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 168: extern __nonreentrant void _delay3(unsigned char);
-[; ;pin_manager.h: 448: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 460: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 465: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 477: void PIN_MANAGER_IOC(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -6796,15 +6800,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;AdcApp.h: 48: void SetChannelMode(char* data);
 [; ;AdcApp.h: 49: void InitAdcApplicationMgr();
 [; ;AdcApp.h: 50: void AdcConvert();
-[; ;FlashApp.h: 31: void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
-[; ;FlashApp.h: 32: void FlashReadUart(int numOfSampleToRead);
-[; ;FlashApp.h: 33: void FlashEreaseMem(void);
-[; ;FlashApp.h: 34: void FlashReadCondition(void);
-[; ;FlashApp.h: 35: bool CheckFlashPrecentage(void);
-[; ;FlashApp.h: 38: uint8_t EepromRead(uint8_t address);
-[; ;FlashApp.h: 39: void EepromWrite(uint8_t address, uint8_t data);
-[; ;FlashApp.h: 42: bool FlashTest(int startAddress, int numOfSamples);
-[; ;FlashApp.h: 43: bool EepromTest(int startAddress, int numOfSamples);
+[; ;FlashApp.h: 36: void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
+[; ;FlashApp.h: 37: void FlashReadUart(int numOfSampleToRead);
+[; ;FlashApp.h: 38: void FlashEreaseMem(void);
+[; ;FlashApp.h: 39: void FlashReadCondition(void);
+[; ;FlashApp.h: 40: bool CheckFlashPrecentage(void);
+[; ;FlashApp.h: 43: uint8_t EepromRead(uint8_t address);
+[; ;FlashApp.h: 44: void EepromWrite(uint8_t address, uint8_t data);
+[; ;FlashApp.h: 47: bool FlashTest(int startAddress, int numOfSamples);
+[; ;FlashApp.h: 48: bool EepromTest(int startAddress, int numOfSamples);
 [; ;MessageFunctions.h: 18: void GroupControlMcu(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 19: void GroupStatusAndVersion(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 20: void GroupAdc(MSG_REQUEST request, char* data);
@@ -6933,107 +6937,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SevenSegmentApp.h: 19: void segmentCounter(void);
 [; ;SevenSegmentApp.h: 20: unsigned short mask(unsigned short num);
 [; ;SevenSegmentApp.h: 21: void InitSevenSegment(void);
-"20 SyntApp.h
-[v _PLL_INIT_REGISTERS `Cul ~T0 @X0 -> 13 `i e ]
-[i _PLL_INIT_REGISTERS
+"23 SyntApp.h
+[v _SYNTH_REGS `Cul ~T0 @X0 -> 13 `i e ]
+[i _SYNTH_REGS
 :U ..
-"22
--> -> 66588 `l `ul
-"23
--> -> 6369291 `l `ul
-"24
--> -> 12595770 `l `ul
 "25
--> -> 572636361 `l `ul
-"26
--> -> 271385640 `l `ul
-"27
--> -> 301990119 `l `ul
-"28
--> -> 889266294 `l `ul
-"29
--> -> 8388645 `l `ul
-"30
--> -> 872455044 `l `ul
-"31
--> -> -> 3 `i `l `ul
-"32
--> -> -> 18 `i `l `ul
-"33
--> -> 100663297 `l `ul
-"35
--> -> 2097984 `l `ul
-..
-]
-[; ;SyntApp.h: 20: const uint32_t PLL_INIT_REGISTERS[13] =
-[; ;SyntApp.h: 21: {
-[; ;SyntApp.h: 22: 0x0001041C,
-[; ;SyntApp.h: 23: 0x0061300B,
-[; ;SyntApp.h: 24: 0x00C0323A,
-[; ;SyntApp.h: 25: 0x2221BCC9,
-[; ;SyntApp.h: 26: 0x102D0428,
-[; ;SyntApp.h: 27: 0x120000E7,
-[; ;SyntApp.h: 28: 0x35012076,
-[; ;SyntApp.h: 29: 0x00800025,
-[; ;SyntApp.h: 30: 0x34009B84,
-[; ;SyntApp.h: 31: 0x00000003,
-[; ;SyntApp.h: 32: 0x00000012,
-[; ;SyntApp.h: 33: 0x06000001,
-[; ;SyntApp.h: 34: 0x00200340
-[; ;SyntApp.h: 35: };
-"37
-[v _TEST_PLL_REGISTERS `Cul ~T0 @X0 -> 13 `i e ]
-[i _TEST_PLL_REGISTERS
-:U ..
-"39
 -> -> 66588 `l `ul
-"40
+"26
 -> -> 6369291 `l `ul
-"41
--> -> 12592826 `l `ul
-"42
--> -> 437910729 `l `ul
-"43
+"27
+-> -> 12589370 `l `ul
+"28
+-> -> 286325961 `l `ul
+"29
 -> -> 271385640 `l `ul
-"44
+"30
 -> -> 301990119 `l `ul
-"45
--> -> 889544822 `l `ul
-"46
+"31
+-> -> 889217142 `l `ul
+"32
 -> -> 8388645 `l `ul
-"47
--> -> 838896516 `l `ul
-"48
+"33
+-> -> 805340036 `l `ul
+"34
 -> -> -> 3 `i `l `ul
-"49
--> -> 524338 `l `ul
-"50
--> -> 27962017 `l `ul
-"52
--> -> 200410 `l `ul
+"35
+-> -> -> 18 `i `l `ul
+"36
+-> -> -> 1 `i `l `ul
+"38
+-> -> 2098752 `l `ul
 ..
 ]
-[; ;SyntApp.h: 37: const uint32_t TEST_PLL_REGISTERS[13] =
-[; ;SyntApp.h: 38: {
-[; ;SyntApp.h: 39: 0x1041C,
-[; ;SyntApp.h: 40: 0x61300B,
-[; ;SyntApp.h: 41: 0xC026BA,
-[; ;SyntApp.h: 42: 0x1A19FCC9,
-[; ;SyntApp.h: 43: 0x102D0428,
-[; ;SyntApp.h: 44: 0x120000E7,
-[; ;SyntApp.h: 45: 0x35056076,
-[; ;SyntApp.h: 46: 0x800025,
-[; ;SyntApp.h: 47: 0x32008B84,
-[; ;SyntApp.h: 48: 0x3,
-[; ;SyntApp.h: 49: 0x80032,
-[; ;SyntApp.h: 50: 0x1AAAAA1,
-[; ;SyntApp.h: 51: 200410
-[; ;SyntApp.h: 52: };
-[; ;SyntApp.h: 57: void PLLUartInitialize(char* data);
-[; ;SyntApp.h: 58: void PLLInitialize(void);
-[; ;SyntApp.h: 60: void UpdateTxFreq(char* data);
-[; ;SyntApp.h: 61: void UpdateRxFreq(char* data);
-[; ;SyntApp.h: 63: void SYNTH_ISR(void);
+[; ;SyntApp.h: 23: const uint32_t SYNTH_REGS[13] =
+[; ;SyntApp.h: 24: {
+[; ;SyntApp.h: 25: 0x1041C,
+[; ;SyntApp.h: 26: 0x61300B,
+[; ;SyntApp.h: 27: 0xC0193A,
+[; ;SyntApp.h: 28: 0x1110FCC9,
+[; ;SyntApp.h: 29: 0x102D0428,
+[; ;SyntApp.h: 30: 0x120000E7,
+[; ;SyntApp.h: 31: 0x35006076,
+[; ;SyntApp.h: 32: 0x800025,
+[; ;SyntApp.h: 33: 0x30008384,
+[; ;SyntApp.h: 34: 0x3,
+[; ;SyntApp.h: 35: 0x12,
+[; ;SyntApp.h: 36: 0x1,
+[; ;SyntApp.h: 37: 0x200640
+[; ;SyntApp.h: 38: };
+[; ;SyntApp.h: 40: void PLLUartInitialize(char* data);
+[; ;SyntApp.h: 41: void PLLInitialize(void);
+[; ;SyntApp.h: 43: void UpdateTxFreq(char* data);
+[; ;SyntApp.h: 44: void UpdateRxFreq(char* data);
+[; ;SyntApp.h: 46: void SYNTH_ISR(void);
 [; ;SwSpiApp.h: 14: typedef enum
 [; ;SwSpiApp.h: 15: {
 [; ;SwSpiApp.h: 16: SYNTH_TX = 0,
@@ -7062,11 +7018,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SystemCommon.h: 43: void Make32bitsArray(bool* array, uint32_t data);
 [; ;SystemCommon.h: 44: void ZeroArray(char* array, int size);
 [; ;SystemCommon.h: 45: void ZeroBitsArray(bool* array);
-[; ;SystemCommon.h: 46: int GCD(int num1, int num2);
-[; ;SystemCommon.h: 47: uint32_t GetIntFromUartData(char* data);
-[; ;SystemCommon.h: 50: void ResetMcu(void);
-[; ;SystemCommon.h: 51: void ResetCpld(void);
-[; ;SystemCommon.h: 52: void SendSystemStartAck(void);
+[; ;SystemCommon.h: 46: uint32_t GetIntFromUartData(int8_t num, char* data);
+[; ;SystemCommon.h: 47: void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
+[; ;SystemCommon.h: 48: uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
+[; ;SystemCommon.h: 51: void ResetMcu(void);
+[; ;SystemCommon.h: 52: void ResetCpld(void);
+[; ;SystemCommon.h: 53: void SendSystemStartAck(void);
 [; ;math.h: 30: extern double fabs(double);
 [; ;math.h: 31: extern double floor(double);
 [; ;math.h: 32: extern double ceil(double);
@@ -7142,44 +7099,55 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;DacApp.c: 25: {
 [e :U _DacInit ]
 [f ]
-[; ;DacApp.c: 26: SWSPI_send_word(EXT_DAC, (0x2344), 1);
-"26
-[e ( _SWSPI_send_word (3 , , . `E7446 2 -> -> -> 9028 `i `l `ul -> -> 1 `i `uc ]
-[; ;DacApp.c: 27: SWSPI_send_word(EXT_DAC, (0x6344), 1);
 "27
-[e ( _SWSPI_send_word (3 , , . `E7446 2 -> -> -> 25412 `i `l `ul -> -> 1 `i `uc ]
-[; ;DacApp.c: 28: SWSPI_send_word(EXT_DAC, (0xA344), 1);
-"28
-[e ( _SWSPI_send_word (3 , , . `E7446 2 -> -> 41796 `ui `ul -> -> 1 `i `uc ]
-[; ;DacApp.c: 29: SWSPI_send_word(EXT_DAC, (0xE344), 1);
+[v _test `ui ~T0 @X0 1 a ]
+[; ;DacApp.c: 27: uint16_t test = ReadIntFromEeprom((0), 2);
+[e = _test -> ( _ReadIntFromEeprom (2 , -> -> 0 `i `uc -> 2 `i `ui ]
+[; ;DacApp.c: 29: SWSPI_send_word(EXT_DAC, (0x2344), 1);
 "29
-[e ( _SWSPI_send_word (3 , , . `E7446 2 -> -> 58180 `ui `ul -> -> 1 `i `uc ]
-[; ;DacApp.c: 30: }
+[e ( _SWSPI_send_word (3 , , . `E7445 2 -> -> -> 9028 `i `l `ul -> -> 1 `i `uc ]
+[; ;DacApp.c: 30: SWSPI_send_word(EXT_DAC, (0x6344), 1);
 "30
+[e ( _SWSPI_send_word (3 , , . `E7445 2 -> -> -> 25412 `i `l `ul -> -> 1 `i `uc ]
+[; ;DacApp.c: 31: SWSPI_send_word(EXT_DAC, (0xA344), 1);
+"31
+[e ( _SWSPI_send_word (3 , , . `E7445 2 -> -> 41796 `ui `ul -> -> 1 `i `uc ]
+[; ;DacApp.c: 32: SWSPI_send_word(EXT_DAC, (0xE344), 1);
+"32
+[e ( _SWSPI_send_word (3 , , . `E7445 2 -> -> 58180 `ui `ul -> -> 1 `i `uc ]
+[; ;DacApp.c: 33: }
+"33
 [e :UE 855 ]
 }
-"33
+"37
 [v _DacSetValue `(v ~T0 @X0 1 ef1`*uc ]
-"34
+"38
 {
-[; ;DacApp.c: 33: void DacSetValue(char* data)
-[; ;DacApp.c: 34: {
+[; ;DacApp.c: 37: void DacSetValue(char* data)
+[; ;DacApp.c: 38: {
 [e :U _DacSetValue ]
-"33
+"37
 [v _data `*uc ~T0 @X0 1 r1 ]
-"34
+"38
 [f ]
-"35
-[v _regData `ui ~T0 @X0 1 a ]
-[; ;DacApp.c: 35: uint16_t regData = GetIntFromUartData(data);
-[e = _regData -> ( _GetIntFromUartData (1 _data `ui ]
-[; ;DacApp.c: 36: SWSPI_send_word(EXT_DAC, regData, 1);
-"36
-[e ( _SWSPI_send_word (3 , , . `E7446 2 -> _regData `ul -> -> 1 `i `uc ]
-[; ;DacApp.c: 39: SendAckMessage((MSG_GROUPS)DAC_MSG, (MSG_REQUEST)DAC_SET_VALUE);
 "39
-[e ( _SendAckMessage (2 , . `E7078 5 . `E7086 24 ]
-[; ;DacApp.c: 40: }
+[v _regData `ui ~T0 @X0 1 a ]
+[; ;DacApp.c: 39: uint16_t regData = GetIntFromUartData(16, data);
+[e = _regData -> ( _GetIntFromUartData (2 , -> -> 16 `i `c _data `ui ]
+[; ;DacApp.c: 40: SWSPI_send_word(EXT_DAC, regData, 1);
 "40
+[e ( _SWSPI_send_word (3 , , . `E7445 2 -> _regData `ul -> -> 1 `i `uc ]
+"43
+[v _dacIndex `c ~T0 @X0 1 a ]
+[; ;DacApp.c: 43: int8_t dacIndex = (regData >> 14) + 2;
+[e = _dacIndex -> + >> _regData -> 14 `i -> -> 2 `i `ui `c ]
+[; ;DacApp.c: 44: StoreIntInEeprom(regData, (0x10) + dacIndex, 2);
+"44
+[e ( _StoreIntInEeprom (3 , , -> _regData `ul -> + -> 16 `i -> _dacIndex `i `uc -> 2 `i ]
+[; ;DacApp.c: 47: SendAckMessage((MSG_GROUPS)DAC_MSG, (MSG_REQUEST)DAC_SET_VALUE);
+"47
+[e ( _SendAckMessage (2 , . `E7078 5 . `E7086 24 ]
+[; ;DacApp.c: 48: }
+"48
 [e :UE 856 ]
 }

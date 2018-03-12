@@ -38,9 +38,6 @@ void InitSystemApplicationManagers(void)
     // Start main timer
     TMR0_StartTimer();
     
-    // Initialize seven segment
-    InitSevenSegment();
-    
     // Initialize Synthesizers
     PLLInitialize();
     

@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=LedsApp.c AdcApp.c EusartApp.c FlashApp.c DacApp.c SevenSegmentApp.c SyntApp.c SwSpiApp.c mcc_generated_files/mcc.c mcc_generated_files/interrupt_manager.c mcc_generated_files/eusart1.c mcc_generated_files/pin_manager.c mcc_generated_files/memory.c mcc_generated_files/tmr0.c mcc_generated_files/adc.c SystemSettings.c MessageFunctions.c SystemCommon.c SystemStatus.c main.c
+SOURCEFILES_QUOTED_IF_SPACED=LedsApp.c AdcApp.c EusartApp.c FlashApp.c DacApp.c SyntApp.c SwSpiApp.c mcc_generated_files/mcc.c mcc_generated_files/interrupt_manager.c mcc_generated_files/eusart1.c mcc_generated_files/pin_manager.c mcc_generated_files/memory.c mcc_generated_files/tmr0.c mcc_generated_files/adc.c SystemSettings.c MessageFunctions.c SystemCommon.c SystemStatus.c main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/LedsApp.p1 ${OBJECTDIR}/AdcApp.p1 ${OBJECTDIR}/EusartApp.p1 ${OBJECTDIR}/FlashApp.p1 ${OBJECTDIR}/DacApp.p1 ${OBJECTDIR}/SevenSegmentApp.p1 ${OBJECTDIR}/SyntApp.p1 ${OBJECTDIR}/SwSpiApp.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/eusart1.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/mcc_generated_files/adc.p1 ${OBJECTDIR}/SystemSettings.p1 ${OBJECTDIR}/MessageFunctions.p1 ${OBJECTDIR}/SystemCommon.p1 ${OBJECTDIR}/SystemStatus.p1 ${OBJECTDIR}/main.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/LedsApp.p1.d ${OBJECTDIR}/AdcApp.p1.d ${OBJECTDIR}/EusartApp.p1.d ${OBJECTDIR}/FlashApp.p1.d ${OBJECTDIR}/DacApp.p1.d ${OBJECTDIR}/SevenSegmentApp.p1.d ${OBJECTDIR}/SyntApp.p1.d ${OBJECTDIR}/SwSpiApp.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/eusart1.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/mcc_generated_files/memory.p1.d ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d ${OBJECTDIR}/mcc_generated_files/adc.p1.d ${OBJECTDIR}/SystemSettings.p1.d ${OBJECTDIR}/MessageFunctions.p1.d ${OBJECTDIR}/SystemCommon.p1.d ${OBJECTDIR}/SystemStatus.p1.d ${OBJECTDIR}/main.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/LedsApp.p1 ${OBJECTDIR}/AdcApp.p1 ${OBJECTDIR}/EusartApp.p1 ${OBJECTDIR}/FlashApp.p1 ${OBJECTDIR}/DacApp.p1 ${OBJECTDIR}/SyntApp.p1 ${OBJECTDIR}/SwSpiApp.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/eusart1.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/mcc_generated_files/adc.p1 ${OBJECTDIR}/SystemSettings.p1 ${OBJECTDIR}/MessageFunctions.p1 ${OBJECTDIR}/SystemCommon.p1 ${OBJECTDIR}/SystemStatus.p1 ${OBJECTDIR}/main.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/LedsApp.p1.d ${OBJECTDIR}/AdcApp.p1.d ${OBJECTDIR}/EusartApp.p1.d ${OBJECTDIR}/FlashApp.p1.d ${OBJECTDIR}/DacApp.p1.d ${OBJECTDIR}/SyntApp.p1.d ${OBJECTDIR}/SwSpiApp.p1.d ${OBJECTDIR}/mcc_generated_files/mcc.p1.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1.d ${OBJECTDIR}/mcc_generated_files/eusart1.p1.d ${OBJECTDIR}/mcc_generated_files/pin_manager.p1.d ${OBJECTDIR}/mcc_generated_files/memory.p1.d ${OBJECTDIR}/mcc_generated_files/tmr0.p1.d ${OBJECTDIR}/mcc_generated_files/adc.p1.d ${OBJECTDIR}/SystemSettings.p1.d ${OBJECTDIR}/MessageFunctions.p1.d ${OBJECTDIR}/SystemCommon.p1.d ${OBJECTDIR}/SystemStatus.p1.d ${OBJECTDIR}/main.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/LedsApp.p1 ${OBJECTDIR}/AdcApp.p1 ${OBJECTDIR}/EusartApp.p1 ${OBJECTDIR}/FlashApp.p1 ${OBJECTDIR}/DacApp.p1 ${OBJECTDIR}/SevenSegmentApp.p1 ${OBJECTDIR}/SyntApp.p1 ${OBJECTDIR}/SwSpiApp.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/eusart1.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/mcc_generated_files/adc.p1 ${OBJECTDIR}/SystemSettings.p1 ${OBJECTDIR}/MessageFunctions.p1 ${OBJECTDIR}/SystemCommon.p1 ${OBJECTDIR}/SystemStatus.p1 ${OBJECTDIR}/main.p1
+OBJECTFILES=${OBJECTDIR}/LedsApp.p1 ${OBJECTDIR}/AdcApp.p1 ${OBJECTDIR}/EusartApp.p1 ${OBJECTDIR}/FlashApp.p1 ${OBJECTDIR}/DacApp.p1 ${OBJECTDIR}/SyntApp.p1 ${OBJECTDIR}/SwSpiApp.p1 ${OBJECTDIR}/mcc_generated_files/mcc.p1 ${OBJECTDIR}/mcc_generated_files/interrupt_manager.p1 ${OBJECTDIR}/mcc_generated_files/eusart1.p1 ${OBJECTDIR}/mcc_generated_files/pin_manager.p1 ${OBJECTDIR}/mcc_generated_files/memory.p1 ${OBJECTDIR}/mcc_generated_files/tmr0.p1 ${OBJECTDIR}/mcc_generated_files/adc.p1 ${OBJECTDIR}/SystemSettings.p1 ${OBJECTDIR}/MessageFunctions.p1 ${OBJECTDIR}/SystemCommon.p1 ${OBJECTDIR}/SystemStatus.p1 ${OBJECTDIR}/main.p1
 
 # Source Files
-SOURCEFILES=LedsApp.c AdcApp.c EusartApp.c FlashApp.c DacApp.c SevenSegmentApp.c SyntApp.c SwSpiApp.c mcc_generated_files/mcc.c mcc_generated_files/interrupt_manager.c mcc_generated_files/eusart1.c mcc_generated_files/pin_manager.c mcc_generated_files/memory.c mcc_generated_files/tmr0.c mcc_generated_files/adc.c SystemSettings.c MessageFunctions.c SystemCommon.c SystemStatus.c main.c
+SOURCEFILES=LedsApp.c AdcApp.c EusartApp.c FlashApp.c DacApp.c SyntApp.c SwSpiApp.c mcc_generated_files/mcc.c mcc_generated_files/interrupt_manager.c mcc_generated_files/eusart1.c mcc_generated_files/pin_manager.c mcc_generated_files/memory.c mcc_generated_files/tmr0.c mcc_generated_files/adc.c SystemSettings.c MessageFunctions.c SystemCommon.c SystemStatus.c main.c
 
 
 CFLAGS=
@@ -132,14 +132,6 @@ ${OBJECTDIR}/DacApp.p1: DacApp.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=free -P -N255 --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/DacApp.p1  DacApp.c 
 	@-${MV} ${OBJECTDIR}/DacApp.d ${OBJECTDIR}/DacApp.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/DacApp.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/SevenSegmentApp.p1: SevenSegmentApp.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/SevenSegmentApp.p1.d 
-	@${RM} ${OBJECTDIR}/SevenSegmentApp.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=free -P -N255 --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/SevenSegmentApp.p1  SevenSegmentApp.c 
-	@-${MV} ${OBJECTDIR}/SevenSegmentApp.d ${OBJECTDIR}/SevenSegmentApp.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/SevenSegmentApp.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/SyntApp.p1: SyntApp.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -293,14 +285,6 @@ ${OBJECTDIR}/DacApp.p1: DacApp.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=free -P -N255 --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/DacApp.p1  DacApp.c 
 	@-${MV} ${OBJECTDIR}/DacApp.d ${OBJECTDIR}/DacApp.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/DacApp.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
-	
-${OBJECTDIR}/SevenSegmentApp.p1: SevenSegmentApp.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/SevenSegmentApp.p1.d 
-	@${RM} ${OBJECTDIR}/SevenSegmentApp.p1 
-	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=free -P -N255 --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/SevenSegmentApp.p1  SevenSegmentApp.c 
-	@-${MV} ${OBJECTDIR}/SevenSegmentApp.d ${OBJECTDIR}/SevenSegmentApp.p1.d 
-	@${FIXDEPS} ${OBJECTDIR}/SevenSegmentApp.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 ${OBJECTDIR}/SyntApp.p1: SyntApp.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 

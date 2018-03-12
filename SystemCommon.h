@@ -26,7 +26,7 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #define ULONG uint32_t
 #define UCHAR uint8_t
 #define MAX_UART_BYTES_SIZE 9
-#define END_UART_STREAM_CHAR 0x40
+#define END_UART_STREAM_CHAR 0x10
 #define NUM_OF_BITS_SYNTH_REG 32
 // MCU Main program FSM:    
 typedef enum
@@ -42,9 +42,10 @@ unsigned char crc8(char* dataArray, int dataSize);
 uint8_t make8(uint32_t data, uint8_t dataLocation);
 void Make32bitsArray(bool* array, uint32_t data);
 void ZeroArray(char* array, int size);
-void ZeroBitsArray(bool* array);
-int GCD(int num1, int num2); 
-uint32_t GetIntFromUartData(char* data);
+void ZeroBitsArray(bool* array); 
+uint32_t GetIntFromUartData(int8_t num, char* data);
+void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
+uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
 
 // System common functions
 void ResetMcu(void);

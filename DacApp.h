@@ -12,13 +12,24 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #include "SystemCommon.h"
 #include <math.h>
 
-// At system start: set all DACs to 1 VDC.
-#define DAC_A_INIT_VAL      (0x2344)
-#define DAC_B_INIT_VAL      (0x6344)
-#define DAC_C_INIT_VAL      (0xA344)
-#define DAC_D_INIT_VAL      (0xE344)
+#define DAC_TEST_DELAY_MSEC (20)
+#define NUM_OF_DACS         (4)
 
-#define DAC_TEST_DELAY_MSEC 20
+const uint8_t DAC_ADDRES[NUM_OF_DACS] = 
+{
+    0x0,        // DAC-A address
+    0x2,        // DAC-B address
+    0x4,        // DAC-C address
+    0x8,        // DAC-D address
+};
+
+const uint16_t DAC_DEFAULT_INIT_VALUES[NUM_OF_DACS] = 
+{
+    0x2344,        // DAC-A address
+    0x6344,        // DAC-B address
+    0xA344,        // DAC-C address
+    0xE344,        // DAC-D address
+};
 
 void DacInit(void);
 void DacSetValue(char* data);

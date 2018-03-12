@@ -23,17 +23,33 @@ void DacTest(void)
 
 void DacInit(void)
 {
-    SWSPI_send_word(EXT_DAC, DAC_A_INIT_VAL, 1);
-    SWSPI_send_word(EXT_DAC, DAC_B_INIT_VAL, 1);
-    SWSPI_send_word(EXT_DAC, DAC_C_INIT_VAL, 1);
-    SWSPI_send_word(EXT_DAC, DAC_D_INIT_VAL, 1);
+
+    uint16_t test = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS, 2);
+    
+    for(int8_t idx = 0; idx < NUM_OF_DACS; idx++)
+    {
+        uint16_t dacInput = 0x0; 
+        if(dacInput == 0x0)
+        {
+            SWSPI_send_word(EXT_DAC, DAC_DEFAULT_INIT_VALUES[idx], 1);
+        }
+    }
+//    SWSPI_send_word(EXT_DAC, DAC_A_INIT_VAL, 1);
+//    SWSPI_send_word(EXT_DAC, DAC_B_INIT_VAL, 1);
+//    SWSPI_send_word(EXT_DAC, DAC_C_INIT_VAL, 1);
+//    SWSPI_send_word(EXT_DAC, DAC_D_INIT_VAL, 1);
 }
+
 // <editor-fold defaultstate="collapsed" desc="DAC Convert">
 
 void DacSetValue(char* data)
 {
-    uint16_t regData = GetIntFromUartData(data);
+    uint16_t regData = GetIntFromUartData(16, data);
     SWSPI_send_word(EXT_DAC, regData, 1);
+    
+    // Store DAC value in EEPROM
+    int8_t dacIndex = (regData >> 14); 
+    StoreIntInEeprom(regData, EEPROM_DAC_REGS_ADDRESS_OFSEET + DAC_ADDRES[dacIndex], 2);
     
     // Transmit ACK signal to serial:
     SendAckMessage((MSG_GROUPS)DAC_MSG, (MSG_REQUEST)DAC_SET_VALUE);

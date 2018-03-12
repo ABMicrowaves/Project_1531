@@ -1,7 +1,7 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "120 mcc_generated_files/interrupt_manager.h
 [v _INTERRUPT_Initialize `(v ~T0 @X0 0 ef ]
-"448 mcc_generated_files/pin_manager.h
+"465 mcc_generated_files/pin_manager.h
 [v _PIN_MANAGER_Initialize `(v ~T0 @X0 0 ef ]
 "85 mcc_generated_files/mcc.h
 [v _OSCILLATOR_Initialize `(v ~T0 @X0 0 ef ]
@@ -28,15 +28,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 "53
 [p x IESO=OFF ]
 "56
-[p x PWRTEN=OFF ]
+[p x PWRTEN=ON ]
 "57
-[p x BOREN=SBORDIS ]
+[p x BOREN=OFF ]
 "58
 [p x BORV=190 ]
 "61
 [p x WDTEN=OFF ]
 "62
-[p x WDTPS=32768 ]
+[p x WDTPS=16384 ]
 "65
 [p x CCP2MX=PORTC1 ]
 "66
@@ -52,9 +52,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "71
 [p x MCLRE=EXTMCLR ]
 "74
-[p x STVREN=ON ]
+[p x STVREN=OFF ]
 "75
-[p x LVP=ON ]
+[p x LVP=OFF ]
 "76
 [p x XINST=OFF ]
 "77
@@ -6642,8 +6642,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 164: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 166: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 168: extern __nonreentrant void _delay3(unsigned char);
-[; ;pin_manager.h: 448: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 460: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 465: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 477: void PIN_MANAGER_IOC(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -6793,9 +6793,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mcc.c: 127: OSCCON2 = 0x04;
 "127
 [e = _OSCCON2 -> -> 4 `i `uc ]
-[; ;mcc.c: 129: OSCTUNE = 0x00;
+[; ;mcc.c: 129: OSCTUNE = 0x80;
 "129
-[e = _OSCTUNE -> -> 0 `i `uc ]
+[e = _OSCTUNE -> -> 128 `i `uc ]
 [; ;mcc.c: 130: }
 "130
 [e :UE 848 ]

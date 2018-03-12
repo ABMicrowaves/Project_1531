@@ -6579,8 +6579,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 164: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 166: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 168: extern __nonreentrant void _delay3(unsigned char);
-[; ;pin_manager.h: 448: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 460: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 465: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 477: void PIN_MANAGER_IOC(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -6957,107 +6957,107 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;EusartApp.h: 30: void InitRxMessageParams(void);
 [; ;EusartApp.h: 33: void WriteUartMessage(char* dataBuf, int dataSize);
 [; ;EusartApp.h: 34: void SendAckMessage(MSG_GROUPS inGroup, MSG_REQUEST inRequest);
-"20 SyntApp.h
+"21 SyntApp.h
 [v _PLL_INIT_REGISTERS `Cul ~T0 @X0 -> 13 `i e ]
 [i _PLL_INIT_REGISTERS
 :U ..
-"22
--> -> 66588 `l `ul
 "23
--> -> 6369291 `l `ul
+-> -> 66588 `l `ul
 "24
--> -> 12595770 `l `ul
+-> -> 6369291 `l `ul
 "25
--> -> 572636361 `l `ul
+-> -> 12595770 `l `ul
 "26
--> -> 271385640 `l `ul
+-> -> 572636361 `l `ul
 "27
--> -> 301990119 `l `ul
+-> -> 271385640 `l `ul
 "28
--> -> 889266294 `l `ul
+-> -> 301990119 `l `ul
 "29
--> -> 8388645 `l `ul
+-> -> 889266294 `l `ul
 "30
--> -> 872455044 `l `ul
+-> -> 8388645 `l `ul
 "31
--> -> -> 3 `i `l `ul
+-> -> 872455044 `l `ul
 "32
--> -> -> 18 `i `l `ul
+-> -> -> 3 `i `l `ul
 "33
+-> -> -> 18 `i `l `ul
+"34
 -> -> 100663297 `l `ul
-"35
+"36
 -> -> 2097984 `l `ul
 ..
 ]
-[; ;SyntApp.h: 20: const uint32_t PLL_INIT_REGISTERS[13] =
-[; ;SyntApp.h: 21: {
-[; ;SyntApp.h: 22: 0x0001041C,
-[; ;SyntApp.h: 23: 0x0061300B,
-[; ;SyntApp.h: 24: 0x00C0323A,
-[; ;SyntApp.h: 25: 0x2221BCC9,
-[; ;SyntApp.h: 26: 0x102D0428,
-[; ;SyntApp.h: 27: 0x120000E7,
-[; ;SyntApp.h: 28: 0x35012076,
-[; ;SyntApp.h: 29: 0x00800025,
-[; ;SyntApp.h: 30: 0x34009B84,
-[; ;SyntApp.h: 31: 0x00000003,
-[; ;SyntApp.h: 32: 0x00000012,
-[; ;SyntApp.h: 33: 0x06000001,
-[; ;SyntApp.h: 34: 0x00200340
-[; ;SyntApp.h: 35: };
-"37
+[; ;SyntApp.h: 21: const uint32_t PLL_INIT_REGISTERS[13] =
+[; ;SyntApp.h: 22: {
+[; ;SyntApp.h: 23: 0x0001041C,
+[; ;SyntApp.h: 24: 0x0061300B,
+[; ;SyntApp.h: 25: 0x00C0323A,
+[; ;SyntApp.h: 26: 0x2221BCC9,
+[; ;SyntApp.h: 27: 0x102D0428,
+[; ;SyntApp.h: 28: 0x120000E7,
+[; ;SyntApp.h: 29: 0x35012076,
+[; ;SyntApp.h: 30: 0x00800025,
+[; ;SyntApp.h: 31: 0x34009B84,
+[; ;SyntApp.h: 32: 0x00000003,
+[; ;SyntApp.h: 33: 0x00000012,
+[; ;SyntApp.h: 34: 0x06000001,
+[; ;SyntApp.h: 35: 0x00200340
+[; ;SyntApp.h: 36: };
+"38
 [v _TEST_PLL_REGISTERS `Cul ~T0 @X0 -> 13 `i e ]
 [i _TEST_PLL_REGISTERS
 :U ..
-"39
--> -> 66588 `l `ul
 "40
--> -> 6369291 `l `ul
+-> -> 66588 `l `ul
 "41
--> -> 12592826 `l `ul
+-> -> 6369291 `l `ul
 "42
--> -> 437910729 `l `ul
+-> -> 12592826 `l `ul
 "43
--> -> 271385640 `l `ul
+-> -> 437910729 `l `ul
 "44
--> -> 301990119 `l `ul
+-> -> 271385640 `l `ul
 "45
--> -> 889544822 `l `ul
+-> -> 301990119 `l `ul
 "46
--> -> 8388645 `l `ul
+-> -> 889544822 `l `ul
 "47
--> -> 838896516 `l `ul
+-> -> 8388645 `l `ul
 "48
--> -> -> 3 `i `l `ul
+-> -> 838896516 `l `ul
 "49
--> -> 524338 `l `ul
+-> -> -> 3 `i `l `ul
 "50
+-> -> 524338 `l `ul
+"51
 -> -> 27962017 `l `ul
-"52
+"53
 -> -> 200410 `l `ul
 ..
 ]
-[; ;SyntApp.h: 37: const uint32_t TEST_PLL_REGISTERS[13] =
-[; ;SyntApp.h: 38: {
-[; ;SyntApp.h: 39: 0x1041C,
-[; ;SyntApp.h: 40: 0x61300B,
-[; ;SyntApp.h: 41: 0xC026BA,
-[; ;SyntApp.h: 42: 0x1A19FCC9,
-[; ;SyntApp.h: 43: 0x102D0428,
-[; ;SyntApp.h: 44: 0x120000E7,
-[; ;SyntApp.h: 45: 0x35056076,
-[; ;SyntApp.h: 46: 0x800025,
-[; ;SyntApp.h: 47: 0x32008B84,
-[; ;SyntApp.h: 48: 0x3,
-[; ;SyntApp.h: 49: 0x80032,
-[; ;SyntApp.h: 50: 0x1AAAAA1,
-[; ;SyntApp.h: 51: 200410
-[; ;SyntApp.h: 52: };
-[; ;SyntApp.h: 57: void PLLUartInitialize(char* data);
-[; ;SyntApp.h: 58: void PLLInitialize(void);
-[; ;SyntApp.h: 60: void UpdateTxFreq(char* data);
-[; ;SyntApp.h: 61: void UpdateRxFreq(char* data);
-[; ;SyntApp.h: 63: void SYNTH_ISR(void);
+[; ;SyntApp.h: 38: const uint32_t TEST_PLL_REGISTERS[13] =
+[; ;SyntApp.h: 39: {
+[; ;SyntApp.h: 40: 0x1041C,
+[; ;SyntApp.h: 41: 0x61300B,
+[; ;SyntApp.h: 42: 0xC026BA,
+[; ;SyntApp.h: 43: 0x1A19FCC9,
+[; ;SyntApp.h: 44: 0x102D0428,
+[; ;SyntApp.h: 45: 0x120000E7,
+[; ;SyntApp.h: 46: 0x35056076,
+[; ;SyntApp.h: 47: 0x800025,
+[; ;SyntApp.h: 48: 0x32008B84,
+[; ;SyntApp.h: 49: 0x3,
+[; ;SyntApp.h: 50: 0x80032,
+[; ;SyntApp.h: 51: 0x1AAAAA1,
+[; ;SyntApp.h: 52: 200410
+[; ;SyntApp.h: 53: };
+[; ;SyntApp.h: 58: void PLLUartInitialize(char* data);
+[; ;SyntApp.h: 59: void PLLInitialize(void);
+[; ;SyntApp.h: 61: void UpdateTxFreq(char* data);
+[; ;SyntApp.h: 62: void UpdateRxFreq(char* data);
+[; ;SyntApp.h: 64: void SYNTH_ISR(void);
 [; ;SwSpiApp.h: 14: typedef enum
 [; ;SwSpiApp.h: 15: {
 [; ;SwSpiApp.h: 16: SYNTH_TX = 0,
