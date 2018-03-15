@@ -17,9 +17,9 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 const uint8_t DAC_ADDRES[NUM_OF_DACS] = 
 {
-    0x0,        // DAC-A address
-    0x2,        // DAC-B address
-    0x4,        // DAC-C address
+    0x2,        // DAC-A address
+    0x4,        // DAC-B address
+    0x6,        // DAC-C address
     0x8,        // DAC-D address
 };
 

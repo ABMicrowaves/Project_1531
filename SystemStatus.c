@@ -11,20 +11,10 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 static uint32_t mcuRunTimeIn5SecTicks = 0;   // Max Time to store = 24 hours
 
-
-void SetMcuFwVersion(char* data)
-{
-    for(uint8_t idx = 0; idx < FW_VERSION_MAX_SIZE_BYTE; idx++)
-    {
-        EepromWrite(idx, data[idx]);
-    }
-    
-    // Now send ACK message via serial:        
-    SendAckMessage((MSG_GROUPS)MCU_STATUS_VERSION_MSG, (MSG_REQUEST)STATUS_SET_MCU_FW_VERSION);
-}
-
 void GetMcuFwVersion()
 {
+    uint32_t compileData = 0x0;
+    
     // Create TX packet and clear the memory:
     char TxMsg[STATUS_FW_PACKET_SIZE + 1];
     ZeroArray(TxMsg, STATUS_FW_PACKET_SIZE + 1);
@@ -36,42 +26,14 @@ void GetMcuFwVersion()
     TxMsg[MSG_DATA_SIZE_LOCATION] = FW_VERSION_MAX_SIZE_BYTE;
 
     // Fill TX array with data:
-    for(uint8_t idx = 0; idx < FW_VERSION_MAX_SIZE_BYTE; idx++)
-    {
-        TxMsg[MSG_DATA_LOCATION + idx] = EepromRead(idx);
-    }
-    
-    TxMsg[STATUS_FW_PACKET_SIZE] = crc8(TxMsg, STATUS_FW_PACKET_SIZE);
-    
-    WriteUartMessage(TxMsg, STATUS_FW_PACKET_SIZE + 1);
-}
+    compileData = __DATE__;
+    TxMsg[MSG_DATA_LOCATION + 0] = (compileData & 0xFF00) >> 8;
+    TxMsg[MSG_DATA_LOCATION + 1] = compileData & 0xFF;
 
-void SetCpldFwVersion(char* data)
-{
-    for(int idx = 0; idx < FW_VERSION_MAX_SIZE_BYTE; idx++)
-    {
-        EepromWrite(CPLD_FW_ADDR_OFFSET + idx, data[idx]);
-    }
-    SendAckMessage((MSG_GROUPS)MCU_STATUS_VERSION_MSG, (MSG_REQUEST)STATUS_SET_CPLD_FW_VERSION);
-}
 
-void GetCpldFwVersion()
-{
-    // Create TX packet and clear the memory:
-    char TxMsg[STATUS_FW_PACKET_SIZE + 1];
-    ZeroArray(TxMsg, STATUS_FW_PACKET_SIZE + 1);
-    
-    // Now fill it:
-    TxMsg[MSG_MAGIC_LOCATION] =  MSG_MAGIC_A;
-    TxMsg[MSG_GROUP_LOCATION] =  MCU_STATUS_VERSION_MSG;
-    TxMsg[MSG_REQUEST_LOCATION] =  STATUS_GET_CPLD_FW_VERSION;
-    TxMsg[MSG_DATA_SIZE_LOCATION] = FW_VERSION_MAX_SIZE_BYTE;
-
-    // Fill TX array with data:
-    for(int idx = 0; idx < FW_VERSION_MAX_SIZE_BYTE; idx++)
-    {
-        TxMsg[MSG_DATA_LOCATION + idx] = EepromRead(CPLD_FW_ADDR_OFFSET + idx);
-    }
+    compileData = __TIME__;
+    TxMsg[MSG_DATA_LOCATION + 2] = (compileData & 0xFF00) >> 8;
+    TxMsg[MSG_DATA_LOCATION + 3] = compileData & 0xFF; 
     
     TxMsg[STATUS_FW_PACKET_SIZE] = crc8(TxMsg, STATUS_FW_PACKET_SIZE);
     

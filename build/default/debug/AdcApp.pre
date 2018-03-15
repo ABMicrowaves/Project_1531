@@ -8713,18 +8713,14 @@ typedef enum
 
 CONTROL_SYSTEM_START = 0x10,
 CONTROL_RESET_MCU = 0x11,
-CONTROL_RESET_CPLD = 0x12,
-CONTROL_PA1_SET = 0x13,
-CONTROL_PA2_SET = 0x14,
-CONTROL_TEST_LEDS = 0x15,
-CONTROL_KEEP_ALIVE = 0x16,
+CONTROL_PA1_SET = 0x12,
+CONTROL_PA2_SET = 0x13,
+CONTROL_TEST_LEDS = 0x14,
+CONTROL_KEEP_ALIVE = 0x15,
 
 
 STATUS_MCU_RUN_TIME = 0x21,
 STATUS_GET_MCU_FW_VERSION = 0x22,
-STATUS_GET_CPLD_FW_VERSION = 0x23,
-STATUS_SET_MCU_FW_VERSION = 0x24,
-STATUS_SET_CPLD_FW_VERSION = 0x25,
 
 
 ADC_OPERATION = 0x31,
@@ -8736,6 +8732,11 @@ SYNTH_TX_INIT_SET = 0x40,
 SYNTH_RX_INIT_SET = 0x41,
 SYNTH_DOWN_SET = 0x42,
 SYNTH_UP_SET = 0x43,
+SYNTH_UP_OPER = 0x44,
+SYNTH_DOWN_OPER = 0x45,
+SYNTH_UP_READ_DATA = 0x46,
+SYNTH_DOWN_READ_DATA = 0x47,
+SYNTH_REQ_ANTHER_REG = 0x48,
 
 
 FLASH_EREASE_MEMORY = 0x51,
@@ -8749,11 +8750,7 @@ DAC_SET_VALUE = 0x61,
 }MSG_REQUEST;
 
 # 27 "SystemStatus.h"
-void SetMcuFwVersion(char* data);
-void SetCpldFwVersion(char* data);
-
-void GetMcuFwVersion();
-void GetCpldFwVersion();
+void GetMcuFwVersion();;
 
 void SetMcuRunTime();
 void GetMcuRunTime();
@@ -8842,7 +8839,23 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 23 "DacApp.h"
+# 18 "DacApp.h"
+const uint8_t DAC_ADDRES[(4)] =
+{
+0x2,
+0x4,
+0x6,
+0x8,
+};
+
+const uint16_t DAC_DEFAULT_INIT_VALUES[(4)] =
+{
+0x2344,
+0x6344,
+0xA344,
+0xE344,
+};
+
 void DacInit(void);
 void DacSetValue(char* data);
 
@@ -8979,7 +8992,7 @@ void segmentCounter(void);
 unsigned short mask(unsigned short num);
 void InitSevenSegment(void);
 
-# 23 "SyntApp.h"
+# 24 "SyntApp.h"
 const uint32_t SYNTH_REGS[13] =
 {
 0x1041C,
@@ -8993,15 +9006,32 @@ const uint32_t SYNTH_REGS[13] =
 0x30008384,
 0x3,
 0x12,
-0x1,
-0x200640
+0xC000001,
+0x200680
+};
+
+const uint8_t SYNTH_ADDRES[4] =
+{
+
+0x4,
+0x8,
+0xC,
+0xF,
 };
 
 void PLLUartInitialize(char* data);
 void PLLInitialize(void);
 
+void InitTxSynth(void);
+void InitRxSynth(void);
+
 void UpdateTxFreq(char* data);
 void UpdateRxFreq(char* data);
+
+void SetSynthTxOper();
+void SetSynthRxOper();
+
+void SynthReadData(char* data);
 
 void SYNTH_ISR(void);
 

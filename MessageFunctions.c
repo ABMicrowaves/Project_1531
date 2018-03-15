@@ -20,10 +20,6 @@ void GroupControlMcu(MSG_REQUEST request, char* data)
             ResetMcu();
             break;
             
-        case CONTROL_RESET_CPLD:
-            ResetCpld();
-            break;
-            
         case CONTROL_PA1_SET:
             break;
             
@@ -41,18 +37,6 @@ void GroupStatusAndVersion(MSG_REQUEST request, char* data)
     {
         case STATUS_GET_MCU_FW_VERSION:
             GetMcuFwVersion();
-            break;
-
-        case STATUS_SET_MCU_FW_VERSION:
-            SetMcuFwVersion(data);
-            break;
-
-        case STATUS_GET_CPLD_FW_VERSION:
-            GetCpldFwVersion();
-            break;
-            
-        case STATUS_SET_CPLD_FW_VERSION:
-            SetCpldFwVersion(data);
             break;
             
         case STATUS_MCU_RUN_TIME:
@@ -104,6 +88,22 @@ void GroupSynthesizers(MSG_REQUEST request, char* data)
             UpdateRxFreq(data);
             break;
         
+        case SYNTH_UP_OPER:
+            SetSynthRxOper();
+            break;
+            
+        case SYNTH_DOWN_OPER:
+            SetSynthTxOper();
+            break;
+            
+        case SYNTH_UP_READ_DATA:
+            SynthReadData(data);
+            break;
+        
+        case SYNTH_DOWN_READ_DATA:
+            SynthReadData(data);
+            break;
+            
         default:
             break;
     } 

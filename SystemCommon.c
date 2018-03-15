@@ -120,15 +120,6 @@ void ResetMcu()
     Reset();
 }
 
-void ResetCpld()
-{
-    // Before MCU system reset send ACK:
-    SendAckMessage((MSG_GROUPS)CONTROL_MSG, (MSG_REQUEST)CONTROL_RESET_CPLD);
-   
-    // Now reset CPLD unit:
-    
-}
-
 void SendSystemStartAck()
 {
     SendAckMessage((MSG_GROUPS)CONTROL_MSG, (MSG_REQUEST)CONTROL_SYSTEM_START);

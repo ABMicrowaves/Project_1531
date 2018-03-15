@@ -11,12 +11,13 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 #include "SystemCommon.h"
 
-#define SYNTH_DELAY_BETWEEN_WORDS_MSEC 250
+#define SYNTH_DELAY_BETWEEN_WORDS_MSEC  250
+#define NUM_OF_REGISTERS                13
+#define NUM_OF_UPDATE_REGISTERS         7
+#define NUM_SYNTH_FREQ_DATA_REGISTERS   4
 
-#define NUM_OF_REGISTERS 13
-
-#define NUM_OF_UPDATE_REGISTERS 7
-
+#define SYNTH_READ_CONDITION_MAX_DATA_SIZE 22
+#define SYNTH_READ_CONDITION_PACKET_SIZE SYNTH_READ_CONDITION_MAX_DATA_SIZE + MSG_DATA_LOCATION 
 // Registers will be write on opposite direction.
 
 
@@ -33,15 +34,32 @@ const uint32_t SYNTH_REGS[NUM_OF_REGISTERS] =
     0x30008384,     /* R04  */
     0x3,            /* R03  */
     0x12,           /* R02  */
-    0x1,            /* R01  */
-    0x200640        /* R00  */
+    0xC000001,       /* R01  */
+    0x200680        /* R00  */
+};
+
+const uint8_t SYNTH_ADDRES[NUM_SYNTH_FREQ_DATA_REGISTERS] = 
+{
+    // SYNTH_TX + RX
+    0x4,        // REG_0
+    0x8,        // REG_1
+    0xC,        // REG_2
+    0xF,        // DAC-D address
 };
 
 void PLLUartInitialize(char* data);
 void PLLInitialize(void);
 
+void InitTxSynth(void);
+void InitRxSynth(void);
+
 void UpdateTxFreq(char* data);
 void UpdateRxFreq(char* data);
+
+void SetSynthTxOper();
+void SetSynthRxOper();
+
+void SynthReadData(char* data); 
 
 void SYNTH_ISR(void);
 
