@@ -68,7 +68,8 @@ typedef enum
     SYNTH_DOWN_OPER             = 0x45,
     SYNTH_UP_READ_DATA          = 0x46,
     SYNTH_DOWN_READ_DATA        = 0x47,
-    SYNTH_REQ_ANTHER_REG        = 0x48,        
+    SYNTH_REQ_ANTHER_TX_REG     = 0x48,
+    SYNTH_REQ_ANTHER_RX_REG     = 0x49,      
             
     // Flash memory
     FLASH_EREASE_MEMORY         = 0x51,

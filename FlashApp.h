@@ -28,9 +28,10 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #define FLASH_READ_CONDITION_PACKET_SIZE FLASH_READ_CONDITION_MAX_DATA_SIZE + MSG_DATA_LOCATION 
 
 // EEPRM Address
-#define EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET     (0)
-#define EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET     (0x10)
-#define EEPROM_DAC_REGS_ADDRESS_OFSEET          (0x20)
+#define EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET     (0)
+#define EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET     (0x20)
+
+#define EEPROM_DAC_REGS_ADDRESS_OFSEET          (0x40)
 
 // Flash routines:
 void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);

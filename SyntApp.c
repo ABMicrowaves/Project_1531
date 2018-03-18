@@ -11,8 +11,8 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 uint8_t cntRegUpdate = 0;
 bool SynthTxOper = true;
+bool SynthRxOper = true;
 // </editor-fold>
-
 
 // <editor-fold defaultstate="collapsed" desc="Init synthesizers">
 
@@ -20,7 +20,8 @@ void PLLInitialize()
 {
     // Set RX Synthesizer latch interrupt on block B - port 7:   
     IOCB = 0b10000000;
-    
+//    StoreIntInEeprom(0x12344321, EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[1], 4);
+//    uint32_t dacInput = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[1], 4);
     InitTxSynth();
     InitRxSynth();
 }
@@ -36,6 +37,7 @@ void InitTxSynth(void)
     // Set TX chip-enable at high:
     SwSpi_Set_CE_Pin(SYNTH_TX, HIGH);
     
+    
     // Update TX registers
     for(uint8_t idx = 0; idx < NUM_OF_REGISTERS; idx++)
     {
@@ -45,10 +47,10 @@ void InitTxSynth(void)
 
 void InitRxSynth(void)
 {
-        // Set TX chip-enable at high:
+    // Set RX chip-enable at high:
     SwSpi_Set_CE_Pin(SYNTH_RX, HIGH);
     
-    // Update TX registers
+    // Update RX registers
     for(uint8_t idx = 0; idx < NUM_OF_REGISTERS; idx++)
     {
         SWSPI_send_word(SYNTH_RX, SYNTH_REGS[idx],3);
@@ -61,17 +63,14 @@ void InitRxSynth(void)
 
 void UpdateTxFreq(char* data)
 {
-    //uint32_t regsInputsArr[NUM_OF_UPDATE_REGISTERS];
-    //ZeroArray(regsInputsArr, NUM_OF_UPDATE_REGISTERS);
-    
+    INT_VAL retVal;
     if(cntRegUpdate < NUM_OF_UPDATE_REGISTERS)
     {
-        uint32_t regData = GetIntFromUartData(10, data);
-        //regsInputsArr[cntRegUpdate] = regData; 
-        SWSPI_send_word(SYNTH_TX, regData, 3);
-        __delay_ms(200);
+        retVal = GetIntFromUartData(10, data);
+        SWSPI_send_word(SYNTH_TX, retVal.num, 3);
+        StoreIntInEeprom(retVal.num, EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[retVal.con], 4);
         cntRegUpdate ++;
-        SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_REG);
+        SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_TX_REG);
     }
     
     else
@@ -79,18 +78,19 @@ void UpdateTxFreq(char* data)
         cntRegUpdate = 0;
         SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
     }
-    //EepromWrite(0x0, 0x1234);
 }
 
 void UpdateRxFreq(char* data)
 {
     if(cntRegUpdate < NUM_OF_UPDATE_REGISTERS)
     {
-        uint32_t regData = GetIntFromUartData(10, data);
-        SWSPI_send_word(SYNTH_RX, regData, 3);
+        
+        //uint32_t regData = GetIntFromUartData(10, data);
+        //SWSPI_send_word(SYNTH_RX, regData, 3);
         cntRegUpdate ++;
+
+        SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG);
     }
-    
     else
     {
         cntRegUpdate = 0;
@@ -122,6 +122,15 @@ void SetSynthTxOper()
 
 void SetSynthRxOper()
 {
+    SynthRxOper = !SynthRxOper;
+    if(SynthRxOper)
+    {
+        InitRxSynth();
+    }
+    else
+    {
+        SwSpi_Set_CE_Pin(SYNTH_RX, LOW);
+    }
     SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_OPER);
 }
 
@@ -137,19 +146,10 @@ void SynthReadData(char* data)
     TxMsg[MSG_DATA_SIZE_LOCATION] = SYNTH_READ_CONDITION_MAX_DATA_SIZE;
     
     uint8_t indx = data[0]; 
-    if(indx)    // TX = 1
+    if(indx == 0x0)    // TX = 1
     {
-        TxMsg[MSG_REQUEST_LOCATION] =  SYNTH_DOWN_READ_DATA;
-
-        // First write FLASH_SIZE:
-        //TxMsg[MSG_DATA_LOCATION + 0] = make8(SAMPLE_END_ADDRESS - SAMPLE_START_ADDRESS,1);
-        //TxMsg[MSG_DATA_LOCATION + 1] = make8(SAMPLE_END_ADDRESS - SAMPLE_START_ADDRESS,0);
-        
-        // Second write writeAddress pointer value:
-        //TxMsg[MSG_DATA_LOCATION + 2] = make8(SAMPLE_END_ADDRESS - writeAddress,1);
-        //TxMsg[MSG_DATA_LOCATION + 3] = make8(SAMPLE_END_ADDRESS - writeAddress,0);
-
-        
+        TxMsg[MSG_REQUEST_LOCATION] =  SYNTH_UP_READ_DATA;
+        //TxMsg[MSG_DATA_LOCATION + 0] = 
     }
     else
     {

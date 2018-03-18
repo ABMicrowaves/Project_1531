@@ -1,11 +1,11 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "35 AdcApp.h
-[c E7044 4 5 6 7 10 13 25 29 30 31 .. ]
-[n E7044 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
-[v F7574 `(v ~T0 @X0 0 tf ]
+[c E7045 4 5 6 7 10 13 25 29 30 31 .. ]
+[n E7045 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
+[v F7583 `(v ~T0 @X0 0 tf ]
 "28 MessageFunctions.h
-[c E12 16 17 18 19 20 21 33 34 35 49 50 51 64 65 66 67 68 69 70 71 81 82 83 84 85 97 .. ]
-[n E12 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION STATUS_SET_MCU_FW_VERSION ADC_OPERATION ADC_CHANNEL_MODE ADC_CONVERSION_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE  ]
+[c E12 16 17 18 19 20 21 33 34 49 50 51 64 65 66 67 68 69 70 71 72 73 81 82 83 84 85 97 .. ]
+[n E12 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION ADC_OPERATION ADC_CHANNEL_MODE ADC_CONVERSION_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA SYNTH_REQ_ANTHER_TX_REG SYNTH_REQ_ANTHER_RX_REG FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE  ]
 "18
 [v _GroupControlMcu `(v ~T0 @X0 0 ef2`E12`*uc ]
 "19
@@ -20,13 +20,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _GroupDAC `(v ~T0 @X0 0 ef2`E12`*uc ]
 "36 LedsApp.h
 [v _testLeds `(v ~T0 @X0 0 ef ]
-"51 SystemCommon.h
+"59 SystemCommon.h
 [v _ResetMcu `(v ~T0 @X0 0 ef ]
 "27 SystemStatus.h
 [v _GetMcuFwVersion `(v ~T0 @X0 0 ef ]
-"43 MessageFunctions.c
-[v _SetMcuFwVersion `(i ~T0 @X0 0 ef ]
-"30 SystemStatus.h
+"30
 [v _GetMcuRunTime `(v ~T0 @X0 0 ef ]
 "46 AdcApp.h
 [v _SetAdcOperationMode `(v ~T0 @X0 0 ef1`*uc ]
@@ -34,23 +32,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _SetChannelMode `(v ~T0 @X0 0 ef1`*uc ]
 "47
 [v _SetConversionResultFormat `(v ~T0 @X0 0 ef1`*uc ]
-"50 SyntApp.h
+"59 SyntApp.h
 [v _PLLUartInitialize `(v ~T0 @X0 0 ef1`*uc ]
-"53
+"65
 [v _UpdateTxFreq `(v ~T0 @X0 0 ef1`*uc ]
-"54
+"66
 [v _UpdateRxFreq `(v ~T0 @X0 0 ef1`*uc ]
-"57
+"69
 [v _SetSynthRxOper `(v ~T0 @X0 0 ef ]
-"56
+"68
 [v _SetSynthTxOper `(v ~T0 @X0 0 ef ]
-"59
+"71
 [v _SynthReadData `(v ~T0 @X0 0 ef1`*uc ]
-"38 FlashApp.h
+"39 FlashApp.h
 [v _FlashEreaseMem `(v ~T0 @X0 0 ef ]
-"39
+"40
 [v _FlashReadCondition `(v ~T0 @X0 0 ef ]
-"37
+"38
 [v _FlashReadUart `(v ~T0 @X0 0 ef1`i ]
 "35 DacApp.h
 [v _DacSetValue `(v ~T0 @X0 0 ef1`*uc ]
@@ -77,25 +75,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;GroupsCommon.h: 51: CONTROL_KEEP_ALIVE = 0x15,
 [; ;GroupsCommon.h: 54: STATUS_MCU_RUN_TIME = 0x21,
 [; ;GroupsCommon.h: 55: STATUS_GET_MCU_FW_VERSION = 0x22,
-[; ;GroupsCommon.h: 56: STATUS_SET_MCU_FW_VERSION = 0x23,
-[; ;GroupsCommon.h: 59: ADC_OPERATION = 0x31,
-[; ;GroupsCommon.h: 60: ADC_CHANNEL_MODE = 0x32,
-[; ;GroupsCommon.h: 61: ADC_CONVERSION_MODE = 0x33,
-[; ;GroupsCommon.h: 64: SYNTH_TX_INIT_SET = 0x40,
-[; ;GroupsCommon.h: 65: SYNTH_RX_INIT_SET = 0x41,
-[; ;GroupsCommon.h: 66: SYNTH_DOWN_SET = 0x42,
-[; ;GroupsCommon.h: 67: SYNTH_UP_SET = 0x43,
-[; ;GroupsCommon.h: 68: SYNTH_UP_OPER = 0x44,
-[; ;GroupsCommon.h: 69: SYNTH_DOWN_OPER = 0x45,
-[; ;GroupsCommon.h: 70: SYNTH_UP_READ_DATA = 0x46,
-[; ;GroupsCommon.h: 71: SYNTH_DOWN_READ_DATA = 0x47,
-[; ;GroupsCommon.h: 74: FLASH_EREASE_MEMORY = 0x51,
-[; ;GroupsCommon.h: 75: FLASH_READ_CONDITION = 0x52,
-[; ;GroupsCommon.h: 76: FLASH_REQUEST_RAW_DATA = 0x53,
-[; ;GroupsCommon.h: 77: FLASH_SEND_RAW_DATA = 0x54,
-[; ;GroupsCommon.h: 78: FLASH_NO_SAMPLE_YET = 0x55,
-[; ;GroupsCommon.h: 81: DAC_SET_VALUE = 0x61,
-[; ;GroupsCommon.h: 82: }MSG_REQUEST;
+[; ;GroupsCommon.h: 58: ADC_OPERATION = 0x31,
+[; ;GroupsCommon.h: 59: ADC_CHANNEL_MODE = 0x32,
+[; ;GroupsCommon.h: 60: ADC_CONVERSION_MODE = 0x33,
+[; ;GroupsCommon.h: 63: SYNTH_TX_INIT_SET = 0x40,
+[; ;GroupsCommon.h: 64: SYNTH_RX_INIT_SET = 0x41,
+[; ;GroupsCommon.h: 65: SYNTH_DOWN_SET = 0x42,
+[; ;GroupsCommon.h: 66: SYNTH_UP_SET = 0x43,
+[; ;GroupsCommon.h: 67: SYNTH_UP_OPER = 0x44,
+[; ;GroupsCommon.h: 68: SYNTH_DOWN_OPER = 0x45,
+[; ;GroupsCommon.h: 69: SYNTH_UP_READ_DATA = 0x46,
+[; ;GroupsCommon.h: 70: SYNTH_DOWN_READ_DATA = 0x47,
+[; ;GroupsCommon.h: 71: SYNTH_REQ_ANTHER_TX_REG = 0x48,
+[; ;GroupsCommon.h: 72: SYNTH_REQ_ANTHER_RX_REG = 0x49,
+[; ;GroupsCommon.h: 75: FLASH_EREASE_MEMORY = 0x51,
+[; ;GroupsCommon.h: 76: FLASH_READ_CONDITION = 0x52,
+[; ;GroupsCommon.h: 77: FLASH_REQUEST_RAW_DATA = 0x53,
+[; ;GroupsCommon.h: 78: FLASH_SEND_RAW_DATA = 0x54,
+[; ;GroupsCommon.h: 79: FLASH_NO_SAMPLE_YET = 0x55,
+[; ;GroupsCommon.h: 82: DAC_SET_VALUE = 0x61,
+[; ;GroupsCommon.h: 83: }MSG_REQUEST;
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -6750,15 +6749,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eusart1.h: 189: uint8_t EUSART1_ReadByte(void);
 [; ;mcc.h: 72: void SYSTEM_Initialize(void);
 [; ;mcc.h: 85: void OSCILLATOR_Initialize(void);
-[; ;FlashApp.h: 36: void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
-[; ;FlashApp.h: 37: void FlashReadUart(int numOfSampleToRead);
-[; ;FlashApp.h: 38: void FlashEreaseMem(void);
-[; ;FlashApp.h: 39: void FlashReadCondition(void);
-[; ;FlashApp.h: 40: bool CheckFlashPrecentage(void);
-[; ;FlashApp.h: 43: uint8_t EepromRead(uint8_t address);
-[; ;FlashApp.h: 44: void EepromWrite(uint8_t address, uint8_t data);
-[; ;FlashApp.h: 47: bool FlashTest(int startAddress, int numOfSamples);
-[; ;FlashApp.h: 48: bool EepromTest(int startAddress, int numOfSamples);
+[; ;FlashApp.h: 37: void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
+[; ;FlashApp.h: 38: void FlashReadUart(int numOfSampleToRead);
+[; ;FlashApp.h: 39: void FlashEreaseMem(void);
+[; ;FlashApp.h: 40: void FlashReadCondition(void);
+[; ;FlashApp.h: 41: bool CheckFlashPrecentage(void);
+[; ;FlashApp.h: 44: uint8_t EepromRead(uint8_t address);
+[; ;FlashApp.h: 45: void EepromWrite(uint8_t address, uint8_t data);
+[; ;FlashApp.h: 48: bool FlashTest(int startAddress, int numOfSamples);
+[; ;FlashApp.h: 49: bool EepromTest(int startAddress, int numOfSamples);
 [; ;AdcApp.h: 22: typedef enum
 [; ;AdcApp.h: 23: {
 [; ;AdcApp.h: 24: CONVERSION_LEFT_FORAMT = 0,
@@ -6770,23 +6769,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;AdcApp.h: 31: SINGLE_CHANNEL = 0x1,
 [; ;AdcApp.h: 32: }ADC_SAMPLE_MODE;
 "35 AdcApp.h
-[v _channelArr `CE7044 ~T0 @X0 -> 7 `i e ]
+[v _channelArr `CE7045 ~T0 @X0 -> 7 `i e ]
 [i _channelArr
 :U ..
 "37
--> -> 7 `i `CE7044
+-> -> 7 `i `CE7045
 "38
--> -> 6 `i `CE7044
+-> -> 6 `i `CE7045
 "39
--> -> 5 `i `CE7044
+-> -> 5 `i `CE7045
 "40
--> -> 4 `i `CE7044
+-> -> 4 `i `CE7045
 "41
--> -> 25 `i `CE7044
+-> -> 25 `i `CE7045
 "42
--> -> 10 `i `CE7044
+-> -> 10 `i `CE7045
 "43
--> -> 13 `i `CE7044
+-> -> 13 `i `CE7045
 ..
 ]
 [; ;AdcApp.h: 35: const adc_channel_t channelArr[(7)] =
@@ -6997,9 +6996,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "36
 -> -> -> 18 `i `l `ul
 "37
--> -> -> 1 `i `l `ul
+-> -> 201326593 `l `ul
 "39
--> -> 2098752 `l `ul
+-> -> 2098816 `l `ul
 ..
 ]
 [; ;SyntApp.h: 24: const uint32_t SYNTH_REGS[13] =
@@ -7015,11 +7014,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 34: 0x30008384,
 [; ;SyntApp.h: 35: 0x3,
 [; ;SyntApp.h: 36: 0x12,
-[; ;SyntApp.h: 37: 0x1,
-[; ;SyntApp.h: 38: 0x200640
+[; ;SyntApp.h: 37: 0xC000001,
+[; ;SyntApp.h: 38: 0x200680
 [; ;SyntApp.h: 39: };
 "41
-[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 4 `i e ]
+[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 13 `i e ]
 [i _SYNTH_ADDRES
 :U ..
 "44
@@ -7029,24 +7028,53 @@ Version 3.2 HI-TECH Software Intermediate Code
 "46
 -> -> 12 `i `uc
 "47
--> -> 15 `i `uc
+-> -> 0 `i `uc
+"48
+-> -> 16 `i `uc
+"49
+-> -> 0 `i `uc
+"50
+-> -> 20 `i `uc
+"51
+-> -> 0 `i `uc
+"52
+-> -> 0 `i `uc
+"53
+-> -> 0 `i `uc
+"54
+-> -> 24 `i `uc
+"55
+-> -> 0 `i `uc
+"56
+-> -> 0 `i `uc
 ..
 ]
-[; ;SyntApp.h: 41: const uint8_t SYNTH_ADDRES[4] =
+[; ;SyntApp.h: 41: const uint8_t SYNTH_ADDRES[13] =
 [; ;SyntApp.h: 42: {
 [; ;SyntApp.h: 44: 0x4,
 [; ;SyntApp.h: 45: 0x8,
 [; ;SyntApp.h: 46: 0xC,
-[; ;SyntApp.h: 47: 0xF,
-[; ;SyntApp.h: 48: };
-[; ;SyntApp.h: 50: void PLLUartInitialize(char* data);
-[; ;SyntApp.h: 51: void PLLInitialize(void);
-[; ;SyntApp.h: 53: void UpdateTxFreq(char* data);
-[; ;SyntApp.h: 54: void UpdateRxFreq(char* data);
-[; ;SyntApp.h: 56: void SetSynthTxOper();
-[; ;SyntApp.h: 57: void SetSynthRxOper();
-[; ;SyntApp.h: 59: void SynthReadData(char* data);
-[; ;SyntApp.h: 61: void SYNTH_ISR(void);
+[; ;SyntApp.h: 47: 0x00,
+[; ;SyntApp.h: 48: 0x10,
+[; ;SyntApp.h: 49: 0x00,
+[; ;SyntApp.h: 50: 0x14,
+[; ;SyntApp.h: 51: 0x00,
+[; ;SyntApp.h: 52: 0x00,
+[; ;SyntApp.h: 53: 0x00,
+[; ;SyntApp.h: 54: 0x18,
+[; ;SyntApp.h: 55: 0x00,
+[; ;SyntApp.h: 56: 0x00,
+[; ;SyntApp.h: 57: };
+[; ;SyntApp.h: 59: void PLLUartInitialize(char* data);
+[; ;SyntApp.h: 60: void PLLInitialize(void);
+[; ;SyntApp.h: 62: void InitTxSynth(void);
+[; ;SyntApp.h: 63: void InitRxSynth(void);
+[; ;SyntApp.h: 65: void UpdateTxFreq(char* data);
+[; ;SyntApp.h: 66: void UpdateRxFreq(char* data);
+[; ;SyntApp.h: 68: void SetSynthTxOper();
+[; ;SyntApp.h: 69: void SetSynthRxOper();
+[; ;SyntApp.h: 71: void SynthReadData(char* data);
+[; ;SyntApp.h: 73: void SYNTH_ISR(void);
 [; ;LedsApp.h: 22: typedef enum
 [; ;LedsApp.h: 24: {
 [; ;LedsApp.h: 25: OK_START_SYSTEM = 0x3,
@@ -7076,25 +7104,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SwSpiApp.h: 32: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 [; ;SwSpiApp.h: 35: void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 [; ;SwSpiApp.h: 36: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
-[; ;SystemCommon.h: 32: typedef enum
-[; ;SystemCommon.h: 33: {
-[; ;SystemCommon.h: 34: START_SYSTEM = 0,
-[; ;SystemCommon.h: 35: ADC_DAC,
-[; ;SystemCommon.h: 36: FLASH,
-[; ;SystemCommon.h: 37: EUSART,
-[; ;SystemCommon.h: 38: FINISH_ROUND
-[; ;SystemCommon.h: 39: }SYSTEM_STATE;
-[; ;SystemCommon.h: 41: unsigned char crc8(char* dataArray, int dataSize);
-[; ;SystemCommon.h: 42: uint8_t make8(uint32_t data, uint8_t dataLocation);
-[; ;SystemCommon.h: 43: void Make32bitsArray(bool* array, uint32_t data);
-[; ;SystemCommon.h: 44: void ZeroArray(char* array, int size);
-[; ;SystemCommon.h: 45: void ZeroBitsArray(bool* array);
-[; ;SystemCommon.h: 46: uint32_t GetIntFromUartData(int8_t num, char* data);
-[; ;SystemCommon.h: 47: void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
-[; ;SystemCommon.h: 48: uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
-[; ;SystemCommon.h: 51: void ResetMcu(void);
-[; ;SystemCommon.h: 52: void ResetCpld(void);
-[; ;SystemCommon.h: 53: void SendSystemStartAck(void);
+[; ;SystemCommon.h: 34: typedef enum
+[; ;SystemCommon.h: 35: {
+[; ;SystemCommon.h: 36: START_SYSTEM = 0,
+[; ;SystemCommon.h: 37: ADC_DAC,
+[; ;SystemCommon.h: 38: FLASH,
+[; ;SystemCommon.h: 39: EUSART,
+[; ;SystemCommon.h: 40: FINISH_ROUND
+[; ;SystemCommon.h: 41: }SYSTEM_STATE;
+[; ;SystemCommon.h: 43: typedef struct
+[; ;SystemCommon.h: 44: {
+[; ;SystemCommon.h: 45: uint32_t num;
+[; ;SystemCommon.h: 46: uint32_t con;
+[; ;SystemCommon.h: 47: }INT_VAL;
+[; ;SystemCommon.h: 49: unsigned char crc8(char* dataArray, int dataSize);
+[; ;SystemCommon.h: 50: uint8_t make8(uint32_t data, uint8_t dataLocation);
+[; ;SystemCommon.h: 51: void Make32bitsArray(bool* array, uint32_t data);
+[; ;SystemCommon.h: 52: void ZeroArray(char* array, int size);
+[; ;SystemCommon.h: 53: void ZeroBitsArray(bool* array);
+[; ;SystemCommon.h: 54: INT_VAL GetIntFromUartData(int8_t num, char* data);
+[; ;SystemCommon.h: 55: void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
+[; ;SystemCommon.h: 56: uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
+[; ;SystemCommon.h: 59: void ResetMcu(void);
+[; ;SystemCommon.h: 60: void ResetCpld(void);
+[; ;SystemCommon.h: 61: void SendSystemStartAck(void);
 [; ;SystemStatus.h: 27: void GetMcuFwVersion();;
 [; ;SystemStatus.h: 29: void SetMcuRunTime();
 [; ;SystemStatus.h: 30: void GetMcuRunTime();
@@ -7107,21 +7140,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 22: void GroupFlashMemory(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 23: void GroupDAC(MSG_REQUEST request, char* data);
 "26 MessageFunctions.h
-[v _groupsArray `*F7574 ~T0 @X0 -> 6 `i e ]
+[v _groupsArray `*F7583 ~T0 @X0 -> 6 `i e ]
 [i _groupsArray
 :U ..
 "28
--> &U _GroupControlMcu `*F7574
+-> &U _GroupControlMcu `*F7583
 "29
--> &U _GroupStatusAndVersion `*F7574
+-> &U _GroupStatusAndVersion `*F7583
 "30
--> &U _GroupAdc `*F7574
+-> &U _GroupAdc `*F7583
 "31
--> &U _GroupSynthesizers `*F7574
+-> &U _GroupSynthesizers `*F7583
 "32
--> &U _GroupFlashMemory `*F7574
+-> &U _GroupFlashMemory `*F7583
 "33
--> &U _GroupDAC `*F7574
+-> &U _GroupDAC `*F7583
 ..
 ]
 [; ;MessageFunctions.h: 26: void (*groupsArray[(6)])() =
@@ -7147,62 +7180,62 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;MessageFunctions.c: 13: switch (request)
 "13
-[e $U 853  ]
+[e $U 854  ]
 [; ;MessageFunctions.c: 14: {
 "14
 {
 [; ;MessageFunctions.c: 15: case CONTROL_TEST_LEDS:
 "15
-[e :U 854 ]
+[e :U 855 ]
 [; ;MessageFunctions.c: 16: testLeds();
 "16
 [e ( _testLeds ..  ]
 [; ;MessageFunctions.c: 17: break;
 "17
-[e $U 852  ]
+[e $U 853  ]
 [; ;MessageFunctions.c: 19: case CONTROL_RESET_MCU:
 "19
-[e :U 855 ]
+[e :U 856 ]
 [; ;MessageFunctions.c: 20: ResetMcu();
 "20
 [e ( _ResetMcu ..  ]
 [; ;MessageFunctions.c: 21: break;
 "21
-[e $U 852  ]
+[e $U 853  ]
 [; ;MessageFunctions.c: 23: case CONTROL_PA1_SET:
 "23
-[e :U 856 ]
+[e :U 857 ]
 [; ;MessageFunctions.c: 24: break;
 "24
-[e $U 852  ]
+[e $U 853  ]
 [; ;MessageFunctions.c: 26: case CONTROL_PA2_SET:
 "26
-[e :U 857 ]
+[e :U 858 ]
 [; ;MessageFunctions.c: 27: break;
 "27
-[e $U 852  ]
+[e $U 853  ]
 [; ;MessageFunctions.c: 29: default:
 "29
-[e :U 858 ]
+[e :U 859 ]
 [; ;MessageFunctions.c: 30: break;
 "30
-[e $U 852  ]
+[e $U 853  ]
 "31
 }
 [; ;MessageFunctions.c: 31: }
-[e $U 852  ]
+[e $U 853  ]
 "13
-[e :U 853 ]
-[e [\ _request , $ . `E12 4 854
- , $ . `E12 1 855
- , $ . `E12 2 856
- , $ . `E12 3 857
- 858 ]
+[e :U 854 ]
+[e [\ _request , $ . `E12 4 855
+ , $ . `E12 1 856
+ , $ . `E12 2 857
+ , $ . `E12 3 858
+ 859 ]
 "31
-[e :U 852 ]
+[e :U 853 ]
 [; ;MessageFunctions.c: 32: }
 "32
-[e :UE 851 ]
+[e :UE 852 ]
 }
 "34
 [v _GroupStatusAndVersion `(v ~T0 @X0 1 ef2`E12`*uc ]
@@ -7218,354 +7251,344 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;MessageFunctions.c: 36: switch (request)
 "36
-[e $U 861  ]
+[e $U 862  ]
 [; ;MessageFunctions.c: 37: {
 "37
 {
 [; ;MessageFunctions.c: 38: case STATUS_GET_MCU_FW_VERSION:
 "38
-[e :U 862 ]
+[e :U 863 ]
 [; ;MessageFunctions.c: 39: GetMcuFwVersion();
 "39
 [e ( _GetMcuFwVersion ..  ]
 [; ;MessageFunctions.c: 40: break;
 "40
-[e $U 860  ]
-[; ;MessageFunctions.c: 42: case STATUS_SET_MCU_FW_VERSION:
+[e $U 861  ]
+[; ;MessageFunctions.c: 42: case STATUS_MCU_RUN_TIME:
 "42
-[e :U 863 ]
-[; ;MessageFunctions.c: 43: SetMcuFwVersion(data);
+[e :U 864 ]
+[; ;MessageFunctions.c: 43: GetMcuRunTime();
 "43
-[e ( _SetMcuFwVersion _data ]
+[e ( _GetMcuRunTime ..  ]
 [; ;MessageFunctions.c: 44: break;
 "44
-[e $U 860  ]
-[; ;MessageFunctions.c: 46: case STATUS_MCU_RUN_TIME:
+[e $U 861  ]
+[; ;MessageFunctions.c: 46: default:
 "46
-[e :U 864 ]
-[; ;MessageFunctions.c: 47: GetMcuRunTime();
-"47
-[e ( _GetMcuRunTime ..  ]
-[; ;MessageFunctions.c: 48: break;
-"48
-[e $U 860  ]
-[; ;MessageFunctions.c: 50: default:
-"50
 [e :U 865 ]
-[; ;MessageFunctions.c: 51: break;
-"51
-[e $U 860  ]
-"52
+[; ;MessageFunctions.c: 47: break;
+"47
+[e $U 861  ]
+"48
 }
-[; ;MessageFunctions.c: 52: }
-[e $U 860  ]
+[; ;MessageFunctions.c: 48: }
+[e $U 861  ]
 "36
-[e :U 861 ]
-[e [\ _request , $ . `E12 7 862
- , $ . `E12 8 863
+[e :U 862 ]
+[e [\ _request , $ . `E12 7 863
  , $ . `E12 6 864
  865 ]
-"52
-[e :U 860 ]
-[; ;MessageFunctions.c: 53: }
-"53
-[e :UE 859 ]
+"48
+[e :U 861 ]
+[; ;MessageFunctions.c: 49: }
+"49
+[e :UE 860 ]
 }
-"55
+"51
 [v _GroupAdc `(v ~T0 @X0 1 ef2`E12`*uc ]
-"56
+"52
 {
-[; ;MessageFunctions.c: 55: void GroupAdc(MSG_REQUEST request, char* data)
-[; ;MessageFunctions.c: 56: {
+[; ;MessageFunctions.c: 51: void GroupAdc(MSG_REQUEST request, char* data)
+[; ;MessageFunctions.c: 52: {
 [e :U _GroupAdc ]
-"55
+"51
 [v _request `E12 ~T0 @X0 1 r1 ]
 [v _data `*uc ~T0 @X0 1 r2 ]
-"56
+"52
 [f ]
-[; ;MessageFunctions.c: 57: switch (request)
-"57
+[; ;MessageFunctions.c: 53: switch (request)
+"53
 [e $U 868  ]
-[; ;MessageFunctions.c: 58: {
-"58
+[; ;MessageFunctions.c: 54: {
+"54
 {
-[; ;MessageFunctions.c: 59: case ADC_OPERATION:
-"59
+[; ;MessageFunctions.c: 55: case ADC_OPERATION:
+"55
 [e :U 869 ]
-[; ;MessageFunctions.c: 60: SetAdcOperationMode(data);
-"60
+[; ;MessageFunctions.c: 56: SetAdcOperationMode(data);
+"56
 [e ( _SetAdcOperationMode (1 _data ]
+[; ;MessageFunctions.c: 57: break;
+"57
+[e $U 867  ]
+[; ;MessageFunctions.c: 59: case ADC_CHANNEL_MODE:
+"59
+[e :U 870 ]
+[; ;MessageFunctions.c: 60: SetChannelMode(data);
+"60
+[e ( _SetChannelMode (1 _data ]
 [; ;MessageFunctions.c: 61: break;
 "61
 [e $U 867  ]
-[; ;MessageFunctions.c: 63: case ADC_CHANNEL_MODE:
+[; ;MessageFunctions.c: 63: case ADC_CONVERSION_MODE:
 "63
-[e :U 870 ]
-[; ;MessageFunctions.c: 64: SetChannelMode(data);
+[e :U 871 ]
+[; ;MessageFunctions.c: 64: SetConversionResultFormat(data);
 "64
-[e ( _SetChannelMode (1 _data ]
+[e ( _SetConversionResultFormat (1 _data ]
 [; ;MessageFunctions.c: 65: break;
 "65
 [e $U 867  ]
-[; ;MessageFunctions.c: 67: case ADC_CONVERSION_MODE:
+[; ;MessageFunctions.c: 67: default:
 "67
-[e :U 871 ]
-[; ;MessageFunctions.c: 68: SetConversionResultFormat(data);
-"68
-[e ( _SetConversionResultFormat (1 _data ]
-[; ;MessageFunctions.c: 69: break;
-"69
-[e $U 867  ]
-[; ;MessageFunctions.c: 71: default:
-"71
 [e :U 872 ]
-[; ;MessageFunctions.c: 72: break;
-"72
+[; ;MessageFunctions.c: 68: break;
+"68
 [e $U 867  ]
-"73
+"69
 }
-[; ;MessageFunctions.c: 73: }
+[; ;MessageFunctions.c: 69: }
 [e $U 867  ]
-"57
+"53
 [e :U 868 ]
-[e [\ _request , $ . `E12 9 869
- , $ . `E12 10 870
- , $ . `E12 11 871
+[e [\ _request , $ . `E12 8 869
+ , $ . `E12 9 870
+ , $ . `E12 10 871
  872 ]
-"73
+"69
 [e :U 867 ]
-[; ;MessageFunctions.c: 74: }
-"74
+[; ;MessageFunctions.c: 70: }
+"70
 [e :UE 866 ]
 }
-"75
+"71
 [v _GroupSynthesizers `(v ~T0 @X0 1 ef2`E12`*uc ]
-"76
+"72
 {
-[; ;MessageFunctions.c: 75: void GroupSynthesizers(MSG_REQUEST request, char* data)
-[; ;MessageFunctions.c: 76: {
+[; ;MessageFunctions.c: 71: void GroupSynthesizers(MSG_REQUEST request, char* data)
+[; ;MessageFunctions.c: 72: {
 [e :U _GroupSynthesizers ]
-"75
+"71
 [v _request `E12 ~T0 @X0 1 r1 ]
 [v _data `*uc ~T0 @X0 1 r2 ]
-"76
+"72
 [f ]
-[; ;MessageFunctions.c: 77: switch (request)
-"77
+[; ;MessageFunctions.c: 73: switch (request)
+"73
 [e $U 875  ]
-[; ;MessageFunctions.c: 78: {
-"78
+[; ;MessageFunctions.c: 74: {
+"74
 {
-[; ;MessageFunctions.c: 79: case SYNTH_TX_INIT_SET:
-"79
+[; ;MessageFunctions.c: 75: case SYNTH_TX_INIT_SET:
+"75
 [e :U 876 ]
+[; ;MessageFunctions.c: 76: PLLUartInitialize(data);
+"76
+[e ( _PLLUartInitialize (1 _data ]
+[; ;MessageFunctions.c: 77: break;
+"77
+[e $U 874  ]
+[; ;MessageFunctions.c: 79: case SYNTH_RX_INIT_SET:
+"79
+[e :U 877 ]
 [; ;MessageFunctions.c: 80: PLLUartInitialize(data);
 "80
 [e ( _PLLUartInitialize (1 _data ]
 [; ;MessageFunctions.c: 81: break;
 "81
 [e $U 874  ]
-[; ;MessageFunctions.c: 83: case SYNTH_RX_INIT_SET:
+[; ;MessageFunctions.c: 83: case SYNTH_DOWN_SET:
 "83
-[e :U 877 ]
-[; ;MessageFunctions.c: 84: PLLUartInitialize(data);
+[e :U 878 ]
+[; ;MessageFunctions.c: 84: UpdateTxFreq(data);
 "84
-[e ( _PLLUartInitialize (1 _data ]
+[e ( _UpdateTxFreq (1 _data ]
 [; ;MessageFunctions.c: 85: break;
 "85
 [e $U 874  ]
-[; ;MessageFunctions.c: 87: case SYNTH_DOWN_SET:
+[; ;MessageFunctions.c: 87: case SYNTH_UP_SET:
 "87
-[e :U 878 ]
-[; ;MessageFunctions.c: 88: UpdateTxFreq(data);
+[e :U 879 ]
+[; ;MessageFunctions.c: 88: UpdateRxFreq(data);
 "88
-[e ( _UpdateTxFreq (1 _data ]
+[e ( _UpdateRxFreq (1 _data ]
 [; ;MessageFunctions.c: 89: break;
 "89
 [e $U 874  ]
-[; ;MessageFunctions.c: 91: case SYNTH_UP_SET:
+[; ;MessageFunctions.c: 91: case SYNTH_UP_OPER:
 "91
-[e :U 879 ]
-[; ;MessageFunctions.c: 92: UpdateRxFreq(data);
+[e :U 880 ]
+[; ;MessageFunctions.c: 92: SetSynthRxOper();
 "92
-[e ( _UpdateRxFreq (1 _data ]
+[e ( _SetSynthRxOper ..  ]
 [; ;MessageFunctions.c: 93: break;
 "93
 [e $U 874  ]
-[; ;MessageFunctions.c: 95: case SYNTH_UP_OPER:
+[; ;MessageFunctions.c: 95: case SYNTH_DOWN_OPER:
 "95
-[e :U 880 ]
-[; ;MessageFunctions.c: 96: SetSynthRxOper();
+[e :U 881 ]
+[; ;MessageFunctions.c: 96: SetSynthTxOper();
 "96
-[e ( _SetSynthRxOper ..  ]
+[e ( _SetSynthTxOper ..  ]
 [; ;MessageFunctions.c: 97: break;
 "97
 [e $U 874  ]
-[; ;MessageFunctions.c: 99: case SYNTH_DOWN_OPER:
+[; ;MessageFunctions.c: 99: case SYNTH_UP_READ_DATA:
 "99
-[e :U 881 ]
-[; ;MessageFunctions.c: 100: SetSynthTxOper();
+[e :U 882 ]
+[; ;MessageFunctions.c: 100: SynthReadData(data);
 "100
-[e ( _SetSynthTxOper ..  ]
+[e ( _SynthReadData (1 _data ]
 [; ;MessageFunctions.c: 101: break;
 "101
 [e $U 874  ]
-[; ;MessageFunctions.c: 103: case SYNTH_UP_READ_DATA:
+[; ;MessageFunctions.c: 103: case SYNTH_DOWN_READ_DATA:
 "103
-[e :U 882 ]
+[e :U 883 ]
 [; ;MessageFunctions.c: 104: SynthReadData(data);
 "104
 [e ( _SynthReadData (1 _data ]
 [; ;MessageFunctions.c: 105: break;
 "105
 [e $U 874  ]
-[; ;MessageFunctions.c: 107: case SYNTH_DOWN_READ_DATA:
+[; ;MessageFunctions.c: 107: default:
 "107
-[e :U 883 ]
-[; ;MessageFunctions.c: 108: SynthReadData(data);
-"108
-[e ( _SynthReadData (1 _data ]
-[; ;MessageFunctions.c: 109: break;
-"109
-[e $U 874  ]
-[; ;MessageFunctions.c: 111: default:
-"111
 [e :U 884 ]
-[; ;MessageFunctions.c: 112: break;
-"112
+[; ;MessageFunctions.c: 108: break;
+"108
 [e $U 874  ]
-"113
+"109
 }
-[; ;MessageFunctions.c: 113: }
+[; ;MessageFunctions.c: 109: }
 [e $U 874  ]
-"77
+"73
 [e :U 875 ]
-[e [\ _request , $ . `E12 12 876
- , $ . `E12 13 877
- , $ . `E12 14 878
- , $ . `E12 15 879
- , $ . `E12 16 880
- , $ . `E12 17 881
- , $ . `E12 18 882
- , $ . `E12 19 883
+[e [\ _request , $ . `E12 11 876
+ , $ . `E12 12 877
+ , $ . `E12 13 878
+ , $ . `E12 14 879
+ , $ . `E12 15 880
+ , $ . `E12 16 881
+ , $ . `E12 17 882
+ , $ . `E12 18 883
  884 ]
-"113
+"109
 [e :U 874 ]
-[; ;MessageFunctions.c: 114: }
-"114
+[; ;MessageFunctions.c: 110: }
+"110
 [e :UE 873 ]
 }
-"116
+"112
 [v _GroupFlashMemory `(v ~T0 @X0 1 ef2`E12`*uc ]
-"117
+"113
 {
-[; ;MessageFunctions.c: 116: void GroupFlashMemory(MSG_REQUEST request, char* data)
-[; ;MessageFunctions.c: 117: {
+[; ;MessageFunctions.c: 112: void GroupFlashMemory(MSG_REQUEST request, char* data)
+[; ;MessageFunctions.c: 113: {
 [e :U _GroupFlashMemory ]
-"116
+"112
 [v _request `E12 ~T0 @X0 1 r1 ]
 [v _data `*uc ~T0 @X0 1 r2 ]
-"117
+"113
 [f ]
-[; ;MessageFunctions.c: 118: switch (request)
-"118
+[; ;MessageFunctions.c: 114: switch (request)
+"114
 [e $U 887  ]
-[; ;MessageFunctions.c: 119: {
-"119
+[; ;MessageFunctions.c: 115: {
+"115
 {
-[; ;MessageFunctions.c: 120: case FLASH_EREASE_MEMORY:
-"120
+[; ;MessageFunctions.c: 116: case FLASH_EREASE_MEMORY:
+"116
 [e :U 888 ]
-[; ;MessageFunctions.c: 121: FlashEreaseMem();
-"121
+[; ;MessageFunctions.c: 117: FlashEreaseMem();
+"117
 [e ( _FlashEreaseMem ..  ]
+[; ;MessageFunctions.c: 118: break;
+"118
+[e $U 886  ]
+[; ;MessageFunctions.c: 120: case FLASH_READ_CONDITION:
+"120
+[e :U 889 ]
+[; ;MessageFunctions.c: 121: FlashReadCondition();
+"121
+[e ( _FlashReadCondition ..  ]
 [; ;MessageFunctions.c: 122: break;
 "122
 [e $U 886  ]
-[; ;MessageFunctions.c: 124: case FLASH_READ_CONDITION:
+[; ;MessageFunctions.c: 124: case FLASH_REQUEST_RAW_DATA:
 "124
-[e :U 889 ]
-[; ;MessageFunctions.c: 125: FlashReadCondition();
+[e :U 890 ]
+[; ;MessageFunctions.c: 125: FlashReadUart((int)data[0]);
 "125
-[e ( _FlashReadCondition ..  ]
+[e ( _FlashReadUart (1 -> *U + _data * -> -> 0 `i `x -> -> # *U _data `i `x `i ]
 [; ;MessageFunctions.c: 126: break;
 "126
 [e $U 886  ]
-[; ;MessageFunctions.c: 128: case FLASH_REQUEST_RAW_DATA:
+[; ;MessageFunctions.c: 128: default:
 "128
-[e :U 890 ]
-[; ;MessageFunctions.c: 129: FlashReadUart((int)data[0]);
-"129
-[e ( _FlashReadUart (1 -> *U + _data * -> -> 0 `i `x -> -> # *U _data `i `x `i ]
-[; ;MessageFunctions.c: 130: break;
-"130
-[e $U 886  ]
-[; ;MessageFunctions.c: 132: default:
-"132
 [e :U 891 ]
-[; ;MessageFunctions.c: 133: break;
-"133
+[; ;MessageFunctions.c: 129: break;
+"129
 [e $U 886  ]
-"134
+"130
 }
-[; ;MessageFunctions.c: 134: }
+[; ;MessageFunctions.c: 130: }
 [e $U 886  ]
-"118
+"114
 [e :U 887 ]
-[e [\ _request , $ . `E12 20 888
- , $ . `E12 21 889
- , $ . `E12 22 890
+[e [\ _request , $ . `E12 21 888
+ , $ . `E12 22 889
+ , $ . `E12 23 890
  891 ]
-"134
+"130
 [e :U 886 ]
-[; ;MessageFunctions.c: 135: }
-"135
+[; ;MessageFunctions.c: 131: }
+"131
 [e :UE 885 ]
 }
-"137
+"133
 [v _GroupDAC `(v ~T0 @X0 1 ef2`E12`*uc ]
-"138
+"134
 {
-[; ;MessageFunctions.c: 137: void GroupDAC(MSG_REQUEST request, char* data)
-[; ;MessageFunctions.c: 138: {
+[; ;MessageFunctions.c: 133: void GroupDAC(MSG_REQUEST request, char* data)
+[; ;MessageFunctions.c: 134: {
 [e :U _GroupDAC ]
-"137
+"133
 [v _request `E12 ~T0 @X0 1 r1 ]
 [v _data `*uc ~T0 @X0 1 r2 ]
-"138
+"134
 [f ]
-[; ;MessageFunctions.c: 139: switch (request)
-"139
+[; ;MessageFunctions.c: 135: switch (request)
+"135
 [e $U 894  ]
-[; ;MessageFunctions.c: 140: {
-"140
+[; ;MessageFunctions.c: 136: {
+"136
 {
-[; ;MessageFunctions.c: 141: case DAC_SET_VALUE:
-"141
+[; ;MessageFunctions.c: 137: case DAC_SET_VALUE:
+"137
 [e :U 895 ]
-[; ;MessageFunctions.c: 142: DacSetValue(data);
-"142
+[; ;MessageFunctions.c: 138: DacSetValue(data);
+"138
 [e ( _DacSetValue (1 _data ]
-[; ;MessageFunctions.c: 143: break;
-"143
-[e $U 893  ]
-[; ;MessageFunctions.c: 145: default:
-"145
-[e :U 896 ]
-[; ;MessageFunctions.c: 146: break;
-"146
-[e $U 893  ]
-"147
-}
-[; ;MessageFunctions.c: 147: }
-[e $U 893  ]
+[; ;MessageFunctions.c: 139: break;
 "139
+[e $U 893  ]
+[; ;MessageFunctions.c: 141: default:
+"141
+[e :U 896 ]
+[; ;MessageFunctions.c: 142: break;
+"142
+[e $U 893  ]
+"143
+}
+[; ;MessageFunctions.c: 143: }
+[e $U 893  ]
+"135
 [e :U 894 ]
-[e [\ _request , $ . `E12 25 895
+[e [\ _request , $ . `E12 26 895
  896 ]
-"147
+"143
 [e :U 893 ]
-[; ;MessageFunctions.c: 148: }
-"148
+[; ;MessageFunctions.c: 144: }
+"144
 [e :UE 892 ]
 }

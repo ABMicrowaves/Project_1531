@@ -41,12 +41,12 @@ void DacInit(void)
 
 void DacSetValue(char* data)
 {
-    uint16_t regData = GetIntFromUartData(16, data);
-    SWSPI_send_word(EXT_DAC, regData, 1);
+    //uint16_t regData = GetIntFromUartData(16, data);
+    //SWSPI_send_word(EXT_DAC, regData, 1);
     
     // Store DAC value in EEPROM
-    int8_t dacIndex = (regData >> 14); 
-    StoreIntInEeprom(regData, EEPROM_DAC_REGS_ADDRESS_OFSEET | DAC_ADDRES[dacIndex], 2);
+    //int8_t dacIndex = (regData >> 14); 
+    //StoreIntInEeprom(regData, EEPROM_DAC_REGS_ADDRESS_OFSEET | DAC_ADDRES[dacIndex], 2);
 
     // Transmit ACK signal to serial:
     SendAckMessage((MSG_GROUPS)DAC_MSG, (MSG_REQUEST)DAC_SET_VALUE);

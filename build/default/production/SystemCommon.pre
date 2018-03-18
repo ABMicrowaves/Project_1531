@@ -8721,7 +8721,6 @@ CONTROL_KEEP_ALIVE = 0x15,
 
 STATUS_MCU_RUN_TIME = 0x21,
 STATUS_GET_MCU_FW_VERSION = 0x22,
-STATUS_SET_MCU_FW_VERSION = 0x23,
 
 
 ADC_OPERATION = 0x31,
@@ -8737,6 +8736,8 @@ SYNTH_UP_OPER = 0x44,
 SYNTH_DOWN_OPER = 0x45,
 SYNTH_UP_READ_DATA = 0x46,
 SYNTH_DOWN_READ_DATA = 0x47,
+SYNTH_REQ_ANTHER_TX_REG = 0x48,
+SYNTH_REQ_ANTHER_RX_REG = 0x49,
 
 
 FLASH_EREASE_MEMORY = 0x51,
@@ -8808,7 +8809,7 @@ void SetChannelMode(char* data);
 void InitAdcApplicationMgr();
 void AdcConvert();
 
-# 36 "FlashApp.h"
+# 37 "FlashApp.h"
 void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
 void FlashReadUart(int numOfSampleToRead);
 void FlashEreaseMem(void);
@@ -9037,21 +9038,33 @@ const uint32_t SYNTH_REGS[13] =
 0x30008384,
 0x3,
 0x12,
-0x1,
-0x200640
+0xC000001,
+0x200680
 };
 
-const uint8_t SYNTH_ADDRES[4] =
+const uint8_t SYNTH_ADDRES[13] =
 {
 
 0x4,
 0x8,
 0xC,
-0xF,
+0x00,
+0x10,
+0x00,
+0x14,
+0x00,
+0x00,
+0x00,
+0x18,
+0x00,
+0x00,
 };
 
 void PLLUartInitialize(char* data);
 void PLLInitialize(void);
+
+void InitTxSynth(void);
+void InitRxSynth(void);
 
 void UpdateTxFreq(char* data);
 void UpdateRxFreq(char* data);
@@ -9088,7 +9101,7 @@ void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 
-# 32 "SystemCommon.h"
+# 34 "SystemCommon.h"
 typedef enum
 {
 START_SYSTEM = 0,
@@ -9098,12 +9111,18 @@ EUSART,
 FINISH_ROUND
 }SYSTEM_STATE;
 
+typedef struct
+{
+uint32_t num;
+uint32_t con;
+}INT_VAL;
+
 unsigned char crc8(char* dataArray, int dataSize);
 uint8_t make8(uint32_t data, uint8_t dataLocation);
 void Make32bitsArray(bool* array, uint32_t data);
 void ZeroArray(char* array, int size);
 void ZeroBitsArray(bool* array);
-uint32_t GetIntFromUartData(int8_t num, char* data);
+INT_VAL GetIntFromUartData(int8_t num, char* data);
 void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
 uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
 
@@ -9134,26 +9153,47 @@ void ZeroBitsArray(bool* array)
 memset(array, 0x0, 32);
 }
 
-uint32_t GetIntFromUartData(int8_t num, char* data)
+INT_VAL GetIntFromUartData(int8_t num, char* data)
 {
-uint32_t retVal = 0;
-char dataRegArr[9];
-ZeroArray(dataRegArr, 9);
+INT_VAL retVal;
+retVal.num = 0;
+retVal.con = 0;
+uint8_t idxData = 0;
+char recVal = (0);
 
-for(int idx = 0; idx < 9; idx++)
+char dataRegArr[0xA];
+ZeroArray(dataRegArr, 0xA);
+
+for(idxData = 0; idxData < 0xA; idxData++)
 {
-char c = data[idx];
-if(c == 0x10)
+recVal = data[idxData];
+if(recVal == 0x10)
+{
+idxData++;
+break;
+}
+else
+{
+dataRegArr[idxData] = recVal + '0';
+}
+}
+retVal.num = strtol(dataRegArr, (0), num);
+
+ZeroArray(dataRegArr, 0xA);
+
+for(int idxCon = 0; idxCon < 0xA; idxCon++)
+{
+recVal = data[idxData + idxCon];
+if(recVal == 0x23)
 {
 break;
 }
 else
 {
-dataRegArr[idx] = data[idx] + '0';
+dataRegArr[idxCon] = data[idxCon + idxData] + '0';
 }
-
 }
-retVal = strtol(dataRegArr, (0), num);
+retVal.con = strtol(dataRegArr, (0), num);
 
 return retVal;
 }
@@ -9200,17 +9240,13 @@ EepromWrite(address - idx, val);
 uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes)
 {
 uint32_t retVal = 0x00;
+address -= numOfByes;
 
-if(numOfByes == 2)
+for(uint8_t idx = 0; idx < numOfByes; idx++)
 {
-retVal = (EepromRead(address + 0) << 8) | (EepromRead(address + 1));
+uint32_t base = pow(2,8*(numOfByes - 1 - idx));
+retVal = retVal | EepromRead(address + idx) * base;
 }
-else if (numOfByes == 4)
-{
-
-}
-
-
 return retVal;
 }
 

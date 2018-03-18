@@ -31,26 +31,47 @@ void ZeroBitsArray(bool* array)
     memset(array, 0x0, 32);
 }
 
-uint32_t GetIntFromUartData(int8_t num, char* data)
+INT_VAL GetIntFromUartData(int8_t num, char* data)
 {
-    uint32_t retVal = 0;
-    char dataRegArr[MAX_UART_BYTES_SIZE];
-    ZeroArray(dataRegArr, MAX_UART_BYTES_SIZE);
+    INT_VAL retVal;
+    retVal.num = 0;
+    retVal.con = 0;
+    uint8_t idxData = 0;
+    char recVal = NULL;
     
-    for(int idx = 0; idx < MAX_UART_BYTES_SIZE; idx++)
+    char dataRegArr[UART_DATA_ARRAY_SIZE];
+    ZeroArray(dataRegArr, UART_DATA_ARRAY_SIZE);
+    
+    for(idxData = 0; idxData < UART_DATA_ARRAY_SIZE; idxData++)
     {
-        char c = data[idx];
-        if(c == END_UART_STREAM_CHAR)   // @ -> End of UART stream.
+        recVal = data[idxData];
+        if(recVal == END_UART_DATA_STREAM_CHAR)   // @ -> End of UART DATA stream.
+        {
+            idxData++;
+            break;
+        }
+        else
+        {
+            dataRegArr[idxData] = recVal + '0';
+        }
+    }
+    retVal.num = strtol(dataRegArr, NULL, num);
+    
+    ZeroArray(dataRegArr, UART_DATA_ARRAY_SIZE);
+    
+    for(int idxCon = 0; idxCon < UART_DATA_ARRAY_SIZE; idxCon++)
+    {
+        recVal = data[idxData + idxCon];
+        if(recVal == END_UART_ALL_STREAM_CHAR)   // $ -> End of all UART stream.
         {
             break;
         }
         else
         {
-            dataRegArr[idx] = data[idx] + '0';
+            dataRegArr[idxCon] = data[idxCon + idxData] + '0';
         }
-        
     }
-    retVal = strtol(dataRegArr, NULL, num);
+    retVal.con = strtol(dataRegArr, NULL, num);
     
     return retVal;
 }
@@ -97,17 +118,13 @@ void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes)
 uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes)
 {
     uint32_t retVal = 0x00;
+    address -= numOfByes;
     
-    if(numOfByes == 2)
+    for(uint8_t idx = 0; idx < numOfByes; idx++)
     {
-        retVal = (EepromRead(address + 0) << 8) | (EepromRead(address + 1));
+        uint32_t base = pow(2,8*(numOfByes - 1 - idx));
+        retVal = retVal | EepromRead(address + idx) * base;
     }
-    else if (numOfByes == 4)
-    {
-        
-    }
-    
-    
     return retVal;
 }
 

@@ -2,10 +2,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "35 AdcApp.h
 [c E7005 4 5 6 7 10 13 25 29 30 31 .. ]
 [n E7005 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
-[v F7187 `(v ~T0 @X0 0 tf ]
+[v F7188 `(v ~T0 @X0 0 tf ]
 "28 MessageFunctions.h
-[c E7086 16 17 18 19 20 21 33 34 35 49 50 51 64 65 66 67 68 69 70 71 81 82 83 84 85 97 .. ]
-[n E7086 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION STATUS_SET_MCU_FW_VERSION ADC_OPERATION ADC_CHANNEL_MODE ADC_CONVERSION_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE  ]
+[c E7086 16 17 18 19 20 21 33 34 49 50 51 64 65 66 67 68 69 70 71 72 73 81 82 83 84 85 97 .. ]
+[n E7086 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION ADC_OPERATION ADC_CHANNEL_MODE ADC_CONVERSION_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA SYNTH_REQ_ANTHER_TX_REG SYNTH_REQ_ANTHER_RX_REG FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE  ]
 "18
 [v _GroupControlMcu `(v ~T0 @X0 0 ef2`E7086`*uc ]
 "19
@@ -18,12 +18,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _GroupFlashMemory `(v ~T0 @X0 0 ef2`E7086`*uc ]
 "23
 [v _GroupDAC `(v ~T0 @X0 0 ef2`E7086`*uc ]
-"44 SystemCommon.h
+"52 SystemCommon.h
 [v _ZeroArray `(v ~T0 @X0 0 ef2`*uc`i ]
-"22 SystemStatus.c
+"24 SystemStatus.c
 [c E7078 1 2 3 4 5 6 .. ]
 [n E7078 . CONTROL_MSG MCU_STATUS_VERSION_MSG ADC_MSG SYNTH_MSG FLASH_MSG DAC_MSG  ]
-"41 SystemCommon.h
+"49 SystemCommon.h
 [v _crc8 `(uc ~T0 @X0 0 ef2`*uc`i ]
 "33 EusartApp.h
 [v _WriteUartMessage `(v ~T0 @X0 0 ef2`*uc`i ]
@@ -6706,25 +6706,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;GroupsCommon.h: 51: CONTROL_KEEP_ALIVE = 0x15,
 [; ;GroupsCommon.h: 54: STATUS_MCU_RUN_TIME = 0x21,
 [; ;GroupsCommon.h: 55: STATUS_GET_MCU_FW_VERSION = 0x22,
-[; ;GroupsCommon.h: 56: STATUS_SET_MCU_FW_VERSION = 0x23,
-[; ;GroupsCommon.h: 59: ADC_OPERATION = 0x31,
-[; ;GroupsCommon.h: 60: ADC_CHANNEL_MODE = 0x32,
-[; ;GroupsCommon.h: 61: ADC_CONVERSION_MODE = 0x33,
-[; ;GroupsCommon.h: 64: SYNTH_TX_INIT_SET = 0x40,
-[; ;GroupsCommon.h: 65: SYNTH_RX_INIT_SET = 0x41,
-[; ;GroupsCommon.h: 66: SYNTH_DOWN_SET = 0x42,
-[; ;GroupsCommon.h: 67: SYNTH_UP_SET = 0x43,
-[; ;GroupsCommon.h: 68: SYNTH_UP_OPER = 0x44,
-[; ;GroupsCommon.h: 69: SYNTH_DOWN_OPER = 0x45,
-[; ;GroupsCommon.h: 70: SYNTH_UP_READ_DATA = 0x46,
-[; ;GroupsCommon.h: 71: SYNTH_DOWN_READ_DATA = 0x47,
-[; ;GroupsCommon.h: 74: FLASH_EREASE_MEMORY = 0x51,
-[; ;GroupsCommon.h: 75: FLASH_READ_CONDITION = 0x52,
-[; ;GroupsCommon.h: 76: FLASH_REQUEST_RAW_DATA = 0x53,
-[; ;GroupsCommon.h: 77: FLASH_SEND_RAW_DATA = 0x54,
-[; ;GroupsCommon.h: 78: FLASH_NO_SAMPLE_YET = 0x55,
-[; ;GroupsCommon.h: 81: DAC_SET_VALUE = 0x61,
-[; ;GroupsCommon.h: 82: }MSG_REQUEST;
+[; ;GroupsCommon.h: 58: ADC_OPERATION = 0x31,
+[; ;GroupsCommon.h: 59: ADC_CHANNEL_MODE = 0x32,
+[; ;GroupsCommon.h: 60: ADC_CONVERSION_MODE = 0x33,
+[; ;GroupsCommon.h: 63: SYNTH_TX_INIT_SET = 0x40,
+[; ;GroupsCommon.h: 64: SYNTH_RX_INIT_SET = 0x41,
+[; ;GroupsCommon.h: 65: SYNTH_DOWN_SET = 0x42,
+[; ;GroupsCommon.h: 66: SYNTH_UP_SET = 0x43,
+[; ;GroupsCommon.h: 67: SYNTH_UP_OPER = 0x44,
+[; ;GroupsCommon.h: 68: SYNTH_DOWN_OPER = 0x45,
+[; ;GroupsCommon.h: 69: SYNTH_UP_READ_DATA = 0x46,
+[; ;GroupsCommon.h: 70: SYNTH_DOWN_READ_DATA = 0x47,
+[; ;GroupsCommon.h: 71: SYNTH_REQ_ANTHER_TX_REG = 0x48,
+[; ;GroupsCommon.h: 72: SYNTH_REQ_ANTHER_RX_REG = 0x49,
+[; ;GroupsCommon.h: 75: FLASH_EREASE_MEMORY = 0x51,
+[; ;GroupsCommon.h: 76: FLASH_READ_CONDITION = 0x52,
+[; ;GroupsCommon.h: 77: FLASH_REQUEST_RAW_DATA = 0x53,
+[; ;GroupsCommon.h: 78: FLASH_SEND_RAW_DATA = 0x54,
+[; ;GroupsCommon.h: 79: FLASH_NO_SAMPLE_YET = 0x55,
+[; ;GroupsCommon.h: 82: DAC_SET_VALUE = 0x61,
+[; ;GroupsCommon.h: 83: }MSG_REQUEST;
 [; ;LedsApp.h: 22: typedef enum
 [; ;LedsApp.h: 24: {
 [; ;LedsApp.h: 25: OK_START_SYSTEM = 0x3,
@@ -6784,15 +6785,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;AdcApp.h: 48: void SetChannelMode(char* data);
 [; ;AdcApp.h: 49: void InitAdcApplicationMgr();
 [; ;AdcApp.h: 50: void AdcConvert();
-[; ;FlashApp.h: 36: void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
-[; ;FlashApp.h: 37: void FlashReadUart(int numOfSampleToRead);
-[; ;FlashApp.h: 38: void FlashEreaseMem(void);
-[; ;FlashApp.h: 39: void FlashReadCondition(void);
-[; ;FlashApp.h: 40: bool CheckFlashPrecentage(void);
-[; ;FlashApp.h: 43: uint8_t EepromRead(uint8_t address);
-[; ;FlashApp.h: 44: void EepromWrite(uint8_t address, uint8_t data);
-[; ;FlashApp.h: 47: bool FlashTest(int startAddress, int numOfSamples);
-[; ;FlashApp.h: 48: bool EepromTest(int startAddress, int numOfSamples);
+[; ;FlashApp.h: 37: void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
+[; ;FlashApp.h: 38: void FlashReadUart(int numOfSampleToRead);
+[; ;FlashApp.h: 39: void FlashEreaseMem(void);
+[; ;FlashApp.h: 40: void FlashReadCondition(void);
+[; ;FlashApp.h: 41: bool CheckFlashPrecentage(void);
+[; ;FlashApp.h: 44: uint8_t EepromRead(uint8_t address);
+[; ;FlashApp.h: 45: void EepromWrite(uint8_t address, uint8_t data);
+[; ;FlashApp.h: 48: bool FlashTest(int startAddress, int numOfSamples);
+[; ;FlashApp.h: 49: bool EepromTest(int startAddress, int numOfSamples);
 [; ;MessageFunctions.h: 18: void GroupControlMcu(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 19: void GroupStatusAndVersion(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 20: void GroupAdc(MSG_REQUEST request, char* data);
@@ -6800,21 +6801,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 22: void GroupFlashMemory(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 23: void GroupDAC(MSG_REQUEST request, char* data);
 "26 MessageFunctions.h
-[v _groupsArray `*F7187 ~T0 @X0 -> 6 `i e ]
+[v _groupsArray `*F7188 ~T0 @X0 -> 6 `i e ]
 [i _groupsArray
 :U ..
 "28
--> &U _GroupControlMcu `*F7187
+-> &U _GroupControlMcu `*F7188
 "29
--> &U _GroupStatusAndVersion `*F7187
+-> &U _GroupStatusAndVersion `*F7188
 "30
--> &U _GroupAdc `*F7187
+-> &U _GroupAdc `*F7188
 "31
--> &U _GroupSynthesizers `*F7187
+-> &U _GroupSynthesizers `*F7188
 "32
--> &U _GroupFlashMemory `*F7187
+-> &U _GroupFlashMemory `*F7188
 "33
--> &U _GroupDAC `*F7187
+-> &U _GroupDAC `*F7188
 ..
 ]
 [; ;MessageFunctions.h: 26: void (*groupsArray[(6)])() =
@@ -7019,9 +7020,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "36
 -> -> -> 18 `i `l `ul
 "37
--> -> -> 1 `i `l `ul
+-> -> 201326593 `l `ul
 "39
--> -> 2098752 `l `ul
+-> -> 2098816 `l `ul
 ..
 ]
 [; ;SyntApp.h: 24: const uint32_t SYNTH_REGS[13] =
@@ -7037,11 +7038,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 34: 0x30008384,
 [; ;SyntApp.h: 35: 0x3,
 [; ;SyntApp.h: 36: 0x12,
-[; ;SyntApp.h: 37: 0x1,
-[; ;SyntApp.h: 38: 0x200640
+[; ;SyntApp.h: 37: 0xC000001,
+[; ;SyntApp.h: 38: 0x200680
 [; ;SyntApp.h: 39: };
 "41
-[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 4 `i e ]
+[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 13 `i e ]
 [i _SYNTH_ADDRES
 :U ..
 "44
@@ -7051,24 +7052,53 @@ Version 3.2 HI-TECH Software Intermediate Code
 "46
 -> -> 12 `i `uc
 "47
--> -> 15 `i `uc
+-> -> 0 `i `uc
+"48
+-> -> 16 `i `uc
+"49
+-> -> 0 `i `uc
+"50
+-> -> 20 `i `uc
+"51
+-> -> 0 `i `uc
+"52
+-> -> 0 `i `uc
+"53
+-> -> 0 `i `uc
+"54
+-> -> 24 `i `uc
+"55
+-> -> 0 `i `uc
+"56
+-> -> 0 `i `uc
 ..
 ]
-[; ;SyntApp.h: 41: const uint8_t SYNTH_ADDRES[4] =
+[; ;SyntApp.h: 41: const uint8_t SYNTH_ADDRES[13] =
 [; ;SyntApp.h: 42: {
 [; ;SyntApp.h: 44: 0x4,
 [; ;SyntApp.h: 45: 0x8,
 [; ;SyntApp.h: 46: 0xC,
-[; ;SyntApp.h: 47: 0xF,
-[; ;SyntApp.h: 48: };
-[; ;SyntApp.h: 50: void PLLUartInitialize(char* data);
-[; ;SyntApp.h: 51: void PLLInitialize(void);
-[; ;SyntApp.h: 53: void UpdateTxFreq(char* data);
-[; ;SyntApp.h: 54: void UpdateRxFreq(char* data);
-[; ;SyntApp.h: 56: void SetSynthTxOper();
-[; ;SyntApp.h: 57: void SetSynthRxOper();
-[; ;SyntApp.h: 59: void SynthReadData(char* data);
-[; ;SyntApp.h: 61: void SYNTH_ISR(void);
+[; ;SyntApp.h: 47: 0x00,
+[; ;SyntApp.h: 48: 0x10,
+[; ;SyntApp.h: 49: 0x00,
+[; ;SyntApp.h: 50: 0x14,
+[; ;SyntApp.h: 51: 0x00,
+[; ;SyntApp.h: 52: 0x00,
+[; ;SyntApp.h: 53: 0x00,
+[; ;SyntApp.h: 54: 0x18,
+[; ;SyntApp.h: 55: 0x00,
+[; ;SyntApp.h: 56: 0x00,
+[; ;SyntApp.h: 57: };
+[; ;SyntApp.h: 59: void PLLUartInitialize(char* data);
+[; ;SyntApp.h: 60: void PLLInitialize(void);
+[; ;SyntApp.h: 62: void InitTxSynth(void);
+[; ;SyntApp.h: 63: void InitRxSynth(void);
+[; ;SyntApp.h: 65: void UpdateTxFreq(char* data);
+[; ;SyntApp.h: 66: void UpdateRxFreq(char* data);
+[; ;SyntApp.h: 68: void SetSynthTxOper();
+[; ;SyntApp.h: 69: void SetSynthRxOper();
+[; ;SyntApp.h: 71: void SynthReadData(char* data);
+[; ;SyntApp.h: 73: void SYNTH_ISR(void);
 [; ;SwSpiApp.h: 14: typedef enum
 [; ;SwSpiApp.h: 15: {
 [; ;SwSpiApp.h: 16: SYNTH_TX = 0,
@@ -7084,25 +7114,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SwSpiApp.h: 32: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 [; ;SwSpiApp.h: 35: void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 [; ;SwSpiApp.h: 36: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
-[; ;SystemCommon.h: 32: typedef enum
-[; ;SystemCommon.h: 33: {
-[; ;SystemCommon.h: 34: START_SYSTEM = 0,
-[; ;SystemCommon.h: 35: ADC_DAC,
-[; ;SystemCommon.h: 36: FLASH,
-[; ;SystemCommon.h: 37: EUSART,
-[; ;SystemCommon.h: 38: FINISH_ROUND
-[; ;SystemCommon.h: 39: }SYSTEM_STATE;
-[; ;SystemCommon.h: 41: unsigned char crc8(char* dataArray, int dataSize);
-[; ;SystemCommon.h: 42: uint8_t make8(uint32_t data, uint8_t dataLocation);
-[; ;SystemCommon.h: 43: void Make32bitsArray(bool* array, uint32_t data);
-[; ;SystemCommon.h: 44: void ZeroArray(char* array, int size);
-[; ;SystemCommon.h: 45: void ZeroBitsArray(bool* array);
-[; ;SystemCommon.h: 46: uint32_t GetIntFromUartData(int8_t num, char* data);
-[; ;SystemCommon.h: 47: void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
-[; ;SystemCommon.h: 48: uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
-[; ;SystemCommon.h: 51: void ResetMcu(void);
-[; ;SystemCommon.h: 52: void ResetCpld(void);
-[; ;SystemCommon.h: 53: void SendSystemStartAck(void);
+[; ;SystemCommon.h: 34: typedef enum
+[; ;SystemCommon.h: 35: {
+[; ;SystemCommon.h: 36: START_SYSTEM = 0,
+[; ;SystemCommon.h: 37: ADC_DAC,
+[; ;SystemCommon.h: 38: FLASH,
+[; ;SystemCommon.h: 39: EUSART,
+[; ;SystemCommon.h: 40: FINISH_ROUND
+[; ;SystemCommon.h: 41: }SYSTEM_STATE;
+[; ;SystemCommon.h: 43: typedef struct
+[; ;SystemCommon.h: 44: {
+[; ;SystemCommon.h: 45: uint32_t num;
+[; ;SystemCommon.h: 46: uint32_t con;
+[; ;SystemCommon.h: 47: }INT_VAL;
+[; ;SystemCommon.h: 49: unsigned char crc8(char* dataArray, int dataSize);
+[; ;SystemCommon.h: 50: uint8_t make8(uint32_t data, uint8_t dataLocation);
+[; ;SystemCommon.h: 51: void Make32bitsArray(bool* array, uint32_t data);
+[; ;SystemCommon.h: 52: void ZeroArray(char* array, int size);
+[; ;SystemCommon.h: 53: void ZeroBitsArray(bool* array);
+[; ;SystemCommon.h: 54: INT_VAL GetIntFromUartData(int8_t num, char* data);
+[; ;SystemCommon.h: 55: void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
+[; ;SystemCommon.h: 56: uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
+[; ;SystemCommon.h: 59: void ResetMcu(void);
+[; ;SystemCommon.h: 60: void ResetCpld(void);
+[; ;SystemCommon.h: 61: void SendSystemStartAck(void);
 [; ;SystemStatus.h: 27: void GetMcuFwVersion();;
 [; ;SystemStatus.h: 29: void SetMcuRunTime();
 [; ;SystemStatus.h: 30: void GetMcuRunTime();
@@ -7122,151 +7157,166 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SystemStatus.c: 15: {
 [e :U _GetMcuFwVersion ]
 [f ]
-"17
+"16
+[v _compileData `ul ~T0 @X0 1 a ]
+[; ;SystemStatus.c: 16: uint32_t compileData = 0x0;
+[e = _compileData -> -> -> 0 `i `l `ul ]
+"19
 [v _TxMsg `uc ~T0 @X0 + + -> 4 `i -> 4 `i -> 1 `i a ]
-[; ;SystemStatus.c: 17: char TxMsg[(0x4) + (0x4) + 1];
-[; ;SystemStatus.c: 18: ZeroArray(TxMsg, (0x4) + (0x4) + 1);
-"18
+[; ;SystemStatus.c: 19: char TxMsg[(0x4) + (0x4) + 1];
+[; ;SystemStatus.c: 20: ZeroArray(TxMsg, (0x4) + (0x4) + 1);
+"20
 [e ( _ZeroArray (2 , &U _TxMsg + + -> 4 `i -> 4 `i -> 1 `i ]
-[; ;SystemStatus.c: 21: TxMsg[(0)] = (0x24);
-"21
-[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
-[; ;SystemStatus.c: 22: TxMsg[(1)] = MCU_STATUS_VERSION_MSG;
-"22
-[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7078 1 `uc ]
-[; ;SystemStatus.c: 23: TxMsg[(2)] = STATUS_GET_MCU_FW_VERSION;
+[; ;SystemStatus.c: 23: TxMsg[(0)] = (0x24);
 "23
-[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7086 7 `uc ]
-[; ;SystemStatus.c: 24: TxMsg[(3)] = (0x4);
+[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
+[; ;SystemStatus.c: 24: TxMsg[(1)] = MCU_STATUS_VERSION_MSG;
 "24
+[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7078 1 `uc ]
+[; ;SystemStatus.c: 25: TxMsg[(2)] = STATUS_GET_MCU_FW_VERSION;
+"25
+[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7086 7 `uc ]
+[; ;SystemStatus.c: 26: TxMsg[(3)] = (0x4);
+"26
 [e = *U + &U _TxMsg * -> -> -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 4 `i `uc ]
-"32
-[v _timeCoplie `ul ~T0 @X0 1 a ]
-[; ;SystemStatus.c: 32: uint32_t timeCoplie = "Mar 14 2018";
-[e = _timeCoplie -> :s 1C `ul ]
-[; ;SystemStatus.c: 33: uint32_t timeCoplie = "Mar 14 2018";
-"33
-[e = _timeCoplie -> :s 2C `ul ]
-[; ;SystemStatus.c: 35: TxMsg[(0x4) + (0x4)] = crc8(TxMsg, (0x4) + (0x4));
+[; ;SystemStatus.c: 29: compileData = "Mar 18 2018";
+"29
+[e = _compileData -> :s 1C `ul ]
+[; ;SystemStatus.c: 30: TxMsg[(0x4) + 0] = (compileData & 0xFF00) >> 8;
+"30
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> >> & _compileData -> -> 65280 `ui `ul -> 8 `i `uc ]
+[; ;SystemStatus.c: 31: TxMsg[(0x4) + 1] = compileData & 0xFF;
+"31
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> & _compileData -> -> -> 255 `i `l `ul `uc ]
+[; ;SystemStatus.c: 34: compileData = "15:12:45";
+"34
+[e = _compileData -> :s 2C `ul ]
+[; ;SystemStatus.c: 35: TxMsg[(0x4) + 2] = (compileData & 0xFF00) >> 8;
 "35
-[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 4 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + -> 4 `i -> 4 `i ]
-[; ;SystemStatus.c: 37: WriteUartMessage(TxMsg, (0x4) + (0x4) + 1);
-"37
-[e ( _WriteUartMessage (2 , &U _TxMsg + + -> 4 `i -> 4 `i -> 1 `i ]
-[; ;SystemStatus.c: 38: }
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> >> & _compileData -> -> 65280 `ui `ul -> 8 `i `uc ]
+[; ;SystemStatus.c: 36: TxMsg[(0x4) + 3] = compileData & 0xFF;
+"36
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> & _compileData -> -> -> 255 `i `l `ul `uc ]
+[; ;SystemStatus.c: 38: TxMsg[(0x4) + (0x4)] = crc8(TxMsg, (0x4) + (0x4));
 "38
-[e :UE 851 ]
-}
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 4 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + -> 4 `i -> 4 `i ]
+[; ;SystemStatus.c: 40: WriteUartMessage(TxMsg, (0x4) + (0x4) + 1);
 "40
-[v _SetMcuRunTime `(v ~T0 @X0 1 ef ]
+[e ( _WriteUartMessage (2 , &U _TxMsg + + -> 4 `i -> 4 `i -> 1 `i ]
+[; ;SystemStatus.c: 41: }
 "41
-{
-[; ;SystemStatus.c: 40: void SetMcuRunTime()
-[; ;SystemStatus.c: 41: {
-[e :U _SetMcuRunTime ]
-[f ]
-[; ;SystemStatus.c: 42: mcuRunTimeIn5SecTicks++;
-"42
-[e ++ _mcuRunTimeIn5SecTicks -> -> -> 1 `i `l `ul ]
-[; ;SystemStatus.c: 43: mcuRunTimeIn5SecTicks %= (17280);
-"43
-[e =% _mcuRunTimeIn5SecTicks -> -> 17280 `us `ul ]
-[; ;SystemStatus.c: 44: }
-"44
 [e :UE 852 ]
 }
-"46
-[v _ClearMcuRunTime `(v ~T0 @X0 1 ef ]
-"47
+"43
+[v _SetMcuRunTime `(v ~T0 @X0 1 ef ]
+"44
 {
-[; ;SystemStatus.c: 46: void ClearMcuRunTime()
-[; ;SystemStatus.c: 47: {
-[e :U _ClearMcuRunTime ]
+[; ;SystemStatus.c: 43: void SetMcuRunTime()
+[; ;SystemStatus.c: 44: {
+[e :U _SetMcuRunTime ]
 [f ]
-[; ;SystemStatus.c: 48: mcuRunTimeIn5SecTicks = 0;
-"48
-[e = _mcuRunTimeIn5SecTicks -> -> -> 0 `i `l `ul ]
-[; ;SystemStatus.c: 49: }
-"49
+[; ;SystemStatus.c: 45: mcuRunTimeIn5SecTicks++;
+"45
+[e ++ _mcuRunTimeIn5SecTicks -> -> -> 1 `i `l `ul ]
+[; ;SystemStatus.c: 46: mcuRunTimeIn5SecTicks %= (17280);
+"46
+[e =% _mcuRunTimeIn5SecTicks -> -> 17280 `us `ul ]
+[; ;SystemStatus.c: 47: }
+"47
 [e :UE 853 ]
 }
-"51
-[v _GetMcuRunTime `(v ~T0 @X0 1 ef ]
-"52
+"49
+[v _ClearMcuRunTime `(v ~T0 @X0 1 ef ]
+"50
 {
-[; ;SystemStatus.c: 51: void GetMcuRunTime()
-[; ;SystemStatus.c: 52: {
+[; ;SystemStatus.c: 49: void ClearMcuRunTime()
+[; ;SystemStatus.c: 50: {
+[e :U _ClearMcuRunTime ]
+[f ]
+[; ;SystemStatus.c: 51: mcuRunTimeIn5SecTicks = 0;
+"51
+[e = _mcuRunTimeIn5SecTicks -> -> -> 0 `i `l `ul ]
+[; ;SystemStatus.c: 52: }
+"52
+[e :UE 854 ]
+}
+"54
+[v _GetMcuRunTime `(v ~T0 @X0 1 ef ]
+"55
+{
+[; ;SystemStatus.c: 54: void GetMcuRunTime()
+[; ;SystemStatus.c: 55: {
 [e :U _GetMcuRunTime ]
 [f ]
-"54
-[v _TxMsg `uc ~T0 @X0 + + -> 4 `i -> 4 `i -> 1 `i a ]
-[; ;SystemStatus.c: 54: char TxMsg[(0x4) + (0x4) + 1];
-[; ;SystemStatus.c: 57: TxMsg[(0)] = (0x24);
 "57
-[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
-[; ;SystemStatus.c: 58: TxMsg[(1)] = MCU_STATUS_VERSION_MSG;
-"58
-[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7078 1 `uc ]
-[; ;SystemStatus.c: 59: TxMsg[(2)] = STATUS_MCU_RUN_TIME;
-"59
-[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7086 6 `uc ]
-[; ;SystemStatus.c: 60: TxMsg[(3)] = (0x4);
+[v _TxMsg `uc ~T0 @X0 + + -> 4 `i -> 4 `i -> 1 `i a ]
+[; ;SystemStatus.c: 57: char TxMsg[(0x4) + (0x4) + 1];
+[; ;SystemStatus.c: 60: TxMsg[(0)] = (0x24);
 "60
-[e = *U + &U _TxMsg * -> -> -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 4 `i `uc ]
+[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
+[; ;SystemStatus.c: 61: TxMsg[(1)] = MCU_STATUS_VERSION_MSG;
+"61
+[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7078 1 `uc ]
+[; ;SystemStatus.c: 62: TxMsg[(2)] = STATUS_MCU_RUN_TIME;
 "62
-[v _tempRunTime `ul ~T0 @X0 1 a ]
-[; ;SystemStatus.c: 62: uint32_t tempRunTime = mcuRunTimeIn5SecTicks;
-[e = _tempRunTime _mcuRunTimeIn5SecTicks ]
-[; ;SystemStatus.c: 65: for(int idx = 0; idx < (0x4); idx++)
+[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7086 6 `uc ]
+[; ;SystemStatus.c: 63: TxMsg[(3)] = (0x4);
+"63
+[e = *U + &U _TxMsg * -> -> -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 4 `i `uc ]
 "65
+[v _tempRunTime `ul ~T0 @X0 1 a ]
+[; ;SystemStatus.c: 65: uint32_t tempRunTime = mcuRunTimeIn5SecTicks;
+[e = _tempRunTime _mcuRunTimeIn5SecTicks ]
+[; ;SystemStatus.c: 68: for(int idx = 0; idx < (0x4); idx++)
+"68
 {
 [v _idx `i ~T0 @X0 1 a ]
 [e = _idx -> 0 `i ]
-[e $ < _idx -> 4 `i 855  ]
-[e $U 856  ]
-"66
-[e :U 855 ]
-[; ;SystemStatus.c: 66: {
-{
-[; ;SystemStatus.c: 67: TxMsg[(0x4) + idx] = tempRunTime % 10;
-"67
-[e = *U + &U _TxMsg * -> -> + -> 4 `i _idx `ui `ux -> -> # *U &U _TxMsg `ui `ux -> % _tempRunTime -> -> -> 10 `i `l `ul `uc ]
-[; ;SystemStatus.c: 68: tempRunTime /= 10;
-"68
-[e =/ _tempRunTime -> -> 10 `uc `ul ]
+[e $ < _idx -> 4 `i 856  ]
+[e $U 857  ]
 "69
-}
-"65
-[e ++ _idx -> 1 `i ]
-[e $ < _idx -> 4 `i 855  ]
 [e :U 856 ]
-"69
-}
-[; ;SystemStatus.c: 69: }
-[; ;SystemStatus.c: 71: TxMsg[(0x4) + (0x4)] = crc8(TxMsg, (0x4) + (0x4));
-"71
-[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 4 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + -> 4 `i -> 4 `i ]
-[; ;SystemStatus.c: 73: WriteUartMessage(TxMsg, (0x4) + (0x4) + 1);
-"73
-[e ( _WriteUartMessage (2 , &U _TxMsg + + -> 4 `i -> 4 `i -> 1 `i ]
-[; ;SystemStatus.c: 74: }
-"74
-[e :UE 854 ]
-}
-"76
-[v _keepAliveSignalUart `(v ~T0 @X0 1 ef ]
-"77
+[; ;SystemStatus.c: 69: {
 {
-[; ;SystemStatus.c: 76: void keepAliveSignalUart(void)
-[; ;SystemStatus.c: 77: {
+[; ;SystemStatus.c: 70: TxMsg[(0x4) + idx] = tempRunTime % 10;
+"70
+[e = *U + &U _TxMsg * -> -> + -> 4 `i _idx `ui `ux -> -> # *U &U _TxMsg `ui `ux -> % _tempRunTime -> -> -> 10 `i `l `ul `uc ]
+[; ;SystemStatus.c: 71: tempRunTime /= 10;
+"71
+[e =/ _tempRunTime -> -> 10 `uc `ul ]
+"72
+}
+"68
+[e ++ _idx -> 1 `i ]
+[e $ < _idx -> 4 `i 856  ]
+[e :U 857 ]
+"72
+}
+[; ;SystemStatus.c: 72: }
+[; ;SystemStatus.c: 74: TxMsg[(0x4) + (0x4)] = crc8(TxMsg, (0x4) + (0x4));
+"74
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 4 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + -> 4 `i -> 4 `i ]
+[; ;SystemStatus.c: 76: WriteUartMessage(TxMsg, (0x4) + (0x4) + 1);
+"76
+[e ( _WriteUartMessage (2 , &U _TxMsg + + -> 4 `i -> 4 `i -> 1 `i ]
+[; ;SystemStatus.c: 77: }
+"77
+[e :UE 855 ]
+}
+"79
+[v _keepAliveSignalUart `(v ~T0 @X0 1 ef ]
+"80
+{
+[; ;SystemStatus.c: 79: void keepAliveSignalUart(void)
+[; ;SystemStatus.c: 80: {
 [e :U _keepAliveSignalUart ]
 [f ]
-[; ;SystemStatus.c: 78: SendAckMessage((MSG_GROUPS)CONTROL_MSG, (MSG_REQUEST)CONTROL_KEEP_ALIVE);
-"78
+[; ;SystemStatus.c: 81: SendAckMessage((MSG_GROUPS)CONTROL_MSG, (MSG_REQUEST)CONTROL_KEEP_ALIVE);
+"81
 [e ( _SendAckMessage (2 , . `E7078 0 . `E7086 5 ]
-[; ;SystemStatus.c: 79: }
-"79
-[e :UE 858 ]
+[; ;SystemStatus.c: 82: }
+"82
+[e :UE 859 ]
 }
-[a 1C 77 97 114 32 49 52 32 50 48 49 56 0 ]
-[a 2C 77 97 114 32 49 52 32 50 48 49 56 0 ]
+[a 1C 77 97 114 32 49 56 32 50 48 49 56 0 ]
+[a 2C 49 53 58 49 50 58 52 53 0 ]
