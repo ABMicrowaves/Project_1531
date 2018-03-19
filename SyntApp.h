@@ -18,8 +18,6 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 #define SYNTH_READ_CONDITION_MAX_DATA_SIZE 22
 #define SYNTH_READ_CONDITION_PACKET_SIZE SYNTH_READ_CONDITION_MAX_DATA_SIZE + MSG_DATA_LOCATION 
-// Registers will be write on opposite direction.
-
 
 const uint32_t SYNTH_REGS[NUM_OF_REGISTERS] = 
 {
@@ -56,20 +54,11 @@ const uint8_t SYNTH_ADDRES[NUM_OF_REGISTERS] =
     0x00,       // Reserved place  for REG 12
 };
 
-void PLLUartInitialize(char* data);
 void PLLInitialize(void);
-
-void InitTxSynth(void);
-void InitRxSynth(void);
-
-void UpdateTxFreq(char* data);
-void UpdateRxFreq(char* data);
-
-void SetSynthTxOper();
-void SetSynthRxOper();
-
-void SynthReadData(char* data); 
-
+void InitSynth(SPI_PERIPHERAL cType);
+void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
+void SetSynthOper(SPI_PERIPHERAL cType);
+void SynthReadData(SPI_PERIPHERAL cType, char* data);
 void SYNTH_ISR(void);
 
 #endif	/* SYNTAPP_H */

@@ -1,6 +1,14 @@
 
 # 1 "SystemStatus.c"
 
+# 13 "SystemCommon.h"
+typedef enum
+{
+SYNTH_TX = 0,
+SYNTH_RX,
+EXT_DAC
+} SPI_PERIPHERAL;
+
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
@@ -9016,7 +9024,7 @@ void segmentCounter(void);
 unsigned short mask(unsigned short num);
 void InitSevenSegment(void);
 
-# 24 "SyntApp.h"
+# 22 "SyntApp.h"
 const uint32_t SYNTH_REGS[13] =
 {
 0x1041C,
@@ -9052,31 +9060,14 @@ const uint8_t SYNTH_ADDRES[13] =
 0x00,
 };
 
-void PLLUartInitialize(char* data);
 void PLLInitialize(void);
-
-void InitTxSynth(void);
-void InitRxSynth(void);
-
-void UpdateTxFreq(char* data);
-void UpdateRxFreq(char* data);
-
-void SetSynthTxOper();
-void SetSynthRxOper();
-
-void SynthReadData(char* data);
-
+void InitSynth(SPI_PERIPHERAL cType);
+void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
+void SetSynthOper(SPI_PERIPHERAL cType);
+void SynthReadData(SPI_PERIPHERAL cType, char* data);
 void SYNTH_ISR(void);
 
-# 14 "SwSpiApp.h"
-typedef enum
-{
-SYNTH_TX = 0,
-SYNTH_RX,
-EXT_DAC
-} SPI_PERIPHERAL;
-
-
+# 17 "SwSpiApp.h"
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
 
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
@@ -9093,7 +9084,7 @@ void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 
-# 34 "SystemCommon.h"
+# 43 "SystemCommon.h"
 typedef enum
 {
 START_SYSTEM = 0,
@@ -9149,12 +9140,12 @@ TxMsg[(2)] = STATUS_GET_MCU_FW_VERSION;
 TxMsg[(3)] = (0x4);
 
 
-compileData = "Mar 18 2018";
+compileData = "Mar 19 2018";
 TxMsg[(0x4) + 0] = (compileData & 0xFF00) >> 8;
 TxMsg[(0x4) + 1] = compileData & 0xFF;
 
 
-compileData = "15:12:45";
+compileData = "12:23:49";
 TxMsg[(0x4) + 2] = (compileData & 0xFF00) >> 8;
 TxMsg[(0x4) + 3] = compileData & 0xFF;
 

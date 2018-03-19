@@ -59,6 +59,14 @@ FLASH_NO_SAMPLE_YET = 0x55,
 DAC_SET_VALUE = 0x61,
 }MSG_REQUEST;
 
+# 13 "SystemCommon.h"
+typedef enum
+{
+SYNTH_TX = 0,
+SYNTH_RX,
+EXT_DAC
+} SPI_PERIPHERAL;
+
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
@@ -8977,7 +8985,7 @@ void segmentCounter(void);
 unsigned short mask(unsigned short num);
 void InitSevenSegment(void);
 
-# 24 "SyntApp.h"
+# 22 "SyntApp.h"
 const uint32_t SYNTH_REGS[13] =
 {
 0x1041C,
@@ -9013,20 +9021,11 @@ const uint8_t SYNTH_ADDRES[13] =
 0x00,
 };
 
-void PLLUartInitialize(char* data);
 void PLLInitialize(void);
-
-void InitTxSynth(void);
-void InitRxSynth(void);
-
-void UpdateTxFreq(char* data);
-void UpdateRxFreq(char* data);
-
-void SetSynthTxOper();
-void SetSynthRxOper();
-
-void SynthReadData(char* data);
-
+void InitSynth(SPI_PERIPHERAL cType);
+void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
+void SetSynthOper(SPI_PERIPHERAL cType);
+void SynthReadData(SPI_PERIPHERAL cType, char* data);
 void SYNTH_ISR(void);
 
 # 22 "LedsApp.h"
@@ -9049,15 +9048,7 @@ void BlinkErrorLeds(LED_OK_INTICATION state);
 void BlinkOkLeds(LED_ERR_INTICATION state);
 void keepAliveSignalLed(void);
 
-# 14 "SwSpiApp.h"
-typedef enum
-{
-SYNTH_TX = 0,
-SYNTH_RX,
-EXT_DAC
-} SPI_PERIPHERAL;
-
-
+# 17 "SwSpiApp.h"
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
 
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
@@ -9074,7 +9065,7 @@ void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 
-# 34 "SystemCommon.h"
+# 43 "SystemCommon.h"
 typedef enum
 {
 START_SYSTEM = 0,
@@ -9197,35 +9188,35 @@ void GroupSynthesizers(MSG_REQUEST request, char* data)
 switch (request)
 {
 case SYNTH_TX_INIT_SET:
-PLLUartInitialize(data);
+
 break;
 
 case SYNTH_RX_INIT_SET:
-PLLUartInitialize(data);
+
 break;
 
 case SYNTH_DOWN_SET:
-UpdateTxFreq(data);
+UpdateSynthFreq(SYNTH_TX, data);
 break;
 
 case SYNTH_UP_SET:
-UpdateRxFreq(data);
+UpdateSynthFreq(SYNTH_RX, data);
 break;
 
 case SYNTH_UP_OPER:
-SetSynthRxOper();
+SetSynthOper(SYNTH_RX);
 break;
 
 case SYNTH_DOWN_OPER:
-SetSynthTxOper();
+SetSynthOper(SYNTH_TX);
 break;
 
 case SYNTH_UP_READ_DATA:
-SynthReadData(data);
+SynthReadData(SYNTH_RX, data);
 break;
 
 case SYNTH_DOWN_READ_DATA:
-SynthReadData(data);
+SynthReadData(SYNTH_TX, data);
 break;
 
 default:

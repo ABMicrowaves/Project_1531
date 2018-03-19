@@ -73,35 +73,35 @@ void GroupSynthesizers(MSG_REQUEST request, char* data)
     switch (request)
     {
         case SYNTH_TX_INIT_SET:
-            PLLUartInitialize(data);
+            //PLLUartInitialize(data);
             break;
         
         case SYNTH_RX_INIT_SET:
-            PLLUartInitialize(data);
+            //PLLUartInitialize(data);
             break;
             
         case SYNTH_DOWN_SET:
-            UpdateTxFreq(data);
+            UpdateSynthFreq(SYNTH_TX, data);
             break;
 
         case SYNTH_UP_SET:
-            UpdateRxFreq(data);
+            UpdateSynthFreq(SYNTH_RX, data);
             break;
         
         case SYNTH_UP_OPER:
-            SetSynthRxOper();
+            SetSynthOper(SYNTH_RX);
             break;
             
         case SYNTH_DOWN_OPER:
-            SetSynthTxOper();
+            SetSynthOper(SYNTH_TX);
             break;
             
         case SYNTH_UP_READ_DATA:
-            SynthReadData(data);
+            SynthReadData(SYNTH_RX, data);
             break;
         
         case SYNTH_DOWN_READ_DATA:
-            SynthReadData(data);
+            SynthReadData(SYNTH_TX, data);
             break;
             
         default:

@@ -11,12 +11,7 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 #include "SystemCommon.h"
 
-typedef enum
-{
-    SYNTH_TX = 0,
-    SYNTH_RX,
-    EXT_DAC
-} SPI_PERIPHERAL;
+
 
 
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);

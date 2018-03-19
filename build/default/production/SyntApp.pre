@@ -1,6 +1,14 @@
 
 # 1 "SyntApp.c"
 
+# 13 "SystemCommon.h"
+typedef enum
+{
+SYNTH_TX = 0,
+SYNTH_RX,
+EXT_DAC
+} SPI_PERIPHERAL;
+
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
@@ -9024,15 +9032,7 @@ void segmentCounter(void);
 unsigned short mask(unsigned short num);
 void InitSevenSegment(void);
 
-# 14 "SwSpiApp.h"
-typedef enum
-{
-SYNTH_TX = 0,
-SYNTH_RX,
-EXT_DAC
-} SPI_PERIPHERAL;
-
-
+# 17 "SwSpiApp.h"
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
 
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
@@ -9049,7 +9049,7 @@ void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 
-# 34 "SystemCommon.h"
+# 43 "SystemCommon.h"
 typedef enum
 {
 START_SYSTEM = 0,
@@ -9079,7 +9079,7 @@ void ResetMcu(void);
 void ResetCpld(void);
 void SendSystemStartAck(void);
 
-# 24 "SyntApp.h"
+# 22 "SyntApp.h"
 const uint32_t SYNTH_REGS[13] =
 {
 0x1041C,
@@ -9115,20 +9115,11 @@ const uint8_t SYNTH_ADDRES[13] =
 0x00,
 };
 
-void PLLUartInitialize(char* data);
 void PLLInitialize(void);
-
-void InitTxSynth(void);
-void InitRxSynth(void);
-
-void UpdateTxFreq(char* data);
-void UpdateRxFreq(char* data);
-
-void SetSynthTxOper();
-void SetSynthRxOper();
-
-void SynthReadData(char* data);
-
+void InitSynth(SPI_PERIPHERAL cType);
+void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
+void SetSynthOper(SPI_PERIPHERAL cType);
+void SynthReadData(SPI_PERIPHERAL cType, char* data);
 void SYNTH_ISR(void);
 
 # 12 "SyntApp.c"
@@ -9143,114 +9134,123 @@ void PLLInitialize()
 {
 
 IOCB = 0b10000000;
-
-
-InitTxSynth();
-InitRxSynth();
+InitSynth(SYNTH_TX);
+InitSynth(SYNTH_RX);
 }
 
-void PLLUartInitialize(char* data)
-
+void InitSynth(SPI_PERIPHERAL cType)
 {
+SwSpi_Set_CE_Pin(cType, 1);
 
-}
-
-void InitTxSynth(void)
-{
-
-SwSpi_Set_CE_Pin(SYNTH_TX, 1);
-
+uint8_t regNum = 0;
+uint32_t EepromVal = 0x0;
 
 
 for(uint8_t idx = 0; idx < 13; idx++)
 {
-SWSPI_send_word(SYNTH_TX, SYNTH_REGS[idx],3);
-}
-}
-
-void InitRxSynth(void)
+regNum = 13 - idx - 1;
+if(regNum == 0x0 || regNum == 0x1 || regNum == 0x2 || regNum == 0x4 || regNum == 0x6 || regNum == 0xA)
 {
-
-SwSpi_Set_CE_Pin(SYNTH_RX, 1);
-
-
-for(uint8_t idx = 0; idx < 13; idx++)
+if(cType == SYNTH_TX)
 {
-SWSPI_send_word(SYNTH_RX, SYNTH_REGS[idx],3);
+EepromVal = ReadIntFromEeprom((0) | SYNTH_ADDRES[regNum], 4);
+}
+else if (cType == SYNTH_RX)
+{
+EepromVal = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[regNum], 4);
+}
+
+if(EepromVal == 0xFFFFFFFF)
+{
+SWSPI_send_word(cType, SYNTH_REGS[idx],3);
+}
+else
+{
+SWSPI_send_word(cType, EepromVal,3);
 }
 }
-
-# 64
-void UpdateTxFreq(char* data)
+else
 {
-uint8_t regIdx = 0;
+SWSPI_send_word(cType, SYNTH_REGS[idx],3);
+}
+}
+}
+
+
+
+
+void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data)
+{
 INT_VAL retVal;
 if(cntRegUpdate < 7)
 {
 retVal = GetIntFromUartData(10, data);
-SWSPI_send_word(SYNTH_TX, retVal.num, 3);
+SWSPI_send_word(cType, retVal.num, 3);
+if(cType == SYNTH_TX)
+{
 StoreIntInEeprom(retVal.num, (0) | SYNTH_ADDRES[retVal.con], 4);
-cntRegUpdate ++;
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_TX_REG);
 }
-
-else
+else if(cType == SYNTH_RX)
 {
-cntRegUpdate = 0;
-SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
-}
-}
-
-void UpdateRxFreq(char* data)
-{
-if(cntRegUpdate < 7)
-{
-
-
-
-cntRegUpdate ++;
-
+StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG);
 }
+cntRegUpdate ++;
+}
+
 else
 {
 cntRegUpdate = 0;
+if(cType == SYNTH_TX)
+{
+SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
+}
+else if(cType == SYNTH_RX)
+{
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_SET);
+}
+
 }
 }
 
-# 110
-void SetSynthTxOper()
+
+
+
+void SetSynthOper(SPI_PERIPHERAL cType)
+{
+if(cType == SYNTH_TX)
 {
 SynthTxOper = !SynthTxOper;
 if(SynthTxOper)
 {
-InitTxSynth();
+InitSynth(cType);
 }
 else
 {
-SwSpi_Set_CE_Pin(SYNTH_TX, 0);
+SwSpi_Set_CE_Pin(cType, 0);
 }
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_OPER);
 }
-
-void SetSynthRxOper()
+else if (cType == SYNTH_RX)
 {
 SynthRxOper = !SynthRxOper;
 if(SynthRxOper)
 {
-InitRxSynth();
+InitSynth(cType);
 }
 else
 {
-SwSpi_Set_CE_Pin(SYNTH_RX, 0);
+SwSpi_Set_CE_Pin(cType, 0);
 }
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_OPER);
 }
+}
 
-void SynthReadData(char* data)
+
+void SynthReadData(SPI_PERIPHERAL cType, char* data)
 {
-
+uint32_t eepromDataArray[3];
 char TxMsg[22 + (0x4) + 1];
 ZeroArray(TxMsg, 22 + (0x4) + 1);
 
@@ -9259,23 +9259,34 @@ TxMsg[(0)] = (0x24);
 TxMsg[(1)] = SYNTH_MSG;
 TxMsg[(3)] = 22;
 
-uint8_t indx = data[0];
-if(indx == 0x0)
-{
-TxMsg[(2)] = SYNTH_UP_READ_DATA;
-
-}
-else
+if(cType == SYNTH_TX)
 {
 TxMsg[(2)] = SYNTH_DOWN_READ_DATA;
+eepromDataArray[0] = ReadIntFromEeprom((0) | SYNTH_ADDRES[0], 4);
+eepromDataArray[1] = ReadIntFromEeprom((0) | SYNTH_ADDRES[1], 4);
+eepromDataArray[2] = ReadIntFromEeprom((0) | SYNTH_ADDRES[2], 4);
+}
+else if (cType == SYNTH_RX)
+{
+TxMsg[(2)] = SYNTH_UP_READ_DATA;
+eepromDataArray[0] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[0], 4);
+eepromDataArray[1] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[1], 4);
+eepromDataArray[2] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[2], 4);
+}
 
+for(int regNum = 0; regNum < 4; regNum++)
+{
+for(int byteNum = 0; byteNum < 4; byteNum++)
+{
+TxMsg[(0x4) + regNum + byteNum] = make8(eepromDataArray[regNum], byteNum);
+}
 }
 
 TxMsg[22 + (0x4)] = crc8(TxMsg, 22 + (0x4));
 WriteUartMessage(TxMsg, 22 + (0x4) + 1);
 }
 
-# 170
+# 180
 void SYNTH_ISR(void)
 {
 

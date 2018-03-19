@@ -10,6 +10,14 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #ifndef SYSTEMCOMMON_H
 #define	SYSTEMCOMMON_H
 
+typedef enum
+{
+    SYNTH_TX = 0,
+    SYNTH_RX,
+    EXT_DAC
+} SPI_PERIPHERAL;
+
+
 #include "mcc_generated_files/mcc.h"
 #include "MessageFunctions.h"
 #include "FlashApp.h"
@@ -19,8 +27,8 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #include "SevenSegmentApp.h"
 #include "SyntApp.h"
 #include "LedsApp.h"
-#include "SyntApp.h"
 #include "SwSpiApp.h"
+#include "SyntApp.h"
 
 // define special types
 #define ULONG uint32_t
@@ -30,6 +38,7 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #define END_UART_DATA_STREAM_CHAR   0x10    // @
 #define END_UART_ALL_STREAM_CHAR    0x23    // #
 #define NUM_OF_BITS_SYNTH_REG       32
+
 // MCU Main program FSM:    
 typedef enum
 {
