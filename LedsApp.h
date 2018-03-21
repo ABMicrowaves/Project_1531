@@ -30,7 +30,8 @@ typedef enum
 {
     FAIL_UART_ACK_NOT_RECIEVE   = 0x2,
     FAIL_FLASH_MORE_THEN_HELF   = 0x4,
-    FAIL_SYNTH_UP_LATCH         = 0x8,
+    FAIL_SYNTH_RX_LATCH         = 0x8,
+    FAIL_SYNTH_TX_LATCH         = 0xA,
 } LED_ERR_INTICATION;
 
 void testLeds();

@@ -7,19 +7,23 @@ Author: RoeeZ (Comm-IT).                                                    ****
 *******************************************************************************/
 
 #include "SyntApp.h"
+
 // <editor-fold defaultstate="collapsed" desc="Global verbs">
 
 uint8_t cntRegUpdate = 0;
 bool SynthTxOper = true;
 bool SynthRxOper = true;
+
+// Lock detect
+bool synthLdTxFlag = false;
+bool synthLdRxFlag = false;
+int8_t synthLdRxCnt = SYNTH_LD_TRIES;
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Init synthesizers">
 
 void PLLInitialize()
 {
-    // Set RX Synthesizer latch interrupt on block B - port 7:   
-    IOCB = 0b10000000;
     InitSynth(SYNTH_TX);
     InitSynth(SYNTH_RX);
 }
@@ -32,28 +36,39 @@ void InitSynth(SPI_PERIPHERAL cType)
     uint32_t EepromVal = 0x0;
     
     // Update TX registers
-    for(uint8_t idx = 0; idx < NUM_OF_REGISTERS; idx++)
+    for(uint8_t idx = 0; idx < NUM_OF_TOTAL_REGISTERS; idx++)
     {
-        regNum = NUM_OF_REGISTERS - idx - 1;
+        regNum = NUM_OF_TOTAL_REGISTERS - idx - 1;
         if(regNum == 0x0 || regNum == 0x1 || regNum == 0x2 || regNum == 0x4 || regNum == 0x6 || regNum == 0xA)
         {
             if(cType == SYNTH_TX)
             {
                 EepromVal = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[regNum], 4);
+                if(EepromVal == 0xFFFFFFFF)
+                {
+                    SWSPI_send_word(cType, SYNTH_REGS[idx],3);
+                    StoreIntInEeprom(SYNTH_REGS[idx], EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[regNum], 4);
+                }
+                else
+                {
+                    SWSPI_send_word(cType, EepromVal,3);
+                }
             }
             else if (cType == SYNTH_RX)
             {
                 EepromVal = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[regNum], 4);
+                if(EepromVal == 0xFFFFFFFF)
+                {
+                    SWSPI_send_word(cType, SYNTH_REGS[idx],3);
+                    StoreIntInEeprom(SYNTH_REGS[idx], EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[regNum], 4);
+                }
+                else
+                {
+                    SWSPI_send_word(cType, EepromVal,3);
+                }
             }
             
-            if(EepromVal == 0xFFFFFFFF)
-            {
-                SWSPI_send_word(cType, SYNTH_REGS[idx],3);
-            }
-            else
-            {
-                SWSPI_send_word(cType, EepromVal,3);
-            }
+            
         }
         else
         {
@@ -137,6 +152,7 @@ void SetSynthOper(SPI_PERIPHERAL cType)
 void SynthReadData(SPI_PERIPHERAL cType, char* data)
 {
     uint32_t eepromDataArray[3];
+    uint8_t regNum = 0, byteNum = 0; 
     char TxMsg[SYNTH_READ_CONDITION_PACKET_SIZE + 1];
     ZeroArray(TxMsg, SYNTH_READ_CONDITION_PACKET_SIZE + 1);
     
@@ -160,14 +176,16 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data)
         eepromDataArray[2] = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[2], 4);
     }
     
-    for(int regNum = 0; regNum < 4; regNum++)
+    for(regNum = 0; regNum < NUM_OF_UART_TX_UPDATE_REGS; regNum++)
     {
-        for(int byteNum = 0; byteNum < 4; byteNum++)
+        for(byteNum = 0; byteNum < (NUM_OF_BYTES_UART_TX_UPDATE_REGS); byteNum++)
         {
-            TxMsg[MSG_DATA_LOCATION + regNum + byteNum] = make8(eepromDataArray[regNum], byteNum); 
+            uint8_t data = make8(eepromDataArray[regNum], byteNum);
+            TxMsg[MSG_DATA_LOCATION + (NUM_OF_UART_TX_UPDATE_REGS + 1)*regNum + byteNum] = data; 
         }
     }
     
+    TxMsg[IDX_SYNTH_OPER_STATE_PLACE] = 0x9;
     TxMsg[SYNTH_READ_CONDITION_PACKET_SIZE] = crc8(TxMsg, SYNTH_READ_CONDITION_PACKET_SIZE);
     WriteUartMessage(TxMsg, SYNTH_READ_CONDITION_PACKET_SIZE + 1);    
 }
@@ -179,6 +197,30 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data)
 
 void SynthLdDetect(void)
 {
-    bool synthLdTxPrevState = false, synthLdTxCurrentState = false; 
+    
+    if(TX_SYNT_LD_GetValue() == LOW)
+    {
+        if(synthLdRxCnt > 0)
+        {
+            InitSynth(SYNTH_RX);
+            synthLdRxCnt--;
+        }
+        else
+        {
+            BlinkErrorLeds(FAIL_SYNTH_RX_LATCH);
+        }
+    }
+    
+    if(TX_SYNT_LD_GetValue() == HIGH)
+    {
+        synthLdTxFlag = true;
+    }
+//    if(RX_SYNT_LD_GetValue()== HIGH)
+//    {
+//        if(TX_SYNT_LD_GetValue() == LOW)
+//        {
+//            synthLdRxFlag = true;
+//        }
+//    }
 }
 // </editor-fold>

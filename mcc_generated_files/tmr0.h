@@ -64,16 +64,18 @@
 /**
   Section: Macro Declarations
 */
-        
-#define TMR0_ONE_SEC_FACTOR             20
-#define TMR0_SAMPLING_TIME_FACTOR       50
-#define TMR0_KEEP_ALIVE_TIME_FACTOR     300
-#define MAX_COUNTER_SIZE TMR0_KEEP_ALIVE_TIME_FACTOR
+
+#define TMR0_INTERVAL_TIME_ONE_SEC_CLOCK        10
+#define TMR0_INTERVAL_TIME_SAMPLING             100  // 800
+#define TMR0_INTERVAL_TIME_SYNTH_LOCK_DETECT    100   // 5 Sec
+#define TMR0_INTERVAL_TIME_KEEP_ALIVE           200 // 15 Sec.
+#define TMR0_MAX_TIME_TO_MEASURE                35000
         
 // Timers counters:
-volatile bool TimerOneSecFlag = false;
-volatile bool TimerSamplingFlag = false;
-volatile bool TimerKeepAliveFlag = false;
+volatile bool Timer0_SynthLd    = false;
+volatile bool Timer0_Sampling   = false;
+volatile bool Timer0_KeepAlive  = false;
+volatile bool Timer0_OneSec     = false;
 
 /**
   Section: TMR0 APIs

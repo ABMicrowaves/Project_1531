@@ -11,15 +11,20 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 #include "SystemCommon.h"
 
-#define SYNTH_DELAY_BETWEEN_WORDS_MSEC  250
-#define NUM_OF_REGISTERS                13
-#define NUM_OF_UPDATE_REGISTERS         7
-#define NUM_SYNTH_FREQ_DATA_REGISTERS   6
+#define SYNTH_DELAY_BETWEEN_WORDS_MSEC      250
+#define NUM_OF_TOTAL_REGISTERS              13
+#define NUM_OF_UPDATE_REGISTERS             7
+#define NUM_SYNTH_FREQ_DATA_REGISTERS       6
+#define NUM_OF_UART_TX_UPDATE_REGS          3
+#define NUM_OF_BYTES_UART_TX_UPDATE_REGS    5
+#define IDX_SYNTH_OPER_STATE_PLACE          NUM_OF_BYTES_UART_TX_UPDATE_REGS * NUM_OF_UART_TX_UPDATE_REGS + 1
 
-#define SYNTH_READ_CONDITION_MAX_DATA_SIZE 22
-#define SYNTH_READ_CONDITION_PACKET_SIZE SYNTH_READ_CONDITION_MAX_DATA_SIZE + MSG_DATA_LOCATION 
+#define SYNTH_READ_CONDITION_MAX_DATA_SIZE  IDX_SYNTH_OPER_STATE_PLACE - MSG_DATA_LOCATION
+#define SYNTH_READ_CONDITION_PACKET_SIZE    IDX_SYNTH_OPER_STATE_PLACE + 1 
 
-const uint32_t SYNTH_REGS[NUM_OF_REGISTERS] = 
+#define SYNTH_LD_TRIES                      2
+
+const uint32_t SYNTH_REGS[NUM_OF_TOTAL_REGISTERS] = 
 {
     0x1041C,        /* R12  */
     0x61300B,       /* R11  */
@@ -29,14 +34,14 @@ const uint32_t SYNTH_REGS[NUM_OF_REGISTERS] =
     0x120000E7,     /* R07  */
     0x35006076,     /* R06  */
     0x800025,       /* R05  */
-    0x30008384,     /* R04  */
+    0x10008384,     /* R04  */
     0x3,            /* R03  */
     0x12,           /* R02  */
     0xC000001,      /* R01  */
     0x200680        /* R00  */
 };
 
-const uint8_t SYNTH_ADDRES[NUM_OF_REGISTERS] = 
+const uint8_t SYNTH_ADDRES[NUM_OF_TOTAL_REGISTERS] = 
 {
     // SYNTH_TX + RX
     0x4,        // REG_0
@@ -59,7 +64,7 @@ void InitSynth(SPI_PERIPHERAL cType);
 void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
 void SetSynthOper(SPI_PERIPHERAL cType);
 void SynthReadData(SPI_PERIPHERAL cType, char* data);
-void SYNTH_ISR(void);
+void SynthLdDetect(void);
 
 #endif	/* SYNTAPP_H */
 

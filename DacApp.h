@@ -14,6 +14,8 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 #define DAC_TEST_DELAY_MSEC (20)
 #define NUM_OF_DACS         (4)
+#define DAC_NUM_BYTES_PRESENT_VALUE 2
+#define DAC_READ_CONDITION_PACKET_SIZE DAC_NUM_BYTES_PRESENT_VALUE + MSG_DATA_LOCATION 
 
 const uint8_t DAC_ADDRES[NUM_OF_DACS] = 
 {
@@ -33,8 +35,5 @@ const uint16_t DAC_DEFAULT_INIT_VALUES[NUM_OF_DACS] =
 
 void DacInit(void);
 void DacSetValue(char* data);
-
-// Test functions
-void DacTest(void);
-
+void DacReadValue(char* data);
 #endif	/* DACAPP_H */

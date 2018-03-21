@@ -28,13 +28,12 @@ void main(void)
     {    
         readUartMessage();
         
-        if (TimerOneSecFlag == true)
-        {
-           //DacTest();   
+        if (Timer0_OneSec == true)
+        {   
             SetMcuRunTime();
-            TimerOneSecFlag = false; 
+            Timer0_OneSec = false; 
         }
-        else if (TimerSamplingFlag == true)
+        else if (Timer0_Sampling == true)
         {
             keepAliveSignalLed();
             
@@ -45,13 +44,17 @@ void main(void)
             
             // Sampling is always occur even if Flash is full.
             AdcConvert();
-            
-            TimerSamplingFlag = false;
+            Timer0_Sampling = false;
         }
-        else if (TimerKeepAliveFlag == true)
+        else if (Timer0_KeepAlive == true)
         {
             keepAliveSignalUart();
-            TimerKeepAliveFlag = false; 
+            Timer0_KeepAlive = false; 
+        }
+        else if (Timer0_SynthLd == true)
+        {
+            SynthLdDetect();
+            Timer0_SynthLd = false; 
         }
     }
 }

@@ -11,47 +11,34 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 #include "SystemCommon.h"
 
-#define ADC_NUM_CHANNELS (7)
+#define ADC_NUM_CHANNELS (9)
 #define VDD             (3340)
 #define ADC_BIT_SIZE    (10)
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
-    
 typedef enum
 {
-	CONVERSION_LEFT_FORAMT = 0,
-	CONVERSION_RIGHT_FORAMT,
-}ADC_CONVERSION_FORMAT;
-
-typedef enum
-{
-	CIRCULAR = 0x0,
-    SINGLE_CHANNEL = 0x1,
+	CIRCULAR        = 0x0,
+    SINGLE_CHANNEL  = 0x1,
 }ADC_SAMPLE_MODE;
 
 
 const adc_channel_t channelArr[ADC_NUM_CHANNELS]  = 
 {
-    0x7,        // ADC_RE2
-    0x6,        // ADC_RE1
-    0x5,        // ADC_RE0
-    0x4,        // ADC_RA5
-    0x19,       // ADC_RD5
-    0xA,        // ADC_RB1
-    0xD,        // ADC_RB5
+    0x4,     // RREV
+    0x5,     // FFWR2
+    0x6,     // FFWR1
+    0x7,     // RF_INDET
+    0x8,     // P7V_SENSE
+    0x9,     // 28V_SNS
+    0xA,     // UP_TEMP
+    0xD,     // DOWN_TEMP
+    0x19,    // PA_TEMP
 };
 
-void SetAdcOperationMode(char* data);
-void SetConversionResultFormat(char* data);
+    
 void SetChannelMode(char* data);
 void InitAdcApplicationMgr();
 void AdcConvert();
-
-#ifdef	__cplusplus
-}
-#endif
 
 #endif	/* ADCAPP_H */
 

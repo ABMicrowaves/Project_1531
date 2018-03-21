@@ -55,9 +55,7 @@ typedef enum
     STATUS_GET_MCU_FW_VERSION   = 0x22,
 
     // ADC
-    ADC_OPERATION               = 0x31,
     ADC_CHANNEL_MODE            = 0x32,
-    ADC_CONVERSION_MODE         = 0x33,
     
     // Synthesizer (Up / Down):
     SYNTH_TX_INIT_SET           = 0x40,
@@ -80,6 +78,7 @@ typedef enum
 
     //DAC
     DAC_SET_VALUE               = 0x61,
+    DAC_READ_VALUE              = 0x62,
 }MSG_REQUEST;
 
 #endif	/* GROUPSCOMMON_H */

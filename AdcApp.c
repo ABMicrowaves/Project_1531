@@ -10,10 +10,8 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 // <editor-fold defaultstate="collapsed" desc="Global verbs">
 
-ADC_CONVERSION_FORMAT conversionFormat = CONVERSION_LEFT_FORAMT;
 ADC_SAMPLE_MODE adcSampleMode = CIRCULAR;
 char channel = 0;
-
 uint16_t count = 0;
 // </editor-fold>
 
@@ -21,24 +19,13 @@ uint16_t count = 0;
 
 void InitAdcApplicationMgr()
 {
-    conversionFormat = CONVERSION_LEFT_FORAMT;
     adcSampleMode = CIRCULAR;
-    char channel = 0;
 }
 
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Set ADC operation mode">
 
-void SetAdcOperationMode(char* data)
-{
-    SendAckMessage((MSG_GROUPS)ADC_MSG, (MSG_REQUEST)ADC_OPERATION);
-}
-
-void SetConversionResultFormat(char* data)
-{
-    SendAckMessage((MSG_GROUPS)ADC_MSG, (MSG_REQUEST)ADC_CONVERSION_MODE);
-}
 
 void SetChannelMode(char* data)
 {

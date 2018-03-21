@@ -1,23 +1,23 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"35 AdcApp.h
-[c E7010 4 5 6 7 10 13 25 29 30 31 .. ]
-[n E7010 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
-[v F7177 `(v ~T0 @X0 0 tf ]
+"25 AdcApp.h
+[c E7032 4 5 6 7 8 9 10 13 25 29 30 31 .. ]
+[n E7032 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB2 ADC_RB3 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
+[v F7194 `(v ~T0 @X0 0 tf ]
 "28 MessageFunctions.h
-[c E7091 16 17 18 19 20 21 33 34 49 50 51 64 65 66 67 68 69 70 71 72 73 81 82 83 84 85 97 .. ]
-[n E7091 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION ADC_OPERATION ADC_CHANNEL_MODE ADC_CONVERSION_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA SYNTH_REQ_ANTHER_TX_REG SYNTH_REQ_ANTHER_RX_REG FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE  ]
+[c E7116 16 17 18 19 20 21 33 34 50 64 65 66 67 68 69 70 71 72 73 81 82 83 84 85 97 98 .. ]
+[n E7116 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION ADC_CHANNEL_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA SYNTH_REQ_ANTHER_TX_REG SYNTH_REQ_ANTHER_RX_REG FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE DAC_READ_VALUE  ]
 "18
-[v _GroupControlMcu `(v ~T0 @X0 0 ef2`E7091`*uc ]
+[v _GroupControlMcu `(v ~T0 @X0 0 ef2`E7116`*uc ]
 "19
-[v _GroupStatusAndVersion `(v ~T0 @X0 0 ef2`E7091`*uc ]
+[v _GroupStatusAndVersion `(v ~T0 @X0 0 ef2`E7116`*uc ]
 "20
-[v _GroupAdc `(v ~T0 @X0 0 ef2`E7091`*uc ]
+[v _GroupAdc `(v ~T0 @X0 0 ef2`E7116`*uc ]
 "21
-[v _GroupSynthesizers `(v ~T0 @X0 0 ef2`E7091`*uc ]
+[v _GroupSynthesizers `(v ~T0 @X0 0 ef2`E7116`*uc ]
 "22
-[v _GroupFlashMemory `(v ~T0 @X0 0 ef2`E7091`*uc ]
+[v _GroupFlashMemory `(v ~T0 @X0 0 ef2`E7116`*uc ]
 "23
-[v _GroupDAC `(v ~T0 @X0 0 ef2`E7091`*uc ]
+[v _GroupDAC `(v ~T0 @X0 0 ef2`E7116`*uc ]
 "294 mcc_generated_files/memory.h
 [v _FLASH_IsWriteDone `(uc ~T0 @X0 0 ef ]
 "195
@@ -26,11 +26,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ZeroArray `(v ~T0 @X0 0 ef2`*uc`i ]
 "92 C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdlib.h
 [v _abs `(i ~T0 @X0 0 ef1`i ]
-"119 FlashApp.c
-[c E7083 1 2 3 4 5 6 .. ]
-[n E7083 . CONTROL_MSG MCU_STATUS_VERSION_MSG ADC_MSG SYNTH_MSG FLASH_MSG DAC_MSG  ]
+"121 FlashApp.c
+[c E7108 1 2 3 4 5 6 .. ]
+[n E7108 . CONTROL_MSG MCU_STATUS_VERSION_MSG ADC_MSG SYNTH_MSG FLASH_MSG DAC_MSG  ]
 "34 EusartApp.h
-[v _SendAckMessage `(v ~T0 @X0 0 ef2`E7083`E7091 ]
+[v _SendAckMessage `(v ~T0 @X0 0 ef2`E7108`E7116 ]
 "101 mcc_generated_files/memory.h
 [v _FLASH_ReadByte `(uc ~T0 @X0 0 ef1`ul ]
 "58 SystemCommon.h
@@ -6626,6 +6626,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 168: extern __nonreentrant void _delay3(unsigned char);
 [; ;pin_manager.h: 465: void PIN_MANAGER_Initialize (void);
 [; ;pin_manager.h: 477: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 490: void IOCB4_ISR(void);
+[; ;pin_manager.h: 513: void IOCB4_SetInterruptHandler(void (* InterruptHandler)(void));
+[; ;pin_manager.h: 537: extern void (*IOCB4_InterruptHandler)(void);
+[; ;pin_manager.h: 561: void IOCB4_DefaultInterruptHandler(void);
+[; ;pin_manager.h: 574: void IOCB5_ISR(void);
+[; ;pin_manager.h: 597: void IOCB5_SetInterruptHandler(void (* InterruptHandler)(void));
+[; ;pin_manager.h: 621: extern void (*IOCB5_InterruptHandler)(void);
+[; ;pin_manager.h: 645: void IOCB5_DefaultInterruptHandler(void);
 [; ;stdbool.h: 12: typedef unsigned char bool;
 [; ;interrupt_manager.h: 108: void interrupt INTERRUPT_InterruptManager(void);
 [; ;interrupt_manager.h: 120: void INTERRUPT_Initialize (void);
@@ -6650,48 +6658,56 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;adc.h: 97: ADC_RE0 = 0x5,
 [; ;adc.h: 98: ADC_RE1 = 0x6,
 [; ;adc.h: 99: ADC_RE2 = 0x7,
-[; ;adc.h: 100: ADC_RB1 = 0xA,
-[; ;adc.h: 101: ADC_RB5 = 0xD,
-[; ;adc.h: 102: ADC_RD5 = 0x19,
-[; ;adc.h: 103: channel_CTMU = 0x1D,
-[; ;adc.h: 104: channel_DAC = 0x1E,
-[; ;adc.h: 105: channel_FVRBuf2 = 0x1F
-[; ;adc.h: 106: } adc_channel_t;
-[; ;adc.h: 141: void ADC_Initialize(void);
-[; ;adc.h: 171: void ADC_SelectChannel(adc_channel_t channel);
-[; ;adc.h: 198: void ADC_StartConversion();
-[; ;adc.h: 230: bool ADC_IsConversionDone();
-[; ;adc.h: 263: adc_result_t ADC_GetConversionResult(void);
-[; ;adc.h: 293: adc_result_t ADC_GetConversion(adc_channel_t channel);
-"74 mcc_generated_files/tmr0.h
-[v _TimerOneSecFlag `Vuc ~T0 @X0 1 e ]
-[i _TimerOneSecFlag
+[; ;adc.h: 100: ADC_RB2 = 0x8,
+[; ;adc.h: 101: ADC_RB3 = 0x9,
+[; ;adc.h: 102: ADC_RB1 = 0xA,
+[; ;adc.h: 103: ADC_RB5 = 0xD,
+[; ;adc.h: 104: ADC_RD5 = 0x19,
+[; ;adc.h: 105: channel_CTMU = 0x1D,
+[; ;adc.h: 106: channel_DAC = 0x1E,
+[; ;adc.h: 107: channel_FVRBuf2 = 0x1F
+[; ;adc.h: 108: } adc_channel_t;
+[; ;adc.h: 143: void ADC_Initialize(void);
+[; ;adc.h: 173: void ADC_SelectChannel(adc_channel_t channel);
+[; ;adc.h: 200: void ADC_StartConversion();
+[; ;adc.h: 232: bool ADC_IsConversionDone();
+[; ;adc.h: 265: adc_result_t ADC_GetConversionResult(void);
+[; ;adc.h: 295: adc_result_t ADC_GetConversion(adc_channel_t channel);
+"75 mcc_generated_files/tmr0.h
+[v _Timer0_SynthLd `Vuc ~T0 @X0 1 e ]
+[i _Timer0_SynthLd
 -> -> 0 `i `uc
 ]
-[; ;tmr0.h: 74: volatile bool TimerOneSecFlag = 0;
-"75
-[v _TimerSamplingFlag `Vuc ~T0 @X0 1 e ]
-[i _TimerSamplingFlag
--> -> 0 `i `uc
-]
-[; ;tmr0.h: 75: volatile bool TimerSamplingFlag = 0;
+[; ;tmr0.h: 75: volatile bool Timer0_SynthLd = 0;
 "76
-[v _TimerKeepAliveFlag `Vuc ~T0 @X0 1 e ]
-[i _TimerKeepAliveFlag
+[v _Timer0_Sampling `Vuc ~T0 @X0 1 e ]
+[i _Timer0_Sampling
 -> -> 0 `i `uc
 ]
-[; ;tmr0.h: 76: volatile bool TimerKeepAliveFlag = 0;
-[; ;tmr0.h: 113: void TMR0_Initialize(void);
-[; ;tmr0.h: 142: void TMR0_StartTimer(void);
-[; ;tmr0.h: 174: void TMR0_StopTimer(void);
-[; ;tmr0.h: 210: uint16_t TMR0_ReadTimer(void);
-[; ;tmr0.h: 249: void TMR0_WriteTimer(uint16_t timerVal);
-[; ;tmr0.h: 285: void TMR0_Reload(void);
-[; ;tmr0.h: 303: void TMR0_ISR(void);
-[; ;tmr0.h: 321: void TMR0_CallBack(void);
-[; ;tmr0.h: 339: void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
-[; ;tmr0.h: 357: extern void (*TMR0_InterruptHandler)(void);
-[; ;tmr0.h: 375: void TMR0_DefaultInterruptHandler(void);
+[; ;tmr0.h: 76: volatile bool Timer0_Sampling = 0;
+"77
+[v _Timer0_KeepAlive `Vuc ~T0 @X0 1 e ]
+[i _Timer0_KeepAlive
+-> -> 0 `i `uc
+]
+[; ;tmr0.h: 77: volatile bool Timer0_KeepAlive = 0;
+"78
+[v _Timer0_OneSec `Vuc ~T0 @X0 1 e ]
+[i _Timer0_OneSec
+-> -> 0 `i `uc
+]
+[; ;tmr0.h: 78: volatile bool Timer0_OneSec = 0;
+[; ;tmr0.h: 115: void TMR0_Initialize(void);
+[; ;tmr0.h: 144: void TMR0_StartTimer(void);
+[; ;tmr0.h: 176: void TMR0_StopTimer(void);
+[; ;tmr0.h: 212: uint16_t TMR0_ReadTimer(void);
+[; ;tmr0.h: 251: void TMR0_WriteTimer(uint16_t timerVal);
+[; ;tmr0.h: 287: void TMR0_Reload(void);
+[; ;tmr0.h: 305: void TMR0_ISR(void);
+[; ;tmr0.h: 323: void TMR0_CallBack(void);
+[; ;tmr0.h: 341: void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+[; ;tmr0.h: 359: extern void (*TMR0_InterruptHandler)(void);
+[; ;tmr0.h: 377: void TMR0_DefaultInterruptHandler(void);
 [; ;eusart1.h: 75: extern volatile uint8_t eusart1TxBufferRemaining;
 [; ;eusart1.h: 76: extern volatile uint8_t eusart1RxCount;
 [; ;eusart1.h: 102: void EUSART1_Initialize(void);
@@ -6726,31 +6742,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;GroupsCommon.h: 51: CONTROL_KEEP_ALIVE = 0x15,
 [; ;GroupsCommon.h: 54: STATUS_MCU_RUN_TIME = 0x21,
 [; ;GroupsCommon.h: 55: STATUS_GET_MCU_FW_VERSION = 0x22,
-[; ;GroupsCommon.h: 58: ADC_OPERATION = 0x31,
-[; ;GroupsCommon.h: 59: ADC_CHANNEL_MODE = 0x32,
-[; ;GroupsCommon.h: 60: ADC_CONVERSION_MODE = 0x33,
-[; ;GroupsCommon.h: 63: SYNTH_TX_INIT_SET = 0x40,
-[; ;GroupsCommon.h: 64: SYNTH_RX_INIT_SET = 0x41,
-[; ;GroupsCommon.h: 65: SYNTH_DOWN_SET = 0x42,
-[; ;GroupsCommon.h: 66: SYNTH_UP_SET = 0x43,
-[; ;GroupsCommon.h: 67: SYNTH_UP_OPER = 0x44,
-[; ;GroupsCommon.h: 68: SYNTH_DOWN_OPER = 0x45,
-[; ;GroupsCommon.h: 69: SYNTH_UP_READ_DATA = 0x46,
-[; ;GroupsCommon.h: 70: SYNTH_DOWN_READ_DATA = 0x47,
-[; ;GroupsCommon.h: 71: SYNTH_REQ_ANTHER_TX_REG = 0x48,
-[; ;GroupsCommon.h: 72: SYNTH_REQ_ANTHER_RX_REG = 0x49,
-[; ;GroupsCommon.h: 75: FLASH_EREASE_MEMORY = 0x51,
-[; ;GroupsCommon.h: 76: FLASH_READ_CONDITION = 0x52,
-[; ;GroupsCommon.h: 77: FLASH_REQUEST_RAW_DATA = 0x53,
-[; ;GroupsCommon.h: 78: FLASH_SEND_RAW_DATA = 0x54,
-[; ;GroupsCommon.h: 79: FLASH_NO_SAMPLE_YET = 0x55,
-[; ;GroupsCommon.h: 82: DAC_SET_VALUE = 0x61,
-[; ;GroupsCommon.h: 83: }MSG_REQUEST;
-[; ;SystemStatus.h: 27: void GetMcuFwVersion();;
-[; ;SystemStatus.h: 29: void SetMcuRunTime();
-[; ;SystemStatus.h: 30: void GetMcuRunTime();
-[; ;SystemStatus.h: 31: void ClearMcuRunTime();
-[; ;SystemStatus.h: 32: void keepAliveSignalUart(void);
+[; ;GroupsCommon.h: 58: ADC_CHANNEL_MODE = 0x32,
+[; ;GroupsCommon.h: 61: SYNTH_TX_INIT_SET = 0x40,
+[; ;GroupsCommon.h: 62: SYNTH_RX_INIT_SET = 0x41,
+[; ;GroupsCommon.h: 63: SYNTH_DOWN_SET = 0x42,
+[; ;GroupsCommon.h: 64: SYNTH_UP_SET = 0x43,
+[; ;GroupsCommon.h: 65: SYNTH_UP_OPER = 0x44,
+[; ;GroupsCommon.h: 66: SYNTH_DOWN_OPER = 0x45,
+[; ;GroupsCommon.h: 67: SYNTH_UP_READ_DATA = 0x46,
+[; ;GroupsCommon.h: 68: SYNTH_DOWN_READ_DATA = 0x47,
+[; ;GroupsCommon.h: 69: SYNTH_REQ_ANTHER_TX_REG = 0x48,
+[; ;GroupsCommon.h: 70: SYNTH_REQ_ANTHER_RX_REG = 0x49,
+[; ;GroupsCommon.h: 73: FLASH_EREASE_MEMORY = 0x51,
+[; ;GroupsCommon.h: 74: FLASH_READ_CONDITION = 0x52,
+[; ;GroupsCommon.h: 75: FLASH_REQUEST_RAW_DATA = 0x53,
+[; ;GroupsCommon.h: 76: FLASH_SEND_RAW_DATA = 0x54,
+[; ;GroupsCommon.h: 77: FLASH_NO_SAMPLE_YET = 0x55,
+[; ;GroupsCommon.h: 80: DAC_SET_VALUE = 0x61,
+[; ;GroupsCommon.h: 81: DAC_READ_VALUE = 0x62,
+[; ;GroupsCommon.h: 82: }MSG_REQUEST;
+[; ;SystemStatus.h: 45: void GetMcuFwVersion();;
+[; ;SystemStatus.h: 47: void SetMcuRunTime();
+[; ;SystemStatus.h: 48: void GetMcuRunTime();
+[; ;SystemStatus.h: 49: void ClearMcuRunTime();
+[; ;SystemStatus.h: 50: void keepAliveSignalUart(void);
 [; ;LedsApp.h: 22: typedef enum
 [; ;LedsApp.h: 24: {
 [; ;LedsApp.h: 25: OK_START_SYSTEM = 0x3,
@@ -6759,57 +6774,57 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LedsApp.h: 30: {
 [; ;LedsApp.h: 31: FAIL_UART_ACK_NOT_RECIEVE = 0x2,
 [; ;LedsApp.h: 32: FAIL_FLASH_MORE_THEN_HELF = 0x4,
-[; ;LedsApp.h: 33: FAIL_SYNTH_UP_LATCH = 0x8,
-[; ;LedsApp.h: 34: } LED_ERR_INTICATION;
-[; ;LedsApp.h: 36: void testLeds();
-[; ;LedsApp.h: 37: void BlinkErrorLeds(LED_OK_INTICATION state);
-[; ;LedsApp.h: 38: void BlinkOkLeds(LED_ERR_INTICATION state);
-[; ;LedsApp.h: 39: void keepAliveSignalLed(void);
-[; ;AdcApp.h: 22: typedef enum
-[; ;AdcApp.h: 23: {
-[; ;AdcApp.h: 24: CONVERSION_LEFT_FORAMT = 0,
-[; ;AdcApp.h: 25: CONVERSION_RIGHT_FORAMT,
-[; ;AdcApp.h: 26: }ADC_CONVERSION_FORMAT;
-[; ;AdcApp.h: 28: typedef enum
-[; ;AdcApp.h: 29: {
-[; ;AdcApp.h: 30: CIRCULAR = 0x0,
-[; ;AdcApp.h: 31: SINGLE_CHANNEL = 0x1,
-[; ;AdcApp.h: 32: }ADC_SAMPLE_MODE;
-"35 AdcApp.h
-[v _channelArr `CE7010 ~T0 @X0 -> 7 `i e ]
+[; ;LedsApp.h: 33: FAIL_SYNTH_RX_LATCH = 0x8,
+[; ;LedsApp.h: 34: FAIL_SYNTH_TX_LATCH = 0xA,
+[; ;LedsApp.h: 35: } LED_ERR_INTICATION;
+[; ;LedsApp.h: 37: void testLeds();
+[; ;LedsApp.h: 38: void BlinkErrorLeds(LED_OK_INTICATION state);
+[; ;LedsApp.h: 39: void BlinkOkLeds(LED_ERR_INTICATION state);
+[; ;LedsApp.h: 40: void keepAliveSignalLed(void);
+[; ;AdcApp.h: 18: typedef enum
+[; ;AdcApp.h: 19: {
+[; ;AdcApp.h: 20: CIRCULAR = 0x0,
+[; ;AdcApp.h: 21: SINGLE_CHANNEL = 0x1,
+[; ;AdcApp.h: 22: }ADC_SAMPLE_MODE;
+"25 AdcApp.h
+[v _channelArr `CE7032 ~T0 @X0 -> 9 `i e ]
 [i _channelArr
 :U ..
-"37
--> -> 7 `i `CE7010
-"38
--> -> 6 `i `CE7010
-"39
--> -> 5 `i `CE7010
-"40
--> -> 4 `i `CE7010
-"41
--> -> 25 `i `CE7010
-"42
--> -> 10 `i `CE7010
-"43
--> -> 13 `i `CE7010
+"27
+-> -> 4 `i `CE7032
+"28
+-> -> 5 `i `CE7032
+"29
+-> -> 6 `i `CE7032
+"30
+-> -> 7 `i `CE7032
+"31
+-> -> 8 `i `CE7032
+"32
+-> -> 9 `i `CE7032
+"33
+-> -> 10 `i `CE7032
+"34
+-> -> 13 `i `CE7032
+"35
+-> -> 25 `i `CE7032
 ..
 ]
-[; ;AdcApp.h: 35: const adc_channel_t channelArr[(7)] =
-[; ;AdcApp.h: 36: {
-[; ;AdcApp.h: 37: 0x7,
-[; ;AdcApp.h: 38: 0x6,
-[; ;AdcApp.h: 39: 0x5,
-[; ;AdcApp.h: 40: 0x4,
-[; ;AdcApp.h: 41: 0x19,
-[; ;AdcApp.h: 42: 0xA,
-[; ;AdcApp.h: 43: 0xD,
-[; ;AdcApp.h: 44: };
-[; ;AdcApp.h: 46: void SetAdcOperationMode(char* data);
-[; ;AdcApp.h: 47: void SetConversionResultFormat(char* data);
-[; ;AdcApp.h: 48: void SetChannelMode(char* data);
-[; ;AdcApp.h: 49: void InitAdcApplicationMgr();
-[; ;AdcApp.h: 50: void AdcConvert();
+[; ;AdcApp.h: 25: const adc_channel_t channelArr[(9)] =
+[; ;AdcApp.h: 26: {
+[; ;AdcApp.h: 27: 0x4,
+[; ;AdcApp.h: 28: 0x5,
+[; ;AdcApp.h: 29: 0x6,
+[; ;AdcApp.h: 30: 0x7,
+[; ;AdcApp.h: 31: 0x8,
+[; ;AdcApp.h: 32: 0x9,
+[; ;AdcApp.h: 33: 0xA,
+[; ;AdcApp.h: 34: 0xD,
+[; ;AdcApp.h: 35: 0x19,
+[; ;AdcApp.h: 36: };
+[; ;AdcApp.h: 39: void SetChannelMode(char* data);
+[; ;AdcApp.h: 40: void InitAdcApplicationMgr();
+[; ;AdcApp.h: 41: void AdcConvert();
 [; ;MessageFunctions.h: 18: void GroupControlMcu(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 19: void GroupStatusAndVersion(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 20: void GroupAdc(MSG_REQUEST request, char* data);
@@ -6817,21 +6832,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 22: void GroupFlashMemory(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 23: void GroupDAC(MSG_REQUEST request, char* data);
 "26 MessageFunctions.h
-[v _groupsArray `*F7177 ~T0 @X0 -> 6 `i e ]
+[v _groupsArray `*F7194 ~T0 @X0 -> 6 `i e ]
 [i _groupsArray
 :U ..
 "28
--> &U _GroupControlMcu `*F7177
+-> &U _GroupControlMcu `*F7194
 "29
--> &U _GroupStatusAndVersion `*F7177
+-> &U _GroupStatusAndVersion `*F7194
 "30
--> &U _GroupAdc `*F7177
+-> &U _GroupAdc `*F7194
 "31
--> &U _GroupSynthesizers `*F7177
+-> &U _GroupSynthesizers `*F7194
 "32
--> &U _GroupFlashMemory `*F7177
+-> &U _GroupFlashMemory `*F7194
 "33
--> &U _GroupDAC `*F7177
+-> &U _GroupDAC `*F7194
 ..
 ]
 [; ;MessageFunctions.h: 26: void (*groupsArray[(6)])() =
@@ -6869,51 +6884,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;math.h: 53: extern double fmod(double, double);
 [; ;math.h: 54: extern double trunc(double);
 [; ;math.h: 55: extern double round(double);
-"18 DacApp.h
+"20 DacApp.h
 [v _DAC_ADDRES `Cuc ~T0 @X0 -> 4 `i e ]
 [i _DAC_ADDRES
 :U ..
-"20
--> -> 2 `i `uc
-"21
--> -> 4 `i `uc
 "22
--> -> 6 `i `uc
+-> -> 2 `i `uc
 "23
+-> -> 4 `i `uc
+"24
+-> -> 6 `i `uc
+"25
 -> -> 8 `i `uc
 ..
 ]
-[; ;DacApp.h: 18: const uint8_t DAC_ADDRES[(4)] =
-[; ;DacApp.h: 19: {
-[; ;DacApp.h: 20: 0x2,
-[; ;DacApp.h: 21: 0x4,
-[; ;DacApp.h: 22: 0x6,
-[; ;DacApp.h: 23: 0x8,
-[; ;DacApp.h: 24: };
-"26
+[; ;DacApp.h: 20: const uint8_t DAC_ADDRES[(4)] =
+[; ;DacApp.h: 21: {
+[; ;DacApp.h: 22: 0x2,
+[; ;DacApp.h: 23: 0x4,
+[; ;DacApp.h: 24: 0x6,
+[; ;DacApp.h: 25: 0x8,
+[; ;DacApp.h: 26: };
+"28
 [v _DAC_DEFAULT_INIT_VALUES `Cui ~T0 @X0 -> 4 `i e ]
 [i _DAC_DEFAULT_INIT_VALUES
 :U ..
-"28
--> -> 9028 `i `ui
-"29
--> -> 25412 `i `ui
 "30
--> 41796 `ui
+-> -> 9028 `i `ui
 "31
+-> -> 25412 `i `ui
+"32
+-> 41796 `ui
+"33
 -> 58180 `ui
 ..
 ]
-[; ;DacApp.h: 26: const uint16_t DAC_DEFAULT_INIT_VALUES[(4)] =
-[; ;DacApp.h: 27: {
-[; ;DacApp.h: 28: 0x2344,
-[; ;DacApp.h: 29: 0x6344,
-[; ;DacApp.h: 30: 0xA344,
-[; ;DacApp.h: 31: 0xE344,
-[; ;DacApp.h: 32: };
-[; ;DacApp.h: 34: void DacInit(void);
-[; ;DacApp.h: 35: void DacSetValue(char* data);
-[; ;DacApp.h: 38: void DacTest(void);
+[; ;DacApp.h: 28: const uint16_t DAC_DEFAULT_INIT_VALUES[(4)] =
+[; ;DacApp.h: 29: {
+[; ;DacApp.h: 30: 0x2344,
+[; ;DacApp.h: 31: 0x6344,
+[; ;DacApp.h: 32: 0xA344,
+[; ;DacApp.h: 33: 0xE344,
+[; ;DacApp.h: 34: };
+[; ;DacApp.h: 36: void DacInit(void);
+[; ;DacApp.h: 37: void DacSetValue(char* data);
+[; ;DacApp.h: 38: void DacReadValue(char* data);
 [; ;__size_t.h: 4: typedef unsigned size_t;
 [; ;string.h: 14: extern void * memcpy(void *, const void *, size_t);
 [; ;string.h: 15: extern void * memmove(void *, const void *, size_t);
@@ -7009,117 +7024,117 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SevenSegmentApp.h: 19: void segmentCounter(void);
 [; ;SevenSegmentApp.h: 20: unsigned short mask(unsigned short num);
 [; ;SevenSegmentApp.h: 21: void InitSevenSegment(void);
-"22 SyntApp.h
+"27 SyntApp.h
 [v _SYNTH_REGS `Cul ~T0 @X0 -> 13 `i e ]
 [i _SYNTH_REGS
 :U ..
-"24
--> -> 66588 `l `ul
-"25
--> -> 6369291 `l `ul
-"26
--> -> 12589370 `l `ul
-"27
--> -> 286325961 `l `ul
-"28
--> -> 271385640 `l `ul
 "29
--> -> 301990119 `l `ul
+-> -> 66588 `l `ul
 "30
--> -> 889217142 `l `ul
+-> -> 6369291 `l `ul
 "31
--> -> 8388645 `l `ul
+-> -> 12589370 `l `ul
 "32
--> -> 805340036 `l `ul
+-> -> 286325961 `l `ul
 "33
--> -> -> 3 `i `l `ul
+-> -> 271385640 `l `ul
 "34
--> -> -> 18 `i `l `ul
+-> -> 301990119 `l `ul
 "35
--> -> 201326593 `l `ul
+-> -> 889217142 `l `ul
+"36
+-> -> 8388645 `l `ul
 "37
+-> -> 268469124 `l `ul
+"38
+-> -> -> 3 `i `l `ul
+"39
+-> -> -> 18 `i `l `ul
+"40
+-> -> 201326593 `l `ul
+"42
 -> -> 2098816 `l `ul
 ..
 ]
-[; ;SyntApp.h: 22: const uint32_t SYNTH_REGS[13] =
-[; ;SyntApp.h: 23: {
-[; ;SyntApp.h: 24: 0x1041C,
-[; ;SyntApp.h: 25: 0x61300B,
-[; ;SyntApp.h: 26: 0xC0193A,
-[; ;SyntApp.h: 27: 0x1110FCC9,
-[; ;SyntApp.h: 28: 0x102D0428,
-[; ;SyntApp.h: 29: 0x120000E7,
-[; ;SyntApp.h: 30: 0x35006076,
-[; ;SyntApp.h: 31: 0x800025,
-[; ;SyntApp.h: 32: 0x30008384,
-[; ;SyntApp.h: 33: 0x3,
-[; ;SyntApp.h: 34: 0x12,
-[; ;SyntApp.h: 35: 0xC000001,
-[; ;SyntApp.h: 36: 0x200680
-[; ;SyntApp.h: 37: };
-"39
+[; ;SyntApp.h: 27: const uint32_t SYNTH_REGS[13] =
+[; ;SyntApp.h: 28: {
+[; ;SyntApp.h: 29: 0x1041C,
+[; ;SyntApp.h: 30: 0x61300B,
+[; ;SyntApp.h: 31: 0xC0193A,
+[; ;SyntApp.h: 32: 0x1110FCC9,
+[; ;SyntApp.h: 33: 0x102D0428,
+[; ;SyntApp.h: 34: 0x120000E7,
+[; ;SyntApp.h: 35: 0x35006076,
+[; ;SyntApp.h: 36: 0x800025,
+[; ;SyntApp.h: 37: 0x10008384,
+[; ;SyntApp.h: 38: 0x3,
+[; ;SyntApp.h: 39: 0x12,
+[; ;SyntApp.h: 40: 0xC000001,
+[; ;SyntApp.h: 41: 0x200680
+[; ;SyntApp.h: 42: };
+"44
 [v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 13 `i e ]
 [i _SYNTH_ADDRES
 :U ..
-"42
--> -> 4 `i `uc
-"43
--> -> 8 `i `uc
-"44
--> -> 12 `i `uc
-"45
--> -> 0 `i `uc
-"46
--> -> 16 `i `uc
 "47
--> -> 0 `i `uc
+-> -> 4 `i `uc
 "48
--> -> 20 `i `uc
+-> -> 8 `i `uc
 "49
--> -> 0 `i `uc
+-> -> 12 `i `uc
 "50
 -> -> 0 `i `uc
 "51
--> -> 0 `i `uc
+-> -> 16 `i `uc
 "52
--> -> 24 `i `uc
-"53
 -> -> 0 `i `uc
+"53
+-> -> 20 `i `uc
 "54
+-> -> 0 `i `uc
+"55
+-> -> 0 `i `uc
+"56
+-> -> 0 `i `uc
+"57
+-> -> 24 `i `uc
+"58
+-> -> 0 `i `uc
+"59
 -> -> 0 `i `uc
 ..
 ]
-[; ;SyntApp.h: 39: const uint8_t SYNTH_ADDRES[13] =
-[; ;SyntApp.h: 40: {
-[; ;SyntApp.h: 42: 0x4,
-[; ;SyntApp.h: 43: 0x8,
-[; ;SyntApp.h: 44: 0xC,
-[; ;SyntApp.h: 45: 0x00,
-[; ;SyntApp.h: 46: 0x10,
-[; ;SyntApp.h: 47: 0x00,
-[; ;SyntApp.h: 48: 0x14,
-[; ;SyntApp.h: 49: 0x00,
+[; ;SyntApp.h: 44: const uint8_t SYNTH_ADDRES[13] =
+[; ;SyntApp.h: 45: {
+[; ;SyntApp.h: 47: 0x4,
+[; ;SyntApp.h: 48: 0x8,
+[; ;SyntApp.h: 49: 0xC,
 [; ;SyntApp.h: 50: 0x00,
-[; ;SyntApp.h: 51: 0x00,
-[; ;SyntApp.h: 52: 0x18,
-[; ;SyntApp.h: 53: 0x00,
+[; ;SyntApp.h: 51: 0x10,
+[; ;SyntApp.h: 52: 0x00,
+[; ;SyntApp.h: 53: 0x14,
 [; ;SyntApp.h: 54: 0x00,
-[; ;SyntApp.h: 55: };
-[; ;SyntApp.h: 57: void PLLInitialize(void);
-[; ;SyntApp.h: 58: void InitSynth(SPI_PERIPHERAL cType);
-[; ;SyntApp.h: 59: void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
-[; ;SyntApp.h: 60: void SetSynthOper(SPI_PERIPHERAL cType);
-[; ;SyntApp.h: 61: void SynthReadData(SPI_PERIPHERAL cType, char* data);
-[; ;SyntApp.h: 62: void SYNTH_ISR(void);
-[; ;SwSpiApp.h: 17: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
-[; ;SwSpiApp.h: 19: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 20: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 22: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 25: void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data);
-[; ;SwSpiApp.h: 26: void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
-[; ;SwSpiApp.h: 27: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
-[; ;SwSpiApp.h: 30: void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
-[; ;SwSpiApp.h: 31: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
+[; ;SyntApp.h: 55: 0x00,
+[; ;SyntApp.h: 56: 0x00,
+[; ;SyntApp.h: 57: 0x18,
+[; ;SyntApp.h: 58: 0x00,
+[; ;SyntApp.h: 59: 0x00,
+[; ;SyntApp.h: 60: };
+[; ;SyntApp.h: 62: void PLLInitialize(void);
+[; ;SyntApp.h: 63: void InitSynth(SPI_PERIPHERAL cType);
+[; ;SyntApp.h: 64: void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
+[; ;SyntApp.h: 65: void SetSynthOper(SPI_PERIPHERAL cType);
+[; ;SyntApp.h: 66: void SynthReadData(SPI_PERIPHERAL cType, char* data);
+[; ;SyntApp.h: 67: void SynthLdDetect(void);
+[; ;SwSpiApp.h: 14: void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
+[; ;SwSpiApp.h: 15: void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 16: void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 17: void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 20: void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data);
+[; ;SwSpiApp.h: 21: void SwSpi_Synth_Toggle_Clock(SPI_PERIPHERAL phrType);
+[; ;SwSpiApp.h: 22: void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
+[; ;SwSpiApp.h: 25: void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
+[; ;SwSpiApp.h: 26: void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 [; ;SystemCommon.h: 43: typedef enum
 [; ;SystemCommon.h: 44: {
 [; ;SystemCommon.h: 45: START_SYSTEM = 0,
@@ -7145,26 +7160,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SystemCommon.h: 69: void ResetCpld(void);
 [; ;SystemCommon.h: 70: void SendSystemStartAck(void);
 [; ;FlashApp.h: 37: void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
-[; ;FlashApp.h: 38: void FlashReadUart(int numOfSampleToRead);
+[; ;FlashApp.h: 38: void FlashReadUart(char* data);
 [; ;FlashApp.h: 39: void FlashEreaseMem(void);
 [; ;FlashApp.h: 40: void FlashReadCondition(void);
 [; ;FlashApp.h: 41: bool CheckFlashPrecentage(void);
 [; ;FlashApp.h: 44: uint8_t EepromRead(uint8_t address);
 [; ;FlashApp.h: 45: void EepromWrite(uint8_t address, uint8_t data);
-[; ;FlashApp.h: 48: bool FlashTest(int startAddress, int numOfSamples);
-[; ;FlashApp.h: 49: bool EepromTest(int startAddress, int numOfSamples);
 "13 FlashApp.c
 [v _writeAddress `ul ~T0 @X0 1 e ]
 [i _writeAddress
--> -> -> 16384 `i `l `ul
+-> -> -> 17664 `i `l `ul
 ]
-[; ;FlashApp.c: 13: uint32_t writeAddress = 0x4000;
+[; ;FlashApp.c: 13: uint32_t writeAddress = 0x4500;
 "14
 [v _readAddress `ul ~T0 @X0 1 e ]
 [i _readAddress
--> -> -> 16384 `i `l `ul
+-> -> -> 17664 `i `l `ul
 ]
-[; ;FlashApp.c: 14: uint32_t readAddress = 0x4000;
+[; ;FlashApp.c: 14: uint32_t readAddress = 0x4500;
 "17
 [v _numOfValidateSamples `ul ~T0 @X0 1 e ]
 [i _numOfValidateSamples
@@ -7235,15 +7248,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;FlashApp.c: 42: {
 "42
 {
-[; ;FlashApp.c: 43: writeAddress = 0x4000;
+[; ;FlashApp.c: 43: writeAddress = 0x4500;
 "43
-[e = _writeAddress -> -> -> 16384 `i `l `ul ]
+[e = _writeAddress -> -> -> 17664 `i `l `ul ]
 [; ;FlashApp.c: 44: isReWriteDone = 1;
 "44
 [e = _isReWriteDone -> -> 1 `i `uc ]
-[; ;FlashApp.c: 45: if (readAddress == 0x4000)
+[; ;FlashApp.c: 45: if (readAddress == 0x4500)
 "45
-[e $ ! == _readAddress -> -> -> 16384 `i `l `ul 855  ]
+[e $ ! == _readAddress -> -> -> 17664 `i `l `ul 855  ]
 [; ;FlashApp.c: 46: {
 "46
 {
@@ -7258,9 +7271,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 854 ]
 [; ;FlashApp.c: 48: }
 [; ;FlashApp.c: 49: }
-[; ;FlashApp.c: 51: if (numOfValidateSamples < ((0x4000-0x7FF0)/(64)))
+[; ;FlashApp.c: 51: if (numOfValidateSamples < ((0x4500-0x7FF0)/(64)))
 "51
-[e $ ! < _numOfValidateSamples -> -> / - -> 16384 `i -> 32752 `i -> 64 `i `l `ul 856  ]
+[e $ ! < _numOfValidateSamples -> -> / - -> 17664 `i -> 32752 `i -> 64 `i `l `ul 856  ]
 [; ;FlashApp.c: 52: {
 "52
 {
@@ -7283,14 +7296,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 852 ]
 }
 "62
-[v _FlashReadUart `(v ~T0 @X0 1 ef1`i ]
+[v _FlashReadUart `(v ~T0 @X0 1 ef1`*uc ]
 "63
 {
-[; ;FlashApp.c: 62: void FlashReadUart(int numOfSampleToRead)
+[; ;FlashApp.c: 62: void FlashReadUart(char* data)
 [; ;FlashApp.c: 63: {
 [e :U _FlashReadUart ]
 "62
-[v _numOfSampleToRead `i ~T0 @X0 1 r1 ]
+[v _data `*uc ~T0 @X0 1 r1 ]
 "63
 [f ]
 "65
@@ -7301,610 +7314,418 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _offset `i ~T0 @X0 1 a ]
 [; ;FlashApp.c: 66: int offset = 0;
 [e = _offset -> 0 `i ]
-"67
-[v _TxMsg `uc ~T0 @X0 + + -> 64 `i -> 4 `i -> 1 `i a ]
-[; ;FlashApp.c: 67: char TxMsg[(64) + (0x4) + 1];
-[; ;FlashApp.c: 68: ZeroArray(TxMsg, (64) + (0x4) + 1);
 "68
+[v _numOfSampleToRead `i ~T0 @X0 1 a ]
+[; ;FlashApp.c: 68: int numOfSampleToRead = data[0];
+[e = _numOfSampleToRead -> *U + _data * -> -> 0 `i `x -> -> # *U _data `i `x `i ]
+"69
+[v _TxMsg `uc ~T0 @X0 + + -> 64 `i -> 4 `i -> 1 `i a ]
+[; ;FlashApp.c: 69: char TxMsg[(64) + (0x4) + 1];
+[; ;FlashApp.c: 70: ZeroArray(TxMsg, (64) + (0x4) + 1);
+"70
 [e ( _ZeroArray (2 , &U _TxMsg + + -> 64 `i -> 4 `i -> 1 `i ]
-[; ;FlashApp.c: 71: if (FLASH_IsWriteDone() == 0)
-"71
-[e $ ! == -> ( _FLASH_IsWriteDone ..  `i -> 0 `i 858  ]
-[; ;FlashApp.c: 72: {
-"72
-{
-[; ;FlashApp.c: 73: return;
+[; ;FlashApp.c: 73: if (FLASH_IsWriteDone() == 0)
 "73
-[e $UE 857  ]
+[e $ ! == -> ( _FLASH_IsWriteDone ..  `i -> 0 `i 858  ]
+[; ;FlashApp.c: 74: {
 "74
+{
+[; ;FlashApp.c: 75: return;
+"75
+[e $UE 857  ]
+"76
 }
 [e :U 858 ]
-[; ;FlashApp.c: 74: }
-[; ;FlashApp.c: 76: if (numOfReadSamples)
-"76
-[e $ ! != _numOfReadSamples -> -> 0 `i `ul 859  ]
-[; ;FlashApp.c: 77: {
-"77
-{
-[; ;FlashApp.c: 78: if (numOfValidateSamples)
+[; ;FlashApp.c: 76: }
+[; ;FlashApp.c: 78: if (numOfReadSamples)
 "78
-[e $ ! != _numOfValidateSamples -> -> 0 `i `ul 860  ]
+[e $ ! != _numOfReadSamples -> -> 0 `i `ul 859  ]
 [; ;FlashApp.c: 79: {
 "79
 {
-[; ;FlashApp.c: 80: offset = numOfValidateSamples - (numOfValidateSamples > numOfSampleToRead)? numOfValidateSamples : numOfSampleToRead;
+[; ;FlashApp.c: 80: if (numOfValidateSamples)
 "80
-[e = _offset -> ? != - _numOfValidateSamples -> -> -> > _numOfValidateSamples -> -> _numOfSampleToRead `l `ul `i `l `ul -> -> 0 `i `ul : _numOfValidateSamples -> -> _numOfSampleToRead `l `ul `i ]
-[; ;FlashApp.c: 81: if(offset < 0)
+[e $ ! != _numOfValidateSamples -> -> 0 `i `ul 860  ]
+[; ;FlashApp.c: 81: {
 "81
-[e $ ! < _offset -> 0 `i 861  ]
-[; ;FlashApp.c: 82: {
-"82
 {
-[; ;FlashApp.c: 83: if (abs(offset) > numOfReadSamples)
+[; ;FlashApp.c: 82: offset = numOfValidateSamples - (numOfValidateSamples > numOfSampleToRead)? numOfValidateSamples : numOfSampleToRead;
+"82
+[e = _offset -> ? != - _numOfValidateSamples -> -> -> > _numOfValidateSamples -> -> _numOfSampleToRead `l `ul `i `l `ul -> -> 0 `i `ul : _numOfValidateSamples -> -> _numOfSampleToRead `l `ul `i ]
+[; ;FlashApp.c: 83: if(offset < 0)
 "83
-[e $ ! > -> -> ( _abs (1 _offset `l `ul _numOfReadSamples 862  ]
+[e $ ! < _offset -> 0 `i 861  ]
 [; ;FlashApp.c: 84: {
 "84
 {
-[; ;FlashApp.c: 85: numOfSampleToRead += offset + numOfReadSamples;
+[; ;FlashApp.c: 85: if (abs(offset) > numOfReadSamples)
 "85
-[e =+ _numOfSampleToRead -> + -> -> _offset `l `ul _numOfReadSamples `i ]
-[; ;FlashApp.c: 86: offset = numOfReadSamples * (-1);
+[e $ ! > -> -> ( _abs (1 _offset `l `ul _numOfReadSamples 862  ]
+[; ;FlashApp.c: 86: {
 "86
-[e = _offset -> * _numOfReadSamples -> -> -U -> 1 `i `l `ul `i ]
+{
+[; ;FlashApp.c: 87: numOfSampleToRead += offset + numOfReadSamples;
+"87
+[e =+ _numOfSampleToRead -> + -> -> _offset `l `ul _numOfReadSamples `i ]
+[; ;FlashApp.c: 88: offset = numOfReadSamples * (-1);
 "88
+[e = _offset -> * _numOfReadSamples -> -> -U -> 1 `i `l `ul `i ]
+"90
 }
 [e :U 862 ]
-[; ;FlashApp.c: 88: }
-[; ;FlashApp.c: 90: readAddress += offset * (64);
-"90
+[; ;FlashApp.c: 90: }
+[; ;FlashApp.c: 92: readAddress += offset * (64);
+"92
 [e =+ _readAddress -> -> * _offset -> 64 `i `l `ul ]
-"91
+"93
 }
 [e :U 861 ]
-"92
-}
-[; ;FlashApp.c: 91: }
-[; ;FlashApp.c: 92: }
-[e $U 863  ]
-"93
-[e :U 860 ]
-[; ;FlashApp.c: 93: else
-[; ;FlashApp.c: 94: {
 "94
-{
-[; ;FlashApp.c: 95: numOfSampleToRead = (numOfReadSamples > numOfSampleToRead)? numOfSampleToRead : numOfReadSamples;
+}
+[; ;FlashApp.c: 93: }
+[; ;FlashApp.c: 94: }
+[e $U 863  ]
 "95
-[e = _numOfSampleToRead -> ? > _numOfReadSamples -> -> _numOfSampleToRead `l `ul : -> -> _numOfSampleToRead `l `ul _numOfReadSamples `i ]
-[; ;FlashApp.c: 96: readAddress -= numOfSampleToRead * (64);
+[e :U 860 ]
+[; ;FlashApp.c: 95: else
+[; ;FlashApp.c: 96: {
 "96
-[e =- _readAddress -> -> * _numOfSampleToRead -> 64 `i `l `ul ]
+{
+[; ;FlashApp.c: 97: numOfSampleToRead = (numOfReadSamples > numOfSampleToRead)? numOfSampleToRead : numOfReadSamples;
 "97
+[e = _numOfSampleToRead -> ? > _numOfReadSamples -> -> _numOfSampleToRead `l `ul : -> -> _numOfSampleToRead `l `ul _numOfReadSamples `i ]
+[; ;FlashApp.c: 98: readAddress -= numOfSampleToRead * (64);
+"98
+[e =- _readAddress -> -> * _numOfSampleToRead -> 64 `i `l `ul ]
+"99
 }
 [e :U 863 ]
-[; ;FlashApp.c: 97: }
-[; ;FlashApp.c: 99: if (readAddress <= 0x4000)
-"99
-[e $ ! <= _readAddress -> -> -> 16384 `i `l `ul 864  ]
-[; ;FlashApp.c: 100: {
-"100
-{
-[; ;FlashApp.c: 101: readAddress = 0x4000;
+[; ;FlashApp.c: 99: }
+[; ;FlashApp.c: 101: if (readAddress <= 0x4500)
 "101
-[e = _readAddress -> -> -> 16384 `i `l `ul ]
+[e $ ! <= _readAddress -> -> -> 17664 `i `l `ul 864  ]
+[; ;FlashApp.c: 102: {
 "102
+{
+[; ;FlashApp.c: 103: readAddress = 0x4500;
+"103
+[e = _readAddress -> -> -> 17664 `i `l `ul ]
+"104
 }
 [e :U 864 ]
-"103
-}
-[; ;FlashApp.c: 102: }
-[; ;FlashApp.c: 103: }
-[e $U 865  ]
-"104
-[e :U 859 ]
-[; ;FlashApp.c: 104: else
-[; ;FlashApp.c: 105: {
 "105
-{
-[; ;FlashApp.c: 106: if ((isReWriteDone) && (readAddress <= writeAddress))
+}
+[; ;FlashApp.c: 104: }
+[; ;FlashApp.c: 105: }
+[e $U 865  ]
 "106
-[e $ ! && != -> _isReWriteDone `i -> -> -> 0 `i `uc `i <= _readAddress _writeAddress 866  ]
+[e :U 859 ]
+[; ;FlashApp.c: 106: else
 [; ;FlashApp.c: 107: {
 "107
 {
-[; ;FlashApp.c: 108: readAddress = writeAddress + (64);
+[; ;FlashApp.c: 108: if ((isReWriteDone) && (readAddress <= writeAddress))
 "108
-[e = _readAddress + _writeAddress -> -> -> 64 `i `l `ul ]
-[; ;FlashApp.c: 109: if (readAddress >= 0x7FF0)
+[e $ ! && != -> _isReWriteDone `i -> -> -> 0 `i `uc `i <= _readAddress _writeAddress 866  ]
+[; ;FlashApp.c: 109: {
 "109
-[e $ ! >= _readAddress -> -> -> 32752 `i `l `ul 867  ]
-[; ;FlashApp.c: 110: {
-"110
 {
-[; ;FlashApp.c: 111: readAddress = 0x4000;
+[; ;FlashApp.c: 110: readAddress = writeAddress + (64);
+"110
+[e = _readAddress + _writeAddress -> -> -> 64 `i `l `ul ]
+[; ;FlashApp.c: 111: if (readAddress >= 0x7FF0)
 "111
-[e = _readAddress -> -> -> 16384 `i `l `ul ]
+[e $ ! >= _readAddress -> -> -> 32752 `i `l `ul 867  ]
+[; ;FlashApp.c: 112: {
 "112
-}
-[e :U 867 ]
+{
+[; ;FlashApp.c: 113: readAddress = 0x4500;
+"113
+[e = _readAddress -> -> -> 17664 `i `l `ul ]
 "114
 }
-[; ;FlashApp.c: 112: }
-[; ;FlashApp.c: 114: }
-[e $U 868  ]
-"115
-[e :U 866 ]
-[; ;FlashApp.c: 115: else
-[; ;FlashApp.c: 116: {
+[e :U 867 ]
 "116
-{
-[; ;FlashApp.c: 117: if(numOfValidateSamples == 0)
+}
+[; ;FlashApp.c: 114: }
+[; ;FlashApp.c: 116: }
+[e $U 868  ]
 "117
-[e $ ! == _numOfValidateSamples -> -> -> 0 `i `l `ul 869  ]
+[e :U 866 ]
+[; ;FlashApp.c: 117: else
 [; ;FlashApp.c: 118: {
 "118
 {
-[; ;FlashApp.c: 119: SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_NO_SAMPLE_YET);
+[; ;FlashApp.c: 119: if(numOfValidateSamples == 0)
 "119
-[e ( _SendAckMessage (2 , . `E7083 4 . `E7091 25 ]
-[; ;FlashApp.c: 120: return;
+[e $ ! == _numOfValidateSamples -> -> -> 0 `i `l `ul 869  ]
+[; ;FlashApp.c: 120: {
 "120
-[e $UE 857  ]
+{
+[; ;FlashApp.c: 121: SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_NO_SAMPLE_YET);
 "121
-}
-[e :U 869 ]
+[e ( _SendAckMessage (2 , . `E7108 4 . `E7116 23 ]
+[; ;FlashApp.c: 122: return;
+"122
+[e $UE 857  ]
 "123
 }
+[e :U 869 ]
+"125
+}
 [e :U 868 ]
-"124
+"126
 }
 [e :U 865 ]
-[; ;FlashApp.c: 121: }
 [; ;FlashApp.c: 123: }
-[; ;FlashApp.c: 124: }
-[; ;FlashApp.c: 127: TxMsg[(0)] = (0x24);
-"127
-[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
-[; ;FlashApp.c: 128: TxMsg[(1)] = FLASH_MSG;
-"128
-[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7083 4 `uc ]
-[; ;FlashApp.c: 129: TxMsg[(2)] = FLASH_SEND_RAW_DATA;
+[; ;FlashApp.c: 125: }
+[; ;FlashApp.c: 126: }
+[; ;FlashApp.c: 129: TxMsg[(0)] = (0x24);
 "129
-[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7091 24 `uc ]
-[; ;FlashApp.c: 130: TxMsg[(3)] = (64);
+[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
+[; ;FlashApp.c: 130: TxMsg[(1)] = FLASH_MSG;
 "130
-[e = *U + &U _TxMsg * -> -> -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 64 `i `uc ]
-[; ;FlashApp.c: 132: for (j=0; j<numOfSampleToRead; j++)
+[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7108 4 `uc ]
+[; ;FlashApp.c: 131: TxMsg[(2)] = FLASH_SEND_RAW_DATA;
+"131
+[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7116 22 `uc ]
+[; ;FlashApp.c: 132: TxMsg[(3)] = (64);
 "132
+[e = *U + &U _TxMsg * -> -> -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 64 `i `uc ]
+[; ;FlashApp.c: 134: for (j=0; j<numOfSampleToRead; j++)
+"134
 {
 [e = _j -> 0 `i ]
 [e $U 873  ]
-"133
-[e :U 870 ]
-[; ;FlashApp.c: 133: {
-{
-[; ;FlashApp.c: 135: for(int idx = 0; idx < (64); idx++)
 "135
+[e :U 870 ]
+[; ;FlashApp.c: 135: {
+{
+[; ;FlashApp.c: 137: for(int idx = 0; idx < (64); idx++)
+"137
 {
 [v _idx `i ~T0 @X0 1 a ]
 [e = _idx -> 0 `i ]
 [e $ < _idx -> 64 `i 874  ]
 [e $U 875  ]
-"136
-[e :U 874 ]
-[; ;FlashApp.c: 136: {
-{
-[; ;FlashApp.c: 137: TxMsg[(0x4) + idx] = FLASH_ReadByte(readAddress + idx);
-"137
-[e = *U + &U _TxMsg * -> -> + -> 4 `i _idx `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _FLASH_ReadByte (1 + _readAddress -> -> _idx `l `ul ]
 "138
+[e :U 874 ]
+[; ;FlashApp.c: 138: {
+{
+[; ;FlashApp.c: 139: TxMsg[(0x4) + idx] = FLASH_ReadByte(readAddress + idx);
+"139
+[e = *U + &U _TxMsg * -> -> + -> 4 `i _idx `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _FLASH_ReadByte (1 + _readAddress -> -> _idx `l `ul ]
+"140
 }
-"135
+"137
 [e ++ _idx -> 1 `i ]
 [e $ < _idx -> 64 `i 874  ]
 [e :U 875 ]
-"138
-}
-[; ;FlashApp.c: 138: }
-[; ;FlashApp.c: 140: readAddress += (64);
 "140
-[e =+ _readAddress -> -> -> 64 `i `l `ul ]
-[; ;FlashApp.c: 141: if (readAddress >= 0x7FF0)
-"141
-[e $ ! >= _readAddress -> -> -> 32752 `i `l `ul 877  ]
-[; ;FlashApp.c: 142: {
+}
+[; ;FlashApp.c: 140: }
+[; ;FlashApp.c: 142: readAddress += (64);
 "142
-{
-[; ;FlashApp.c: 143: readAddress = 0x4000;
+[e =+ _readAddress -> -> -> 64 `i `l `ul ]
+[; ;FlashApp.c: 143: if (readAddress >= 0x7FF0)
 "143
-[e = _readAddress -> -> -> 16384 `i `l `ul ]
+[e $ ! >= _readAddress -> -> -> 32752 `i `l `ul 877  ]
+[; ;FlashApp.c: 144: {
 "144
+{
+[; ;FlashApp.c: 145: readAddress = 0x4500;
+"145
+[e = _readAddress -> -> -> 17664 `i `l `ul ]
+"146
 }
 [e :U 877 ]
-[; ;FlashApp.c: 144: }
-[; ;FlashApp.c: 145: TxMsg[(64) + (0x4)] = crc8(TxMsg, (64) + (0x4));
-"145
-[e = *U + &U _TxMsg * -> -> + -> 64 `i -> 4 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + -> 64 `i -> 4 `i ]
-[; ;FlashApp.c: 147: WriteUartMessage(TxMsg, (64) + (0x4) + 1);
+[; ;FlashApp.c: 146: }
+[; ;FlashApp.c: 147: TxMsg[(64) + (0x4)] = crc8(TxMsg, (64) + (0x4));
 "147
-[e ( _WriteUartMessage (2 , &U _TxMsg + + -> 64 `i -> 4 `i -> 1 `i ]
-[; ;FlashApp.c: 149: if(numOfValidateSamples)
+[e = *U + &U _TxMsg * -> -> + -> 64 `i -> 4 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + -> 64 `i -> 4 `i ]
+[; ;FlashApp.c: 149: WriteUartMessage(TxMsg, (64) + (0x4) + 1);
 "149
-[e $ ! != _numOfValidateSamples -> -> 0 `i `ul 878  ]
-[; ;FlashApp.c: 150: {
-"150
-{
-[; ;FlashApp.c: 151: if (numOfReadSamples < ((0x4000-0x7FF0)/(64)))
+[e ( _WriteUartMessage (2 , &U _TxMsg + + -> 64 `i -> 4 `i -> 1 `i ]
+[; ;FlashApp.c: 151: if(numOfValidateSamples)
 "151
-[e $ ! < _numOfReadSamples -> -> / - -> 16384 `i -> 32752 `i -> 64 `i `l `ul 879  ]
+[e $ ! != _numOfValidateSamples -> -> 0 `i `ul 878  ]
 [; ;FlashApp.c: 152: {
 "152
 {
-[; ;FlashApp.c: 153: numOfReadSamples++;
+[; ;FlashApp.c: 153: if (numOfReadSamples < ((0x4500-0x7FF0)/(64)))
 "153
-[e ++ _numOfReadSamples -> -> -> 1 `i `l `ul ]
+[e $ ! < _numOfReadSamples -> -> / - -> 17664 `i -> 32752 `i -> 64 `i `l `ul 879  ]
+[; ;FlashApp.c: 154: {
 "154
+{
+[; ;FlashApp.c: 155: numOfReadSamples++;
+"155
+[e ++ _numOfReadSamples -> -> -> 1 `i `l `ul ]
+"156
 }
 [e :U 879 ]
-[; ;FlashApp.c: 154: }
-[; ;FlashApp.c: 155: if (numOfValidateSamples > 0)
-"155
-[e $ ! > _numOfValidateSamples -> -> -> 0 `i `l `ul 880  ]
-[; ;FlashApp.c: 156: {
-"156
-{
-[; ;FlashApp.c: 157: numOfValidateSamples--;
+[; ;FlashApp.c: 156: }
+[; ;FlashApp.c: 157: if (numOfValidateSamples > 0)
 "157
-[e -- _numOfValidateSamples -> -> -> 1 `i `l `ul ]
+[e $ ! > _numOfValidateSamples -> -> -> 0 `i `l `ul 880  ]
+[; ;FlashApp.c: 158: {
 "158
-}
-[e :U 880 ]
+{
+[; ;FlashApp.c: 159: numOfValidateSamples--;
 "159
-}
-[e :U 878 ]
+[e -- _numOfValidateSamples -> -> -> 1 `i `l `ul ]
 "160
 }
-"132
+[e :U 880 ]
+"161
+}
+[e :U 878 ]
+"162
+}
+"134
 [e ++ _j -> 1 `i ]
 [e :U 873 ]
 [e $ < _j _numOfSampleToRead 870  ]
 [e :U 871 ]
-"160
+"162
 }
-[; ;FlashApp.c: 158: }
-[; ;FlashApp.c: 159: }
 [; ;FlashApp.c: 160: }
 [; ;FlashApp.c: 161: }
-"161
+[; ;FlashApp.c: 162: }
+[; ;FlashApp.c: 163: }
+"163
 [e :UE 857 ]
 }
-"168
+"170
 [v _FlashEreaseMem `(v ~T0 @X0 1 ef ]
-"169
+"171
 {
-[; ;FlashApp.c: 168: void FlashEreaseMem(void)
-[; ;FlashApp.c: 169: {
+[; ;FlashApp.c: 170: void FlashEreaseMem(void)
+[; ;FlashApp.c: 171: {
 [e :U _FlashEreaseMem ]
 [f ]
-[; ;FlashApp.c: 170: writeAddress = 0x4000;
-"170
-[e = _writeAddress -> -> -> 16384 `i `l `ul ]
-[; ;FlashApp.c: 171: readAddress = 0x4000;
-"171
-[e = _readAddress -> -> -> 16384 `i `l `ul ]
-[; ;FlashApp.c: 172: numOfValidateSamples = 0;
+[; ;FlashApp.c: 172: writeAddress = 0x4500;
 "172
-[e = _numOfValidateSamples -> -> -> 0 `i `l `ul ]
-[; ;FlashApp.c: 173: ZeroArray(sampleArray, (64)/sizeof(adc_result_t));
+[e = _writeAddress -> -> -> 17664 `i `l `ul ]
+[; ;FlashApp.c: 173: readAddress = 0x4500;
 "173
-[e ( _ZeroArray (2 , -> &U _sampleArray `*uc -> / -> -> 64 `i `ui -> # `ui `ui `i ]
-[; ;FlashApp.c: 174: SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_EREASE_MEMORY);
+[e = _readAddress -> -> -> 17664 `i `l `ul ]
+[; ;FlashApp.c: 174: numOfValidateSamples = 0;
 "174
-[e ( _SendAckMessage (2 , . `E7083 4 . `E7091 21 ]
-[; ;FlashApp.c: 175: }
+[e = _numOfValidateSamples -> -> -> 0 `i `l `ul ]
+[; ;FlashApp.c: 175: ZeroArray(sampleArray, (64)/sizeof(adc_result_t));
 "175
+[e ( _ZeroArray (2 , -> &U _sampleArray `*uc -> / -> -> 64 `i `ui -> # `ui `ui `i ]
+[; ;FlashApp.c: 176: SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_EREASE_MEMORY);
+"176
+[e ( _SendAckMessage (2 , . `E7108 4 . `E7116 19 ]
+[; ;FlashApp.c: 177: }
+"177
 [e :UE 881 ]
 }
-"178
+"180
 [v _FlashReadCondition `(v ~T0 @X0 1 ef ]
-"179
+"181
 {
-[; ;FlashApp.c: 178: void FlashReadCondition(void)
-[; ;FlashApp.c: 179: {
+[; ;FlashApp.c: 180: void FlashReadCondition(void)
+[; ;FlashApp.c: 181: {
 [e :U _FlashReadCondition ]
 [f ]
-"181
+"183
 [v _TxMsg `uc ~T0 @X0 + + -> 4 `i -> 4 `i -> 1 `i a ]
-[; ;FlashApp.c: 181: char TxMsg[4 + (0x4) + 1];
-[; ;FlashApp.c: 182: ZeroArray(TxMsg, 4 + (0x4) + 1);
-"182
+[; ;FlashApp.c: 183: char TxMsg[4 + (0x4) + 1];
+[; ;FlashApp.c: 184: ZeroArray(TxMsg, 4 + (0x4) + 1);
+"184
 [e ( _ZeroArray (2 , &U _TxMsg + + -> 4 `i -> 4 `i -> 1 `i ]
-[; ;FlashApp.c: 185: TxMsg[(0)] = (0x24);
-"185
-[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
-[; ;FlashApp.c: 186: TxMsg[(1)] = FLASH_MSG;
-"186
-[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7083 4 `uc ]
-[; ;FlashApp.c: 187: TxMsg[(2)] = FLASH_READ_CONDITION;
+[; ;FlashApp.c: 187: TxMsg[(0)] = (0x24);
 "187
-[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7091 22 `uc ]
-[; ;FlashApp.c: 188: TxMsg[(3)] = 4;
+[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
+[; ;FlashApp.c: 188: TxMsg[(1)] = FLASH_MSG;
 "188
+[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7108 4 `uc ]
+[; ;FlashApp.c: 189: TxMsg[(2)] = FLASH_READ_CONDITION;
+"189
+[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7116 20 `uc ]
+[; ;FlashApp.c: 190: TxMsg[(3)] = 4;
+"190
 [e = *U + &U _TxMsg * -> -> -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 4 `i `uc ]
-[; ;FlashApp.c: 193: TxMsg[(0x4) + 0] = make8(0x7FF0 - 0x4000,1);
-"193
-[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _make8 (2 , -> -> - -> 32752 `i -> 16384 `i `l `ul -> -> 1 `i `uc ]
-[; ;FlashApp.c: 194: TxMsg[(0x4) + 1] = make8(0x7FF0 - 0x4000,0);
-"194
-[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _make8 (2 , -> -> - -> 32752 `i -> 16384 `i `l `ul -> -> 0 `i `uc ]
-[; ;FlashApp.c: 197: TxMsg[(0x4) + 2] = make8(0x7FF0 - writeAddress,1);
-"197
+[; ;FlashApp.c: 195: TxMsg[(0x4) + 0] = make8(0x7FF0 - 0x4500,1);
+"195
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _make8 (2 , -> -> - -> 32752 `i -> 17664 `i `l `ul -> -> 1 `i `uc ]
+[; ;FlashApp.c: 196: TxMsg[(0x4) + 1] = make8(0x7FF0 - 0x4500,0);
+"196
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _make8 (2 , -> -> - -> 32752 `i -> 17664 `i `l `ul -> -> 0 `i `uc ]
+[; ;FlashApp.c: 199: TxMsg[(0x4) + 2] = make8(0x7FF0 - writeAddress,1);
+"199
 [e = *U + &U _TxMsg * -> -> + -> 4 `i -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _make8 (2 , - -> -> -> 32752 `i `l `ul _writeAddress -> -> 1 `i `uc ]
-[; ;FlashApp.c: 198: TxMsg[(0x4) + 3] = make8(0x7FF0 - writeAddress,0);
-"198
-[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _make8 (2 , - -> -> -> 32752 `i `l `ul _writeAddress -> -> 0 `i `uc ]
-[; ;FlashApp.c: 200: TxMsg[4 + (0x4)] = crc8(TxMsg, 4 + (0x4));
+[; ;FlashApp.c: 200: TxMsg[(0x4) + 3] = make8(0x7FF0 - writeAddress,0);
 "200
-[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 4 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + -> 4 `i -> 4 `i ]
-[; ;FlashApp.c: 202: WriteUartMessage(TxMsg, 4 + (0x4) + 1);
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _make8 (2 , - -> -> -> 32752 `i `l `ul _writeAddress -> -> 0 `i `uc ]
+[; ;FlashApp.c: 202: TxMsg[4 + (0x4)] = crc8(TxMsg, 4 + (0x4));
 "202
+[e = *U + &U _TxMsg * -> -> + -> 4 `i -> 4 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + -> 4 `i -> 4 `i ]
+[; ;FlashApp.c: 204: WriteUartMessage(TxMsg, 4 + (0x4) + 1);
+"204
 [e ( _WriteUartMessage (2 , &U _TxMsg + + -> 4 `i -> 4 `i -> 1 `i ]
-[; ;FlashApp.c: 203: }
-"203
+[; ;FlashApp.c: 205: }
+"205
 [e :UE 882 ]
 }
-"205
+"207
 [v _CheckFlashPrecentage `(uc ~T0 @X0 1 ef ]
-"206
+"208
 {
-[; ;FlashApp.c: 205: bool CheckFlashPrecentage(void)
-[; ;FlashApp.c: 206: {
+[; ;FlashApp.c: 207: bool CheckFlashPrecentage(void)
+[; ;FlashApp.c: 208: {
 [e :U _CheckFlashPrecentage ]
 [f ]
-"207
+"209
 [v _precentage `d ~T0 @X0 1 a ]
-[; ;FlashApp.c: 207: double precentage = ((double)(0x7FF0 - writeAddress) / 0x7FF0) * 100;
+[; ;FlashApp.c: 209: double precentage = ((double)(0x7FF0 - writeAddress) / 0x7FF0) * 100;
 [e = _precentage * / -> - -> -> -> 32752 `i `l `ul _writeAddress `d -> -> 32752 `i `d -> -> 100 `i `d ]
-[; ;FlashApp.c: 208: return (precentage > 75) ? 1 : 0;
-"208
+[; ;FlashApp.c: 210: return (precentage > 75) ? 1 : 0;
+"210
 [e ) -> ? > _precentage -> -> 75 `i `d : -> 1 `i -> 0 `i `uc ]
 [e $UE 883  ]
-[; ;FlashApp.c: 209: }
-"209
+[; ;FlashApp.c: 211: }
+"211
 [e :UE 883 ]
 }
-"215
-[v _EepromRead `(uc ~T0 @X0 1 ef1`uc ]
-"216
-{
-[; ;FlashApp.c: 215: uint8_t EepromRead(uint8_t address)
-[; ;FlashApp.c: 216: {
-[e :U _EepromRead ]
-"215
-[v _address `uc ~T0 @X0 1 r1 ]
-"216
-[f ]
-[; ;FlashApp.c: 217: return DATAEE_ReadByte(address);
 "217
+[v _EepromRead `(uc ~T0 @X0 1 ef1`uc ]
+"218
+{
+[; ;FlashApp.c: 217: uint8_t EepromRead(uint8_t address)
+[; ;FlashApp.c: 218: {
+[e :U _EepromRead ]
+"217
+[v _address `uc ~T0 @X0 1 r1 ]
+"218
+[f ]
+[; ;FlashApp.c: 219: return DATAEE_ReadByte(address);
+"219
 [e ) ( _DATAEE_ReadByte (1 _address ]
 [e $UE 884  ]
-[; ;FlashApp.c: 218: }
-"218
+[; ;FlashApp.c: 220: }
+"220
 [e :UE 884 ]
 }
-"220
+"222
 [v _EepromWrite `(v ~T0 @X0 1 ef2`uc`uc ]
-"221
+"223
 {
-[; ;FlashApp.c: 220: void EepromWrite(uint8_t address, uint8_t data)
-[; ;FlashApp.c: 221: {
+[; ;FlashApp.c: 222: void EepromWrite(uint8_t address, uint8_t data)
+[; ;FlashApp.c: 223: {
 [e :U _EepromWrite ]
-"220
+"222
 [v _address `uc ~T0 @X0 1 r1 ]
 [v _data `uc ~T0 @X0 1 r2 ]
-"221
-[f ]
-[; ;FlashApp.c: 222: DATAEE_WriteByte(address, data);
-"222
-[e ( _DATAEE_WriteByte (2 , _address _data ]
-[; ;FlashApp.c: 223: }
 "223
+[f ]
+[; ;FlashApp.c: 224: DATAEE_WriteByte(address, data);
+"224
+[e ( _DATAEE_WriteByte (2 , _address _data ]
+[; ;FlashApp.c: 225: }
+"225
 [e :UE 885 ]
-}
-"229
-[v _FlashTest `(uc ~T0 @X0 1 ef2`i`i ]
-"230
-{
-[; ;FlashApp.c: 229: bool FlashTest(int startAddress, int numOfSamples)
-[; ;FlashApp.c: 230: {
-[e :U _FlashTest ]
-"229
-[v _startAddress `i ~T0 @X0 1 r1 ]
-[v _numOfSamples `i ~T0 @X0 1 r2 ]
-"230
-[f ]
-[; ;FlashApp.c: 231: if(numOfSamples > 128)
-"231
-[e $ ! > _numOfSamples -> 128 `i 887  ]
-[; ;FlashApp.c: 232: {
-"232
-{
-[; ;FlashApp.c: 233: return 0;
-"233
-[e ) -> -> 0 `i `uc ]
-[e $UE 886  ]
-"234
-}
-[e :U 887 ]
-"235
-[v _buff `uc ~T0 @X0 -> 128 `i a ]
-[; ;FlashApp.c: 234: }
-[; ;FlashApp.c: 235: uint8_t buff[128];
-[; ;FlashApp.c: 236: for(uint8_t idx = 0; idx < numOfSamples; idx++)
-"236
-{
-[v _idx `uc ~T0 @X0 1 a ]
-[e = _idx -> -> 0 `i `uc ]
-[e $U 891  ]
-"237
-[e :U 888 ]
-[; ;FlashApp.c: 237: {
-{
-[; ;FlashApp.c: 238: buff[idx] = idx;
-"238
-[e = *U + &U _buff * -> _idx `ux -> -> # *U &U _buff `ui `ux _idx ]
-"239
-}
-"236
-[e ++ _idx -> -> 1 `i `uc ]
-[e :U 891 ]
-[e $ < -> _idx `i _numOfSamples 888  ]
-[e :U 889 ]
-"239
-}
-[; ;FlashApp.c: 239: }
-[; ;FlashApp.c: 241: FLASH_WriteBlock(startAddress, buff);
-"241
-[e ( _FLASH_WriteBlock (2 , -> -> _startAddress `l `ul &U _buff ]
-[; ;FlashApp.c: 243: for(uint8_t idx = 0; idx < numOfSamples; idx++)
-"243
-{
-[v _idx `uc ~T0 @X0 1 a ]
-[e = _idx -> -> 0 `i `uc ]
-[e $U 895  ]
-"244
-[e :U 892 ]
-[; ;FlashApp.c: 244: {
-{
-"245
-[v _FlashData `uc ~T0 @X0 1 a ]
-[; ;FlashApp.c: 245: uint8_t FlashData = FLASH_ReadByte(startAddress + idx);
-[e = _FlashData ( _FLASH_ReadByte (1 -> -> + _startAddress -> _idx `i `l `ul ]
-[; ;FlashApp.c: 246: if(FlashData != idx)
-"246
-[e $ ! != -> _FlashData `i -> _idx `i 896  ]
-[; ;FlashApp.c: 247: {
-"247
-{
-[; ;FlashApp.c: 248: return 0;
-"248
-[e ) -> -> 0 `i `uc ]
-[e $UE 886  ]
-"249
-}
-[e :U 896 ]
-"250
-}
-"243
-[e ++ _idx -> -> 1 `i `uc ]
-[e :U 895 ]
-[e $ < -> _idx `i _numOfSamples 892  ]
-[e :U 893 ]
-"250
-}
-[; ;FlashApp.c: 249: }
-[; ;FlashApp.c: 250: }
-[; ;FlashApp.c: 252: return 1;
-"252
-[e ) -> -> 1 `i `uc ]
-[e $UE 886  ]
-[; ;FlashApp.c: 253: }
-"253
-[e :UE 886 ]
-}
-"255
-[v _EepromTest `(uc ~T0 @X0 1 ef2`i`i ]
-"256
-{
-[; ;FlashApp.c: 255: bool EepromTest(int startAddress, int numOfSamples)
-[; ;FlashApp.c: 256: {
-[e :U _EepromTest ]
-"255
-[v _startAddress `i ~T0 @X0 1 r1 ]
-[v _numOfSamples `i ~T0 @X0 1 r2 ]
-"256
-[f ]
-[; ;FlashApp.c: 257: if(numOfSamples > 128)
-"257
-[e $ ! > _numOfSamples -> 128 `i 898  ]
-[; ;FlashApp.c: 258: {
-"258
-{
-[; ;FlashApp.c: 259: return 0;
-"259
-[e ) -> -> 0 `i `uc ]
-[e $UE 897  ]
-"260
-}
-[e :U 898 ]
-[; ;FlashApp.c: 260: }
-[; ;FlashApp.c: 262: for(uint8_t idx = 0; idx < numOfSamples; idx++)
-"262
-{
-[v _idx `uc ~T0 @X0 1 a ]
-[e = _idx -> -> 0 `i `uc ]
-[e $U 902  ]
-"263
-[e :U 899 ]
-[; ;FlashApp.c: 263: {
-{
-[; ;FlashApp.c: 264: DATAEE_WriteByte(startAddress + idx, idx);
-"264
-[e ( _DATAEE_WriteByte (2 , -> + _startAddress -> _idx `i `uc _idx ]
-"265
-}
-"262
-[e ++ _idx -> -> 1 `i `uc ]
-[e :U 902 ]
-[e $ < -> _idx `i _numOfSamples 899  ]
-[e :U 900 ]
-"265
-}
-[; ;FlashApp.c: 265: }
-[; ;FlashApp.c: 267: for(uint8_t idx = 0; idx < 256; idx++)
-"267
-{
-[v _idx `uc ~T0 @X0 1 a ]
-[e = _idx -> -> 0 `i `uc ]
-[e $ < -> _idx `i -> 256 `i 903  ]
-[e $U 904  ]
-"268
-[e :U 903 ]
-[; ;FlashApp.c: 268: {
-{
-"269
-[v _EEdata `uc ~T0 @X0 1 a ]
-[; ;FlashApp.c: 269: uint8_t EEdata = DATAEE_ReadByte(startAddress + idx);
-[e = _EEdata ( _DATAEE_ReadByte (1 -> + _startAddress -> _idx `i `uc ]
-[; ;FlashApp.c: 270: if(EEdata != idx)
-"270
-[e $ ! != -> _EEdata `i -> _idx `i 906  ]
-[; ;FlashApp.c: 271: {
-"271
-{
-[; ;FlashApp.c: 272: return 0;
-"272
-[e ) -> -> 0 `i `uc ]
-[e $UE 897  ]
-"273
-}
-[e :U 906 ]
-"274
-}
-"267
-[e ++ _idx -> -> 1 `i `uc ]
-[e $ < -> _idx `i -> 256 `i 903  ]
-[e :U 904 ]
-"274
-}
-[; ;FlashApp.c: 273: }
-[; ;FlashApp.c: 274: }
-[; ;FlashApp.c: 275: return 1;
-"275
-[e ) -> -> 1 `i `uc ]
-[e $UE 897  ]
-[; ;FlashApp.c: 276: }
-"276
-[e :UE 897 ]
 }

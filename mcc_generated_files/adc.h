@@ -93,13 +93,15 @@ typedef struct
 
 typedef enum
 {
-    ADC_RA5 =  0x4,
-    ADC_RE0 =  0x5,
-    ADC_RE1 =  0x6,
-    ADC_RE2 =  0x7,
-    ADC_RB1 =  0xA,
-    ADC_RB5 =  0xD,
-    ADC_RD5 =  0x19,
+    ADC_RA5 =  0x4,     // RREV
+    ADC_RE0 =  0x5,     // FFWR2
+    ADC_RE1 =  0x6,     // FFWR1
+    ADC_RE2 =  0x7,     // RF_INDET
+    ADC_RB2 =  0x8,     // P7V_SENSE
+    ADC_RB3 =  0x9,     // 28V_SNS
+    ADC_RB1 =  0xA,     // UP_TEMP
+    ADC_RB5 =  0xD,     // DOWN_TEMP
+    ADC_RD5 =  0x19,    // PA_TEMP
     channel_CTMU =  0x1D,
     channel_DAC =  0x1E,
     channel_FVRBuf2 =  0x1F

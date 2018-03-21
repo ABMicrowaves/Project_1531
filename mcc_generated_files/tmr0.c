@@ -67,11 +67,11 @@ void TMR0_Initialize(void)
 {
     // Set TMR0 to the options selected in the User Interface
 	
-    // TMR0H 60; 
-    TMR0H = 0x3C;
+    // TMR0H 248; 
+    TMR0H = 0xF8;
 
-    // TMR0L 175; 
-    TMR0L = 0xAF;
+    // TMR0L 47; 
+    TMR0L = 0x2F;
 
 	
     // Load TMR0 value to the 16-bit reload variable
@@ -141,25 +141,29 @@ void TMR0_ISR(void)
     TMR0H = timer0ReloadVal >> 8;
     TMR0L = (uint8_t) timer0ReloadVal;
 
-    // callback function - called every 20th pass
-    
-    CountCallBack ++;
-    if ((CountCallBack % TMR0_ONE_SEC_FACTOR) == 0)
+    CountCallBack++;
+    if ((CountCallBack % TMR0_INTERVAL_TIME_SYNTH_LOCK_DETECT) == 0)
     {
-        TimerOneSecFlag = true;
+        Timer0_SynthLd = true;
     }
-    
-    if ((CountCallBack % TMR0_SAMPLING_TIME_FACTOR) == 0)
+    if ((CountCallBack % TMR0_INTERVAL_TIME_SAMPLING) == 0)
     {
-        TimerSamplingFlag = true;
+        Timer0_Sampling = true;
     }
-    if ((CountCallBack % TMR0_KEEP_ALIVE_TIME_FACTOR) == 0)
+    if ((CountCallBack % TMR0_INTERVAL_TIME_KEEP_ALIVE) == 0)
     {
-        TimerKeepAliveFlag = true;
+        Timer0_KeepAlive = true;
     }
-    
-    CountCallBack %= MAX_COUNTER_SIZE;
-     
+    if ((CountCallBack % TMR0_INTERVAL_TIME_ONE_SEC_CLOCK) == 0)
+    {
+        Timer0_OneSec = true;
+    }        
+    if(CountCallBack >= TMR0_MAX_TIME_TO_MEASURE)
+        
+    {
+        // reset ticker counter
+        CountCallBack = 0;
+    }
 }
 
 void TMR0_CallBack(void)
@@ -170,8 +174,6 @@ void TMR0_CallBack(void)
     {
         TMR0_InterruptHandler();
     }
-    
-    
 }
 
 void TMR0_SetInterruptHandler(void (* InterruptHandler)(void)){
@@ -181,7 +183,6 @@ void TMR0_SetInterruptHandler(void (* InterruptHandler)(void)){
 void TMR0_DefaultInterruptHandler(void){
     // add your TMR0 interrupt custom code
     // or set custom function using TMR0_SetInterruptHandler()
-
 }
 
 /**

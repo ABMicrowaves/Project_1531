@@ -13,7 +13,7 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #include "SystemCommon.h"
 
 // Manage flash
-#define SAMPLE_START_ADDRESS        0x4000
+#define SAMPLE_START_ADDRESS        0x4500
 #define SAMPLE_END_ADDRESS          0x7FF0
 #define PROGRAM_START_ADDRESS       0xe
 #define MAX_NUMBER_BYTES_IN_TEST    128
@@ -35,7 +35,7 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 // Flash routines:
 void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
-void FlashReadUart(int numOfSampleToRead);
+void FlashReadUart(char* data);
 void FlashEreaseMem(void);
 void FlashReadCondition(void);
 bool CheckFlashPrecentage(void);
@@ -43,12 +43,6 @@ bool CheckFlashPrecentage(void);
 // EEPROMM routines:
 uint8_t EepromRead(uint8_t address);
 void EepromWrite(uint8_t address, uint8_t data);
-
-// Test Flash and EEPROM functions:
-bool FlashTest(int startAddress, int numOfSamples);
-bool EepromTest(int startAddress, int numOfSamples);
-
-
 
 #endif	/* FLASHAPP_H */
 

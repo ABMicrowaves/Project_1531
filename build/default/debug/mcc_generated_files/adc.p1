@@ -10,8 +10,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "13727
 [v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
 "80 mcc_generated_files/adc.c
-[c E6975 4 5 6 7 10 13 25 29 30 31 .. ]
-[n E6975 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
+[c E6975 4 5 6 7 8 9 10 13 25 29 30 31 .. ]
+[n E6975 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB2 ADC_RB3 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
 "13581 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f45k22.h
 [s S640 :1 `uc 1 :1 `uc 1 ]
 [n S640 . . GO_NOT_DONE ]
@@ -6629,19 +6629,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;adc.h: 97: ADC_RE0 = 0x5,
 [; ;adc.h: 98: ADC_RE1 = 0x6,
 [; ;adc.h: 99: ADC_RE2 = 0x7,
-[; ;adc.h: 100: ADC_RB1 = 0xA,
-[; ;adc.h: 101: ADC_RB5 = 0xD,
-[; ;adc.h: 102: ADC_RD5 = 0x19,
-[; ;adc.h: 103: channel_CTMU = 0x1D,
-[; ;adc.h: 104: channel_DAC = 0x1E,
-[; ;adc.h: 105: channel_FVRBuf2 = 0x1F
-[; ;adc.h: 106: } adc_channel_t;
-[; ;adc.h: 141: void ADC_Initialize(void);
-[; ;adc.h: 171: void ADC_SelectChannel(adc_channel_t channel);
-[; ;adc.h: 198: void ADC_StartConversion();
-[; ;adc.h: 230: bool ADC_IsConversionDone();
-[; ;adc.h: 263: adc_result_t ADC_GetConversionResult(void);
-[; ;adc.h: 293: adc_result_t ADC_GetConversion(adc_channel_t channel);
+[; ;adc.h: 100: ADC_RB2 = 0x8,
+[; ;adc.h: 101: ADC_RB3 = 0x9,
+[; ;adc.h: 102: ADC_RB1 = 0xA,
+[; ;adc.h: 103: ADC_RB5 = 0xD,
+[; ;adc.h: 104: ADC_RD5 = 0x19,
+[; ;adc.h: 105: channel_CTMU = 0x1D,
+[; ;adc.h: 106: channel_DAC = 0x1E,
+[; ;adc.h: 107: channel_FVRBuf2 = 0x1F
+[; ;adc.h: 108: } adc_channel_t;
+[; ;adc.h: 143: void ADC_Initialize(void);
+[; ;adc.h: 173: void ADC_SelectChannel(adc_channel_t channel);
+[; ;adc.h: 200: void ADC_StartConversion();
+[; ;adc.h: 232: bool ADC_IsConversionDone();
+[; ;adc.h: 265: adc_result_t ADC_GetConversionResult(void);
+[; ;adc.h: 295: adc_result_t ADC_GetConversion(adc_channel_t channel);
 "58 mcc_generated_files/adc.c
 [v _ADC_Initialize `(v ~T0 @X0 1 ef ]
 "59

@@ -52,16 +52,8 @@ void GroupAdc(MSG_REQUEST request, char* data)
 {
     switch (request)
     {
-        case ADC_OPERATION:
-            SetAdcOperationMode(data);
-            break;
-
         case ADC_CHANNEL_MODE:
             SetChannelMode(data);
-            break;
-
-        case ADC_CONVERSION_MODE:
-            SetConversionResultFormat(data);
             break;
             
         default:
@@ -122,7 +114,7 @@ void GroupFlashMemory(MSG_REQUEST request, char* data)
             break;
 
         case FLASH_REQUEST_RAW_DATA:
-            FlashReadUart((int)data[0]);
+            FlashReadUart(data);
             break;
             
         default:
@@ -136,6 +128,10 @@ void GroupDAC(MSG_REQUEST request, char* data)
     {
         case DAC_SET_VALUE:
             DacSetValue(data);
+            break;
+            
+        case DAC_READ_VALUE:
+            DacReadValue(data);
             break;
             
         default:

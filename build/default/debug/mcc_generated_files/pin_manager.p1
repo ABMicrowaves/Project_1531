@@ -1,4 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
+[v F6952 `(v ~T0 @X0 0 tf ]
+[v F6963 `(v ~T0 @X0 0 tf ]
 "8006 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f45k22.h
 [v _LATE `Vuc ~T0 @X0 0 e@3981 ]
 "7894
@@ -45,7 +47,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S813 . . . . ]
 "16845
 [v _INTCON2bits `VS813 ~T0 @X0 0 e@4081 ]
-"16896
+"2785
+[s S134 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S134 . . IOCB4 IOCB5 IOCB6 IOCB7 ]
+"2784
+[u S133 `S134 1 ]
+[n S133 . . ]
+"2793
+[v _IOCBbits `VS133 ~T0 @X0 0 e@3938 ]
+[v F6949 `(v ~T0 @X0 0 tf ]
+"513 mcc_generated_files/pin_manager.h
+[v _IOCB4_SetInterruptHandler `(v ~T0 @X0 0 ef1`*F6949 ]
+"561
+[v _IOCB4_DefaultInterruptHandler `(v ~T0 @X0 0 ef ]
+[v F6960 `(v ~T0 @X0 0 tf ]
+"597
+[v _IOCB5_SetInterruptHandler `(v ~T0 @X0 0 ef1`*F6960 ]
+"645
+[v _IOCB5_DefaultInterruptHandler `(v ~T0 @X0 0 ef ]
+"16896 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f45k22.h
 [s S818 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S818 . RBIF INT0IF TMR0IF RBIE INT0IE TMR0IE PEIE_GIEL GIE_GIEH ]
 "16906
@@ -59,6 +79,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S817 . . . . ]
 "16922
 [v _INTCONbits `VS817 ~T0 @X0 0 e@4082 ]
+"490 mcc_generated_files/pin_manager.h
+[v _IOCB4_ISR `(v ~T0 @X0 0 ef ]
+"574
+[v _IOCB5_ISR `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -6608,85 +6632,233 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 168: extern __nonreentrant void _delay3(unsigned char);
 [; ;pin_manager.h: 465: void PIN_MANAGER_Initialize (void);
 [; ;pin_manager.h: 477: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 490: void IOCB4_ISR(void);
+[; ;pin_manager.h: 513: void IOCB4_SetInterruptHandler(void (* InterruptHandler)(void));
+[; ;pin_manager.h: 537: extern void (*IOCB4_InterruptHandler)(void);
+[; ;pin_manager.h: 561: void IOCB4_DefaultInterruptHandler(void);
+[; ;pin_manager.h: 574: void IOCB5_ISR(void);
+[; ;pin_manager.h: 597: void IOCB5_SetInterruptHandler(void (* InterruptHandler)(void));
+[; ;pin_manager.h: 621: extern void (*IOCB5_InterruptHandler)(void);
+[; ;pin_manager.h: 645: void IOCB5_DefaultInterruptHandler(void);
 [; ;stdbool.h: 12: typedef unsigned char bool;
-"52 mcc_generated_files/pin_manager.c
+"51 mcc_generated_files/pin_manager.c
+[v _IOCB4_InterruptHandler `*F6952 ~T0 @X0 1 e ]
+[; ;pin_manager.c: 51: void (*IOCB4_InterruptHandler)(void);
+"52
+[v _IOCB5_InterruptHandler `*F6963 ~T0 @X0 1 e ]
+[; ;pin_manager.c: 52: void (*IOCB5_InterruptHandler)(void);
+"55
 [v _PIN_MANAGER_Initialize `(v ~T0 @X0 1 ef ]
-"53
+"56
 {
-[; ;pin_manager.c: 52: void PIN_MANAGER_Initialize(void)
-[; ;pin_manager.c: 53: {
+[; ;pin_manager.c: 55: void PIN_MANAGER_Initialize(void)
+[; ;pin_manager.c: 56: {
 [e :U _PIN_MANAGER_Initialize ]
 [f ]
-[; ;pin_manager.c: 57: LATE = 0x00;
-"57
-[e = _LATE -> -> 0 `i `uc ]
-[; ;pin_manager.c: 58: LATD = 0x00;
-"58
-[e = _LATD -> -> 0 `i `uc ]
-[; ;pin_manager.c: 59: LATA = 0x06;
-"59
-[e = _LATA -> -> 6 `i `uc ]
-[; ;pin_manager.c: 60: LATB = 0x00;
+[; ;pin_manager.c: 60: LATE = 0x00;
 "60
-[e = _LATB -> -> 0 `i `uc ]
-[; ;pin_manager.c: 61: LATC = 0x00;
+[e = _LATE -> -> 0 `i `uc ]
+[; ;pin_manager.c: 61: LATD = 0x00;
 "61
+[e = _LATD -> -> 0 `i `uc ]
+[; ;pin_manager.c: 62: LATA = 0x06;
+"62
+[e = _LATA -> -> 6 `i `uc ]
+[; ;pin_manager.c: 63: LATB = 0x00;
+"63
+[e = _LATB -> -> 0 `i `uc ]
+[; ;pin_manager.c: 64: LATC = 0x00;
+"64
 [e = _LATC -> -> 0 `i `uc ]
-[; ;pin_manager.c: 66: TRISE = 0x07;
-"66
-[e = _TRISE -> -> 7 `i `uc ]
-[; ;pin_manager.c: 67: TRISA = 0xE1;
-"67
-[e = _TRISA -> -> 225 `i `uc ]
-[; ;pin_manager.c: 68: TRISB = 0xEF;
-"68
-[e = _TRISB -> -> 239 `i `uc ]
-[; ;pin_manager.c: 69: TRISC = 0x80;
+[; ;pin_manager.c: 69: TRISE = 0x07;
 "69
-[e = _TRISC -> -> 128 `i `uc ]
-[; ;pin_manager.c: 70: TRISD = 0xF2;
+[e = _TRISE -> -> 7 `i `uc ]
+[; ;pin_manager.c: 70: TRISA = 0xE1;
 "70
+[e = _TRISA -> -> 225 `i `uc ]
+[; ;pin_manager.c: 71: TRISB = 0xEF;
+"71
+[e = _TRISB -> -> 239 `i `uc ]
+[; ;pin_manager.c: 72: TRISC = 0x80;
+"72
+[e = _TRISC -> -> 128 `i `uc ]
+[; ;pin_manager.c: 73: TRISD = 0xF2;
+"73
 [e = _TRISD -> -> 242 `i `uc ]
-[; ;pin_manager.c: 75: ANSELC = 0x34;
-"75
-[e = _ANSELC -> -> 52 `i `uc ]
-[; ;pin_manager.c: 76: ANSELB = 0x32;
-"76
-[e = _ANSELB -> -> 50 `i `uc ]
-[; ;pin_manager.c: 77: ANSELD = 0xE4;
-"77
-[e = _ANSELD -> -> 228 `i `uc ]
-[; ;pin_manager.c: 78: ANSELE = 0x07;
+[; ;pin_manager.c: 78: ANSELC = 0x34;
 "78
-[e = _ANSELE -> -> 7 `i `uc ]
-[; ;pin_manager.c: 79: ANSELA = 0x2F;
+[e = _ANSELC -> -> 52 `i `uc ]
+[; ;pin_manager.c: 79: ANSELB = 0x3E;
 "79
+[e = _ANSELB -> -> 62 `i `uc ]
+[; ;pin_manager.c: 80: ANSELD = 0xE4;
+"80
+[e = _ANSELD -> -> 228 `i `uc ]
+[; ;pin_manager.c: 81: ANSELE = 0x07;
+"81
+[e = _ANSELE -> -> 7 `i `uc ]
+[; ;pin_manager.c: 82: ANSELA = 0x2F;
+"82
 [e = _ANSELA -> -> 47 `i `uc ]
-[; ;pin_manager.c: 84: WPUB = 0xC3;
-"84
+[; ;pin_manager.c: 87: WPUB = 0xC3;
+"87
 [e = _WPUB -> -> 195 `i `uc ]
-[; ;pin_manager.c: 85: INTCON2bits.nRBPU = 0;
-"85
+[; ;pin_manager.c: 88: INTCON2bits.nRBPU = 0;
+"88
 [e = . . _INTCON2bits 1 7 -> -> 0 `i `uc ]
-[; ;pin_manager.c: 92: INTCONbits.RBIE = 1;
-"92
+[; ;pin_manager.c: 96: IOCBbits.IOCB4 = 1;
+"96
+[e = . . _IOCBbits 0 1 -> -> 1 `i `uc ]
+[; ;pin_manager.c: 97: IOCBbits.IOCB5 = 1;
+"97
+[e = . . _IOCBbits 0 2 -> -> 1 `i `uc ]
+[; ;pin_manager.c: 100: IOCB4_SetInterruptHandler(IOCB4_DefaultInterruptHandler);
+"100
+[e ( _IOCB4_SetInterruptHandler (1 &U _IOCB4_DefaultInterruptHandler ]
+[; ;pin_manager.c: 101: IOCB5_SetInterruptHandler(IOCB5_DefaultInterruptHandler);
+"101
+[e ( _IOCB5_SetInterruptHandler (1 &U _IOCB5_DefaultInterruptHandler ]
+[; ;pin_manager.c: 104: INTCONbits.RBIE = 1;
+"104
 [e = . . _INTCONbits 0 3 -> -> 1 `i `uc ]
-[; ;pin_manager.c: 94: }
-"94
+[; ;pin_manager.c: 106: }
+"106
 [e :UE 846 ]
 }
-"96
+"108
 [v _PIN_MANAGER_IOC `(v ~T0 @X0 1 ef ]
-"97
+"109
 {
-[; ;pin_manager.c: 96: void PIN_MANAGER_IOC(void)
-[; ;pin_manager.c: 97: {
+[; ;pin_manager.c: 108: void PIN_MANAGER_IOC(void)
+[; ;pin_manager.c: 109: {
 [e :U _PIN_MANAGER_IOC ]
 [f ]
-[; ;pin_manager.c: 100: INTCONbits.RBIF = 0;
-"100
+[; ;pin_manager.c: 111: if(IOCBbits.IOCB4 == 1)
+"111
+[e $ ! == -> . . _IOCBbits 0 1 `i -> 1 `i 848  ]
+[; ;pin_manager.c: 112: {
+"112
+{
+[; ;pin_manager.c: 113: IOCB4_ISR();
+"113
+[e ( _IOCB4_ISR ..  ]
+"114
+}
+[e :U 848 ]
+[; ;pin_manager.c: 114: }
+[; ;pin_manager.c: 116: if(IOCBbits.IOCB5 == 1)
+"116
+[e $ ! == -> . . _IOCBbits 0 2 `i -> 1 `i 849  ]
+[; ;pin_manager.c: 117: {
+"117
+{
+[; ;pin_manager.c: 118: IOCB5_ISR();
+"118
+[e ( _IOCB5_ISR ..  ]
+"119
+}
+[e :U 849 ]
+[; ;pin_manager.c: 119: }
+[; ;pin_manager.c: 122: INTCONbits.RBIF = 0;
+"122
 [e = . . _INTCONbits 0 0 -> -> 0 `i `uc ]
-[; ;pin_manager.c: 102: }
-"102
+[; ;pin_manager.c: 124: }
+"124
 [e :UE 847 ]
+}
+"129
+[v _IOCB4_ISR `(v ~T0 @X0 1 ef ]
+{
+[; ;pin_manager.c: 129: void IOCB4_ISR(void) {
+[e :U _IOCB4_ISR ]
+[f ]
+[; ;pin_manager.c: 134: if(IOCB4_InterruptHandler)
+"134
+[e $ ! != _IOCB4_InterruptHandler -> -> 0 `i `*F6952 851  ]
+[; ;pin_manager.c: 135: {
+"135
+{
+[; ;pin_manager.c: 136: IOCB4_InterruptHandler();
+"136
+[e ( *U _IOCB4_InterruptHandler ..  ]
+"137
+}
+[e :U 851 ]
+[; ;pin_manager.c: 137: }
+[; ;pin_manager.c: 138: }
+"138
+[e :UE 850 ]
+}
+"143
+[v _IOCB4_SetInterruptHandler `(v ~T0 @X0 1 ef1`*F6949 ]
+{
+[; ;pin_manager.c: 143: void IOCB4_SetInterruptHandler(void (* InterruptHandler)(void)){
+[e :U _IOCB4_SetInterruptHandler ]
+[v F6978 `(v ~T0 @X0 0 tf ]
+[v _InterruptHandler `*F6978 ~T0 @X0 1 r1 ]
+[f ]
+[; ;pin_manager.c: 144: IOCB4_InterruptHandler = InterruptHandler;
+"144
+[e = _IOCB4_InterruptHandler _InterruptHandler ]
+[; ;pin_manager.c: 145: }
+"145
+[e :UE 852 ]
+}
+"150
+[v _IOCB4_DefaultInterruptHandler `(v ~T0 @X0 1 ef ]
+{
+[; ;pin_manager.c: 150: void IOCB4_DefaultInterruptHandler(void){
+[e :U _IOCB4_DefaultInterruptHandler ]
+[f ]
+[; ;pin_manager.c: 153: }
+"153
+[e :UE 853 ]
+}
+"158
+[v _IOCB5_ISR `(v ~T0 @X0 1 ef ]
+{
+[; ;pin_manager.c: 158: void IOCB5_ISR(void) {
+[e :U _IOCB5_ISR ]
+[f ]
+[; ;pin_manager.c: 163: if(IOCB5_InterruptHandler)
+"163
+[e $ ! != _IOCB5_InterruptHandler -> -> 0 `i `*F6963 855  ]
+[; ;pin_manager.c: 164: {
+"164
+{
+[; ;pin_manager.c: 165: IOCB5_InterruptHandler();
+"165
+[e ( *U _IOCB5_InterruptHandler ..  ]
+"166
+}
+[e :U 855 ]
+[; ;pin_manager.c: 166: }
+[; ;pin_manager.c: 167: }
+"167
+[e :UE 854 ]
+}
+"172
+[v _IOCB5_SetInterruptHandler `(v ~T0 @X0 1 ef1`*F6960 ]
+{
+[; ;pin_manager.c: 172: void IOCB5_SetInterruptHandler(void (* InterruptHandler)(void)){
+[e :U _IOCB5_SetInterruptHandler ]
+[v F6983 `(v ~T0 @X0 0 tf ]
+[v _InterruptHandler `*F6983 ~T0 @X0 1 r1 ]
+[f ]
+[; ;pin_manager.c: 173: IOCB5_InterruptHandler = InterruptHandler;
+"173
+[e = _IOCB5_InterruptHandler _InterruptHandler ]
+[; ;pin_manager.c: 174: }
+"174
+[e :UE 856 ]
+}
+"179
+[v _IOCB5_DefaultInterruptHandler `(v ~T0 @X0 1 ef ]
+{
+[; ;pin_manager.c: 179: void IOCB5_DefaultInterruptHandler(void){
+[e :U _IOCB5_DefaultInterruptHandler ]
+[f ]
+[; ;pin_manager.c: 182: }
+"182
+[e :UE 857 ]
 }

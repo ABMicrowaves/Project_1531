@@ -8545,42 +8545,43 @@ typedef uint16_t uintptr_t;
 # 12 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdbool.h"
 typedef unsigned char bool;
 
-# 74 "mcc_generated_files/tmr0.h"
-volatile bool TimerOneSecFlag = 0;
-volatile bool TimerSamplingFlag = 0;
-volatile bool TimerKeepAliveFlag = 0;
+# 75 "mcc_generated_files/tmr0.h"
+volatile bool Timer0_SynthLd = 0;
+volatile bool Timer0_Sampling = 0;
+volatile bool Timer0_KeepAlive = 0;
+volatile bool Timer0_OneSec = 0;
 
-# 113
+# 115
 void TMR0_Initialize(void);
 
-# 142
+# 144
 void TMR0_StartTimer(void);
 
-# 174
+# 176
 void TMR0_StopTimer(void);
 
-# 210
+# 212
 uint16_t TMR0_ReadTimer(void);
 
-# 249
+# 251
 void TMR0_WriteTimer(uint16_t timerVal);
 
-# 285
+# 287
 void TMR0_Reload(void);
 
-# 303
+# 305
 void TMR0_ISR(void);
 
-# 321
+# 323
 void TMR0_CallBack(void);
 
-# 339
+# 341
 void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
 
-# 357
+# 359
 extern void (*TMR0_InterruptHandler)(void);
 
-# 375
+# 377
 void TMR0_DefaultInterruptHandler(void);
 
 # 57 "mcc_generated_files/tmr0.c"
@@ -8594,10 +8595,10 @@ void TMR0_Initialize(void)
 
 
 
-TMR0H = 0x3C;
+TMR0H = 0xF8;
 
 
-TMR0L = 0xAF;
+TMR0L = 0x2F;
 
 
 
@@ -8667,25 +8668,29 @@ INTCONbits.TMR0IF = 0;
 TMR0H = timer0ReloadVal >> 8;
 TMR0L = (uint8_t) timer0ReloadVal;
 
-
-
-CountCallBack ++;
-if ((CountCallBack % 20) == 0)
+CountCallBack++;
+if ((CountCallBack % 100) == 0)
 {
-TimerOneSecFlag = 1;
+Timer0_SynthLd = 1;
 }
-
-if ((CountCallBack % 50) == 0)
+if ((CountCallBack % 100) == 0)
 {
-TimerSamplingFlag = 1;
+Timer0_Sampling = 1;
 }
-if ((CountCallBack % 300) == 0)
+if ((CountCallBack % 200) == 0)
 {
-TimerKeepAliveFlag = 1;
+Timer0_KeepAlive = 1;
 }
+if ((CountCallBack % 10) == 0)
+{
+Timer0_OneSec = 1;
+}
+if(CountCallBack >= 35000)
 
-CountCallBack %= 300;
+{
 
+CountCallBack = 0;
+}
 }
 
 void TMR0_CallBack(void)
@@ -8696,8 +8701,6 @@ if(TMR0_InterruptHandler)
 {
 TMR0_InterruptHandler();
 }
-
-
 }
 
 void TMR0_SetInterruptHandler(void (* InterruptHandler)(void)){
@@ -8705,7 +8708,6 @@ TMR0_InterruptHandler = InterruptHandler;
 }
 
 void TMR0_DefaultInterruptHandler(void){
-
 
 
 }

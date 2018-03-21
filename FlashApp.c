@@ -59,11 +59,13 @@ void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum)
 
 // <editor-fold defaultstate="collapsed" desc="Flash samples read via EUSART">
 
-void FlashReadUart(int numOfSampleToRead)
+void FlashReadUart(char* data)
 {
     // Create TX packet and clear the memory:
     int j=0;
     int offset = 0;
+    
+    int numOfSampleToRead = data[0];
     char TxMsg[FLASH_TX_PACKET_SIZE + 1];
     ZeroArray(TxMsg, FLASH_TX_PACKET_SIZE + 1);
     
@@ -220,59 +222,6 @@ uint8_t EepromRead(uint8_t address)
 void EepromWrite(uint8_t address, uint8_t data)
 {
     DATAEE_WriteByte(address, data);
-}
-
-// </editor-fold>
-
-// <editor-fold defaultstate="collapsed" desc="Tests Flash / EEPROM">
-
-bool FlashTest(int startAddress, int numOfSamples)
-{
-    if(numOfSamples > MAX_NUMBER_BYTES_IN_TEST)
-    {
-        return false;
-    }
-    uint8_t buff[MAX_NUMBER_BYTES_IN_TEST];
-    for(uint8_t idx = 0; idx < numOfSamples; idx++)
-    {       
-        buff[idx] = idx;
-    }
-    
-    FLASH_WriteBlock(startAddress, buff);
-    
-    for(uint8_t idx = 0; idx < numOfSamples; idx++)
-    {
-        uint8_t FlashData = FLASH_ReadByte(startAddress + idx);
-        if(FlashData != idx)
-        {
-            return false;
-        }
-    }
-    
-    return true;
-}
-
-bool EepromTest(int startAddress, int numOfSamples)
-{
-    if(numOfSamples > MAX_NUMBER_BYTES_IN_TEST)
-    {
-        return false;
-    }
-    
-    for(uint8_t idx = 0; idx < numOfSamples; idx++)
-    {       
-        DATAEE_WriteByte(startAddress + idx, idx);
-    }
-    
-    for(uint8_t idx = 0; idx < 256; idx++)
-    {
-        uint8_t EEdata = DATAEE_ReadByte(startAddress + idx);
-        if(EEdata != idx)
-        {
-            return false;
-        }
-    }
-    return true;
 }
 
 // </editor-fold>

@@ -8520,6 +8520,30 @@ void PIN_MANAGER_Initialize (void);
 # 477
 void PIN_MANAGER_IOC(void);
 
+# 490
+void IOCB4_ISR(void);
+
+# 513
+void IOCB4_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 537
+extern void (*IOCB4_InterruptHandler)(void);
+
+# 561
+void IOCB4_DefaultInterruptHandler(void);
+
+# 574
+void IOCB5_ISR(void);
+
+# 597
+void IOCB5_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 621
+extern void (*IOCB5_InterruptHandler)(void);
+
+# 645
+void IOCB5_DefaultInterruptHandler(void);
+
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdint.h"
 typedef signed char int8_t;
 
@@ -8661,6 +8685,8 @@ ADC_RA5 = 0x4,
 ADC_RE0 = 0x5,
 ADC_RE1 = 0x6,
 ADC_RE2 = 0x7,
+ADC_RB2 = 0x8,
+ADC_RB3 = 0x9,
 ADC_RB1 = 0xA,
 ADC_RB5 = 0xD,
 ADC_RD5 = 0x19,
@@ -8669,60 +8695,61 @@ channel_DAC = 0x1E,
 channel_FVRBuf2 = 0x1F
 } adc_channel_t;
 
-# 141
+# 143
 void ADC_Initialize(void);
 
-# 171
+# 173
 void ADC_SelectChannel(adc_channel_t channel);
 
-# 198
+# 200
 void ADC_StartConversion();
 
-# 230
+# 232
 bool ADC_IsConversionDone();
 
-# 263
+# 265
 adc_result_t ADC_GetConversionResult(void);
 
-# 293
+# 295
 adc_result_t ADC_GetConversion(adc_channel_t channel);
 
-# 74 "mcc_generated_files/tmr0.h"
-volatile bool TimerOneSecFlag = 0;
-volatile bool TimerSamplingFlag = 0;
-volatile bool TimerKeepAliveFlag = 0;
+# 75 "mcc_generated_files/tmr0.h"
+volatile bool Timer0_SynthLd = 0;
+volatile bool Timer0_Sampling = 0;
+volatile bool Timer0_KeepAlive = 0;
+volatile bool Timer0_OneSec = 0;
 
-# 113
+# 115
 void TMR0_Initialize(void);
 
-# 142
+# 144
 void TMR0_StartTimer(void);
 
-# 174
+# 176
 void TMR0_StopTimer(void);
 
-# 210
+# 212
 uint16_t TMR0_ReadTimer(void);
 
-# 249
+# 251
 void TMR0_WriteTimer(uint16_t timerVal);
 
-# 285
+# 287
 void TMR0_Reload(void);
 
-# 303
+# 305
 void TMR0_ISR(void);
 
-# 321
+# 323
 void TMR0_CallBack(void);
 
-# 339
+# 341
 void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
 
-# 357
+# 359
 extern void (*TMR0_InterruptHandler)(void);
 
-# 375
+# 377
 void TMR0_DefaultInterruptHandler(void);
 
 # 75 "mcc_generated_files/eusart1.h"

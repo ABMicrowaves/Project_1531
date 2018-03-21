@@ -32,9 +32,7 @@ STATUS_MCU_RUN_TIME = 0x21,
 STATUS_GET_MCU_FW_VERSION = 0x22,
 
 
-ADC_OPERATION = 0x31,
 ADC_CHANNEL_MODE = 0x32,
-ADC_CONVERSION_MODE = 0x33,
 
 
 SYNTH_TX_INIT_SET = 0x40,
@@ -57,6 +55,7 @@ FLASH_NO_SAMPLE_YET = 0x55,
 
 
 DAC_SET_VALUE = 0x61,
+DAC_READ_VALUE = 0x62,
 }MSG_REQUEST;
 
 # 13 "SystemCommon.h"
@@ -8524,6 +8523,30 @@ void PIN_MANAGER_Initialize (void);
 # 477
 void PIN_MANAGER_IOC(void);
 
+# 490
+void IOCB4_ISR(void);
+
+# 513
+void IOCB4_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 537
+extern void (*IOCB4_InterruptHandler)(void);
+
+# 561
+void IOCB4_DefaultInterruptHandler(void);
+
+# 574
+void IOCB5_ISR(void);
+
+# 597
+void IOCB5_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 621
+extern void (*IOCB5_InterruptHandler)(void);
+
+# 645
+void IOCB5_DefaultInterruptHandler(void);
+
 # 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdint.h"
 typedef signed char int8_t;
 
@@ -8665,6 +8688,8 @@ ADC_RA5 = 0x4,
 ADC_RE0 = 0x5,
 ADC_RE1 = 0x6,
 ADC_RE2 = 0x7,
+ADC_RB2 = 0x8,
+ADC_RB3 = 0x9,
 ADC_RB1 = 0xA,
 ADC_RB5 = 0xD,
 ADC_RD5 = 0x19,
@@ -8673,60 +8698,61 @@ channel_DAC = 0x1E,
 channel_FVRBuf2 = 0x1F
 } adc_channel_t;
 
-# 141
+# 143
 void ADC_Initialize(void);
 
-# 171
+# 173
 void ADC_SelectChannel(adc_channel_t channel);
 
-# 198
+# 200
 void ADC_StartConversion();
 
-# 230
+# 232
 bool ADC_IsConversionDone();
 
-# 263
+# 265
 adc_result_t ADC_GetConversionResult(void);
 
-# 293
+# 295
 adc_result_t ADC_GetConversion(adc_channel_t channel);
 
-# 74 "mcc_generated_files/tmr0.h"
-volatile bool TimerOneSecFlag = 0;
-volatile bool TimerSamplingFlag = 0;
-volatile bool TimerKeepAliveFlag = 0;
+# 75 "mcc_generated_files/tmr0.h"
+volatile bool Timer0_SynthLd = 0;
+volatile bool Timer0_Sampling = 0;
+volatile bool Timer0_KeepAlive = 0;
+volatile bool Timer0_OneSec = 0;
 
-# 113
+# 115
 void TMR0_Initialize(void);
 
-# 142
+# 144
 void TMR0_StartTimer(void);
 
-# 174
+# 176
 void TMR0_StopTimer(void);
 
-# 210
+# 212
 uint16_t TMR0_ReadTimer(void);
 
-# 249
+# 251
 void TMR0_WriteTimer(uint16_t timerVal);
 
-# 285
+# 287
 void TMR0_Reload(void);
 
-# 303
+# 305
 void TMR0_ISR(void);
 
-# 321
+# 323
 void TMR0_CallBack(void);
 
-# 339
+# 341
 void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
 
-# 357
+# 359
 extern void (*TMR0_InterruptHandler)(void);
 
-# 375
+# 377
 void TMR0_DefaultInterruptHandler(void);
 
 # 75 "mcc_generated_files/eusart1.h"
@@ -8760,7 +8786,7 @@ void OSCILLATOR_Initialize(void);
 
 # 37 "FlashApp.h"
 void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum);
-void FlashReadUart(int numOfSampleToRead);
+void FlashReadUart(char* data);
 void FlashEreaseMem(void);
 void FlashReadCondition(void);
 bool CheckFlashPrecentage(void);
@@ -8769,17 +8795,7 @@ bool CheckFlashPrecentage(void);
 uint8_t EepromRead(uint8_t address);
 void EepromWrite(uint8_t address, uint8_t data);
 
-
-bool FlashTest(int startAddress, int numOfSamples);
-bool EepromTest(int startAddress, int numOfSamples);
-
-# 22 "AdcApp.h"
-typedef enum
-{
-CONVERSION_LEFT_FORAMT = 0,
-CONVERSION_RIGHT_FORAMT,
-}ADC_CONVERSION_FORMAT;
-
+# 18 "AdcApp.h"
 typedef enum
 {
 CIRCULAR = 0x0,
@@ -8787,19 +8803,20 @@ SINGLE_CHANNEL = 0x1,
 }ADC_SAMPLE_MODE;
 
 
-const adc_channel_t channelArr[(7)] =
+const adc_channel_t channelArr[(9)] =
 {
-0x7,
-0x6,
-0x5,
 0x4,
-0x19,
+0x5,
+0x6,
+0x7,
+0x8,
+0x9,
 0xA,
 0xD,
+0x19,
 };
 
-void SetAdcOperationMode(char* data);
-void SetConversionResultFormat(char* data);
+
 void SetChannelMode(char* data);
 void InitAdcApplicationMgr();
 void AdcConvert();
@@ -8832,7 +8849,7 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 18 "DacApp.h"
+# 20 "DacApp.h"
 const uint8_t DAC_ADDRES[(4)] =
 {
 0x2,
@@ -8851,9 +8868,7 @@ const uint16_t DAC_DEFAULT_INIT_VALUES[(4)] =
 
 void DacInit(void);
 void DacSetValue(char* data);
-
-
-void DacTest(void);
+void DacReadValue(char* data);
 
 # 4 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\__size_t.h"
 typedef unsigned size_t;
@@ -8985,7 +9000,7 @@ void segmentCounter(void);
 unsigned short mask(unsigned short num);
 void InitSevenSegment(void);
 
-# 22 "SyntApp.h"
+# 27 "SyntApp.h"
 const uint32_t SYNTH_REGS[13] =
 {
 0x1041C,
@@ -8996,7 +9011,7 @@ const uint32_t SYNTH_REGS[13] =
 0x120000E7,
 0x35006076,
 0x800025,
-0x30008384,
+0x10008384,
 0x3,
 0x12,
 0xC000001,
@@ -9026,7 +9041,7 @@ void InitSynth(SPI_PERIPHERAL cType);
 void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
 void SetSynthOper(SPI_PERIPHERAL cType);
 void SynthReadData(SPI_PERIPHERAL cType, char* data);
-void SYNTH_ISR(void);
+void SynthLdDetect(void);
 
 # 22 "LedsApp.h"
 typedef enum
@@ -9040,7 +9055,8 @@ typedef enum
 {
 FAIL_UART_ACK_NOT_RECIEVE = 0x2,
 FAIL_FLASH_MORE_THEN_HELF = 0x4,
-FAIL_SYNTH_UP_LATCH = 0x8,
+FAIL_SYNTH_RX_LATCH = 0x8,
+FAIL_SYNTH_TX_LATCH = 0xA,
 } LED_ERR_INTICATION;
 
 void testLeds();
@@ -9048,12 +9064,10 @@ void BlinkErrorLeds(LED_OK_INTICATION state);
 void BlinkOkLeds(LED_ERR_INTICATION state);
 void keepAliveSignalLed(void);
 
-# 17 "SwSpiApp.h"
+# 14 "SwSpiApp.h"
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
-
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-
 void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 
 
@@ -9095,7 +9109,7 @@ void ResetMcu(void);
 void ResetCpld(void);
 void SendSystemStartAck(void);
 
-# 27 "SystemStatus.h"
+# 45 "SystemStatus.h"
 void GetMcuFwVersion();;
 
 void SetMcuRunTime();
@@ -9167,16 +9181,8 @@ void GroupAdc(MSG_REQUEST request, char* data)
 {
 switch (request)
 {
-case ADC_OPERATION:
-SetAdcOperationMode(data);
-break;
-
 case ADC_CHANNEL_MODE:
 SetChannelMode(data);
-break;
-
-case ADC_CONVERSION_MODE:
-SetConversionResultFormat(data);
 break;
 
 default:
@@ -9237,7 +9243,7 @@ FlashReadCondition();
 break;
 
 case FLASH_REQUEST_RAW_DATA:
-FlashReadUart((int)data[0]);
+FlashReadUart(data);
 break;
 
 default:
@@ -9251,6 +9257,10 @@ switch (request)
 {
 case DAC_SET_VALUE:
 DacSetValue(data);
+break;
+
+case DAC_READ_VALUE:
+DacReadValue(data);
 break;
 
 default:

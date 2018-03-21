@@ -11,14 +11,9 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 #include "SystemCommon.h"
 
-
-
-
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
-
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 void SwSpi_Clk_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
-
 void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
 
 // SYNTH:
