@@ -340,19 +340,19 @@
 #define TX_SYNT_DATA_SetAnalogMode()  do { ANSELDbits.ANSD0 = 1; } while(0)
 #define TX_SYNT_DATA_SetDigitalMode() do { ANSELDbits.ANSD0 = 0; } while(0)
 
-// get/set RX_SYNT_LD aliases
-#define RX_SYNT_LD_TRIS               TRISDbits.TRISD1
-#define RX_SYNT_LD_LAT                LATDbits.LATD1
-#define RX_SYNT_LD_PORT               PORTDbits.RD1
-#define RX_SYNT_LD_ANS                ANSELDbits.ANSD1
-#define RX_SYNT_LD_SetHigh()            do { LATDbits.LATD1 = 1; } while(0)
-#define RX_SYNT_LD_SetLow()             do { LATDbits.LATD1 = 0; } while(0)
-#define RX_SYNT_LD_Toggle()             do { LATDbits.LATD1 = ~LATDbits.LATD1; } while(0)
-#define RX_SYNT_LD_GetValue()           PORTDbits.RD1
-#define RX_SYNT_LD_SetDigitalInput()    do { TRISDbits.TRISD1 = 1; } while(0)
-#define RX_SYNT_LD_SetDigitalOutput()   do { TRISDbits.TRISD1 = 0; } while(0)
-#define RX_SYNT_LD_SetAnalogMode()  do { ANSELDbits.ANSD1 = 1; } while(0)
-#define RX_SYNT_LD_SetDigitalMode() do { ANSELDbits.ANSD1 = 0; } while(0)
+// get/set TX_SYNT_LD aliases
+#define TX_SYNT_LD_TRIS               TRISDbits.TRISD1
+#define TX_SYNT_LD_LAT                LATDbits.LATD1
+#define TX_SYNT_LD_PORT               PORTDbits.RD1
+#define TX_SYNT_LD_ANS                ANSELDbits.ANSD1
+#define TX_SYNT_LD_SetHigh()            do { LATDbits.LATD1 = 1; } while(0)
+#define TX_SYNT_LD_SetLow()             do { LATDbits.LATD1 = 0; } while(0)
+#define TX_SYNT_LD_Toggle()             do { LATDbits.LATD1 = ~LATDbits.LATD1; } while(0)
+#define TX_SYNT_LD_GetValue()           PORTDbits.RD1
+#define TX_SYNT_LD_SetDigitalInput()    do { TRISDbits.TRISD1 = 1; } while(0)
+#define TX_SYNT_LD_SetDigitalOutput()   do { TRISDbits.TRISD1 = 0; } while(0)
+#define TX_SYNT_LD_SetAnalogMode()  do { ANSELDbits.ANSD1 = 1; } while(0)
+#define TX_SYNT_LD_SetDigitalMode() do { ANSELDbits.ANSD1 = 0; } while(0)
 
 // get/set RX_SYNT_CE aliases
 #define RX_SYNT_CE_TRIS               TRISDbits.TRISD2
@@ -382,19 +382,19 @@
 #define RX_SYNT_LE_SetAnalogMode()  do { ANSELDbits.ANSD3 = 1; } while(0)
 #define RX_SYNT_LE_SetDigitalMode() do { ANSELDbits.ANSD3 = 0; } while(0)
 
-// get/set TX_SYNT_LD aliases
-#define TX_SYNT_LD_TRIS               TRISDbits.TRISD4
-#define TX_SYNT_LD_LAT                LATDbits.LATD4
-#define TX_SYNT_LD_PORT               PORTDbits.RD4
-#define TX_SYNT_LD_ANS                ANSELDbits.ANSD4
-#define TX_SYNT_LD_SetHigh()            do { LATDbits.LATD4 = 1; } while(0)
-#define TX_SYNT_LD_SetLow()             do { LATDbits.LATD4 = 0; } while(0)
-#define TX_SYNT_LD_Toggle()             do { LATDbits.LATD4 = ~LATDbits.LATD4; } while(0)
-#define TX_SYNT_LD_GetValue()           PORTDbits.RD4
-#define TX_SYNT_LD_SetDigitalInput()    do { TRISDbits.TRISD4 = 1; } while(0)
-#define TX_SYNT_LD_SetDigitalOutput()   do { TRISDbits.TRISD4 = 0; } while(0)
-#define TX_SYNT_LD_SetAnalogMode()  do { ANSELDbits.ANSD4 = 1; } while(0)
-#define TX_SYNT_LD_SetDigitalMode() do { ANSELDbits.ANSD4 = 0; } while(0)
+// get/set RX_SYNT_LD aliases
+#define RX_SYNT_LD_TRIS               TRISDbits.TRISD4
+#define RX_SYNT_LD_LAT                LATDbits.LATD4
+#define RX_SYNT_LD_PORT               PORTDbits.RD4
+#define RX_SYNT_LD_ANS                ANSELDbits.ANSD4
+#define RX_SYNT_LD_SetHigh()            do { LATDbits.LATD4 = 1; } while(0)
+#define RX_SYNT_LD_SetLow()             do { LATDbits.LATD4 = 0; } while(0)
+#define RX_SYNT_LD_Toggle()             do { LATDbits.LATD4 = ~LATDbits.LATD4; } while(0)
+#define RX_SYNT_LD_GetValue()           PORTDbits.RD4
+#define RX_SYNT_LD_SetDigitalInput()    do { TRISDbits.TRISD4 = 1; } while(0)
+#define RX_SYNT_LD_SetDigitalOutput()   do { TRISDbits.TRISD4 = 0; } while(0)
+#define RX_SYNT_LD_SetAnalogMode()  do { ANSELDbits.ANSD4 = 1; } while(0)
+#define RX_SYNT_LD_SetDigitalMode() do { ANSELDbits.ANSD4 = 0; } while(0)
 
 // get/set ADC_RD5 aliases
 #define ADC_RD5_TRIS               TRISDbits.TRISD5

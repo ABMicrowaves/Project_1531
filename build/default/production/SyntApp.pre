@@ -8614,6 +8614,45 @@ uint8_t DATAEE_ReadByte(uint8_t bAdd);
 void MEMORY_ISR(void);
 bool FLASH_IsWriteDone();
 
+# 75 "mcc_generated_files/tmr0.h"
+volatile bool Timer0_SynthLd = 0;
+volatile bool Timer0_Sampling = 0;
+volatile bool Timer0_KeepAlive = 0;
+volatile bool Timer0_OneSec = 0;
+
+# 115
+void TMR0_Initialize(void);
+
+# 144
+void TMR0_StartTimer(void);
+
+# 176
+void TMR0_StopTimer(void);
+
+# 212
+uint16_t TMR0_ReadTimer(void);
+
+# 251
+void TMR0_WriteTimer(uint16_t timerVal);
+
+# 287
+void TMR0_Reload(void);
+
+# 305
+void TMR0_ISR(void);
+
+# 323
+void TMR0_CallBack(void);
+
+# 341
+void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 359
+extern void (*TMR0_InterruptHandler)(void);
+
+# 377
+void TMR0_DefaultInterruptHandler(void);
+
 # 71 "mcc_generated_files/adc.h"
 typedef uint16_t adc_result_t;
 
@@ -8658,45 +8697,6 @@ adc_result_t ADC_GetConversionResult(void);
 
 # 295
 adc_result_t ADC_GetConversion(adc_channel_t channel);
-
-# 75 "mcc_generated_files/tmr0.h"
-volatile bool Timer0_SynthLd = 0;
-volatile bool Timer0_Sampling = 0;
-volatile bool Timer0_KeepAlive = 0;
-volatile bool Timer0_OneSec = 0;
-
-# 115
-void TMR0_Initialize(void);
-
-# 144
-void TMR0_StartTimer(void);
-
-# 176
-void TMR0_StopTimer(void);
-
-# 212
-uint16_t TMR0_ReadTimer(void);
-
-# 251
-void TMR0_WriteTimer(uint16_t timerVal);
-
-# 287
-void TMR0_Reload(void);
-
-# 305
-void TMR0_ISR(void);
-
-# 323
-void TMR0_CallBack(void);
-
-# 341
-void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
-
-# 359
-extern void (*TMR0_InterruptHandler)(void);
-
-# 377
-void TMR0_DefaultInterruptHandler(void);
 
 # 75 "mcc_generated_files/eusart1.h"
 extern volatile uint8_t eusart1TxBufferRemaining;
@@ -8803,9 +8803,9 @@ typedef enum
 
 {
 FAIL_UART_ACK_NOT_RECIEVE = 0x2,
-FAIL_FLASH_MORE_THEN_HELF = 0x4,
-FAIL_SYNTH_RX_LATCH = 0x8,
-FAIL_SYNTH_TX_LATCH = 0xA,
+FAIL_FLASH_MORE_THEN_HELF = 0x2,
+FAIL_SYNTH_RX_LATCH = 0x2,
+FAIL_SYNTH_TX_LATCH = 0x2,
 } LED_ERR_INTICATION;
 
 void testLeds();
@@ -9063,7 +9063,7 @@ void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 
-# 43 "SystemCommon.h"
+# 44 "SystemCommon.h"
 typedef enum
 {
 START_SYSTEM = 0,
@@ -9083,10 +9083,12 @@ unsigned char crc8(char* dataArray, int dataSize);
 uint8_t make8(uint32_t data, uint8_t dataLocation);
 void Make32bitsArray(bool* array, uint32_t data);
 void ZeroArray(char* array, int size);
+void FillArray(char* array, int size, uint8_t value);
 void ZeroBitsArray(bool* array);
 INT_VAL GetIntFromUartData(int8_t num, char* data);
 void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
 uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
+uint16_t GetUint16FromBitArray(bool* bitarray);
 
 
 void ResetMcu(void);
@@ -9104,7 +9106,7 @@ const uint32_t SYNTH_REGS[13] =
 0x120000E7,
 0x35006076,
 0x800025,
-0x10008384,
+0x800BF84,
 0x3,
 0x12,
 0xC000001,
@@ -9129,6 +9131,17 @@ const uint8_t SYNTH_ADDRES[13] =
 0x00,
 };
 
+typedef enum
+{
+UNLOCK = 0x0,
+LOCK = 0x1,
+} SYNTH_LD_STATE;
+
+
+
+volatile bool synthLdRxArray[14];
+volatile bool synthLdTxArray[14];
+
 void PLLInitialize(void);
 void InitSynth(SPI_PERIPHERAL cType);
 void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
@@ -9142,9 +9155,12 @@ bool SynthTxOper = 1;
 bool SynthRxOper = 1;
 
 
-bool synthLdTxFlag = 0;
-bool synthLdRxFlag = 0;
 int8_t synthLdRxCnt = 2;
+int8_t synthLdTxCnt = 2;
+
+
+uint8_t synthLdRxArrayCnt = 0;
+uint8_t synthLdTxArrayCnt = 0;
 
 
 
@@ -9153,6 +9169,9 @@ void PLLInitialize()
 {
 InitSynth(SYNTH_TX);
 InitSynth(SYNTH_RX);
+
+
+FillArray(synthLdRxArray, sizeof(synthLdRxArray), 0xFF);
 }
 
 void InitSynth(SPI_PERIPHERAL cType)
@@ -9317,9 +9336,10 @@ TxMsg[5 * 3 + 1 + 1] = crc8(TxMsg, 5 * 3 + 1 + 1);
 WriteUartMessage(TxMsg, 5 * 3 + 1 + 1 + 1);
 }
 
-# 198
+# 204
 void SynthLdDetect(void)
 {
+
 
 if(PORTDbits.RD4 == 0)
 {
@@ -9332,13 +9352,33 @@ else
 {
 BlinkErrorLeds(FAIL_SYNTH_RX_LATCH);
 }
+synthLdRxArray[synthLdRxArrayCnt++ % 29] = UNLOCK;
 }
-
-if(PORTDbits.RD4 == 1)
+else
 {
-synthLdTxFlag = 1;
+synthLdRxCnt = 2;
+synthLdRxArray[synthLdRxArrayCnt++ % 29] = LOCK;
 }
 
-# 225
+
+
+
+if(PORTDbits.RD1 == 0)
+{
+if(synthLdTxCnt > 0)
+{
+InitSynth(SYNTH_TX);
+synthLdTxCnt--;
+}
+else
+{
+BlinkErrorLeds(FAIL_SYNTH_TX_LATCH);
+}
+}
+else
+{
+synthLdTxCnt = 2;
+}
+
 }
 

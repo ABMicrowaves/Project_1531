@@ -26,9 +26,26 @@ void ZeroArray(char* array, int size)
     memset(array, 0x0, size);
 }
 
-void ZeroBitsArray(bool* array)
+void FillArray(char* array, int size, uint8_t value)
 {
-    memset(array, 0x0, 32);
+    memset(array, value, size);
+}
+
+uint16_t GetUint16FromBitArray(bool* bitarray)
+{
+    uint16_t res = 0;
+    for (int i = 0 ; i != 16 ; i++) 
+    {
+        bool state = bitarray[i];
+        if(state == 0xFF)
+        {
+            return res; 
+        }
+        if (bitarray[i]) 
+        {
+            res |= (uint16_t)(1 << i);
+        }
+    }
 }
 
 INT_VAL GetIntFromUartData(int8_t num, char* data)

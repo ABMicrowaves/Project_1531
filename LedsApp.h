@@ -29,9 +29,9 @@ typedef enum
 // Fail system operation state:
 {
     FAIL_UART_ACK_NOT_RECIEVE   = 0x2,
-    FAIL_FLASH_MORE_THEN_HELF   = 0x4,
-    FAIL_SYNTH_RX_LATCH         = 0x8,
-    FAIL_SYNTH_TX_LATCH         = 0xA,
+    FAIL_FLASH_MORE_THEN_HELF   = 0x2,
+    FAIL_SYNTH_RX_LATCH         = 0x2,
+    FAIL_SYNTH_TX_LATCH         = 0x2,
 } LED_ERR_INTICATION;
 
 void testLeds();

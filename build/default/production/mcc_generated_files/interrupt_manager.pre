@@ -8606,6 +8606,45 @@ uint8_t DATAEE_ReadByte(uint8_t bAdd);
 void MEMORY_ISR(void);
 bool FLASH_IsWriteDone();
 
+# 75 "mcc_generated_files/tmr0.h"
+volatile bool Timer0_SynthLd = 0;
+volatile bool Timer0_Sampling = 0;
+volatile bool Timer0_KeepAlive = 0;
+volatile bool Timer0_OneSec = 0;
+
+# 115
+void TMR0_Initialize(void);
+
+# 144
+void TMR0_StartTimer(void);
+
+# 176
+void TMR0_StopTimer(void);
+
+# 212
+uint16_t TMR0_ReadTimer(void);
+
+# 251
+void TMR0_WriteTimer(uint16_t timerVal);
+
+# 287
+void TMR0_Reload(void);
+
+# 305
+void TMR0_ISR(void);
+
+# 323
+void TMR0_CallBack(void);
+
+# 341
+void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 359
+extern void (*TMR0_InterruptHandler)(void);
+
+# 377
+void TMR0_DefaultInterruptHandler(void);
+
 # 71 "mcc_generated_files/adc.h"
 typedef uint16_t adc_result_t;
 
@@ -8650,45 +8689,6 @@ adc_result_t ADC_GetConversionResult(void);
 
 # 295
 adc_result_t ADC_GetConversion(adc_channel_t channel);
-
-# 75 "mcc_generated_files/tmr0.h"
-volatile bool Timer0_SynthLd = 0;
-volatile bool Timer0_Sampling = 0;
-volatile bool Timer0_KeepAlive = 0;
-volatile bool Timer0_OneSec = 0;
-
-# 115
-void TMR0_Initialize(void);
-
-# 144
-void TMR0_StartTimer(void);
-
-# 176
-void TMR0_StopTimer(void);
-
-# 212
-uint16_t TMR0_ReadTimer(void);
-
-# 251
-void TMR0_WriteTimer(uint16_t timerVal);
-
-# 287
-void TMR0_Reload(void);
-
-# 305
-void TMR0_ISR(void);
-
-# 323
-void TMR0_CallBack(void);
-
-# 341
-void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
-
-# 359
-extern void (*TMR0_InterruptHandler)(void);
-
-# 377
-void TMR0_DefaultInterruptHandler(void);
 
 # 75 "mcc_generated_files/eusart1.h"
 extern volatile uint8_t eusart1TxBufferRemaining;

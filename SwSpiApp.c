@@ -70,7 +70,7 @@ void SWSPI_Synth_send_bits(SPI_PERIPHERAL phrType, uint32_t data)
     uint32_t mask = 0x1;
     
     bool bitArray[32];
-    ZeroBitsArray(bitArray);
+    FillArray(bitArray, sizeof(bitArray), 0x0);
     
     Make32bitsArray(bitArray, data);
     
@@ -220,7 +220,7 @@ void SwSpi_Set_CE_Pin (SPI_PERIPHERAL phrType, bool cPinMode)
             }
             else if(cPinMode == LOW)
             {
-                TX_SYNT_CE_SetLow(); 
+                RX_SYNT_CE_SetLow(); 
             }
             break;
     }

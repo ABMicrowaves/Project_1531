@@ -8614,6 +8614,45 @@ uint8_t DATAEE_ReadByte(uint8_t bAdd);
 void MEMORY_ISR(void);
 bool FLASH_IsWriteDone();
 
+# 75 "mcc_generated_files/tmr0.h"
+volatile bool Timer0_SynthLd = 0;
+volatile bool Timer0_Sampling = 0;
+volatile bool Timer0_KeepAlive = 0;
+volatile bool Timer0_OneSec = 0;
+
+# 115
+void TMR0_Initialize(void);
+
+# 144
+void TMR0_StartTimer(void);
+
+# 176
+void TMR0_StopTimer(void);
+
+# 212
+uint16_t TMR0_ReadTimer(void);
+
+# 251
+void TMR0_WriteTimer(uint16_t timerVal);
+
+# 287
+void TMR0_Reload(void);
+
+# 305
+void TMR0_ISR(void);
+
+# 323
+void TMR0_CallBack(void);
+
+# 341
+void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 359
+extern void (*TMR0_InterruptHandler)(void);
+
+# 377
+void TMR0_DefaultInterruptHandler(void);
+
 # 71 "mcc_generated_files/adc.h"
 typedef uint16_t adc_result_t;
 
@@ -8658,45 +8697,6 @@ adc_result_t ADC_GetConversionResult(void);
 
 # 295
 adc_result_t ADC_GetConversion(adc_channel_t channel);
-
-# 75 "mcc_generated_files/tmr0.h"
-volatile bool Timer0_SynthLd = 0;
-volatile bool Timer0_Sampling = 0;
-volatile bool Timer0_KeepAlive = 0;
-volatile bool Timer0_OneSec = 0;
-
-# 115
-void TMR0_Initialize(void);
-
-# 144
-void TMR0_StartTimer(void);
-
-# 176
-void TMR0_StopTimer(void);
-
-# 212
-uint16_t TMR0_ReadTimer(void);
-
-# 251
-void TMR0_WriteTimer(uint16_t timerVal);
-
-# 287
-void TMR0_Reload(void);
-
-# 305
-void TMR0_ISR(void);
-
-# 323
-void TMR0_CallBack(void);
-
-# 341
-void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
-
-# 359
-extern void (*TMR0_InterruptHandler)(void);
-
-# 377
-void TMR0_DefaultInterruptHandler(void);
 
 # 75 "mcc_generated_files/eusart1.h"
 extern volatile uint8_t eusart1TxBufferRemaining;
@@ -8803,9 +8803,9 @@ typedef enum
 
 {
 FAIL_UART_ACK_NOT_RECIEVE = 0x2,
-FAIL_FLASH_MORE_THEN_HELF = 0x4,
-FAIL_SYNTH_RX_LATCH = 0x8,
-FAIL_SYNTH_TX_LATCH = 0xA,
+FAIL_FLASH_MORE_THEN_HELF = 0x2,
+FAIL_SYNTH_RX_LATCH = 0x2,
+FAIL_SYNTH_TX_LATCH = 0x2,
 } LED_ERR_INTICATION;
 
 void testLeds();
@@ -8842,6 +8842,60 @@ GroupSynthesizers,
 GroupFlashMemory,
 GroupDAC,
 };
+
+# 27 "SyntApp.h"
+const uint32_t SYNTH_REGS[13] =
+{
+0x1041C,
+0x61300B,
+0xC0193A,
+0x1110FCC9,
+0x102D0428,
+0x120000E7,
+0x35006076,
+0x800025,
+0x800BF84,
+0x3,
+0x12,
+0xC000001,
+0x200680
+};
+
+const uint8_t SYNTH_ADDRES[13] =
+{
+
+0x4,
+0x8,
+0xC,
+0x00,
+0x10,
+0x00,
+0x14,
+0x00,
+0x00,
+0x00,
+0x18,
+0x00,
+0x00,
+};
+
+typedef enum
+{
+UNLOCK = 0x0,
+LOCK = 0x1,
+} SYNTH_LD_STATE;
+
+
+
+volatile bool synthLdRxArray[12];
+volatile bool synthLdTxArray[12];
+
+void PLLInitialize(void);
+void InitSynth(SPI_PERIPHERAL cType);
+void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
+void SetSynthOper(SPI_PERIPHERAL cType);
+void SynthReadData(SPI_PERIPHERAL cType, char* data);
+void SynthLdDetect(void);
 
 # 30 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\math.h"
 extern double fabs(double);
@@ -9022,49 +9076,6 @@ void segmentCounter(void);
 unsigned short mask(unsigned short num);
 void InitSevenSegment(void);
 
-# 27 "SyntApp.h"
-const uint32_t SYNTH_REGS[13] =
-{
-0x1041C,
-0x61300B,
-0xC0193A,
-0x1110FCC9,
-0x102D0428,
-0x120000E7,
-0x35006076,
-0x800025,
-0x10008384,
-0x3,
-0x12,
-0xC000001,
-0x200680
-};
-
-const uint8_t SYNTH_ADDRES[13] =
-{
-
-0x4,
-0x8,
-0xC,
-0x00,
-0x10,
-0x00,
-0x14,
-0x00,
-0x00,
-0x00,
-0x18,
-0x00,
-0x00,
-};
-
-void PLLInitialize(void);
-void InitSynth(SPI_PERIPHERAL cType);
-void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
-void SetSynthOper(SPI_PERIPHERAL cType);
-void SynthReadData(SPI_PERIPHERAL cType, char* data);
-void SynthLdDetect(void);
-
 # 14 "SwSpiApp.h"
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
@@ -9080,7 +9091,7 @@ void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 
-# 43 "SystemCommon.h"
+# 44 "SystemCommon.h"
 typedef enum
 {
 START_SYSTEM = 0,
@@ -9100,10 +9111,12 @@ unsigned char crc8(char* dataArray, int dataSize);
 uint8_t make8(uint32_t data, uint8_t dataLocation);
 void Make32bitsArray(bool* array, uint32_t data);
 void ZeroArray(char* array, int size);
+void FillArray(char* array, int size, uint8_t value);
 void ZeroBitsArray(bool* array);
 INT_VAL GetIntFromUartData(int8_t num, char* data);
 void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
 uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
+uint16_t GetUint16FromBitArray(bool* bitarray);
 
 
 void ResetMcu(void);
@@ -9169,16 +9182,24 @@ void AdcConvert()
 {
 
 uint16_t adcRes = 0;
+uint8_t idx = 0;
 
 if (adcSampleMode == CIRCULAR)
 {
-for(uint8_t idx = 0; idx < (9); idx++)
+for(idx = 0; idx < (9); idx++)
 {
 adc_result_t _adcResult = ADC_GetConversion(channelArr[idx]);
 adcRes = (_adcResult/pow(2,(10)))*(3340);
 FlashSampleWrite(adcRes, idx + 1);
 _delay((unsigned long)((250)*(8000000/4000.0)));
 }
+
+
+uint16_t ldRxSate = GetUint16FromBitArray(synthLdRxArray);
+FlashSampleWrite(ldRxSate, idx + 1);
+uint16_t ldTxSate = GetUint16FromBitArray(synthLdTxArray);
+FlashSampleWrite(ldTxSate, idx + 2);
+
 }
 else if (adcSampleMode == SINGLE_CHANNEL)
 {

@@ -65,7 +65,9 @@ void FlashReadUart(char* data)
     int j=0;
     int offset = 0;
     
-    int numOfSampleToRead = data[0];
+    INT_VAL val = GetIntFromUartData(10, data);
+    int numOfSampleToRead = val.num;
+    
     char TxMsg[FLASH_TX_PACKET_SIZE + 1];
     ZeroArray(TxMsg, FLASH_TX_PACKET_SIZE + 1);
     
@@ -130,6 +132,7 @@ void FlashReadUart(char* data)
     TxMsg[MSG_GROUP_LOCATION] =  FLASH_MSG;
     TxMsg[MSG_REQUEST_LOCATION] =  FLASH_SEND_RAW_DATA;
     TxMsg[MSG_DATA_SIZE_LOCATION] = WRITE_FLASH_BLOCKSIZE;
+    
     
     for (j=0; j<numOfSampleToRead; j++)
     {

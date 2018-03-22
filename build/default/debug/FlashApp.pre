@@ -8614,6 +8614,45 @@ uint8_t DATAEE_ReadByte(uint8_t bAdd);
 void MEMORY_ISR(void);
 bool FLASH_IsWriteDone();
 
+# 75 "mcc_generated_files/tmr0.h"
+volatile bool Timer0_SynthLd = 0;
+volatile bool Timer0_Sampling = 0;
+volatile bool Timer0_KeepAlive = 0;
+volatile bool Timer0_OneSec = 0;
+
+# 115
+void TMR0_Initialize(void);
+
+# 144
+void TMR0_StartTimer(void);
+
+# 176
+void TMR0_StopTimer(void);
+
+# 212
+uint16_t TMR0_ReadTimer(void);
+
+# 251
+void TMR0_WriteTimer(uint16_t timerVal);
+
+# 287
+void TMR0_Reload(void);
+
+# 305
+void TMR0_ISR(void);
+
+# 323
+void TMR0_CallBack(void);
+
+# 341
+void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 359
+extern void (*TMR0_InterruptHandler)(void);
+
+# 377
+void TMR0_DefaultInterruptHandler(void);
+
 # 71 "mcc_generated_files/adc.h"
 typedef uint16_t adc_result_t;
 
@@ -8658,45 +8697,6 @@ adc_result_t ADC_GetConversionResult(void);
 
 # 295
 adc_result_t ADC_GetConversion(adc_channel_t channel);
-
-# 75 "mcc_generated_files/tmr0.h"
-volatile bool Timer0_SynthLd = 0;
-volatile bool Timer0_Sampling = 0;
-volatile bool Timer0_KeepAlive = 0;
-volatile bool Timer0_OneSec = 0;
-
-# 115
-void TMR0_Initialize(void);
-
-# 144
-void TMR0_StartTimer(void);
-
-# 176
-void TMR0_StopTimer(void);
-
-# 212
-uint16_t TMR0_ReadTimer(void);
-
-# 251
-void TMR0_WriteTimer(uint16_t timerVal);
-
-# 287
-void TMR0_Reload(void);
-
-# 305
-void TMR0_ISR(void);
-
-# 323
-void TMR0_CallBack(void);
-
-# 341
-void TMR0_SetInterruptHandler(void (* InterruptHandler)(void));
-
-# 359
-extern void (*TMR0_InterruptHandler)(void);
-
-# 377
-void TMR0_DefaultInterruptHandler(void);
 
 # 75 "mcc_generated_files/eusart1.h"
 extern volatile uint8_t eusart1TxBufferRemaining;
@@ -8803,9 +8803,9 @@ typedef enum
 
 {
 FAIL_UART_ACK_NOT_RECIEVE = 0x2,
-FAIL_FLASH_MORE_THEN_HELF = 0x4,
-FAIL_SYNTH_RX_LATCH = 0x8,
-FAIL_SYNTH_TX_LATCH = 0xA,
+FAIL_FLASH_MORE_THEN_HELF = 0x2,
+FAIL_SYNTH_RX_LATCH = 0x2,
+FAIL_SYNTH_TX_LATCH = 0x2,
 } LED_ERR_INTICATION;
 
 void testLeds();
@@ -8857,6 +8857,60 @@ GroupSynthesizers,
 GroupFlashMemory,
 GroupDAC,
 };
+
+# 27 "SyntApp.h"
+const uint32_t SYNTH_REGS[13] =
+{
+0x1041C,
+0x61300B,
+0xC0193A,
+0x1110FCC9,
+0x102D0428,
+0x120000E7,
+0x35006076,
+0x800025,
+0x800BF84,
+0x3,
+0x12,
+0xC000001,
+0x200680
+};
+
+const uint8_t SYNTH_ADDRES[13] =
+{
+
+0x4,
+0x8,
+0xC,
+0x00,
+0x10,
+0x00,
+0x14,
+0x00,
+0x00,
+0x00,
+0x18,
+0x00,
+0x00,
+};
+
+typedef enum
+{
+UNLOCK = 0x0,
+LOCK = 0x1,
+} SYNTH_LD_STATE;
+
+
+
+volatile bool synthLdRxArray[12];
+volatile bool synthLdTxArray[12];
+
+void PLLInitialize(void);
+void InitSynth(SPI_PERIPHERAL cType);
+void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
+void SetSynthOper(SPI_PERIPHERAL cType);
+void SynthReadData(SPI_PERIPHERAL cType, char* data);
+void SynthLdDetect(void);
 
 # 30 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\math.h"
 extern double fabs(double);
@@ -9037,49 +9091,6 @@ void segmentCounter(void);
 unsigned short mask(unsigned short num);
 void InitSevenSegment(void);
 
-# 27 "SyntApp.h"
-const uint32_t SYNTH_REGS[13] =
-{
-0x1041C,
-0x61300B,
-0xC0193A,
-0x1110FCC9,
-0x102D0428,
-0x120000E7,
-0x35006076,
-0x800025,
-0x10008384,
-0x3,
-0x12,
-0xC000001,
-0x200680
-};
-
-const uint8_t SYNTH_ADDRES[13] =
-{
-
-0x4,
-0x8,
-0xC,
-0x00,
-0x10,
-0x00,
-0x14,
-0x00,
-0x00,
-0x00,
-0x18,
-0x00,
-0x00,
-};
-
-void PLLInitialize(void);
-void InitSynth(SPI_PERIPHERAL cType);
-void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
-void SetSynthOper(SPI_PERIPHERAL cType);
-void SynthReadData(SPI_PERIPHERAL cType, char* data);
-void SynthLdDetect(void);
-
 # 14 "SwSpiApp.h"
 void SWSPI_send_word (SPI_PERIPHERAL phrType, uint32_t data, uint8_t dataSize);
 void SwSpi_Data_Pin (SPI_PERIPHERAL phrType, bool cPinMode);
@@ -9095,7 +9106,7 @@ void SwSpi_Set_Synth_Le_Pin(SPI_PERIPHERAL phrType, bool cPinMode);
 void SWSPI_DAC_send_bits(SPI_PERIPHERAL phrType, uint8_t data);
 void SwSpi_Set_Dac_Sync_Pin(bool cPinMode);
 
-# 43 "SystemCommon.h"
+# 44 "SystemCommon.h"
 typedef enum
 {
 START_SYSTEM = 0,
@@ -9115,10 +9126,12 @@ unsigned char crc8(char* dataArray, int dataSize);
 uint8_t make8(uint32_t data, uint8_t dataLocation);
 void Make32bitsArray(bool* array, uint32_t data);
 void ZeroArray(char* array, int size);
+void FillArray(char* array, int size, uint8_t value);
 void ZeroBitsArray(bool* array);
 INT_VAL GetIntFromUartData(int8_t num, char* data);
 void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
 uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
+uint16_t GetUint16FromBitArray(bool* bitarray);
 
 
 void ResetMcu(void);
@@ -9137,8 +9150,8 @@ uint8_t EepromRead(uint8_t address);
 void EepromWrite(uint8_t address, uint8_t data);
 
 # 13 "FlashApp.c"
-uint32_t writeAddress = 0x4500;
-uint32_t readAddress = 0x4500;
+uint32_t writeAddress = 0x4600;
+uint32_t readAddress = 0x4600;
 
 
 uint32_t numOfValidateSamples = 0;
@@ -9163,15 +9176,15 @@ FLASH_WriteBlock(writeAddress, (uint8_t *)sampleArray);
 writeAddress += (64);
 if (writeAddress >= 0x7FF0)
 {
-writeAddress = 0x4500;
+writeAddress = 0x4600;
 isReWriteDone = 1;
-if (readAddress == 0x4500)
+if (readAddress == 0x4600)
 {
 readAddress += (64);
 }
 }
 
-if (numOfValidateSamples < ((0x4500-0x7FF0)/(64)))
+if (numOfValidateSamples < ((0x4600-0x7FF0)/(64)))
 {
 numOfValidateSamples++;
 }
@@ -9188,7 +9201,9 @@ void FlashReadUart(char* data)
 int j=0;
 int offset = 0;
 
-int numOfSampleToRead = data[0];
+INT_VAL val = GetIntFromUartData(10, data);
+int numOfSampleToRead = val.num;
+
 char TxMsg[(64) + (0x4) + 1];
 ZeroArray(TxMsg, (64) + (0x4) + 1);
 
@@ -9221,9 +9236,9 @@ numOfSampleToRead = (numOfReadSamples > numOfSampleToRead)? numOfSampleToRead : 
 readAddress -= numOfSampleToRead * (64);
 }
 
-if (readAddress <= 0x4500)
+if (readAddress <= 0x4600)
 {
-readAddress = 0x4500;
+readAddress = 0x4600;
 }
 }
 else
@@ -9233,7 +9248,7 @@ if ((isReWriteDone) && (readAddress <= writeAddress))
 readAddress = writeAddress + (64);
 if (readAddress >= 0x7FF0)
 {
-readAddress = 0x4500;
+readAddress = 0x4600;
 }
 
 }
@@ -9254,6 +9269,7 @@ TxMsg[(1)] = FLASH_MSG;
 TxMsg[(2)] = FLASH_SEND_RAW_DATA;
 TxMsg[(3)] = (64);
 
+
 for (j=0; j<numOfSampleToRead; j++)
 {
 
@@ -9265,7 +9281,7 @@ TxMsg[(0x4) + idx] = FLASH_ReadByte(readAddress + idx);
 readAddress += (64);
 if (readAddress >= 0x7FF0)
 {
-readAddress = 0x4500;
+readAddress = 0x4600;
 }
 TxMsg[(64) + (0x4)] = crc8(TxMsg, (64) + (0x4));
 
@@ -9273,7 +9289,7 @@ WriteUartMessage(TxMsg, (64) + (0x4) + 1);
 
 if(numOfValidateSamples)
 {
-if (numOfReadSamples < ((0x4500-0x7FF0)/(64)))
+if (numOfReadSamples < ((0x4600-0x7FF0)/(64)))
 {
 numOfReadSamples++;
 }
@@ -9285,11 +9301,11 @@ numOfValidateSamples--;
 }
 }
 
-# 170
+# 173
 void FlashEreaseMem(void)
 {
-writeAddress = 0x4500;
-readAddress = 0x4500;
+writeAddress = 0x4600;
+readAddress = 0x4600;
 numOfValidateSamples = 0;
 ZeroArray(sampleArray, (64)/sizeof(adc_result_t));
 SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_EREASE_MEMORY);
@@ -9311,8 +9327,8 @@ TxMsg[(3)] = 4;
 
 
 
-TxMsg[(0x4) + 0] = make8(0x7FF0 - 0x4500,1);
-TxMsg[(0x4) + 1] = make8(0x7FF0 - 0x4500,0);
+TxMsg[(0x4) + 0] = make8(0x7FF0 - 0x4600,1);
+TxMsg[(0x4) + 1] = make8(0x7FF0 - 0x4600,0);
 
 
 TxMsg[(0x4) + 2] = make8(0x7FF0 - writeAddress,1);
@@ -9329,7 +9345,7 @@ double precentage = ((double)(0x7FF0 - writeAddress) / 0x7FF0) * 100;
 return (precentage > 75) ? 1 : 0;
 }
 
-# 217
+# 220
 uint8_t EepromRead(uint8_t address)
 {
 return DATAEE_ReadByte(address);

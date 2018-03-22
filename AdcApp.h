@@ -11,9 +11,9 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 #include "SystemCommon.h"
 
-#define ADC_NUM_CHANNELS (9)
-#define VDD             (3340)
-#define ADC_BIT_SIZE    (10)
+#define ADC_NUM_CHANNELS    (9)
+#define VDD                 (3340)
+#define ADC_BIT_SIZE        (10)
 
 typedef enum
 {

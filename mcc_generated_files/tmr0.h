@@ -66,9 +66,9 @@
 */
 
 #define TMR0_INTERVAL_TIME_ONE_SEC_CLOCK        10
-#define TMR0_INTERVAL_TIME_SAMPLING             100  // 800
-#define TMR0_INTERVAL_TIME_SYNTH_LOCK_DETECT    100   // 5 Sec
-#define TMR0_INTERVAL_TIME_KEEP_ALIVE           200 // 15 Sec.
+#define TMR0_INTERVAL_TIME_SAMPLING             100     // 800
+#define TMR0_INTERVAL_TIME_SYNTH_LOCK_DETECT    20     // 120 Sec
+#define TMR0_INTERVAL_TIME_KEEP_ALIVE           200     // 15 Sec.
 #define TMR0_MAX_TIME_TO_MEASURE                35000
         
 // Timers counters:

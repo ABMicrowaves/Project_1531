@@ -6815,9 +6815,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;tmr0.c: 144: CountCallBack++;
 "144
 [e ++ F7016 -> -> 1 `i `ui ]
-[; ;tmr0.c: 145: if ((CountCallBack % 100) == 0)
+[; ;tmr0.c: 145: if ((CountCallBack % 20) == 0)
 "145
-[e $ ! == % F7016 -> -> 100 `i `ui -> -> 0 `i `ui 853  ]
+[e $ ! == % F7016 -> -> 20 `i `ui -> -> 0 `i `ui 853  ]
 [; ;tmr0.c: 146: {
 "146
 {

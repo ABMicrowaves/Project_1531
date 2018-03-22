@@ -23,7 +23,7 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #define SYNTH_READ_CONDITION_PACKET_SIZE    IDX_SYNTH_OPER_STATE_PLACE + 1 
 
 #define SYNTH_LD_TRIES                      2
-
+#define SYNTH_LD_NUM_BITS                   12
 const uint32_t SYNTH_REGS[NUM_OF_TOTAL_REGISTERS] = 
 {
     0x1041C,        /* R12  */
@@ -34,7 +34,7 @@ const uint32_t SYNTH_REGS[NUM_OF_TOTAL_REGISTERS] =
     0x120000E7,     /* R07  */
     0x35006076,     /* R06  */
     0x800025,       /* R05  */
-    0x10008384,     /* R04  */
+    0x800BF84,     /* R04  */
     0x3,            /* R03  */
     0x12,           /* R02  */
     0xC000001,      /* R01  */
@@ -58,6 +58,17 @@ const uint8_t SYNTH_ADDRES[NUM_OF_TOTAL_REGISTERS] =
     0x00,       // Reserved place  for REG 11
     0x00,       // Reserved place  for REG 12
 };
+
+typedef enum
+{   
+    UNLOCK  = 0x0,
+    LOCK    = 0x1,            
+} SYNTH_LD_STATE;
+
+
+// define LD array (TX + RX)
+volatile bool synthLdRxArray[SYNTH_LD_NUM_BITS];
+volatile bool synthLdTxArray[SYNTH_LD_NUM_BITS];
 
 void PLLInitialize(void);
 void InitSynth(SPI_PERIPHERAL cType);

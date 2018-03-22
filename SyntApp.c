@@ -15,9 +15,12 @@ bool SynthTxOper = true;
 bool SynthRxOper = true;
 
 // Lock detect
-bool synthLdTxFlag = false;
-bool synthLdRxFlag = false;
 int8_t synthLdRxCnt = SYNTH_LD_TRIES;
+int8_t synthLdTxCnt = SYNTH_LD_TRIES;
+
+//volatile bool synthLdRxArray[14];
+uint8_t synthLdRxArrayCnt = 0; 
+uint8_t synthLdTxArrayCnt = 0;
 // </editor-fold>
 
 // <editor-fold defaultstate="collapsed" desc="Init synthesizers">
@@ -26,6 +29,9 @@ void PLLInitialize()
 {
     InitSynth(SYNTH_TX);
     InitSynth(SYNTH_RX);
+    
+    // Initialize LD array
+    FillArray(synthLdRxArray, sizeof(synthLdRxArray), 0xFF);
 }
 
 void InitSynth(SPI_PERIPHERAL cType)
@@ -197,8 +203,9 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data)
 
 void SynthLdDetect(void)
 {
+    // <editor-fold defaultstate="collapsed" desc="Synth Rx lock detect">
     
-    if(TX_SYNT_LD_GetValue() == LOW)
+    if(RX_SYNT_LD_GetValue() == LOW)
     {
         if(synthLdRxCnt > 0)
         {
@@ -209,18 +216,35 @@ void SynthLdDetect(void)
         {
             BlinkErrorLeds(FAIL_SYNTH_RX_LATCH);
         }
+        synthLdRxArray[synthLdRxArrayCnt++ % SYNTH_LD_NUM_BITS] = UNLOCK;
     }
-    
-    if(TX_SYNT_LD_GetValue() == HIGH)
+    else
     {
-        synthLdTxFlag = true;
+        synthLdRxCnt = SYNTH_LD_TRIES;
+        synthLdRxArray[synthLdRxArrayCnt++ % SYNTH_LD_NUM_BITS] = LOCK;
     }
-//    if(RX_SYNT_LD_GetValue()== HIGH)
-//    {
-//        if(TX_SYNT_LD_GetValue() == LOW)
-//        {
-//            synthLdRxFlag = true;
-//        }
-//    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Synth Tx lock detect">
+    
+    if(TX_SYNT_LD_GetValue() == LOW)
+    {
+        if(synthLdTxCnt > 0)
+        {
+            InitSynth(SYNTH_TX);
+            synthLdTxCnt--;
+        }
+        else
+        {
+            BlinkErrorLeds(FAIL_SYNTH_TX_LATCH);
+        }
+        synthLdTxArray[synthLdTxArrayCnt++ % SYNTH_LD_NUM_BITS] = UNLOCK;
+    }
+    else
+    {
+        synthLdTxCnt = SYNTH_LD_TRIES;
+        synthLdTxArray[synthLdTxArrayCnt++ % SYNTH_LD_NUM_BITS] = LOCK;
+    }
+    // </editor-fold>
 }
 // </editor-fold>
