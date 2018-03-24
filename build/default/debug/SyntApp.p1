@@ -38,7 +38,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S851 . num con ]
 "65
 [v _GetIntFromUartData `(S851 ~T0 @X0 0 ef2`c`*uc ]
-"99 SyntApp.c
+"100 SyntApp.c
 [c E7108 1 2 3 4 5 6 .. ]
 [n E7108 . CONTROL_MSG MCU_STATUS_VERSION_MSG ADC_MSG SYNTH_MSG FLASH_MSG DAC_MSG  ]
 "34 EusartApp.h
@@ -77,17 +77,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S357 . . . . . . . . ]
 "7203
 [v _PORTDbits `VS357 ~T0 @X0 0 e@3971 ]
-"217 SyntApp.c
+"221 SyntApp.c
 [c E7150 3 .. ]
 [n E7150 . OK_START_SYSTEM  ]
 "38 LedsApp.h
 [v _BlinkErrorLeds `(v ~T0 @X0 0 ef1`E7150 ]
-"217 SyntApp.c
+"221 SyntApp.c
 [c E7153 2 2 2 2 .. ]
 [n E7153 . FAIL_UART_ACK_NOT_RECIEVE FAIL_FLASH_MORE_THEN_HELF FAIL_SYNTH_RX_LATCH FAIL_SYNTH_TX_LATCH  ]
-"219
-[c E7589 0 1 .. ]
-[n E7589 . UNLOCK LOCK  ]
+"223
+[c E7590 0 1 .. ]
+[n E7590 . UNLOCK LOCK  ]
 [; ;SystemCommon.h: 13: typedef enum
 [; ;SystemCommon.h: 14: {
 [; ;SystemCommon.h: 15: SYNTH_TX = 0,
@@ -7107,7 +7107,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SystemCommon.h: 65: INT_VAL GetIntFromUartData(int8_t num, char* data);
 [; ;SystemCommon.h: 66: void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
 [; ;SystemCommon.h: 67: uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
-[; ;SystemCommon.h: 68: uint16_t GetUint16FromBitArray(bool* bitarray);
+[; ;SystemCommon.h: 68: uint16_t GetUint16FromBitArray(bool* bitarray, int numOfBits);
 [; ;SystemCommon.h: 71: void ResetMcu(void);
 [; ;SystemCommon.h: 72: void ResetCpld(void);
 [; ;SystemCommon.h: 73: void SendSystemStartAck(void);
@@ -7280,650 +7280,662 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.c: 31: InitSynth(SYNTH_RX);
 "31
 [e ( _InitSynth (1 . `E1 1 ]
-[; ;SyntApp.c: 34: FillArray(synthLdRxArray, sizeof(synthLdRxArray), 0xFF);
+[; ;SyntApp.c: 34: FillArray(synthLdRxArray, sizeof(synthLdRxArray), 0x0);
 "34
-[e ( _FillArray (3 , , -> &U _synthLdRxArray `*uc -> -> # _synthLdRxArray `ui `i -> -> 255 `i `uc ]
-[; ;SyntApp.c: 35: }
+[e ( _FillArray (3 , , -> &U _synthLdRxArray `*uc -> -> # _synthLdRxArray `ui `i -> -> 0 `i `uc ]
+[; ;SyntApp.c: 35: FillArray(synthLdTxArray, sizeof(synthLdTxArray), 0x0);
 "35
+[e ( _FillArray (3 , , -> &U _synthLdTxArray `*uc -> -> # _synthLdTxArray `ui `i -> -> 0 `i `uc ]
+[; ;SyntApp.c: 36: }
+"36
 [e :UE 852 ]
 }
-"37
+"38
 [v _InitSynth `(v ~T0 @X0 1 ef1`E1 ]
-"38
-{
-[; ;SyntApp.c: 37: void InitSynth(SPI_PERIPHERAL cType)
-[; ;SyntApp.c: 38: {
-[e :U _InitSynth ]
-"37
-[v _cType `E1 ~T0 @X0 1 r1 ]
-"38
-[f ]
-[; ;SyntApp.c: 39: SwSpi_Set_CE_Pin(cType, 1);
 "39
+{
+[; ;SyntApp.c: 38: void InitSynth(SPI_PERIPHERAL cType)
+[; ;SyntApp.c: 39: {
+[e :U _InitSynth ]
+"38
+[v _cType `E1 ~T0 @X0 1 r1 ]
+"39
+[f ]
+[; ;SyntApp.c: 40: SwSpi_Set_CE_Pin(cType, 1);
+"40
 [e ( _SwSpi_Set_CE_Pin (2 , _cType -> -> 1 `i `uc ]
-"41
-[v _regNum `uc ~T0 @X0 1 a ]
-[; ;SyntApp.c: 41: uint8_t regNum = 0;
-[e = _regNum -> -> 0 `i `uc ]
 "42
+[v _regNum `uc ~T0 @X0 1 a ]
+[; ;SyntApp.c: 42: uint8_t regNum = 0;
+[e = _regNum -> -> 0 `i `uc ]
+"43
 [v _EepromVal `ul ~T0 @X0 1 a ]
-[; ;SyntApp.c: 42: uint32_t EepromVal = 0x0;
+[; ;SyntApp.c: 43: uint32_t EepromVal = 0x0;
 [e = _EepromVal -> -> -> 0 `i `l `ul ]
-[; ;SyntApp.c: 45: for(uint8_t idx = 0; idx < 13; idx++)
-"45
+[; ;SyntApp.c: 46: for(uint8_t idx = 0; idx < 13; idx++)
+"46
 {
 [v _idx `uc ~T0 @X0 1 a ]
 [e = _idx -> -> 0 `i `uc ]
 [e $ < -> _idx `i -> 13 `i 854  ]
 [e $U 855  ]
-"46
-[e :U 854 ]
-[; ;SyntApp.c: 46: {
-{
-[; ;SyntApp.c: 47: regNum = 13 - idx - 1;
 "47
-[e = _regNum -> - - -> 13 `i -> _idx `i -> 1 `i `uc ]
-[; ;SyntApp.c: 48: if(regNum == 0x0 || regNum == 0x1 || regNum == 0x2 || regNum == 0x4 || regNum == 0x6 || regNum == 0xA)
+[e :U 854 ]
+[; ;SyntApp.c: 47: {
+{
+[; ;SyntApp.c: 48: regNum = 13 - idx - 1;
 "48
-[e $ ! || || || || || == -> _regNum `i -> 0 `i == -> _regNum `i -> 1 `i == -> _regNum `i -> 2 `i == -> _regNum `i -> 4 `i == -> _regNum `i -> 6 `i == -> _regNum `i -> 10 `i 857  ]
-[; ;SyntApp.c: 49: {
+[e = _regNum -> - - -> 13 `i -> _idx `i -> 1 `i `uc ]
+[; ;SyntApp.c: 49: if(regNum == 0x0 || regNum == 0x1 || regNum == 0x2 || regNum == 0x4 || regNum == 0x6 || regNum == 0xA)
 "49
-{
-[; ;SyntApp.c: 50: if(cType == SYNTH_TX)
+[e $ ! || || || || || == -> _regNum `i -> 0 `i == -> _regNum `i -> 1 `i == -> _regNum `i -> 2 `i == -> _regNum `i -> 4 `i == -> _regNum `i -> 6 `i == -> _regNum `i -> 10 `i 857  ]
+[; ;SyntApp.c: 50: {
 "50
-[e $ ! == -> _cType `i -> . `E1 0 `i 858  ]
-[; ;SyntApp.c: 51: {
+{
+[; ;SyntApp.c: 51: if(cType == SYNTH_TX)
 "51
-{
-[; ;SyntApp.c: 52: EepromVal = ReadIntFromEeprom((0) | SYNTH_ADDRES[regNum], 4);
+[e $ ! == -> _cType `i -> . `E1 0 `i 858  ]
+[; ;SyntApp.c: 52: {
 "52
-[e = _EepromVal ( _ReadIntFromEeprom (2 , -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> _regNum `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-[; ;SyntApp.c: 53: if(EepromVal == 0xFFFFFFFF)
+{
+[; ;SyntApp.c: 53: EepromVal = ReadIntFromEeprom((0) | SYNTH_ADDRES[regNum], 4);
 "53
-[e $ ! == _EepromVal -> -1 `ul 859  ]
-[; ;SyntApp.c: 54: {
+[e = _EepromVal ( _ReadIntFromEeprom (2 , -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> _regNum `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 54: if(EepromVal == 0xFFFFFFFF)
 "54
-{
-[; ;SyntApp.c: 55: SWSPI_send_word(cType, SYNTH_REGS[idx],3);
+[e $ ! == _EepromVal -> -1 `ul 859  ]
+[; ;SyntApp.c: 55: {
 "55
-[e ( _SWSPI_send_word (3 , , _cType *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> -> 3 `i `uc ]
-[; ;SyntApp.c: 56: StoreIntInEeprom(SYNTH_REGS[idx], (0) | SYNTH_ADDRES[regNum], 4);
-"56
-[e ( _StoreIntInEeprom (3 , , *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> _regNum `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-"57
-}
-[; ;SyntApp.c: 57: }
-[e $U 860  ]
-"58
-[e :U 859 ]
-[; ;SyntApp.c: 58: else
-[; ;SyntApp.c: 59: {
-"59
 {
-[; ;SyntApp.c: 60: SWSPI_send_word(cType, EepromVal,3);
-"60
-[e ( _SWSPI_send_word (3 , , _cType _EepromVal -> -> 3 `i `uc ]
-"61
+[; ;SyntApp.c: 56: SWSPI_send_word(cType, SYNTH_REGS[idx],3);
+"56
+[e ( _SWSPI_send_word (3 , , _cType *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> -> 3 `i `uc ]
+[; ;SyntApp.c: 57: StoreIntInEeprom(SYNTH_REGS[idx], (0) | SYNTH_ADDRES[regNum], 4);
+"57
+[e ( _StoreIntInEeprom (3 , , *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> _regNum `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+"58
 }
-[e :U 860 ]
+[; ;SyntApp.c: 58: }
+[e $U 860  ]
+"59
+[e :U 859 ]
+[; ;SyntApp.c: 59: else
+[; ;SyntApp.c: 60: {
+"60
+{
+[; ;SyntApp.c: 61: SWSPI_send_word(cType, EepromVal,3);
+"61
+[e ( _SWSPI_send_word (3 , , _cType _EepromVal -> -> 3 `i `uc ]
 "62
 }
-[; ;SyntApp.c: 61: }
-[; ;SyntApp.c: 62: }
-[e $U 861  ]
+[e :U 860 ]
 "63
-[e :U 858 ]
-[; ;SyntApp.c: 63: else if (cType == SYNTH_RX)
-[e $ ! == -> _cType `i -> . `E1 1 `i 862  ]
-[; ;SyntApp.c: 64: {
+}
+[; ;SyntApp.c: 62: }
+[; ;SyntApp.c: 63: }
+[e $U 861  ]
 "64
-{
-[; ;SyntApp.c: 65: EepromVal = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[regNum], 4);
+[e :U 858 ]
+[; ;SyntApp.c: 64: else if (cType == SYNTH_RX)
+[e $ ! == -> _cType `i -> . `E1 1 `i 862  ]
+[; ;SyntApp.c: 65: {
 "65
-[e = _EepromVal ( _ReadIntFromEeprom (2 , -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> _regNum `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-[; ;SyntApp.c: 66: if(EepromVal == 0xFFFFFFFF)
+{
+[; ;SyntApp.c: 66: EepromVal = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[regNum], 4);
 "66
-[e $ ! == _EepromVal -> -1 `ul 863  ]
-[; ;SyntApp.c: 67: {
+[e = _EepromVal ( _ReadIntFromEeprom (2 , -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> _regNum `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 67: if(EepromVal == 0xFFFFFFFF)
 "67
-{
-[; ;SyntApp.c: 68: SWSPI_send_word(cType, SYNTH_REGS[idx],3);
+[e $ ! == _EepromVal -> -1 `ul 863  ]
+[; ;SyntApp.c: 68: {
 "68
-[e ( _SWSPI_send_word (3 , , _cType *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> -> 3 `i `uc ]
-[; ;SyntApp.c: 69: StoreIntInEeprom(SYNTH_REGS[idx], (0x20) | SYNTH_ADDRES[regNum], 4);
-"69
-[e ( _StoreIntInEeprom (3 , , *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> _regNum `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-"70
-}
-[; ;SyntApp.c: 70: }
-[e $U 864  ]
-"71
-[e :U 863 ]
-[; ;SyntApp.c: 71: else
-[; ;SyntApp.c: 72: {
-"72
 {
-[; ;SyntApp.c: 73: SWSPI_send_word(cType, EepromVal,3);
-"73
-[e ( _SWSPI_send_word (3 , , _cType _EepromVal -> -> 3 `i `uc ]
-"74
+[; ;SyntApp.c: 69: SWSPI_send_word(cType, SYNTH_REGS[idx],3);
+"69
+[e ( _SWSPI_send_word (3 , , _cType *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> -> 3 `i `uc ]
+[; ;SyntApp.c: 70: StoreIntInEeprom(SYNTH_REGS[idx], (0x20) | SYNTH_ADDRES[regNum], 4);
+"70
+[e ( _StoreIntInEeprom (3 , , *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> _regNum `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+"71
 }
-[e :U 864 ]
+[; ;SyntApp.c: 71: }
+[e $U 864  ]
+"72
+[e :U 863 ]
+[; ;SyntApp.c: 72: else
+[; ;SyntApp.c: 73: {
+"73
+{
+[; ;SyntApp.c: 74: SWSPI_send_word(cType, EepromVal,3);
+"74
+[e ( _SWSPI_send_word (3 , , _cType _EepromVal -> -> 3 `i `uc ]
 "75
 }
+[e :U 864 ]
+"76
+}
 [e :U 862 ]
-"78
+"79
 [e :U 861 ]
 }
-[; ;SyntApp.c: 74: }
 [; ;SyntApp.c: 75: }
-[; ;SyntApp.c: 78: }
+[; ;SyntApp.c: 76: }
+[; ;SyntApp.c: 79: }
 [e $U 865  ]
-"79
-[e :U 857 ]
-[; ;SyntApp.c: 79: else
-[; ;SyntApp.c: 80: {
 "80
-{
-[; ;SyntApp.c: 81: SWSPI_send_word(cType, SYNTH_REGS[idx],3);
+[e :U 857 ]
+[; ;SyntApp.c: 80: else
+[; ;SyntApp.c: 81: {
 "81
-[e ( _SWSPI_send_word (3 , , _cType *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> -> 3 `i `uc ]
+{
+[; ;SyntApp.c: 82: SWSPI_send_word(cType, SYNTH_REGS[idx],3);
 "82
-}
-[e :U 865 ]
+[e ( _SWSPI_send_word (3 , , _cType *U + &U _SYNTH_REGS * -> _idx `ux -> -> # *U &U _SYNTH_REGS `ui `ux -> -> 3 `i `uc ]
 "83
 }
-"45
+[e :U 865 ]
+"84
+}
+"46
 [e ++ _idx -> -> 1 `i `uc ]
 [e $ < -> _idx `i -> 13 `i 854  ]
 [e :U 855 ]
-"83
+"84
 }
-[; ;SyntApp.c: 82: }
 [; ;SyntApp.c: 83: }
 [; ;SyntApp.c: 84: }
-"84
+[; ;SyntApp.c: 85: }
+"85
 [e :UE 853 ]
 }
-"89
-[v _UpdateSynthFreq `(v ~T0 @X0 1 ef2`E1`*uc ]
 "90
+[v _UpdateSynthFreq `(v ~T0 @X0 1 ef2`E1`*uc ]
+"91
 {
-[; ;SyntApp.c: 89: void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data)
-[; ;SyntApp.c: 90: {
+[; ;SyntApp.c: 90: void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data)
+[; ;SyntApp.c: 91: {
 [e :U _UpdateSynthFreq ]
-"89
+"90
 [v _cType `E1 ~T0 @X0 1 r1 ]
 [v _data `*uc ~T0 @X0 1 r2 ]
-"90
-[f ]
 "91
-[v _retVal `S851 ~T0 @X0 1 a ]
-[; ;SyntApp.c: 91: INT_VAL retVal;
-[; ;SyntApp.c: 92: if(cntRegUpdate < 7)
+[f ]
 "92
-[e $ ! < -> _cntRegUpdate `i -> 7 `i 867  ]
-[; ;SyntApp.c: 93: {
+[v _retVal `S851 ~T0 @X0 1 a ]
+[; ;SyntApp.c: 92: INT_VAL retVal;
+[; ;SyntApp.c: 93: if(cntRegUpdate < 7)
 "93
-{
-[; ;SyntApp.c: 94: retVal = GetIntFromUartData(10, data);
+[e $ ! < -> _cntRegUpdate `i -> 7 `i 867  ]
+[; ;SyntApp.c: 94: {
 "94
-[e = _retVal ( _GetIntFromUartData (2 , -> -> 10 `i `c _data ]
-[; ;SyntApp.c: 95: SWSPI_send_word(cType, retVal.num, 3);
+{
+[; ;SyntApp.c: 95: retVal = GetIntFromUartData(10, data);
 "95
-[e ( _SWSPI_send_word (3 , , _cType . _retVal 0 -> -> 3 `i `uc ]
-[; ;SyntApp.c: 96: if(cType == SYNTH_TX)
+[e = _retVal ( _GetIntFromUartData (2 , -> -> 10 `i `c _data ]
+[; ;SyntApp.c: 96: SWSPI_send_word(cType, retVal.num, 3);
 "96
-[e $ ! == -> _cType `i -> . `E1 0 `i 868  ]
-[; ;SyntApp.c: 97: {
+[e ( _SWSPI_send_word (3 , , _cType . _retVal 0 -> -> 3 `i `uc ]
+[; ;SyntApp.c: 97: if(cType == SYNTH_TX)
 "97
-{
-[; ;SyntApp.c: 98: StoreIntInEeprom(retVal.num, (0) | SYNTH_ADDRES[retVal.con], 4);
+[e $ ! == -> _cType `i -> . `E1 0 `i 868  ]
+[; ;SyntApp.c: 98: {
 "98
-[e ( _StoreIntInEeprom (3 , , . _retVal 0 -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> . _retVal 1 `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-[; ;SyntApp.c: 99: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_TX_REG);
-"99
-[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 17 ]
-"100
-}
-[; ;SyntApp.c: 100: }
-[e $U 869  ]
-"101
-[e :U 868 ]
-[; ;SyntApp.c: 101: else if(cType == SYNTH_RX)
-[e $ ! == -> _cType `i -> . `E1 1 `i 870  ]
-[; ;SyntApp.c: 102: {
-"102
 {
-[; ;SyntApp.c: 103: StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
+[; ;SyntApp.c: 99: StoreIntInEeprom(retVal.num, (0) | SYNTH_ADDRES[retVal.con], 4);
+"99
+[e ( _StoreIntInEeprom (3 , , . _retVal 0 -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> . _retVal 1 `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 100: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_TX_REG);
+"100
+[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 17 ]
+"101
+}
+[; ;SyntApp.c: 101: }
+[e $U 869  ]
+"102
+[e :U 868 ]
+[; ;SyntApp.c: 102: else if(cType == SYNTH_RX)
+[e $ ! == -> _cType `i -> . `E1 1 `i 870  ]
+[; ;SyntApp.c: 103: {
 "103
-[e ( _StoreIntInEeprom (3 , , . _retVal 0 -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> . _retVal 1 `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-[; ;SyntApp.c: 104: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG);
+{
+[; ;SyntApp.c: 104: StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
 "104
-[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 18 ]
+[e ( _StoreIntInEeprom (3 , , . _retVal 0 -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> . _retVal 1 `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 105: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG);
 "105
+[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 18 ]
+"106
 }
 [e :U 870 ]
-"106
-[e :U 869 ]
-[; ;SyntApp.c: 105: }
-[; ;SyntApp.c: 106: cntRegUpdate ++;
-[e ++ _cntRegUpdate -> -> 1 `i `uc ]
 "107
+[e :U 869 ]
+[; ;SyntApp.c: 106: }
+[; ;SyntApp.c: 107: cntRegUpdate ++;
+[e ++ _cntRegUpdate -> -> 1 `i `uc ]
+"108
 }
-[; ;SyntApp.c: 107: }
+[; ;SyntApp.c: 108: }
 [e $U 871  ]
-"109
-[e :U 867 ]
-[; ;SyntApp.c: 109: else
-[; ;SyntApp.c: 110: {
 "110
-{
-[; ;SyntApp.c: 111: cntRegUpdate = 0;
+[e :U 867 ]
+[; ;SyntApp.c: 110: else
+[; ;SyntApp.c: 111: {
 "111
-[e = _cntRegUpdate -> -> 0 `i `uc ]
-[; ;SyntApp.c: 112: if(cType == SYNTH_TX)
+{
+[; ;SyntApp.c: 112: cntRegUpdate = 0;
 "112
-[e $ ! == -> _cType `i -> . `E1 0 `i 872  ]
-[; ;SyntApp.c: 113: {
+[e = _cntRegUpdate -> -> 0 `i `uc ]
+[; ;SyntApp.c: 113: if(cType == SYNTH_TX)
 "113
-{
-[; ;SyntApp.c: 114: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
+[e $ ! == -> _cType `i -> . `E1 0 `i 872  ]
+[; ;SyntApp.c: 114: {
 "114
-[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 11 ]
-"115
-}
-[; ;SyntApp.c: 115: }
-[e $U 873  ]
-"116
-[e :U 872 ]
-[; ;SyntApp.c: 116: else if(cType == SYNTH_RX)
-[e $ ! == -> _cType `i -> . `E1 1 `i 874  ]
-[; ;SyntApp.c: 117: {
-"117
 {
-[; ;SyntApp.c: 118: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_SET);
+[; ;SyntApp.c: 115: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
+"115
+[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 11 ]
+"116
+}
+[; ;SyntApp.c: 116: }
+[e $U 873  ]
+"117
+[e :U 872 ]
+[; ;SyntApp.c: 117: else if(cType == SYNTH_RX)
+[e $ ! == -> _cType `i -> . `E1 1 `i 874  ]
+[; ;SyntApp.c: 118: {
 "118
-[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 12 ]
+{
+[; ;SyntApp.c: 119: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_SET);
 "119
+[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 12 ]
+"120
 }
 [e :U 874 ]
-"121
+"122
 [e :U 873 ]
 }
 [e :U 871 ]
-[; ;SyntApp.c: 119: }
-[; ;SyntApp.c: 121: }
+[; ;SyntApp.c: 120: }
 [; ;SyntApp.c: 122: }
-"122
+[; ;SyntApp.c: 123: }
+"123
 [e :UE 866 ]
 }
-"127
+"128
 [v _SetSynthOper `(v ~T0 @X0 1 ef1`E1 ]
-"128
-{
-[; ;SyntApp.c: 127: void SetSynthOper(SPI_PERIPHERAL cType)
-[; ;SyntApp.c: 128: {
-[e :U _SetSynthOper ]
-"127
-[v _cType `E1 ~T0 @X0 1 r1 ]
-"128
-[f ]
-[; ;SyntApp.c: 129: if(cType == SYNTH_TX)
 "129
-[e $ ! == -> _cType `i -> . `E1 0 `i 876  ]
-[; ;SyntApp.c: 130: {
+{
+[; ;SyntApp.c: 128: void SetSynthOper(SPI_PERIPHERAL cType)
+[; ;SyntApp.c: 129: {
+[e :U _SetSynthOper ]
+"128
+[v _cType `E1 ~T0 @X0 1 r1 ]
+"129
+[f ]
+[; ;SyntApp.c: 130: if(cType == SYNTH_TX)
 "130
-{
-[; ;SyntApp.c: 131: SynthTxOper = !SynthTxOper;
+[e $ ! == -> _cType `i -> . `E1 0 `i 876  ]
+[; ;SyntApp.c: 131: {
 "131
-[e = _SynthTxOper -> -> ! != -> _SynthTxOper `i -> -> -> 0 `i `uc `i `i `uc ]
-[; ;SyntApp.c: 132: if(SynthTxOper)
+{
+[; ;SyntApp.c: 132: SynthTxOper = !SynthTxOper;
 "132
-[e $ ! != -> _SynthTxOper `i -> -> -> 0 `i `uc `i 877  ]
-[; ;SyntApp.c: 133: {
+[e = _SynthTxOper -> -> ! != -> _SynthTxOper `i -> -> -> 0 `i `uc `i `i `uc ]
+[; ;SyntApp.c: 133: if(SynthTxOper)
 "133
-{
-[; ;SyntApp.c: 134: InitSynth(cType);
+[e $ ! != -> _SynthTxOper `i -> -> -> 0 `i `uc `i 877  ]
+[; ;SyntApp.c: 134: {
 "134
-[e ( _InitSynth (1 _cType ]
-"135
-}
-[; ;SyntApp.c: 135: }
-[e $U 878  ]
-"136
-[e :U 877 ]
-[; ;SyntApp.c: 136: else
-[; ;SyntApp.c: 137: {
-"137
 {
-[; ;SyntApp.c: 138: SwSpi_Set_CE_Pin(cType, 0);
+[; ;SyntApp.c: 135: InitSynth(cType);
+"135
+[e ( _InitSynth (1 _cType ]
+"136
+}
+[; ;SyntApp.c: 136: }
+[e $U 878  ]
+"137
+[e :U 877 ]
+[; ;SyntApp.c: 137: else
+[; ;SyntApp.c: 138: {
 "138
-[e ( _SwSpi_Set_CE_Pin (2 , _cType -> -> 0 `i `uc ]
+{
+[; ;SyntApp.c: 139: SwSpi_Set_CE_Pin(cType, 0);
 "139
+[e ( _SwSpi_Set_CE_Pin (2 , _cType -> -> 0 `i `uc ]
+"140
 }
 [e :U 878 ]
-[; ;SyntApp.c: 139: }
-[; ;SyntApp.c: 140: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_OPER);
-"140
-[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 14 ]
+[; ;SyntApp.c: 140: }
+[; ;SyntApp.c: 141: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_OPER);
 "141
-}
-[; ;SyntApp.c: 141: }
-[e $U 879  ]
+[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 14 ]
 "142
-[e :U 876 ]
-[; ;SyntApp.c: 142: else if (cType == SYNTH_RX)
-[e $ ! == -> _cType `i -> . `E1 1 `i 880  ]
-[; ;SyntApp.c: 143: {
-"143
-{
-[; ;SyntApp.c: 144: SynthRxOper = !SynthRxOper;
-"144
-[e = _SynthRxOper -> -> ! != -> _SynthRxOper `i -> -> -> 0 `i `uc `i `i `uc ]
-[; ;SyntApp.c: 145: if(SynthRxOper)
-"145
-[e $ ! != -> _SynthRxOper `i -> -> -> 0 `i `uc `i 881  ]
-[; ;SyntApp.c: 146: {
-"146
-{
-[; ;SyntApp.c: 147: InitSynth(cType);
-"147
-[e ( _InitSynth (1 _cType ]
-"148
 }
-[; ;SyntApp.c: 148: }
-[e $U 882  ]
-"149
-[e :U 881 ]
-[; ;SyntApp.c: 149: else
-[; ;SyntApp.c: 150: {
-"150
+[; ;SyntApp.c: 142: }
+[e $U 879  ]
+"143
+[e :U 876 ]
+[; ;SyntApp.c: 143: else if (cType == SYNTH_RX)
+[e $ ! == -> _cType `i -> . `E1 1 `i 880  ]
+[; ;SyntApp.c: 144: {
+"144
 {
-[; ;SyntApp.c: 151: SwSpi_Set_CE_Pin(cType, 0);
+[; ;SyntApp.c: 145: SynthRxOper = !SynthRxOper;
+"145
+[e = _SynthRxOper -> -> ! != -> _SynthRxOper `i -> -> -> 0 `i `uc `i `i `uc ]
+[; ;SyntApp.c: 146: if(SynthRxOper)
+"146
+[e $ ! != -> _SynthRxOper `i -> -> -> 0 `i `uc `i 881  ]
+[; ;SyntApp.c: 147: {
+"147
+{
+[; ;SyntApp.c: 148: InitSynth(cType);
+"148
+[e ( _InitSynth (1 _cType ]
+"149
+}
+[; ;SyntApp.c: 149: }
+[e $U 882  ]
+"150
+[e :U 881 ]
+[; ;SyntApp.c: 150: else
+[; ;SyntApp.c: 151: {
 "151
-[e ( _SwSpi_Set_CE_Pin (2 , _cType -> -> 0 `i `uc ]
+{
+[; ;SyntApp.c: 152: SwSpi_Set_CE_Pin(cType, 0);
 "152
+[e ( _SwSpi_Set_CE_Pin (2 , _cType -> -> 0 `i `uc ]
+"153
 }
 [e :U 882 ]
-[; ;SyntApp.c: 152: }
-[; ;SyntApp.c: 153: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_OPER);
-"153
-[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 13 ]
+[; ;SyntApp.c: 153: }
+[; ;SyntApp.c: 154: SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_OPER);
 "154
+[e ( _SendAckMessage (2 , . `E7108 3 . `E7116 13 ]
+"155
 }
 [e :U 880 ]
-"155
+"156
 [e :U 879 ]
-[; ;SyntApp.c: 154: }
 [; ;SyntApp.c: 155: }
+[; ;SyntApp.c: 156: }
 [e :UE 875 ]
 }
-"158
-[v _SynthReadData `(v ~T0 @X0 1 ef2`E1`*uc ]
 "159
+[v _SynthReadData `(v ~T0 @X0 1 ef2`E1`*uc ]
+"160
 {
-[; ;SyntApp.c: 158: void SynthReadData(SPI_PERIPHERAL cType, char* data)
-[; ;SyntApp.c: 159: {
+[; ;SyntApp.c: 159: void SynthReadData(SPI_PERIPHERAL cType, char* data)
+[; ;SyntApp.c: 160: {
 [e :U _SynthReadData ]
-"158
+"159
 [v _cType `E1 ~T0 @X0 1 r1 ]
 [v _data `*uc ~T0 @X0 1 r2 ]
-"159
-[f ]
 "160
-[v _eepromDataArray `ul ~T0 @X0 -> 3 `i a ]
+[f ]
 "161
+[v _eepromDataArray `ul ~T0 @X0 -> 4 `i a ]
+[; ;SyntApp.c: 161: uint32_t eepromDataArray[4];
+[; ;SyntApp.c: 162: ZeroArray(eepromDataArray, sizeof(eepromDataArray));
+"162
+[e ( _ZeroArray (2 , -> &U _eepromDataArray `*uc -> -> # _eepromDataArray `ui `i ]
+"163
 [v _regNum `uc ~T0 @X0 1 a ]
-[; ;SyntApp.c: 160: uint32_t eepromDataArray[3];
-[; ;SyntApp.c: 161: uint8_t regNum = 0, byteNum = 0;
+[; ;SyntApp.c: 163: uint8_t regNum = 0, byteNum = 0;
 [e = _regNum -> -> 0 `i `uc ]
 [v _byteNum `uc ~T0 @X0 1 a ]
 [e = _byteNum -> -> 0 `i `uc ]
-"162
-[v _TxMsg `uc ~T0 @X0 + + + * -> 5 `i -> 3 `i -> 1 `i -> 1 `i -> 1 `i a ]
-[; ;SyntApp.c: 162: char TxMsg[5 * 3 + 1 + 1 + 1];
-[; ;SyntApp.c: 163: ZeroArray(TxMsg, 5 * 3 + 1 + 1 + 1);
-"163
-[e ( _ZeroArray (2 , &U _TxMsg + + + * -> 5 `i -> 3 `i -> 1 `i -> 1 `i -> 1 `i ]
-[; ;SyntApp.c: 166: TxMsg[(0)] = (0x24);
-"166
-[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
-[; ;SyntApp.c: 167: TxMsg[(1)] = SYNTH_MSG;
-"167
-[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7108 3 `uc ]
-[; ;SyntApp.c: 168: TxMsg[(3)] = 5 * 3 + 1 - (0x4);
+"164
+[v _TxMsg `uc ~T0 @X0 + + * -> 5 `i -> 4 `i -> 1 `i -> 1 `i a ]
+[; ;SyntApp.c: 164: char TxMsg[5 * 4 + 1 + 1];
+[; ;SyntApp.c: 165: ZeroArray(TxMsg, 5 * 4 + 1 + 1);
+"165
+[e ( _ZeroArray (2 , &U _TxMsg + + * -> 5 `i -> 4 `i -> 1 `i -> 1 `i ]
+[; ;SyntApp.c: 168: TxMsg[(0)] = (0x24);
 "168
-[e = *U + &U _TxMsg * -> -> -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> - + * -> 5 `i -> 3 `i -> 1 `i -> 4 `i `uc ]
-[; ;SyntApp.c: 170: if(cType == SYNTH_TX)
+[e = *U + &U _TxMsg * -> -> -> 0 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 36 `i `uc ]
+[; ;SyntApp.c: 169: TxMsg[(1)] = SYNTH_MSG;
+"169
+[e = *U + &U _TxMsg * -> -> -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7108 3 `uc ]
+[; ;SyntApp.c: 170: TxMsg[(3)] = 5 * 4 - (0x4);
 "170
-[e $ ! == -> _cType `i -> . `E1 0 `i 884  ]
-[; ;SyntApp.c: 171: {
-"171
-{
-[; ;SyntApp.c: 172: TxMsg[(2)] = SYNTH_DOWN_READ_DATA;
+[e = *U + &U _TxMsg * -> -> -> 3 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> - * -> 5 `i -> 4 `i -> 4 `i `uc ]
+[; ;SyntApp.c: 172: if(cType == SYNTH_TX)
 "172
-[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7116 16 `uc ]
-[; ;SyntApp.c: 173: eepromDataArray[0] = ReadIntFromEeprom((0) | SYNTH_ADDRES[0], 4);
+[e $ ! == -> _cType `i -> . `E1 0 `i 884  ]
+[; ;SyntApp.c: 173: {
 "173
-[e = *U + &U _eepromDataArray * -> -> -> 0 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 0 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-[; ;SyntApp.c: 174: eepromDataArray[1] = ReadIntFromEeprom((0) | SYNTH_ADDRES[1], 4);
-"174
-[e = *U + &U _eepromDataArray * -> -> -> 1 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 1 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-[; ;SyntApp.c: 175: eepromDataArray[2] = ReadIntFromEeprom((0) | SYNTH_ADDRES[2], 4);
-"175
-[e = *U + &U _eepromDataArray * -> -> -> 2 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 2 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-"176
-}
-[; ;SyntApp.c: 176: }
-[e $U 885  ]
-"177
-[e :U 884 ]
-[; ;SyntApp.c: 177: else if (cType == SYNTH_RX)
-[e $ ! == -> _cType `i -> . `E1 1 `i 886  ]
-[; ;SyntApp.c: 178: {
-"178
 {
-[; ;SyntApp.c: 179: TxMsg[(2)] = SYNTH_UP_READ_DATA;
+[; ;SyntApp.c: 174: TxMsg[(2)] = SYNTH_DOWN_READ_DATA;
+"174
+[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7116 16 `uc ]
+[; ;SyntApp.c: 175: eepromDataArray[0] = ReadIntFromEeprom((0) | SYNTH_ADDRES[0], 4);
+"175
+[e = *U + &U _eepromDataArray * -> -> -> 0 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 0 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 176: eepromDataArray[1] = ReadIntFromEeprom((0) | SYNTH_ADDRES[1], 4);
+"176
+[e = *U + &U _eepromDataArray * -> -> -> 1 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 1 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 177: eepromDataArray[2] = ReadIntFromEeprom((0) | SYNTH_ADDRES[2], 4);
+"177
+[e = *U + &U _eepromDataArray * -> -> -> 2 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 2 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 178: eepromDataArray[3] = ReadIntFromEeprom((0) | SYNTH_ADDRES[4], 4);
+"178
+[e = *U + &U _eepromDataArray * -> -> -> 3 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 0 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 4 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
 "179
-[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7116 15 `uc ]
-[; ;SyntApp.c: 180: eepromDataArray[0] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[0], 4);
+}
+[; ;SyntApp.c: 179: }
+[e $U 885  ]
 "180
-[e = *U + &U _eepromDataArray * -> -> -> 0 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 0 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-[; ;SyntApp.c: 181: eepromDataArray[1] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[1], 4);
+[e :U 884 ]
+[; ;SyntApp.c: 180: else if (cType == SYNTH_RX)
+[e $ ! == -> _cType `i -> . `E1 1 `i 886  ]
+[; ;SyntApp.c: 181: {
 "181
-[e = *U + &U _eepromDataArray * -> -> -> 1 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 1 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
-[; ;SyntApp.c: 182: eepromDataArray[2] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[2], 4);
+{
+[; ;SyntApp.c: 182: TxMsg[(2)] = SYNTH_UP_READ_DATA;
 "182
-[e = *U + &U _eepromDataArray * -> -> -> 2 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 2 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[e = *U + &U _TxMsg * -> -> -> 2 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> . `E7116 15 `uc ]
+[; ;SyntApp.c: 183: eepromDataArray[0] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[0], 4);
 "183
+[e = *U + &U _eepromDataArray * -> -> -> 0 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 0 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 184: eepromDataArray[1] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[1], 4);
+"184
+[e = *U + &U _eepromDataArray * -> -> -> 1 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 1 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 185: eepromDataArray[2] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[2], 4);
+"185
+[e = *U + &U _eepromDataArray * -> -> -> 2 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 2 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+[; ;SyntApp.c: 186: eepromDataArray[3] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[4], 4);
+"186
+[e = *U + &U _eepromDataArray * -> -> -> 3 `i `ui `ux -> -> # *U &U _eepromDataArray `ui `ux ( _ReadIntFromEeprom (2 , -> | -> 32 `i -> *U + &U _SYNTH_ADDRES * -> -> -> 4 `i `ui `ux -> -> # *U &U _SYNTH_ADDRES `ui `ux `i `uc -> 4 `i ]
+"187
 }
 [e :U 886 ]
-"185
+"189
 [e :U 885 ]
-[; ;SyntApp.c: 183: }
-[; ;SyntApp.c: 185: for(regNum = 0; regNum < 3; regNum++)
+[; ;SyntApp.c: 187: }
+[; ;SyntApp.c: 189: for(regNum = 0; regNum < 4; regNum++)
 {
 [e = _regNum -> -> 0 `i `uc ]
-[e $ < -> _regNum `i -> 3 `i 887  ]
+[e $ < -> _regNum `i -> 4 `i 887  ]
 [e $U 888  ]
-"186
+"190
 [e :U 887 ]
-[; ;SyntApp.c: 186: {
+[; ;SyntApp.c: 190: {
 {
-[; ;SyntApp.c: 187: for(byteNum = 0; byteNum < (5); byteNum++)
-"187
+[; ;SyntApp.c: 191: for(byteNum = 0; byteNum < (5); byteNum++)
+"191
 {
 [e = _byteNum -> -> 0 `i `uc ]
 [e $ < -> _byteNum `i -> 5 `i 890  ]
 [e $U 891  ]
-"188
+"192
 [e :U 890 ]
-[; ;SyntApp.c: 188: {
+[; ;SyntApp.c: 192: {
 {
 [v _data `uc ~T0 @X0 1 a ]
-[; ;SyntApp.c: 189: uint8_t data = make8(eepromDataArray[regNum], byteNum);
-"189
+[; ;SyntApp.c: 193: uint8_t data = make8(eepromDataArray[regNum], byteNum);
+"193
 [e = _data ( _make8 (2 , *U + &U _eepromDataArray * -> _regNum `ux -> -> # *U &U _eepromDataArray `ui `ux _byteNum ]
-[; ;SyntApp.c: 190: TxMsg[(0x4) + (3 + 1)*regNum + byteNum] = data;
-"190
-[e = *U + &U _TxMsg * -> -> + + -> 4 `i * + -> 3 `i -> 1 `i -> _regNum `i -> _byteNum `i `ui `ux -> -> # *U &U _TxMsg `ui `ux _data ]
-"191
+[; ;SyntApp.c: 194: TxMsg[(0x4) + (4)*regNum + byteNum] = data;
+"194
+[e = *U + &U _TxMsg * -> -> + + -> 4 `i * -> 4 `i -> _regNum `i -> _byteNum `i `ui `ux -> -> # *U &U _TxMsg `ui `ux _data ]
+"195
 }
-"187
+"191
 [e ++ _byteNum -> -> 1 `i `uc ]
 [e $ < -> _byteNum `i -> 5 `i 890  ]
 [e :U 891 ]
-"191
-}
-"192
-}
-"185
-[e ++ _regNum -> -> 1 `i `uc ]
-[e $ < -> _regNum `i -> 3 `i 887  ]
-[e :U 888 ]
-"192
-}
-[; ;SyntApp.c: 191: }
-[; ;SyntApp.c: 192: }
-[; ;SyntApp.c: 194: TxMsg[5 * 3 + 1] = 0x9;
-"194
-[e = *U + &U _TxMsg * -> -> + * -> 5 `i -> 3 `i -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> -> 9 `i `uc ]
-[; ;SyntApp.c: 195: TxMsg[5 * 3 + 1 + 1] = crc8(TxMsg, 5 * 3 + 1 + 1);
 "195
-[e = *U + &U _TxMsg * -> -> + + * -> 5 `i -> 3 `i -> 1 `i -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + + * -> 5 `i -> 3 `i -> 1 `i -> 1 `i ]
-[; ;SyntApp.c: 196: WriteUartMessage(TxMsg, 5 * 3 + 1 + 1 + 1);
+}
 "196
-[e ( _WriteUartMessage (2 , &U _TxMsg + + + * -> 5 `i -> 3 `i -> 1 `i -> 1 `i -> 1 `i ]
-[; ;SyntApp.c: 197: }
-"197
+}
+"189
+[e ++ _regNum -> -> 1 `i `uc ]
+[e $ < -> _regNum `i -> 4 `i 887  ]
+[e :U 888 ]
+"196
+}
+[; ;SyntApp.c: 195: }
+[; ;SyntApp.c: 196: }
+[; ;SyntApp.c: 198: TxMsg[5 * 4] = cType == SYNTH_TX ? SynthTxOper : SynthRxOper;
+"198
+[e = *U + &U _TxMsg * -> -> * -> 5 `i -> 4 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux -> ? == -> _cType `i -> . `E1 0 `i : -> _SynthTxOper `i -> _SynthRxOper `i `uc ]
+[; ;SyntApp.c: 199: TxMsg[5 * 4 + 1] = crc8(TxMsg, 5 * 4 + 1);
+"199
+[e = *U + &U _TxMsg * -> -> + * -> 5 `i -> 4 `i -> 1 `i `ui `ux -> -> # *U &U _TxMsg `ui `ux ( _crc8 (2 , &U _TxMsg + * -> 5 `i -> 4 `i -> 1 `i ]
+[; ;SyntApp.c: 200: WriteUartMessage(TxMsg, 5 * 4 + 1 + 1);
+"200
+[e ( _WriteUartMessage (2 , &U _TxMsg + + * -> 5 `i -> 4 `i -> 1 `i -> 1 `i ]
+[; ;SyntApp.c: 201: }
+"201
 [e :UE 883 ]
 }
-"204
-[v _SynthLdDetect `(v ~T0 @X0 1 ef ]
-"205
-{
-[; ;SyntApp.c: 204: void SynthLdDetect(void)
-[; ;SyntApp.c: 205: {
-[e :U _SynthLdDetect ]
-[f ]
-[; ;SyntApp.c: 208: if(PORTDbits.RD4 == 0)
 "208
-[e $ ! == -> . . _PORTDbits 0 4 `i -> 0 `i 894  ]
-[; ;SyntApp.c: 209: {
+[v _SynthLdDetect `(v ~T0 @X0 1 ef ]
 "209
 {
-[; ;SyntApp.c: 210: if(synthLdRxCnt > 0)
-"210
-[e $ ! > -> _synthLdRxCnt `i -> 0 `i 895  ]
-[; ;SyntApp.c: 211: {
-"211
-{
-[; ;SyntApp.c: 212: InitSynth(SYNTH_RX);
+[; ;SyntApp.c: 208: void SynthLdDetect(void)
+[; ;SyntApp.c: 209: {
+[e :U _SynthLdDetect ]
+[f ]
+[; ;SyntApp.c: 212: if(PORTDbits.RD4 == 0)
 "212
-[e ( _InitSynth (1 . `E1 1 ]
-[; ;SyntApp.c: 213: synthLdRxCnt--;
+[e $ ! == -> . . _PORTDbits 0 4 `i -> 0 `i 894  ]
+[; ;SyntApp.c: 213: {
 "213
-[e -- _synthLdRxCnt -> -> 1 `i `c ]
-"214
-}
-[; ;SyntApp.c: 214: }
-[e $U 896  ]
-"215
-[e :U 895 ]
-[; ;SyntApp.c: 215: else
-[; ;SyntApp.c: 216: {
-"216
 {
-[; ;SyntApp.c: 217: BlinkErrorLeds(FAIL_SYNTH_RX_LATCH);
+[; ;SyntApp.c: 214: if(synthLdRxCnt > 0)
+"214
+[e $ ! > -> _synthLdRxCnt `i -> 0 `i 895  ]
+[; ;SyntApp.c: 215: {
+"215
+{
+[; ;SyntApp.c: 216: InitSynth(SYNTH_RX);
+"216
+[e ( _InitSynth (1 . `E1 1 ]
+[; ;SyntApp.c: 217: synthLdRxCnt--;
 "217
-[e ( _BlinkErrorLeds (1 . `E7153 2 ]
+[e -- _synthLdRxCnt -> -> 1 `i `c ]
 "218
 }
-[e :U 896 ]
 [; ;SyntApp.c: 218: }
-[; ;SyntApp.c: 219: synthLdRxArray[synthLdRxArrayCnt++ % 12] = UNLOCK;
+[e $U 896  ]
 "219
-[e = *U + &U _synthLdRxArray * -> -> % -> ++ _synthLdRxArrayCnt -> -> 1 `i `uc `i -> 12 `i `ui `ux -> -> # *U &U _synthLdRxArray `ui `ux -> . `E7589 0 `uc ]
+[e :U 895 ]
+[; ;SyntApp.c: 219: else
+[; ;SyntApp.c: 220: {
 "220
-}
-[; ;SyntApp.c: 220: }
-[e $U 897  ]
-"221
-[e :U 894 ]
-[; ;SyntApp.c: 221: else
-[; ;SyntApp.c: 222: {
-"222
 {
-[; ;SyntApp.c: 223: synthLdRxCnt = 2;
+[; ;SyntApp.c: 221: BlinkErrorLeds(FAIL_SYNTH_RX_LATCH);
+"221
+[e ( _BlinkErrorLeds (1 . `E7153 2 ]
+"222
+}
+[e :U 896 ]
+[; ;SyntApp.c: 222: }
+[; ;SyntApp.c: 223: synthLdRxArray[synthLdRxArrayCnt++ % 12] = UNLOCK;
 "223
-[e = _synthLdRxCnt -> -> 2 `i `c ]
-[; ;SyntApp.c: 224: synthLdRxArray[synthLdRxArrayCnt++ % 12] = LOCK;
+[e = *U + &U _synthLdRxArray * -> -> % -> ++ _synthLdRxArrayCnt -> -> 1 `i `uc `i -> 12 `i `ui `ux -> -> # *U &U _synthLdRxArray `ui `ux -> . `E7590 0 `uc ]
 "224
-[e = *U + &U _synthLdRxArray * -> -> % -> ++ _synthLdRxArrayCnt -> -> 1 `i `uc `i -> 12 `i `ui `ux -> -> # *U &U _synthLdRxArray `ui `ux -> . `E7589 1 `uc ]
+}
+[; ;SyntApp.c: 224: }
+[e $U 897  ]
 "225
+[e :U 894 ]
+[; ;SyntApp.c: 225: else
+[; ;SyntApp.c: 226: {
+"226
+{
+[; ;SyntApp.c: 227: synthLdRxCnt = 2;
+"227
+[e = _synthLdRxCnt -> -> 2 `i `c ]
+[; ;SyntApp.c: 228: synthLdRxArray[synthLdRxArrayCnt++ % 12] = LOCK;
+"228
+[e = *U + &U _synthLdRxArray * -> -> % -> ++ _synthLdRxArrayCnt -> -> 1 `i `uc `i -> 12 `i `ui `ux -> -> # *U &U _synthLdRxArray `ui `ux -> . `E7590 1 `uc ]
+"229
 }
 [e :U 897 ]
-[; ;SyntApp.c: 225: }
-[; ;SyntApp.c: 230: if(PORTDbits.RD1 == 0)
-"230
-[e $ ! == -> . . _PORTDbits 0 1 `i -> 0 `i 898  ]
-[; ;SyntApp.c: 231: {
-"231
-{
-[; ;SyntApp.c: 232: if(synthLdTxCnt > 0)
-"232
-[e $ ! > -> _synthLdTxCnt `i -> 0 `i 899  ]
-[; ;SyntApp.c: 233: {
-"233
-{
-[; ;SyntApp.c: 234: InitSynth(SYNTH_TX);
+[; ;SyntApp.c: 229: }
+[; ;SyntApp.c: 234: if(PORTDbits.RD1 == 0)
 "234
-[e ( _InitSynth (1 . `E1 0 ]
-[; ;SyntApp.c: 235: synthLdTxCnt--;
+[e $ ! == -> . . _PORTDbits 0 1 `i -> 0 `i 898  ]
+[; ;SyntApp.c: 235: {
 "235
-[e -- _synthLdTxCnt -> -> 1 `i `c ]
-"236
-}
-[; ;SyntApp.c: 236: }
-[e $U 900  ]
-"237
-[e :U 899 ]
-[; ;SyntApp.c: 237: else
-[; ;SyntApp.c: 238: {
-"238
 {
-[; ;SyntApp.c: 239: BlinkErrorLeds(FAIL_SYNTH_TX_LATCH);
+[; ;SyntApp.c: 236: if(synthLdTxCnt > 0)
+"236
+[e $ ! > -> _synthLdTxCnt `i -> 0 `i 899  ]
+[; ;SyntApp.c: 237: {
+"237
+{
+[; ;SyntApp.c: 238: InitSynth(SYNTH_TX);
+"238
+[e ( _InitSynth (1 . `E1 0 ]
+[; ;SyntApp.c: 239: synthLdTxCnt--;
 "239
-[e ( _BlinkErrorLeds (1 . `E7153 3 ]
+[e -- _synthLdTxCnt -> -> 1 `i `c ]
 "240
 }
-[e :U 900 ]
 [; ;SyntApp.c: 240: }
-[; ;SyntApp.c: 241: synthLdTxArray[synthLdTxArrayCnt++ % 12] = UNLOCK;
+[e $U 900  ]
 "241
-[e = *U + &U _synthLdTxArray * -> -> % -> ++ _synthLdTxArrayCnt -> -> 1 `i `uc `i -> 12 `i `ui `ux -> -> # *U &U _synthLdTxArray `ui `ux -> . `E7589 0 `uc ]
+[e :U 899 ]
+[; ;SyntApp.c: 241: else
+[; ;SyntApp.c: 242: {
 "242
-}
-[; ;SyntApp.c: 242: }
-[e $U 901  ]
-"243
-[e :U 898 ]
-[; ;SyntApp.c: 243: else
-[; ;SyntApp.c: 244: {
-"244
 {
-[; ;SyntApp.c: 245: synthLdTxCnt = 2;
+[; ;SyntApp.c: 243: BlinkErrorLeds(FAIL_SYNTH_TX_LATCH);
+"243
+[e ( _BlinkErrorLeds (1 . `E7153 3 ]
+"244
+}
+[e :U 900 ]
+[; ;SyntApp.c: 244: }
+[; ;SyntApp.c: 245: synthLdTxArray[synthLdTxArrayCnt++ % 12] = UNLOCK;
 "245
-[e = _synthLdTxCnt -> -> 2 `i `c ]
-[; ;SyntApp.c: 246: synthLdTxArray[synthLdTxArrayCnt++ % 12] = LOCK;
+[e = *U + &U _synthLdTxArray * -> -> % -> ++ _synthLdTxArrayCnt -> -> 1 `i `uc `i -> 12 `i `ui `ux -> -> # *U &U _synthLdTxArray `ui `ux -> . `E7590 0 `uc ]
 "246
-[e = *U + &U _synthLdTxArray * -> -> % -> ++ _synthLdTxArrayCnt -> -> 1 `i `uc `i -> 12 `i `ui `ux -> -> # *U &U _synthLdTxArray `ui `ux -> . `E7589 1 `uc ]
+}
+[; ;SyntApp.c: 246: }
+[e $U 901  ]
 "247
+[e :U 898 ]
+[; ;SyntApp.c: 247: else
+[; ;SyntApp.c: 248: {
+"248
+{
+[; ;SyntApp.c: 249: synthLdTxCnt = 2;
+"249
+[e = _synthLdTxCnt -> -> 2 `i `c ]
+[; ;SyntApp.c: 250: synthLdTxArray[synthLdTxArrayCnt++ % 12] = LOCK;
+"250
+[e = *U + &U _synthLdTxArray * -> -> % -> ++ _synthLdTxArrayCnt -> -> 1 `i `uc `i -> 12 `i `ui `ux -> -> # *U &U _synthLdTxArray `ui `ux -> . `E7590 1 `uc ]
+"251
 }
 [e :U 901 ]
-[; ;SyntApp.c: 247: }
-[; ;SyntApp.c: 249: }
-"249
+[; ;SyntApp.c: 251: }
+[; ;SyntApp.c: 253: }
+"253
 [e :UE 893 ]
 }

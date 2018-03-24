@@ -8887,8 +8887,8 @@ LOCK = 0x1,
 
 
 
-volatile bool synthLdRxArray[14];
-volatile bool synthLdTxArray[14];
+volatile bool synthLdRxArray[12];
+volatile bool synthLdTxArray[12];
 
 void PLLInitialize(void);
 void InitSynth(SPI_PERIPHERAL cType);
@@ -9116,7 +9116,7 @@ void ZeroBitsArray(bool* array);
 INT_VAL GetIntFromUartData(int8_t num, char* data);
 void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
 uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
-uint16_t GetUint16FromBitArray(bool* bitarray);
+uint16_t GetUint16FromBitArray(bool* bitarray, int numOfBits);
 
 
 void ResetMcu(void);
@@ -9183,7 +9183,7 @@ void AdcConvert()
 
 uint16_t adcRes = 0;
 uint8_t idx = 0;
-
+uint16_t ldRxSate = 0, ldTxSate = 0;
 if (adcSampleMode == CIRCULAR)
 {
 for(idx = 0; idx < (9); idx++)
@@ -9195,10 +9195,10 @@ _delay((unsigned long)((250)*(8000000/4000.0)));
 }
 
 
-uint16_t ldRxSate = GetUint16FromBitArray(synthLdRxArray);
+ldRxSate = GetUint16FromBitArray(synthLdRxArray, 12);
 FlashSampleWrite(ldRxSate, idx + 1);
-uint16_t ldTxSate = GetUint16FromBitArray(synthLdTxArray);
-FlashSampleWrite(ldTxSate, idx + 1);
+ldTxSate = GetUint16FromBitArray(synthLdTxArray, 12);
+FlashSampleWrite(ldTxSate, idx + 2);
 
 }
 else if (adcSampleMode == SINGLE_CHANNEL)

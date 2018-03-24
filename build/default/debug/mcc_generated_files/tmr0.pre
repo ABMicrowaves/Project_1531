@@ -8669,7 +8669,7 @@ TMR0H = timer0ReloadVal >> 8;
 TMR0L = (uint8_t) timer0ReloadVal;
 
 CountCallBack++;
-if ((CountCallBack % 20) == 0)
+if ((CountCallBack % 240) == 0)
 {
 Timer0_SynthLd = 1;
 }

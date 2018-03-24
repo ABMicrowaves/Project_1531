@@ -30,8 +30,9 @@ void PLLInitialize()
     InitSynth(SYNTH_TX);
     InitSynth(SYNTH_RX);
     
-    // Initialize LD array
-    FillArray(synthLdRxArray, sizeof(synthLdRxArray), 0xFF);
+    // Initialize LD array, by default its unlock unless say other.
+    FillArray(synthLdRxArray, sizeof(synthLdRxArray), 0x0);
+    FillArray(synthLdTxArray, sizeof(synthLdTxArray), 0x0);
 }
 
 void InitSynth(SPI_PERIPHERAL cType)
@@ -157,7 +158,8 @@ void SetSynthOper(SPI_PERIPHERAL cType)
 
 void SynthReadData(SPI_PERIPHERAL cType, char* data)
 {
-    uint32_t eepromDataArray[3];
+    uint32_t eepromDataArray[NUM_OF_UART_TX_UPDATE_REGS];
+    ZeroArray(eepromDataArray, sizeof(eepromDataArray));
     uint8_t regNum = 0, byteNum = 0; 
     char TxMsg[SYNTH_READ_CONDITION_PACKET_SIZE + 1];
     ZeroArray(TxMsg, SYNTH_READ_CONDITION_PACKET_SIZE + 1);
@@ -173,6 +175,7 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data)
         eepromDataArray[0] = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[0], 4);
         eepromDataArray[1] = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[1], 4);
         eepromDataArray[2] = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[2], 4);
+        eepromDataArray[3] = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[4], 4);
     }
     else if (cType == SYNTH_RX)
     {
@@ -180,6 +183,7 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data)
         eepromDataArray[0] = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[0], 4);
         eepromDataArray[1] = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[1], 4);
         eepromDataArray[2] = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[2], 4);
+        eepromDataArray[3] = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[4], 4);
     }
     
     for(regNum = 0; regNum < NUM_OF_UART_TX_UPDATE_REGS; regNum++)
@@ -187,11 +191,11 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data)
         for(byteNum = 0; byteNum < (NUM_OF_BYTES_UART_TX_UPDATE_REGS); byteNum++)
         {
             uint8_t data = make8(eepromDataArray[regNum], byteNum);
-            TxMsg[MSG_DATA_LOCATION + (NUM_OF_UART_TX_UPDATE_REGS + 1)*regNum + byteNum] = data; 
+            TxMsg[MSG_DATA_LOCATION + (NUM_OF_UART_TX_UPDATE_REGS)*regNum + byteNum] = data; 
         }
     }
     
-    TxMsg[IDX_SYNTH_OPER_STATE_PLACE] = 0x9;
+    TxMsg[IDX_SYNTH_OPER_STATE_PLACE] = cType == SYNTH_TX ? SynthTxOper : SynthRxOper;
     TxMsg[SYNTH_READ_CONDITION_PACKET_SIZE] = crc8(TxMsg, SYNTH_READ_CONDITION_PACKET_SIZE);
     WriteUartMessage(TxMsg, SYNTH_READ_CONDITION_PACKET_SIZE + 1);    
 }

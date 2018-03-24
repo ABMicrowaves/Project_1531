@@ -8902,8 +8902,8 @@ LOCK = 0x1,
 
 
 
-volatile bool synthLdRxArray[14];
-volatile bool synthLdTxArray[14];
+volatile bool synthLdRxArray[12];
+volatile bool synthLdTxArray[12];
 
 void PLLInitialize(void);
 void InitSynth(SPI_PERIPHERAL cType);
@@ -9131,7 +9131,7 @@ void ZeroBitsArray(bool* array);
 INT_VAL GetIntFromUartData(int8_t num, char* data);
 void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
 uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
-uint16_t GetUint16FromBitArray(bool* bitarray);
+uint16_t GetUint16FromBitArray(bool* bitarray, int numOfBits);
 
 
 void ResetMcu(void);
@@ -9150,8 +9150,8 @@ uint8_t EepromRead(uint8_t address);
 void EepromWrite(uint8_t address, uint8_t data);
 
 # 13 "FlashApp.c"
-uint32_t writeAddress = 0x4500;
-uint32_t readAddress = 0x4500;
+uint32_t writeAddress = 0x4580;
+uint32_t readAddress = 0x4580;
 
 
 uint32_t numOfValidateSamples = 0;
@@ -9176,15 +9176,16 @@ FLASH_WriteBlock(writeAddress, (uint8_t *)sampleArray);
 writeAddress += (64);
 if (writeAddress >= 0x7FF0)
 {
-writeAddress = 0x4500;
+writeAddress = 0x4580;
 isReWriteDone = 1;
-if (readAddress == 0x4500)
+if (readAddress == 0x4580)
 {
 readAddress += (64);
 }
 }
 
-if (numOfValidateSamples < ((0x4500-0x7FF0)/(64)))
+
+if (numOfValidateSamples < ((0x4580-0x7FF0)/(64)))
 {
 numOfValidateSamples++;
 }
@@ -9196,16 +9197,20 @@ sampleCount = 0;
 
 
 void FlashReadUart(char* data)
-{
 
+
+
+
+{
 int j=0;
 int offset = 0;
-
+int16_t numOfSampleToRead = 0x0;
 INT_VAL val = GetIntFromUartData(10, data);
+
 int numOfSampleToRead = val.num;
 
+
 char TxMsg[(64) + (0x4) + 1];
-ZeroArray(TxMsg, (64) + (0x4) + 1);
 
 
 if (FLASH_IsWriteDone() == 0)
@@ -9213,99 +9218,45 @@ if (FLASH_IsWriteDone() == 0)
 return;
 }
 
-if (numOfReadSamples)
-{
-if (numOfValidateSamples)
-{
-offset = numOfValidateSamples - (numOfValidateSamples > numOfSampleToRead)? numOfValidateSamples : numOfSampleToRead;
-if(offset < 0)
-{
-if (abs(offset) > numOfReadSamples)
-{
-numOfSampleToRead += offset + numOfReadSamples;
-offset = numOfReadSamples * (-1);
 
-}
-
-readAddress += offset * (64);
-}
-}
-else
+if (readAddress < writeAddress)
 {
-numOfSampleToRead = (numOfReadSamples > numOfSampleToRead)? numOfSampleToRead : numOfReadSamples;
-readAddress -= numOfSampleToRead * (64);
-}
-
-if (readAddress <= 0x4500)
-{
-readAddress = 0x4500;
-}
-}
-else
-{
-if ((isReWriteDone) && (readAddress <= writeAddress))
-{
-readAddress = writeAddress + (64);
-if (readAddress >= 0x7FF0)
-{
-readAddress = 0x4500;
-}
-
-}
-else
-{
-if(numOfValidateSamples == 0)
-{
-SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_NO_SAMPLE_YET);
-return;
-}
-
-}
+numOfSampleToRead = numOfSampleToRead >= numOfValidateSamples ? numOfValidateSamples : numOfSampleToRead;
+readAddress = writeAddress;
 }
 
 
+for (j=0; j<numOfSampleToRead; j++)
+{
+
+ZeroArray(TxMsg, (64) + (0x4) + 1);
 TxMsg[(0)] = (0x24);
 TxMsg[(1)] = FLASH_MSG;
 TxMsg[(2)] = FLASH_SEND_RAW_DATA;
 TxMsg[(3)] = (64);
 
 
-for (j=0; j<numOfSampleToRead; j++)
-{
-
 for(int idx = 0; idx < (64); idx++)
 {
 TxMsg[(0x4) + idx] = FLASH_ReadByte(readAddress + idx);
 }
 
-readAddress += (64);
+readAddress -= (64);
 if (readAddress >= 0x7FF0)
 {
-readAddress = 0x4500;
+readAddress = 0x4580;
 }
 TxMsg[(64) + (0x4)] = crc8(TxMsg, (64) + (0x4));
 
 WriteUartMessage(TxMsg, (64) + (0x4) + 1);
-
-if(numOfValidateSamples)
-{
-if (numOfReadSamples < ((0x4500-0x7FF0)/(64)))
-{
-numOfReadSamples++;
-}
-if (numOfValidateSamples > 0)
-{
-numOfValidateSamples--;
-}
-}
 }
 }
 
-# 173
+# 124
 void FlashEreaseMem(void)
 {
-writeAddress = 0x4500;
-readAddress = 0x4500;
+writeAddress = 0x4580;
+readAddress = 0x4580;
 numOfValidateSamples = 0;
 ZeroArray(sampleArray, (64)/sizeof(adc_result_t));
 SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_EREASE_MEMORY);
@@ -9327,8 +9278,8 @@ TxMsg[(3)] = 4;
 
 
 
-TxMsg[(0x4) + 0] = make8(0x7FF0 - 0x4500,1);
-TxMsg[(0x4) + 1] = make8(0x7FF0 - 0x4500,0);
+TxMsg[(0x4) + 0] = make8(0x7FF0 - 0x4580,1);
+TxMsg[(0x4) + 1] = make8(0x7FF0 - 0x4580,0);
 
 
 TxMsg[(0x4) + 2] = make8(0x7FF0 - writeAddress,1);
@@ -9345,7 +9296,7 @@ double precentage = ((double)(0x7FF0 - writeAddress) / 0x7FF0) * 100;
 return (precentage > 75) ? 1 : 0;
 }
 
-# 220
+# 171
 uint8_t EepromRead(uint8_t address)
 {
 return DATAEE_ReadByte(address);

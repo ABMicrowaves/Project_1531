@@ -13,7 +13,7 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #include "SystemCommon.h"
 
 // Manage flash
-#define SAMPLE_START_ADDRESS        0x4600
+#define SAMPLE_START_ADDRESS        0x4580     // Need to be in multiple of 64
 #define SAMPLE_END_ADDRESS          0x7FF0
 #define PROGRAM_START_ADDRESS       0xe
 #define MAX_NUMBER_BYTES_IN_TEST    128

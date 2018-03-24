@@ -8892,8 +8892,8 @@ LOCK = 0x1,
 
 
 
-volatile bool synthLdRxArray[14];
-volatile bool synthLdTxArray[14];
+volatile bool synthLdRxArray[12];
+volatile bool synthLdTxArray[12];
 
 void PLLInitialize(void);
 void InitSynth(SPI_PERIPHERAL cType);
@@ -9121,7 +9121,7 @@ void ZeroBitsArray(bool* array);
 INT_VAL GetIntFromUartData(int8_t num, char* data);
 void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
 uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
-uint16_t GetUint16FromBitArray(bool* bitarray);
+uint16_t GetUint16FromBitArray(bool* bitarray, int numOfBits);
 
 
 void ResetMcu(void);

@@ -31,21 +31,17 @@ void FillArray(char* array, int size, uint8_t value)
     memset(array, value, size);
 }
 
-uint16_t GetUint16FromBitArray(bool* bitarray)
+uint16_t GetUint16FromBitArray(bool* bitarray, int numOfBits)
 {
     uint16_t res = 0;
-    for (int i = 0 ; i != 16 ; i++) 
+    for (int i = 0 ; i < numOfBits ; i++) 
     {
-        bool state = bitarray[i];
-        if(state == 0xFF)
-        {
-            return res; 
-        }
         if (bitarray[i]) 
         {
             res |= (uint16_t)(1 << i);
         }
     }
+    return res;
 }
 
 INT_VAL GetIntFromUartData(int8_t num, char* data)

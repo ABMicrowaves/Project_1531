@@ -47,7 +47,7 @@ void AdcConvert()
     
     uint16_t adcRes = 0; 
     uint8_t idx = 0;
-    
+    uint16_t ldRxSate = 0, ldTxSate = 0; 
     if (adcSampleMode == CIRCULAR)
     {
         for(idx = 0; idx < ADC_NUM_CHANNELS; idx++)
@@ -59,9 +59,9 @@ void AdcConvert()
         }
         
         // Fill Flash with synthesizers LD array
-        uint16_t ldRxSate = GetUint16FromBitArray(synthLdRxArray);
+        ldRxSate = GetUint16FromBitArray(synthLdRxArray, SYNTH_LD_NUM_BITS);
         FlashSampleWrite(ldRxSate, idx + 1);
-        uint16_t ldTxSate = GetUint16FromBitArray(synthLdTxArray);
+        ldTxSate = GetUint16FromBitArray(synthLdTxArray, SYNTH_LD_NUM_BITS);
         FlashSampleWrite(ldTxSate, idx + 2);
         
     }

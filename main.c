@@ -48,12 +48,12 @@ void main(void)
         }
         else if (Timer0_KeepAlive == true)
         {
-            keepAliveSignalUart();
+            //keepAliveSignalUart();
             Timer0_KeepAlive = false; 
         }
         else if (Timer0_SynthLd == true)
         {
-            SynthLdDetect();
+            //SynthLdDetect();
             Timer0_SynthLd = false; 
         }
     }

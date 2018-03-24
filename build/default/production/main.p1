@@ -45,10 +45,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _BlinkErrorLeds `(v ~T0 @X0 0 ef1`E7150 ]
 "41 AdcApp.h
 [v _AdcConvert `(v ~T0 @X0 0 ef ]
-"50 SystemStatus.h
-[v _keepAliveSignalUart `(v ~T0 @X0 0 ef ]
-"78 SyntApp.h
-[v _SynthLdDetect `(v ~T0 @X0 0 ef ]
 [; ;SystemCommon.h: 13: typedef enum
 [; ;SystemCommon.h: 14: {
 [; ;SystemCommon.h: 15: SYNTH_TX = 0,
@@ -6973,11 +6969,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 65: LOCK = 0x1,
 [; ;SyntApp.h: 66: } SYNTH_LD_STATE;
 "70
-[v _synthLdRxArray `Vuc ~T0 @X0 -> 14 `i e ]
-[; ;SyntApp.h: 70: volatile bool synthLdRxArray[14];
+[v _synthLdRxArray `Vuc ~T0 @X0 -> 12 `i e ]
+[; ;SyntApp.h: 70: volatile bool synthLdRxArray[12];
 "71
-[v _synthLdTxArray `Vuc ~T0 @X0 -> 14 `i e ]
-[; ;SyntApp.h: 71: volatile bool synthLdTxArray[14];
+[v _synthLdTxArray `Vuc ~T0 @X0 -> 12 `i e ]
+[; ;SyntApp.h: 71: volatile bool synthLdTxArray[12];
 [; ;SyntApp.h: 73: void PLLInitialize(void);
 [; ;SyntApp.h: 74: void InitSynth(SPI_PERIPHERAL cType);
 [; ;SyntApp.h: 75: void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data);
@@ -7181,7 +7177,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SystemCommon.h: 65: INT_VAL GetIntFromUartData(int8_t num, char* data);
 [; ;SystemCommon.h: 66: void StoreIntInEeprom(uint32_t data, uint8_t address, int numOfByes);
 [; ;SystemCommon.h: 67: uint32_t ReadIntFromEeprom(uint8_t address, int numOfByes);
-[; ;SystemCommon.h: 68: uint16_t GetUint16FromBitArray(bool* bitarray);
+[; ;SystemCommon.h: 68: uint16_t GetUint16FromBitArray(bool* bitarray, int numOfBits);
 [; ;SystemCommon.h: 71: void ResetMcu(void);
 [; ;SystemCommon.h: 72: void ResetCpld(void);
 [; ;SystemCommon.h: 73: void SendSystemStartAck(void);
@@ -7273,9 +7269,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 50: {
 "50
 {
-[; ;main.c: 51: keepAliveSignalUart();
-"51
-[e ( _keepAliveSignalUart ..  ]
 [; ;main.c: 52: Timer0_KeepAlive = 0;
 "52
 [e = _Timer0_KeepAlive -> -> 0 `i `uc ]
@@ -7290,9 +7283,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 55: {
 "55
 {
-[; ;main.c: 56: SynthLdDetect();
-"56
-[e ( _SynthLdDetect ..  ]
 [; ;main.c: 57: Timer0_SynthLd = 0;
 "57
 [e = _Timer0_SynthLd -> -> 0 `i `uc ]

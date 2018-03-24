@@ -38,7 +38,7 @@ void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum)
     {
         FLASH_WriteBlock(writeAddress, (uint8_t *)sampleArray);
         writeAddress += WRITE_FLASH_BLOCKSIZE;
-        if (writeAddress >= SAMPLE_END_ADDRESS)
+        if (writeAddress >= SAMPLE_END_ADDRESS) // Treat cycle operation when flash space end.
         {
             writeAddress = SAMPLE_START_ADDRESS;
             isReWriteDone = true;
@@ -48,6 +48,7 @@ void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum)
             }
         }
         
+        // Treat normal operation when we are in middle of flash size.
         if (numOfValidateSamples < ((SAMPLE_START_ADDRESS-SAMPLE_END_ADDRESS)/WRITE_FLASH_BLOCKSIZE))
         {
             numOfValidateSamples++;  
@@ -60,108 +61,63 @@ void FlashSampleWrite(adc_result_t sampleData, uint8_t channelNum)
 // <editor-fold defaultstate="collapsed" desc="Flash samples read via EUSART">
 
 void FlashReadUart(char* data)
+// numOfReadSamples = Count how many samples had been read.
+// numOfSampleToRead = Indicate how many samples user request.
+// numOfValidateSamples = How many samples there is to read.
+// FLASH_IsWriteDone - Check if currently there is no write operation on flash.
 {
-    // Create TX packet and clear the memory:
-    int j=0;
-    int offset = 0;
-    
+    int16_t numOfSampleToRead = 0x0;
     INT_VAL val = GetIntFromUartData(10, data);
+
     int numOfSampleToRead = val.num;
     
     char TxMsg[FLASH_TX_PACKET_SIZE + 1];
-    ZeroArray(TxMsg, FLASH_TX_PACKET_SIZE + 1);
     
-    // No valid samples in flash
     if (FLASH_IsWriteDone() == false)
+    // Check we are in middle of writing to flash
     {
         return;
     }
     
-    if (numOfReadSamples)
+    if(numOfValidateSamples == 0)
     {
-        if (numOfValidateSamples)
+        SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_NO_SAMPLE_YET);
+    }
+    
+    // Get lowest of {User request samples, valid samples}
+    numOfSampleToRead = numOfSampleToRead >=  numOfValidateSamples ? numOfValidateSamples : numOfSampleToRead;
+    
+    // Set readAddress
+    readAddress = writeAddress;
+    
+    for (int j=0; j<numOfSampleToRead; j++)
+    {
+        // set readAddress
+        if(readAddress > 0)
         {
-            offset = numOfValidateSamples - (numOfValidateSamples > numOfSampleToRead)? numOfValidateSamples : numOfSampleToRead;
-            if(offset < 0)
-            {
-                if (abs(offset) > numOfReadSamples)
-                {
-                    numOfSampleToRead += offset + numOfReadSamples;
-                    offset = numOfReadSamples * (-1);
-
-                }
-
-                readAddress += offset * WRITE_FLASH_BLOCKSIZE;
-            }
+            readAddress -= WRITE_FLASH_BLOCKSIZE;
         }
         else
         {
-            numOfSampleToRead = (numOfReadSamples > numOfSampleToRead)? numOfSampleToRead : numOfReadSamples;
-            readAddress -= numOfSampleToRead * WRITE_FLASH_BLOCKSIZE;
+            readAddress = SAMPLE_END_ADDRESS - WRITE_FLASH_BLOCKSIZE;
         }
-
-        if (readAddress <= SAMPLE_START_ADDRESS)
-        {
-            readAddress = SAMPLE_START_ADDRESS;
-        }
-    }
-    else
-    {
-        if ((isReWriteDone) && (readAddress <= writeAddress))
-        {
-            readAddress = writeAddress + WRITE_FLASH_BLOCKSIZE;
-            if (readAddress >= SAMPLE_END_ADDRESS)
-            {
-                readAddress = SAMPLE_START_ADDRESS;
-            }
-            //isReWriteDone = false;
-        }
-        else
-        {
-            if(numOfValidateSamples == 0)
-            {
-                SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_NO_SAMPLE_YET);
-                return;
-            }
-                
-        }
-    }
-
-    // Now fill it:
-    TxMsg[MSG_MAGIC_LOCATION] =  MSG_MAGIC_A;
-    TxMsg[MSG_GROUP_LOCATION] =  FLASH_MSG;
-    TxMsg[MSG_REQUEST_LOCATION] =  FLASH_SEND_RAW_DATA;
-    TxMsg[MSG_DATA_SIZE_LOCATION] = WRITE_FLASH_BLOCKSIZE;
-    
-    
-    for (j=0; j<numOfSampleToRead; j++)
-    {
-        // Fill TX array with data:
+        
+        // Fill TX EUSART packet with data:
+        ZeroArray(TxMsg, FLASH_TX_PACKET_SIZE + 1);
+        TxMsg[MSG_MAGIC_LOCATION] =  MSG_MAGIC_A;
+        TxMsg[MSG_GROUP_LOCATION] =  FLASH_MSG;
+        TxMsg[MSG_REQUEST_LOCATION] =  FLASH_SEND_RAW_DATA;
+        TxMsg[MSG_DATA_SIZE_LOCATION] = WRITE_FLASH_BLOCKSIZE;
+        
         for(int idx = 0; idx < WRITE_FLASH_BLOCKSIZE; idx++)
         {
             TxMsg[MSG_DATA_LOCATION + idx] = FLASH_ReadByte(readAddress + idx); 
         }
-
-        readAddress += WRITE_FLASH_BLOCKSIZE;
-        if (readAddress >= SAMPLE_END_ADDRESS)
-        {
-            readAddress = SAMPLE_START_ADDRESS;
-        }
+        
         TxMsg[FLASH_TX_PACKET_SIZE] = crc8(TxMsg, FLASH_TX_PACKET_SIZE);
 
         WriteUartMessage(TxMsg, FLASH_TX_PACKET_SIZE + 1);
-        
-        if(numOfValidateSamples)
-        {
-            if (numOfReadSamples < ((SAMPLE_START_ADDRESS-SAMPLE_END_ADDRESS)/WRITE_FLASH_BLOCKSIZE))
-            {
-                numOfReadSamples++;
-            }
-            if (numOfValidateSamples > 0)
-            {
-                numOfValidateSamples--;  
-            }
-        }
+        __delay_ms(200);
     }
 }
 // </editor-fold>
@@ -178,7 +134,6 @@ void FlashEreaseMem(void)
     ZeroArray(sampleArray, WRITE_FLASH_BLOCKSIZE/sizeof(adc_result_t));
     SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_EREASE_MEMORY);
 }
-
 
 void FlashReadCondition(void)
 {
