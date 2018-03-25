@@ -10,7 +10,8 @@ Author: RoeeZ (Comm-IT).                                                    ****
 
 // <editor-fold defaultstate="collapsed" desc="Global verbs">
 
-uint8_t cntRegUpdate = 0;
+uint8_t cntRegUpdateTx = 0;
+uint8_t cntRegUpdateRx = 0;
 bool SynthTxOper = true;
 bool SynthRxOper = true;
 
@@ -90,35 +91,38 @@ void InitSynth(SPI_PERIPHERAL cType)
 void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data)
 {
     INT_VAL retVal;
-    if(cntRegUpdate < NUM_OF_UPDATE_REGISTERS)
+    
+    retVal = GetIntFromUartData(10, data);
+    
+    if(cType == SYNTH_TX)
     {
-        retVal = GetIntFromUartData(10, data);
-        SWSPI_send_word(cType, retVal.num, 3);
-        if(cType == SYNTH_TX)
-        {
+        if(cntRegUpdateTx < NUM_OF_UPDATE_REGISTERS)
+        {        
+            SWSPI_send_word(cType, retVal.num, 3);
             StoreIntInEeprom(retVal.num, EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[retVal.con], 4);
+            cntRegUpdateTx ++;
             SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_TX_REG);
         }
-        else if(cType == SYNTH_RX)
+        else
         {
-            StoreIntInEeprom(retVal.num, EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[retVal.con], 4);
-            SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG);
-        }
-        cntRegUpdate ++;
-    }
-    
-    else
-    {
-        cntRegUpdate = 0;
-        if(cType == SYNTH_TX)
-        {
+            cntRegUpdateTx = 0;
             SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
         }
-        else if(cType == SYNTH_RX)
+    }
+    else if(cType == SYNTH_RX)
+    {
+        if(cntRegUpdateRx < NUM_OF_UPDATE_REGISTERS)
         {
+            SWSPI_send_word(cType, retVal.num, 3);
+            StoreIntInEeprom(retVal.num, EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[retVal.con], 4);
+            cntRegUpdateRx ++;
+            SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG); 
+        }
+        else
+        {
+            cntRegUpdateRx = 0;
             SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_SET);
         }
-        
     }
 }
 // </editor-fold>

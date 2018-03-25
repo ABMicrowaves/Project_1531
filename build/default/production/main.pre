@@ -9192,12 +9192,12 @@ Timer0_Sampling = 0;
 }
 else if (Timer0_KeepAlive == 1)
 {
-
+keepAliveSignalUart();
 Timer0_KeepAlive = 0;
 }
 else if (Timer0_SynthLd == 1)
 {
-
+SynthLdDetect();
 Timer0_SynthLd = 0;
 }
 }

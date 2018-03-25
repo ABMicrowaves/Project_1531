@@ -6815,9 +6815,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;tmr0.c: 144: CountCallBack++;
 "144
 [e ++ F7016 -> -> 1 `i `ui ]
-[; ;tmr0.c: 145: if ((CountCallBack % 240) == 0)
+[; ;tmr0.c: 145: if ((CountCallBack % 250) == 0)
 "145
-[e $ ! == % F7016 -> -> 240 `i `ui -> -> 0 `i `ui 853  ]
+[e $ ! == % F7016 -> -> 250 `i `ui -> -> 0 `i `ui 853  ]
 [; ;tmr0.c: 146: {
 "146
 {
@@ -6828,9 +6828,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 853 ]
 [; ;tmr0.c: 148: }
-[; ;tmr0.c: 149: if ((CountCallBack % 100) == 0)
+[; ;tmr0.c: 149: if ((CountCallBack % 1300) == 0)
 "149
-[e $ ! == % F7016 -> -> 100 `i `ui -> -> 0 `i `ui 854  ]
+[e $ ! == % F7016 -> -> 1300 `i `ui -> -> 0 `i `ui 854  ]
 [; ;tmr0.c: 150: {
 "150
 {
@@ -6841,9 +6841,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 854 ]
 [; ;tmr0.c: 152: }
-[; ;tmr0.c: 153: if ((CountCallBack % 200) == 0)
+[; ;tmr0.c: 153: if ((CountCallBack % 350) == 0)
 "153
-[e $ ! == % F7016 -> -> 200 `i `ui -> -> 0 `i `ui 855  ]
+[e $ ! == % F7016 -> -> 350 `i `ui -> -> 0 `i `ui 855  ]
 [; ;tmr0.c: 154: {
 "154
 {

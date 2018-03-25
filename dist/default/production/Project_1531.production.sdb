@@ -232,7 +232,7 @@ FLASH_NO_SAMPLE_YET 85
 DAC_SET_VALUE 97
 DAC_READ_VALUE 98
 ]
-"98 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
+"84 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
 [e E7108 . `uc
 CONTROL_MSG 1
 MCU_STATUS_VERSION_MSG 2
@@ -344,13 +344,13 @@ FLASH_NO_SAMPLE_YET 85
 DAC_SET_VALUE 97
 DAC_READ_VALUE 98
 ]
-"30 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
+"31 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
 [e E1 . `uc
 SYNTH_TX 0
 SYNTH_RX 1
 EXT_DAC 2
 ]
-"100
+"104
 [e E7108 . `uc
 CONTROL_MSG 1
 MCU_STATUS_VERSION_MSG 2
@@ -359,7 +359,7 @@ SYNTH_MSG 4
 FLASH_MSG 5
 DAC_MSG 6
 ]
-"218
+"225
 [e E7150 . `uc
 OK_START_SYSTEM 3
 ]
@@ -369,7 +369,7 @@ FAIL_FLASH_MORE_THEN_HELF 2
 FAIL_SYNTH_RX_LATCH 2
 FAIL_SYNTH_TX_LATCH 2
 ]
-"220
+"227
 [e E7590 . `uc
 UNLOCK 0
 LOCK 1
@@ -577,7 +577,7 @@ FLASH_NO_SAMPLE_YET 85
 DAC_SET_VALUE 97
 DAC_READ_VALUE 98
 ]
-"152 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
+"147 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [e E7108 . `uc
 CONTROL_MSG 1
 MCU_STATUS_VERSION_MSG 2
@@ -789,15 +789,15 @@ OK_START_SYSTEM 3
 [v _FlashSampleWrite FlashSampleWrite `(v  1 e 1 0 ]
 "63
 [v _FlashReadUart FlashReadUart `(v  1 e 1 0 ]
-"124
+"129
 [v _FlashEreaseMem FlashEreaseMem `(v  1 e 1 0 ]
-"134
+"138
 [v _FlashReadCondition FlashReadCondition `(v  1 e 1 0 ]
-"161
+"165
 [v _CheckFlashPrecentage CheckFlashPrecentage `(uc  1 e 1 0 ]
-"171
+"175
 [v _EepromRead EepromRead `(uc  1 e 1 0 ]
-"176
+"180
 [v _EepromWrite EepromWrite `(v  1 e 1 0 ]
 "13 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\LedsApp.c
 [v _BlinkErrorLeds BlinkErrorLeds `(v  1 e 1 0 ]
@@ -899,16 +899,18 @@ OK_START_SYSTEM 3
 [v _SwSpi_Set_Synth_Le_Pin SwSpi_Set_Synth_Le_Pin `(v  1 e 1 0 ]
 "260
 [v _SwSpi_Set_Dac_Sync_Pin SwSpi_Set_Dac_Sync_Pin `(v  1 e 1 0 ]
-"28 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
+"29 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
 [v _PLLInitialize PLLInitialize `(v  1 e 1 0 ]
-"38
+"39
 [v _InitSynth InitSynth `(v  1 e 1 0 ]
-"90
+"91
 [v _UpdateSynthFreq UpdateSynthFreq `(v  1 e 1 0 ]
-"128
+"132
 [v _SetSynthOper SetSynthOper `(v  1 e 1 0 ]
-"159
+"163
 [v _SynthReadData SynthReadData `(v  1 e 1 0 ]
+"212
+[v _SynthLdDetect SynthLdDetect `(v  1 e 1 0 ]
 "13 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _crc8 crc8 `(uc  1 e 1 0 ]
 "24
@@ -919,19 +921,19 @@ OK_START_SYSTEM 3
 [v _GetUint16FromBitArray GetUint16FromBitArray `(ui  1 e 2 0 ]
 "54 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.h
 [s S531 . 8 `ul 1 num 4 0 `ul 1 con 4 4 ]
-"52 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
+"47 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _GetIntFromUartData GetIntFromUartData `(S531  1 e 8 0 ]
-"97
+"92
 [v _make8 make8 `(uc  1 e 1 0 ]
-"118
+"113
 [v _Make32bitsArray Make32bitsArray `(v  1 e 1 0 ]
-"127
+"122
 [v _StoreIntInEeprom StoreIntInEeprom `(v  1 e 1 0 ]
-"136
+"131
 [v _ReadIntFromEeprom ReadIntFromEeprom `(ul  1 e 4 0 ]
-"149
+"144
 [v _ResetMcu ResetMcu `(v  1 e 1 0 ]
-"158
+"153
 [v _SendSystemStartAck SendSystemStartAck `(v  1 e 1 0 ]
 "11 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemSettings.c
 [v _SetMcuSystem SetMcuSystem `(v  1 e 1 0 ]
@@ -945,6 +947,8 @@ OK_START_SYSTEM 3
 [v _ClearMcuRunTime ClearMcuRunTime `(v  1 e 1 0 ]
 "68
 [v _GetMcuRunTime GetMcuRunTime `(v  1 e 1 0 ]
+"93
+[v _keepAliveSignalUart keepAliveSignalUart `(v  1 e 1 0 ]
 "13 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\AdcApp.c
 [v _adcSampleMode adcSampleMode `E7601  1 e 1 0 ]
 "14
@@ -963,16 +967,16 @@ OK_START_SYSTEM 3
 [v _ANSELE ANSELE `VEuc  1 e 1 @3900 ]
 "2717
 [v _WPUB WPUB `VEuc  1 e 1 @3937 ]
-[s S1815 . 1 `uc 1 . 1 0 :4:0 
+[s S1818 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 IOCB4 1 0 :1:4 
 `uc 1 IOCB5 1 0 :1:5 
 `uc 1 IOCB6 1 0 :1:6 
 `uc 1 IOCB7 1 0 :1:7 
 ]
 "2793
-[u S1821 . 1 `S1815 1 . 1 0 ]
-[v _IOCBbits IOCBbits `VES1821  1 e 1 @3938 ]
-[s S821 . 1 `uc 1 RD0 1 0 :1:0 
+[u S1824 . 1 `S1818 1 . 1 0 ]
+[v _IOCBbits IOCBbits `VES1824  1 e 1 @3938 ]
+[s S822 . 1 `uc 1 RD0 1 0 :1:0 
 `uc 1 RD1 1 0 :1:1 
 `uc 1 RD2 1 0 :1:2 
 `uc 1 RD3 1 0 :1:3 
@@ -982,7 +986,7 @@ OK_START_SYSTEM 3
 `uc 1 RD7 1 0 :1:7 
 ]
 "7203
-[s S830 . 1 `uc 1 . 1 0 :2:0 
+[s S831 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 P2B 1 0 :1:2 
 `uc 1 P2C 1 0 :1:3 
 `uc 1 P2D 1 0 :1:4 
@@ -990,16 +994,16 @@ OK_START_SYSTEM 3
 `uc 1 P1C 1 0 :1:6 
 `uc 1 P1D 1 0 :1:7 
 ]
-[s S838 . 1 `uc 1 . 1 0 :1:0 
+[s S839 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 CCP4 1 0 :1:1 
 `uc 1 . 1 0 :4:2 
 `uc 1 TX2 1 0 :1:6 
 `uc 1 RX2 1 0 :1:7 
 ]
-[s S844 . 1 `uc 1 . 1 0 :3:0 
+[s S845 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 NOT_SS2 1 0 :1:3 
 ]
-[s S847 . 1 `uc 1 SCK2 1 0 :1:0 
+[s S848 . 1 `uc 1 SCK2 1 0 :1:0 
 `uc 1 SDI2 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 nSS2 1 0 :1:3 
@@ -1008,12 +1012,12 @@ OK_START_SYSTEM 3
 `uc 1 CK2 1 0 :1:6 
 `uc 1 DT2 1 0 :1:7 
 ]
-[s S856 . 1 `uc 1 SCL2 1 0 :1:0 
+[s S857 . 1 `uc 1 SCL2 1 0 :1:0 
 `uc 1 SDA2 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 SS2 1 0 :1:3 
 ]
-[s S861 . 1 `uc 1 AN20 1 0 :1:0 
+[s S862 . 1 `uc 1 AN20 1 0 :1:0 
 `uc 1 AN21 1 0 :1:1 
 `uc 1 AN22 1 0 :1:2 
 `uc 1 AN23 1 0 :1:3 
@@ -1022,11 +1026,11 @@ OK_START_SYSTEM 3
 `uc 1 AN26 1 0 :1:6 
 `uc 1 AN27 1 0 :1:7 
 ]
-[u S870 . 1 `S821 1 . 1 0 `S830 1 . 1 0 `S838 1 . 1 0 `S844 1 . 1 0 `S847 1 . 1 0 `S856 1 . 1 0 `S861 1 . 1 0 ]
-[v _PORTDbits PORTDbits `VES870  1 e 1 @3971 ]
+[u S871 . 1 `S822 1 . 1 0 `S831 1 . 1 0 `S839 1 . 1 0 `S845 1 . 1 0 `S848 1 . 1 0 `S857 1 . 1 0 `S862 1 . 1 0 ]
+[v _PORTDbits PORTDbits `VES871  1 e 1 @3971 ]
 "7558
 [v _LATA LATA `VEuc  1 e 1 @3977 ]
-[s S1197 . 1 `uc 1 LATA0 1 0 :1:0 
+[s S1200 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 LATA3 1 0 :1:3 
@@ -1036,7 +1040,7 @@ OK_START_SYSTEM 3
 `uc 1 LATA7 1 0 :1:7 
 ]
 "7585
-[s S1206 . 1 `uc 1 LA0 1 0 :1:0 
+[s S1209 . 1 `uc 1 LA0 1 0 :1:0 
 `uc 1 LA1 1 0 :1:1 
 `uc 1 LA2 1 0 :1:2 
 `uc 1 LA3 1 0 :1:3 
@@ -1045,8 +1049,8 @@ OK_START_SYSTEM 3
 `uc 1 LA6 1 0 :1:6 
 `uc 1 LA7 1 0 :1:7 
 ]
-[u S1215 . 1 `S1197 1 . 1 0 `S1206 1 . 1 0 ]
-[v _LATAbits LATAbits `VES1215  1 e 1 @3977 ]
+[u S1218 . 1 `S1200 1 . 1 0 `S1209 1 . 1 0 ]
+[v _LATAbits LATAbits `VES1218  1 e 1 @3977 ]
 "7670
 [v _LATB LATB `VEuc  1 e 1 @3978 ]
 [s S105 . 1 `uc 1 LATB0 1 0 :1:0 
@@ -1095,7 +1099,7 @@ OK_START_SYSTEM 3
 [v _LATCbits LATCbits `VES169  1 e 1 @3979 ]
 "7894
 [v _LATD LATD `VEuc  1 e 1 @3980 ]
-[s S1135 . 1 `uc 1 LATD0 1 0 :1:0 
+[s S1138 . 1 `uc 1 LATD0 1 0 :1:0 
 `uc 1 LATD1 1 0 :1:1 
 `uc 1 LATD2 1 0 :1:2 
 `uc 1 LATD3 1 0 :1:3 
@@ -1105,7 +1109,7 @@ OK_START_SYSTEM 3
 `uc 1 LATD7 1 0 :1:7 
 ]
 "7921
-[s S1144 . 1 `uc 1 LD0 1 0 :1:0 
+[s S1147 . 1 `uc 1 LD0 1 0 :1:0 
 `uc 1 LD1 1 0 :1:1 
 `uc 1 LD2 1 0 :1:2 
 `uc 1 LD3 1 0 :1:3 
@@ -1114,8 +1118,8 @@ OK_START_SYSTEM 3
 `uc 1 LD6 1 0 :1:6 
 `uc 1 LD7 1 0 :1:7 
 ]
-[u S1153 . 1 `S1135 1 . 1 0 `S1144 1 . 1 0 ]
-[v _LATDbits LATDbits `VES1153  1 e 1 @3980 ]
+[u S1156 . 1 `S1138 1 . 1 0 `S1147 1 . 1 0 ]
+[v _LATDbits LATDbits `VES1156  1 e 1 @3980 ]
 "8006
 [v _LATE LATE `VEuc  1 e 1 @3981 ]
 "8058
@@ -1130,7 +1134,7 @@ OK_START_SYSTEM 3
 [v _TRISE TRISE `VEuc  1 e 1 @3990 ]
 "9062
 [v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
-[s S1518 . 1 `uc 1 TMR1IE 1 0 :1:0 
+[s S1521 . 1 `uc 1 TMR1IE 1 0 :1:0 
 `uc 1 TMR2IE 1 0 :1:1 
 `uc 1 CCP1IE 1 0 :1:2 
 `uc 1 SSP1IE 1 0 :1:3 
@@ -1139,14 +1143,14 @@ OK_START_SYSTEM 3
 `uc 1 ADIE 1 0 :1:6 
 ]
 "9434
-[s S1526 . 1 `uc 1 . 1 0 :3:0 
+[s S1529 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SSPIE 1 0 :1:3 
 `uc 1 TXIE 1 0 :1:4 
 `uc 1 RCIE 1 0 :1:5 
 ]
-[u S1531 . 1 `S1518 1 . 1 0 `S1526 1 . 1 0 ]
-[v _PIE1bits PIE1bits `VES1531  1 e 1 @3997 ]
-[s S1548 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S1534 . 1 `S1521 1 . 1 0 `S1529 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES1534  1 e 1 @3997 ]
+[s S1551 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSP1IF 1 0 :1:3 
@@ -1155,14 +1159,14 @@ OK_START_SYSTEM 3
 `uc 1 ADIF 1 0 :1:6 
 ]
 "9511
-[s S1556 . 1 `uc 1 . 1 0 :3:0 
+[s S1559 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SSPIF 1 0 :1:3 
 `uc 1 TXIF 1 0 :1:4 
 `uc 1 RCIF 1 0 :1:5 
 ]
-[u S1561 . 1 `S1548 1 . 1 0 `S1556 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES1561  1 e 1 @3998 ]
-[s S1440 . 1 `uc 1 CCP2IE 1 0 :1:0 
+[u S1564 . 1 `S1551 1 . 1 0 `S1559 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES1564  1 e 1 @3998 ]
+[s S1443 . 1 `uc 1 CCP2IE 1 0 :1:0 
 `uc 1 TMR3IE 1 0 :1:1 
 `uc 1 HLVDIE 1 0 :1:2 
 `uc 1 BCL1IE 1 0 :1:3 
@@ -1172,16 +1176,16 @@ OK_START_SYSTEM 3
 `uc 1 OSCFIE 1 0 :1:7 
 ]
 "9669
-[s S1449 . 1 `uc 1 . 1 0 :2:0 
+[s S1452 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 LVDIE 1 0 :1:2 
 `uc 1 BCLIE 1 0 :1:3 
 ]
-[s S1453 . 1 `uc 1 . 1 0 :6:0 
+[s S1456 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 CMIE 1 0 :1:6 
 ]
-[u S1456 . 1 `S1440 1 . 1 0 `S1449 1 . 1 0 `S1453 1 . 1 0 ]
-[v _PIE2bits PIE2bits `VES1456  1 e 1 @4000 ]
-[s S1477 . 1 `uc 1 CCP2IF 1 0 :1:0 
+[u S1459 . 1 `S1443 1 . 1 0 `S1452 1 . 1 0 `S1456 1 . 1 0 ]
+[v _PIE2bits PIE2bits `VES1459  1 e 1 @4000 ]
+[s S1480 . 1 `uc 1 CCP2IF 1 0 :1:0 
 `uc 1 TMR3IF 1 0 :1:1 
 `uc 1 HLVDIF 1 0 :1:2 
 `uc 1 BCL1IF 1 0 :1:3 
@@ -1191,16 +1195,16 @@ OK_START_SYSTEM 3
 `uc 1 OSCFIF 1 0 :1:7 
 ]
 "9755
-[s S1486 . 1 `uc 1 . 1 0 :2:0 
+[s S1489 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 LVDIF 1 0 :1:2 
 `uc 1 BCLIF 1 0 :1:3 
 ]
-[s S1490 . 1 `uc 1 . 1 0 :6:0 
+[s S1493 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 CMIF 1 0 :1:6 
 ]
-[u S1493 . 1 `S1477 1 . 1 0 `S1486 1 . 1 0 `S1490 1 . 1 0 ]
-[v _PIR2bits PIR2bits `VES1493  1 e 1 @4001 ]
-[s S1976 . 1 `uc 1 RD 1 0 :1:0 
+[u S1496 . 1 `S1480 1 . 1 0 `S1489 1 . 1 0 `S1493 1 . 1 0 ]
+[v _PIR2bits PIR2bits `VES1496  1 e 1 @4001 ]
+[s S1979 . 1 `uc 1 RD 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -1210,11 +1214,11 @@ OK_START_SYSTEM 3
 `uc 1 EEPGD 1 0 :1:7 
 ]
 "10188
-[s S1985 . 1 `uc 1 . 1 0 :6:0 
+[s S1988 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 EEFS 1 0 :1:6 
 ]
-[u S1988 . 1 `S1976 1 . 1 0 `S1985 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES1988  1 e 1 @4006 ]
+[u S1991 . 1 `S1979 1 . 1 0 `S1988 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES1991  1 e 1 @4006 ]
 "10233
 [v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
 "10253
@@ -1223,7 +1227,7 @@ OK_START_SYSTEM 3
 [v _EEADR EEADR `VEuc  1 e 1 @4009 ]
 "10343
 [v _RCSTA1 RCSTA1 `VEuc  1 e 1 @4011 ]
-[s S1666 . 1 `uc 1 RX9D 1 0 :1:0 
+[s S1669 . 1 `uc 1 RX9D 1 0 :1:0 
 `uc 1 OERR 1 0 :1:1 
 `uc 1 FERR 1 0 :1:2 
 `uc 1 ADDEN 1 0 :1:3 
@@ -1233,10 +1237,10 @@ OK_START_SYSTEM 3
 `uc 1 SPEN 1 0 :1:7 
 ]
 "10396
-[s S1675 . 1 `uc 1 . 1 0 :3:0 
+[s S1678 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 ADEN 1 0 :1:3 
 ]
-[s S1678 . 1 `uc 1 RX9D1 1 0 :1:0 
+[s S1681 . 1 `uc 1 RX9D1 1 0 :1:0 
 `uc 1 OERR1 1 0 :1:1 
 `uc 1 FERR1 1 0 :1:2 
 `uc 1 ADDEN1 1 0 :1:3 
@@ -1245,18 +1249,18 @@ OK_START_SYSTEM 3
 `uc 1 RX91 1 0 :1:6 
 `uc 1 SPEN1 1 0 :1:7 
 ]
-[s S1687 . 1 `uc 1 RCD8 1 0 :1:0 
+[s S1690 . 1 `uc 1 RCD8 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 RC8_9 1 0 :1:6 
 ]
-[s S1691 . 1 `uc 1 . 1 0 :6:0 
+[s S1694 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 RC9 1 0 :1:6 
 ]
-[s S1694 . 1 `uc 1 . 1 0 :5:0 
+[s S1697 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 SRENA 1 0 :1:5 
 ]
-[u S1697 . 1 `S1666 1 . 1 0 `S1675 1 . 1 0 `S1678 1 . 1 0 `S1687 1 . 1 0 `S1691 1 . 1 0 `S1694 1 . 1 0 ]
-[v _RCSTA1bits RCSTA1bits `VES1697  1 e 1 @4011 ]
+[u S1700 . 1 `S1669 1 . 1 0 `S1678 1 . 1 0 `S1681 1 . 1 0 `S1690 1 . 1 0 `S1694 1 . 1 0 `S1697 1 . 1 0 ]
+[v _RCSTA1bits RCSTA1bits `VES1700  1 e 1 @4011 ]
 "10799
 [v _TXSTA1 TXSTA1 `VEuc  1 e 1 @4012 ]
 "11174
@@ -1275,15 +1279,15 @@ OK_START_SYSTEM 3
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 "13575
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S2162 . 1 `uc 1 . 1 0 :1:0 
+[s S2165 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "13620
-[s S2165 . 1 `uc 1 ADON 1 0 :1:0 
+[s S2168 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :5:2 
 ]
-[s S2169 . 1 `uc 1 . 1 0 :1:0 
+[s S2172 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -1291,43 +1295,43 @@ OK_START_SYSTEM 3
 `uc 1 CHS3 1 0 :1:5 
 `uc 1 CHS4 1 0 :1:6 
 ]
-[s S2177 . 1 `uc 1 . 1 0 :1:0 
+[s S2180 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S2180 . 1 `uc 1 . 1 0 :1:0 
+[s S2183 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S2183 . 1 `uc 1 . 1 0 :1:0 
+[s S2186 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S2186 . 1 `uc 1 . 1 0 :1:0 
+[s S2189 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S2189 . 1 `uc 1 . 1 0 :1:0 
+[s S2192 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S2192 . 1 `S2162 1 . 1 0 `S2165 1 . 1 0 `S2169 1 . 1 0 `S2177 1 . 1 0 `S2180 1 . 1 0 `S2183 1 . 1 0 `S2186 1 . 1 0 `S2189 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES2192  1 e 1 @4034 ]
+[u S2195 . 1 `S2165 1 . 1 0 `S2168 1 . 1 0 `S2172 1 . 1 0 `S2180 1 . 1 0 `S2183 1 . 1 0 `S2186 1 . 1 0 `S2189 1 . 1 0 `S2192 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES2195  1 e 1 @4034 ]
 "13707
 [v _ADRESL ADRESL `VEuc  1 e 1 @4035 ]
 "13727
 [v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
-[s S1338 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+[s S1341 . 1 `uc 1 NOT_BOR 1 0 :1:0 
 ]
 "15835
-[s S1340 . 1 `uc 1 . 1 0 :1:0 
+[s S1343 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_POR 1 0 :1:1 
 ]
-[s S1343 . 1 `uc 1 . 1 0 :2:0 
+[s S1346 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_PD 1 0 :1:2 
 ]
-[s S1346 . 1 `uc 1 . 1 0 :3:0 
+[s S1349 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 NOT_TO 1 0 :1:3 
 ]
-[s S1349 . 1 `uc 1 . 1 0 :4:0 
+[s S1352 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 NOT_RI 1 0 :1:4 
 ]
-[s S1352 . 1 `uc 1 nBOR 1 0 :1:0 
+[s S1355 . 1 `uc 1 nBOR 1 0 :1:0 
 `uc 1 nPOR 1 0 :1:1 
 `uc 1 nPD 1 0 :1:2 
 `uc 1 nTO 1 0 :1:3 
@@ -1336,21 +1340,21 @@ OK_START_SYSTEM 3
 `uc 1 SBOREN 1 0 :1:6 
 `uc 1 IPEN 1 0 :1:7 
 ]
-[s S1361 . 1 `uc 1 BOR 1 0 :1:0 
+[s S1364 . 1 `uc 1 BOR 1 0 :1:0 
 `uc 1 POR 1 0 :1:1 
 `uc 1 PD 1 0 :1:2 
 `uc 1 TO 1 0 :1:3 
 `uc 1 RI 1 0 :1:4 
 ]
-[u S1367 . 1 `S1338 1 . 1 0 `S1340 1 . 1 0 `S1343 1 . 1 0 `S1346 1 . 1 0 `S1349 1 . 1 0 `S1352 1 . 1 0 `S1361 1 . 1 0 ]
-[v _RCONbits RCONbits `VES1367  1 e 1 @4048 ]
+[u S1370 . 1 `S1341 1 . 1 0 `S1343 1 . 1 0 `S1346 1 . 1 0 `S1349 1 . 1 0 `S1352 1 . 1 0 `S1355 1 . 1 0 `S1364 1 . 1 0 ]
+[v _RCONbits RCONbits `VES1370  1 e 1 @4048 ]
 "15953
 [v _OSCCON2 OSCCON2 `VEuc  1 e 1 @4050 ]
 "16010
 [v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
 "16093
 [v _T0CON T0CON `VEuc  1 e 1 @4053 ]
-[s S2088 . 1 `uc 1 T0PS 1 0 :3:0 
+[s S2091 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -1358,21 +1362,21 @@ OK_START_SYSTEM 3
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "16113
-[s S2095 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S2098 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 ]
-[u S2099 . 1 `S2088 1 . 1 0 `S2095 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES2099  1 e 1 @4053 ]
+[u S2102 . 1 `S2091 1 . 1 0 `S2098 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES2102  1 e 1 @4053 ]
 "16170
 [v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
 "16190
 [v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
-[s S1780 . 1 `uc 1 . 1 0 :7:0 
+[s S1783 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_RBPU 1 0 :1:7 
 ]
 "16845
-[s S1783 . 1 `uc 1 RBIP 1 0 :1:0 
+[s S1786 . 1 `uc 1 RBIP 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 TMR0IP 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -1381,12 +1385,12 @@ OK_START_SYSTEM 3
 `uc 1 INTEDG0 1 0 :1:6 
 `uc 1 nRBPU 1 0 :1:7 
 ]
-[s S1792 . 1 `uc 1 . 1 0 :7:0 
+[s S1795 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 RBPU 1 0 :1:7 
 ]
-[u S1795 . 1 `S1780 1 . 1 0 `S1783 1 . 1 0 `S1792 1 . 1 0 ]
-[v _INTCON2bits INTCON2bits `VES1795  1 e 1 @4081 ]
-[s S1041 . 1 `uc 1 RBIF 1 0 :1:0 
+[u S1798 . 1 `S1783 1 . 1 0 `S1786 1 . 1 0 `S1795 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES1798  1 e 1 @4081 ]
+[s S1044 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -1396,7 +1400,7 @@ OK_START_SYSTEM 3
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "16922
-[s S1050 . 1 `uc 1 . 1 0 :1:0 
+[s S1053 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -1405,12 +1409,12 @@ OK_START_SYSTEM 3
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S1059 . 1 `uc 1 . 1 0 :6:0 
+[s S1062 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S1063 . 1 `S1041 1 . 1 0 `S1050 1 . 1 0 `S1059 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES1063  1 e 1 @4082 ]
+[u S1066 . 1 `S1044 1 . 1 0 `S1053 1 . 1 0 `S1062 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES1066  1 e 1 @4082 ]
 "17054
 [v _TABLAT TABLAT `VEuc  1 e 1 @4085 ]
 "17083
@@ -1489,18 +1493,20 @@ OK_START_SYSTEM 3
 "26 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\MessageFunctions.h
 [v _groupsArray groupsArray `[6]*.37(v  1 e 12 0 ]
 "13 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
-[v _cntRegUpdate cntRegUpdate `uc  1 e 1 0 ]
+[v _cntRegUpdateTx cntRegUpdateTx `uc  1 e 1 0 ]
 "14
-[v _SynthTxOper SynthTxOper `uc  1 e 1 0 ]
+[v _cntRegUpdateRx cntRegUpdateRx `uc  1 e 1 0 ]
 "15
+[v _SynthTxOper SynthTxOper `uc  1 e 1 0 ]
+"16
 [v _SynthRxOper SynthRxOper `uc  1 e 1 0 ]
-"18
-[v _synthLdRxCnt synthLdRxCnt `c  1 e 1 0 ]
 "19
+[v _synthLdRxCnt synthLdRxCnt `c  1 e 1 0 ]
+"20
 [v _synthLdTxCnt synthLdTxCnt `c  1 e 1 0 ]
-"22
-[v _synthLdRxArrayCnt synthLdRxArrayCnt `uc  1 e 1 0 ]
 "23
+[v _synthLdRxArrayCnt synthLdRxArrayCnt `uc  1 e 1 0 ]
+"24
 [v _synthLdTxArrayCnt synthLdTxArrayCnt `uc  1 e 1 0 ]
 "27 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.h
 [v _SYNTH_REGS SYNTH_REGS `C[13]ul  1 e 52 0 ]
@@ -1521,9 +1527,9 @@ OK_START_SYSTEM 3
 [v _readUartMessage readUartMessage `(v  1 e 1 0 ]
 {
 "107
-[v readUartMessage@idx idx `i  1 a 2 34 ]
+[v readUartMessage@idx idx `i  1 a 2 48 ]
 "31
-[v readUartMessage@chRec chRec `uc  1 a 1 36 ]
+[v readUartMessage@chRec chRec `uc  1 a 1 50 ]
 "140
 } 0
 "142
@@ -1536,8 +1542,8 @@ OK_START_SYSTEM 3
 {
 [v GroupDAC@request request `E12  1 a 1 wreg ]
 [v GroupDAC@request request `E12  1 a 1 wreg ]
-[v GroupDAC@data data `*.39uc  1 p 2 122 ]
-[v GroupDAC@request request `E12  1 a 1 124 ]
+[v GroupDAC@data data `*.39uc  1 p 2 134 ]
+[v GroupDAC@request request `E12  1 a 1 136 ]
 "140
 } 0
 "104
@@ -1545,8 +1551,8 @@ OK_START_SYSTEM 3
 {
 [v GroupFlashMemory@request request `E12  1 a 1 wreg ]
 [v GroupFlashMemory@request request `E12  1 a 1 wreg ]
-[v GroupFlashMemory@data data `*.2uc  1 p 2 122 ]
-[v GroupFlashMemory@request request `E12  1 a 1 124 ]
+[v GroupFlashMemory@data data `*.2uc  1 p 2 134 ]
+[v GroupFlashMemory@request request `E12  1 a 1 136 ]
 "123
 } 0
 "51
@@ -1554,8 +1560,8 @@ OK_START_SYSTEM 3
 {
 [v GroupAdc@request request `E12  1 a 1 wreg ]
 [v GroupAdc@request request `E12  1 a 1 wreg ]
-[v GroupAdc@data data `*.2uc  1 p 2 122 ]
-[v GroupAdc@request request `E12  1 a 1 124 ]
+[v GroupAdc@data data `*.2uc  1 p 2 134 ]
+[v GroupAdc@request request `E12  1 a 1 136 ]
 "62
 } 0
 "34
@@ -1563,7 +1569,7 @@ OK_START_SYSTEM 3
 {
 [v GroupStatusAndVersion@request request `E12  1 a 1 wreg ]
 [v GroupStatusAndVersion@request request `E12  1 a 1 wreg ]
-[v GroupStatusAndVersion@request request `E12  1 a 1 125 ]
+[v GroupStatusAndVersion@request request `E12  1 a 1 137 ]
 "49
 } 0
 "11
@@ -1571,7 +1577,7 @@ OK_START_SYSTEM 3
 {
 [v GroupControlMcu@request request `E12  1 a 1 wreg ]
 [v GroupControlMcu@request request `E12  1 a 1 wreg ]
-[v GroupControlMcu@request request `E12  1 a 1 125 ]
+[v GroupControlMcu@request request `E12  1 a 1 137 ]
 "32
 } 0
 "63
@@ -1579,52 +1585,52 @@ OK_START_SYSTEM 3
 {
 [v GroupSynthesizers@request request `E12  1 a 1 wreg ]
 [v GroupSynthesizers@request request `E12  1 a 1 wreg ]
-[v GroupSynthesizers@data data `*.2uc  1 p 2 122 ]
-[v GroupSynthesizers@request request `E12  1 a 1 124 ]
+[v GroupSynthesizers@data data `*.2uc  1 p 2 134 ]
+[v GroupSynthesizers@request request `E12  1 a 1 136 ]
 "102
 } 0
-"90 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
+"91 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
 [v _UpdateSynthFreq UpdateSynthFreq `(v  1 e 1 0 ]
 {
 [v UpdateSynthFreq@cType cType `E1  1 a 1 wreg ]
 [s S531 . 8 `ul 1 num 4 0 `ul 1 con 4 4 ]
-"92
+"93
 [v UpdateSynthFreq@retVal retVal `S531  1 a 8 45 ]
-"90
+"91
 [v UpdateSynthFreq@cType cType `E1  1 a 1 wreg ]
 [v UpdateSynthFreq@data data `*.2uc  1 p 2 42 ]
-"93
+"95
 [v UpdateSynthFreq@cType cType `E1  1 a 1 44 ]
-"123
+"127
 } 0
-"159
+"163
 [v _SynthReadData SynthReadData `(v  1 e 1 0 ]
 {
 [v SynthReadData@cType cType `E1  1 a 1 wreg ]
-"189
-[v SynthReadData@data_979 data `uc  1 a 1 18 ]
+"196
+[v SynthReadData@data_981 data `uc  1 a 1 22 ]
+"168
+[v SynthReadData@TxMsg TxMsg `[22]uc  1 a 22 0 ]
+"165
+[v SynthReadData@eepromDataArray eepromDataArray `[4]ul  1 a 16 25 ]
+"167
+[v SynthReadData@byteNum byteNum `uc  1 a 1 43 ]
+[v SynthReadData@regNum regNum `uc  1 a 1 42 ]
 "163
-[v SynthReadData@TxMsg TxMsg `[18]uc  1 a 18 0 ]
-"161
-[v SynthReadData@eepromDataArray eepromDataArray `[3]ul  1 a 12 20 ]
-"162
-[v SynthReadData@byteNum byteNum `uc  1 a 1 33 ]
-[v SynthReadData@regNum regNum `uc  1 a 1 32 ]
-"159
 [v SynthReadData@cType cType `E1  1 a 1 wreg ]
 [v SynthReadData@data data `*.2uc  1 p 2 104 ]
-"162
-[v SynthReadData@cType cType `E1  1 a 1 19 ]
-"198
+"166
+[v SynthReadData@cType cType `E1  1 a 1 41 ]
+"205
 } 0
-"128
+"132
 [v _SetSynthOper SetSynthOper `(v  1 e 1 0 ]
 {
 [v SetSynthOper@cType cType `E1  1 a 1 wreg ]
 [v SetSynthOper@cType cType `E1  1 a 1 wreg ]
-"130
+"134
 [v SetSynthOper@cType cType `E1  1 a 1 111 ]
-"156
+"160
 } 0
 "68 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemStatus.c
 [v _GetMcuRunTime GetMcuRunTime `(v  1 e 1 0 ]
@@ -1661,22 +1667,20 @@ OK_START_SYSTEM 3
 "63 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
 [v _FlashReadUart FlashReadUart `(v  1 e 1 0 ]
 {
-"103
-[v FlashReadUart@idx idx `i  1 a 2 87 ]
-"77
-[v FlashReadUart@TxMsg TxMsg `[69]uc  1 a 69 0 ]
+"112
+[v FlashReadUart@idx idx `i  1 a 2 132 ]
+"93
+[v FlashReadUart@j j `i  1 a 2 128 ]
+"74
+[v FlashReadUart@TxMsg TxMsg `[69]uc  1 a 69 47 ]
 [s S531 . 8 `ul 1 num 4 0 `ul 1 con 4 4 ]
-"72
-[v FlashReadUart@val val `S531  1 a 8 71 ]
-"71
-[v FlashReadUart@numOfSampleToRead numOfSampleToRead `i  1 a 2 85 ]
-"69
-[v FlashReadUart@j j `i  1 a 2 83 ]
 "70
-[v FlashReadUart@offset offset `i  1 a 2 69 ]
+[v FlashReadUart@val val `S531  1 a 8 116 ]
+"69
+[v FlashReadUart@numOfSampleToRead numOfSampleToRead `i  1 a 2 130 ]
 "63
 [v FlashReadUart@data data `*.2uc  1 p 2 39 ]
-"117
+"122
 } 0
 "58 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\mcc_generated_files/memory.c
 [v _FLASH_ReadByte FLASH_ReadByte `(uc  1 e 1 0 ]
@@ -1684,17 +1688,17 @@ OK_START_SYSTEM 3
 [v FLASH_ReadByte@flashAddr flashAddr `ul  1 p 4 23 ]
 "67
 } 0
-"134 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
+"138 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
 [v _FlashReadCondition FlashReadCondition `(v  1 e 1 0 ]
 {
-"137
+"141
 [v FlashReadCondition@TxMsg TxMsg `[9]uc  1 a 9 39 ]
-"159
+"163
 } 0
-"124
+"129
 [v _FlashEreaseMem FlashEreaseMem `(v  1 e 1 0 ]
 {
-"131
+"136
 } 0
 "30 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\DacApp.c
 [v _DacSetValue DacSetValue `(v  1 e 1 0 ]
@@ -1710,26 +1714,26 @@ OK_START_SYSTEM 3
 } 0
 "54 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.h
 [s S531 . 8 `ul 1 num 4 0 `ul 1 con 4 4 ]
-"52 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
+"47 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _GetIntFromUartData GetIntFromUartData `(S531  1 e 8 0 ]
 {
 [v GetIntFromUartData@num num `c  1 a 1 wreg ]
-"80
+"75
 [v GetIntFromUartData@idxCon idxCon `i  1 a 2 36 ]
-"60
+"55
 [v GetIntFromUartData@dataRegArr dataRegArr `[10]uc  1 a 10 16 ]
-"54
+"49
 [v GetIntFromUartData@retVal retVal `S531  1 a 8 28 ]
-"57
-[v GetIntFromUartData@idxData idxData `uc  1 a 1 38 ]
-"58
-[v GetIntFromUartData@recVal recVal `uc  1 a 1 27 ]
 "52
+[v GetIntFromUartData@idxData idxData `uc  1 a 1 38 ]
+"53
+[v GetIntFromUartData@recVal recVal `uc  1 a 1 27 ]
+"47
 [v GetIntFromUartData@num num `c  1 a 1 wreg ]
 [v GetIntFromUartData@data data `*.39uc  1 p 2 6 ]
-"55
+"50
 [v GetIntFromUartData@num num `c  1 a 1 26 ]
-"95
+"90
 } 0
 "5 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\strtol.c
 [v _strtol strtol `(l  1 e 4 0 ]
@@ -1815,10 +1819,10 @@ OK_START_SYSTEM 3
 [v testLeds@idx idx `i  1 a 2 44 ]
 "61
 } 0
-"149 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
+"144 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _ResetMcu ResetMcu `(v  1 e 1 0 ]
 {
-"156
+"151
 } 0
 "30 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\AdcApp.c
 [v _SetChannelMode SetChannelMode `(v  1 e 1 0 ]
@@ -1833,10 +1837,43 @@ OK_START_SYSTEM 3
 [v EUSART1_Read@readValue readValue `ui  1 a 2 24 ]
 "134
 } 0
+"93 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemStatus.c
+[v _keepAliveSignalUart keepAliveSignalUart `(v  1 e 1 0 ]
+{
+"96
+} 0
 "35 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\LedsApp.c
 [v _keepAliveSignalLed keepAliveSignalLed `(v  1 e 1 0 ]
 {
 "38
+} 0
+"212 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
+[v _SynthLdDetect SynthLdDetect `(v  1 e 1 0 ]
+{
+"257
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"11
+[v ___awmod@sign sign `uc  1 a 1 28 ]
+[v ___awmod@counter counter `uc  1 a 1 27 ]
+"8
+[v ___awmod@dividend dividend `i  1 p 2 23 ]
+[v ___awmod@divisor divisor `i  1 p 2 25 ]
+"35
+} 0
+"13 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\LedsApp.c
+[v _BlinkErrorLeds BlinkErrorLeds `(v  1 e 1 0 ]
+{
+[v BlinkErrorLeds@state state `E7597  1 a 1 wreg ]
+"15
+[v BlinkErrorLeds@idx idx `i  1 a 2 27 ]
+"13
+[v BlinkErrorLeds@state state `E7597  1 a 1 wreg ]
+"15
+[v BlinkErrorLeds@state state `E7597  1 a 1 26 ]
+"22
 } 0
 "11 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemSettings.c
 [v _SetMcuSystem SetMcuSystem `(v  1 e 1 0 ]
@@ -1911,10 +1948,10 @@ OK_START_SYSTEM 3
 [v ___llmod@divisor divisor `ul  1 p 4 27 ]
 "26
 } 0
-"158 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
+"153 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _SendSystemStartAck SendSystemStartAck `(v  1 e 1 0 ]
 {
-"161
+"156
 } 0
 "171 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\EusartApp.c
 [v _SendAckMessage SendAckMessage `(v  1 e 1 0 ]
@@ -1976,26 +2013,26 @@ OK_START_SYSTEM 3
 {
 "97
 } 0
-"28 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
+"29 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
 [v _PLLInitialize PLLInitialize `(v  1 e 1 0 ]
 {
-"36
+"37
 } 0
-"38
+"39
 [v _InitSynth InitSynth `(v  1 e 1 0 ]
 {
 [v InitSynth@cType cType `E1  1 a 1 wreg ]
-"46
+"47
 [v InitSynth@idx idx `uc  1 a 1 109 ]
-"43
+"44
 [v InitSynth@EepromVal EepromVal `ul  1 a 4 104 ]
-"42
+"43
 [v InitSynth@regNum regNum `uc  1 a 1 110 ]
-"38
+"39
 [v InitSynth@cType cType `E1  1 a 1 wreg ]
-"40
+"41
 [v InitSynth@cType cType `E1  1 a 1 108 ]
-"85
+"86
 } 0
 "201 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SwSpiApp.c
 [v _SwSpi_Set_CE_Pin SwSpi_Set_CE_Pin `(v  1 e 1 0 ]
@@ -2020,28 +2057,28 @@ OK_START_SYSTEM 3
 [v DacInit@idx idx `c  1 a 1 108 ]
 "26
 } 0
-"127 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
+"122 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _StoreIntInEeprom StoreIntInEeprom `(v  1 e 1 0 ]
 {
-"131
+"126
 [v StoreIntInEeprom@val val `uc  1 a 1 39 ]
-"129
+"124
 [v StoreIntInEeprom@idx idx `uc  1 a 1 40 ]
-"127
+"122
 [v StoreIntInEeprom@data data `ul  1 p 4 32 ]
 [v StoreIntInEeprom@address address `uc  1 p 1 36 ]
 [v StoreIntInEeprom@numOfByes numOfByes `i  1 p 2 37 ]
-"134
+"129
 } 0
-"176 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
+"180 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
 [v _EepromWrite EepromWrite `(v  1 e 1 0 ]
 {
 [v EepromWrite@address address `uc  1 a 1 wreg ]
 [v EepromWrite@address address `uc  1 a 1 wreg ]
 [v EepromWrite@data data `uc  1 p 1 26 ]
-"178
+"182
 [v EepromWrite@address address `uc  1 a 1 27 ]
-"179
+"183
 } 0
 "167 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\mcc_generated_files/memory.c
 [v _DATAEE_WriteByte DATAEE_WriteByte `(v  1 e 1 0 ]
@@ -2072,12 +2109,12 @@ OK_START_SYSTEM 3
 [v SWSPI_send_word@phrType phrType `E1  1 a 1 41 ]
 "41
 } 0
-"97 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
+"92 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _make8 make8 `(uc  1 e 1 0 ]
 {
 [v make8@data data `ul  1 p 4 23 ]
 [v make8@dataLocation dataLocation `uc  1 p 1 27 ]
-"116
+"111
 } 0
 "232 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SwSpiApp.c
 [v _SwSpi_Set_Synth_Le_Pin SwSpi_Set_Synth_Le_Pin `(v  1 e 1 0 ]
@@ -2112,15 +2149,15 @@ OK_START_SYSTEM 3
 [v SWSPI_Synth_send_bits@phrType phrType `E1  1 a 1 37 ]
 "97
 } 0
-"118 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
+"113 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _Make32bitsArray Make32bitsArray `(v  1 e 1 0 ]
 {
-"120
+"115
 [v Make32bitsArray@idx idx `i  1 a 2 31 ]
-"118
+"113
 [v Make32bitsArray@array array `*.39uc  1 p 2 23 ]
 [v Make32bitsArray@data data `ul  1 p 4 25 ]
-"125
+"120
 } 0
 "29
 [v _FillArray FillArray `(v  1 e 1 0 ]
@@ -2172,22 +2209,22 @@ OK_START_SYSTEM 3
 [v SwSpi_Clk_Pin@phrType phrType `E1  1 a 1 24 ]
 "180
 } 0
-"136 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
+"131 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _ReadIntFromEeprom ReadIntFromEeprom `(ul  1 e 4 0 ]
 {
 [v ReadIntFromEeprom@address address `uc  1 a 1 wreg ]
-"143
-[v ReadIntFromEeprom@base base `ul  1 a 4 88 ]
-"141
-[v ReadIntFromEeprom@idx idx `uc  1 a 1 103 ]
 "138
-[v ReadIntFromEeprom@retVal retVal `ul  1 a 4 99 ]
+[v ReadIntFromEeprom@base base `ul  1 a 4 88 ]
 "136
+[v ReadIntFromEeprom@idx idx `uc  1 a 1 103 ]
+"133
+[v ReadIntFromEeprom@retVal retVal `ul  1 a 4 99 ]
+"131
 [v ReadIntFromEeprom@address address `uc  1 a 1 wreg ]
 [v ReadIntFromEeprom@numOfByes numOfByes `i  1 p 2 81 ]
-"138
+"133
 [v ReadIntFromEeprom@address address `uc  1 a 1 98 ]
-"147
+"142
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
@@ -2199,14 +2236,14 @@ OK_START_SYSTEM 3
 [v ___lmul@multiplicand multiplicand `ul  1 p 4 29 ]
 "129
 } 0
-"171 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
+"175 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
 [v _EepromRead EepromRead `(uc  1 e 1 0 ]
 {
 [v EepromRead@address address `uc  1 a 1 wreg ]
 [v EepromRead@address address `uc  1 a 1 wreg ]
-"173
+"177
 [v EepromRead@address address `uc  1 a 1 24 ]
-"174
+"178
 } 0
 "194 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\mcc_generated_files/memory.c
 [v _DATAEE_ReadByte DATAEE_ReadByte `(uc  1 e 1 0 ]
@@ -2222,12 +2259,12 @@ OK_START_SYSTEM 3
 {
 "66
 } 0
-"161 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
+"165 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
 [v _CheckFlashPrecentage CheckFlashPrecentage `(uc  1 e 1 0 ]
 {
-"163
+"167
 [v CheckFlashPrecentage@precentage precentage `d  1 a 3 28 ]
-"165
+"169
 } 0
 "24 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\LedsApp.c
 [v _BlinkOkLeds BlinkOkLeds `(v  1 e 1 0 ]
@@ -2240,18 +2277,6 @@ OK_START_SYSTEM 3
 "26
 [v BlinkOkLeds@state state `E7594  1 a 1 26 ]
 "33
-} 0
-"13
-[v _BlinkErrorLeds BlinkErrorLeds `(v  1 e 1 0 ]
-{
-[v BlinkErrorLeds@state state `E7597  1 a 1 wreg ]
-"15
-[v BlinkErrorLeds@idx idx `i  1 a 2 27 ]
-"13
-[v BlinkErrorLeds@state state `E7597  1 a 1 wreg ]
-"15
-[v BlinkErrorLeds@state state `E7597  1 a 1 26 ]
-"22
 } 0
 "43 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\AdcApp.c
 [v _AdcConvert AdcConvert `(v  1 e 1 0 ]
@@ -2468,16 +2493,14 @@ OK_START_SYSTEM 3
 "34 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _GetUint16FromBitArray GetUint16FromBitArray `(ui  1 e 2 0 ]
 {
-"39
-[v GetUint16FromBitArray@state state `uc  1 a 1 30 ]
 "37
-[v GetUint16FromBitArray@i i `i  1 a 2 33 ]
+[v GetUint16FromBitArray@i i `i  1 a 2 32 ]
 "36
-[v GetUint16FromBitArray@res res `ui  1 a 2 31 ]
+[v GetUint16FromBitArray@res res `ui  1 a 2 30 ]
 "34
 [v GetUint16FromBitArray@bitarray bitarray `*.39uc  1 p 2 23 ]
 [v GetUint16FromBitArray@numOfBits numOfBits `i  1 p 2 25 ]
-"50
+"45
 } 0
 "29 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\FlashApp.c
 [v _FlashSampleWrite FlashSampleWrite `(v  1 e 1 0 ]

@@ -9150,7 +9150,8 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data);
 void SynthLdDetect(void);
 
 # 13 "SyntApp.c"
-uint8_t cntRegUpdate = 0;
+uint8_t cntRegUpdateTx = 0;
+uint8_t cntRegUpdateRx = 0;
 bool SynthTxOper = 1;
 bool SynthRxOper = 1;
 
@@ -9230,35 +9231,38 @@ SWSPI_send_word(cType, SYNTH_REGS[idx],3);
 void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data)
 {
 INT_VAL retVal;
-if(cntRegUpdate < 7)
-{
+
 retVal = GetIntFromUartData(10, data);
-SWSPI_send_word(cType, retVal.num, 3);
+
 if(cType == SYNTH_TX)
 {
+if(cntRegUpdateTx < 7)
+{
+SWSPI_send_word(cType, retVal.num, 3);
 StoreIntInEeprom(retVal.num, (0) | SYNTH_ADDRES[retVal.con], 4);
+cntRegUpdateTx ++;
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_TX_REG);
 }
-else if(cType == SYNTH_RX)
-{
-StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
-SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG);
-}
-cntRegUpdate ++;
-}
-
 else
 {
-cntRegUpdate = 0;
-if(cType == SYNTH_TX)
-{
+cntRegUpdateTx = 0;
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
+}
 }
 else if(cType == SYNTH_RX)
 {
+if(cntRegUpdateRx < 7)
+{
+SWSPI_send_word(cType, retVal.num, 3);
+StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
+cntRegUpdateRx ++;
+SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG);
+}
+else
+{
+cntRegUpdateRx = 0;
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_SET);
 }
-
 }
 }
 
@@ -9340,7 +9344,7 @@ TxMsg[5 * 4 + 1] = crc8(TxMsg, 5 * 4 + 1);
 WriteUartMessage(TxMsg, 5 * 4 + 1 + 1);
 }
 
-# 208
+# 212
 void SynthLdDetect(void)
 {
 

@@ -9150,7 +9150,8 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data);
 void SynthLdDetect(void);
 
 # 13 "SyntApp.c"
-uint8_t cntRegUpdate = 0;
+uint8_t cntRegUpdateTx = 0;
+uint8_t cntRegUpdateRx = 0;
 bool SynthTxOper = 1;
 bool SynthRxOper = 1;
 
@@ -9171,8 +9172,8 @@ InitSynth(SYNTH_TX);
 InitSynth(SYNTH_RX);
 
 
-FillArray(synthLdRxArray, sizeof(synthLdRxArray), 0xFF);
-FillArray(synthLdTxArray, sizeof(synthLdTxArray), 0xFF);
+FillArray(synthLdRxArray, sizeof(synthLdRxArray), 0x0);
+FillArray(synthLdTxArray, sizeof(synthLdTxArray), 0x0);
 }
 
 void InitSynth(SPI_PERIPHERAL cType)
@@ -9230,35 +9231,38 @@ SWSPI_send_word(cType, SYNTH_REGS[idx],3);
 void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data)
 {
 INT_VAL retVal;
-if(cntRegUpdate < 7)
-{
+
 retVal = GetIntFromUartData(10, data);
-SWSPI_send_word(cType, retVal.num, 3);
+
 if(cType == SYNTH_TX)
 {
+if(cntRegUpdateTx < 7)
+{
+SWSPI_send_word(cType, retVal.num, 3);
 StoreIntInEeprom(retVal.num, (0) | SYNTH_ADDRES[retVal.con], 4);
+cntRegUpdateTx ++;
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_TX_REG);
 }
-else if(cType == SYNTH_RX)
-{
-StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
-SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG);
-}
-cntRegUpdate ++;
-}
-
 else
 {
-cntRegUpdate = 0;
-if(cType == SYNTH_TX)
-{
+cntRegUpdateTx = 0;
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
+}
 }
 else if(cType == SYNTH_RX)
 {
+if(cntRegUpdateRx < 7)
+{
+SWSPI_send_word(cType, retVal.num, 3);
+StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
+cntRegUpdateRx ++;
+SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_REQ_ANTHER_RX_REG);
+}
+else
+{
+cntRegUpdateRx = 0;
 SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_SET);
 }
-
 }
 }
 
@@ -9298,15 +9302,16 @@ SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_OPER);
 
 void SynthReadData(SPI_PERIPHERAL cType, char* data)
 {
-uint32_t eepromDataArray[3];
+uint32_t eepromDataArray[4];
+ZeroArray(eepromDataArray, sizeof(eepromDataArray));
 uint8_t regNum = 0, byteNum = 0;
-char TxMsg[5 * 3 + 1 + 1 + 1];
-ZeroArray(TxMsg, 5 * 3 + 1 + 1 + 1);
+char TxMsg[5 * 4 + 1 + 1];
+ZeroArray(TxMsg, 5 * 4 + 1 + 1);
 
 
 TxMsg[(0)] = (0x24);
 TxMsg[(1)] = SYNTH_MSG;
-TxMsg[(3)] = 5 * 3 + 1 - (0x4);
+TxMsg[(3)] = 5 * 4 - (0x4);
 
 if(cType == SYNTH_TX)
 {
@@ -9314,6 +9319,7 @@ TxMsg[(2)] = SYNTH_DOWN_READ_DATA;
 eepromDataArray[0] = ReadIntFromEeprom((0) | SYNTH_ADDRES[0], 4);
 eepromDataArray[1] = ReadIntFromEeprom((0) | SYNTH_ADDRES[1], 4);
 eepromDataArray[2] = ReadIntFromEeprom((0) | SYNTH_ADDRES[2], 4);
+eepromDataArray[3] = ReadIntFromEeprom((0) | SYNTH_ADDRES[4], 4);
 }
 else if (cType == SYNTH_RX)
 {
@@ -9321,23 +9327,24 @@ TxMsg[(2)] = SYNTH_UP_READ_DATA;
 eepromDataArray[0] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[0], 4);
 eepromDataArray[1] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[1], 4);
 eepromDataArray[2] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[2], 4);
+eepromDataArray[3] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[4], 4);
 }
 
-for(regNum = 0; regNum < 3; regNum++)
+for(regNum = 0; regNum < 4; regNum++)
 {
 for(byteNum = 0; byteNum < (5); byteNum++)
 {
 uint8_t data = make8(eepromDataArray[regNum], byteNum);
-TxMsg[(0x4) + (3 + 1)*regNum + byteNum] = data;
+TxMsg[(0x4) + (4)*regNum + byteNum] = data;
 }
 }
 
-TxMsg[5 * 3 + 1] = 0x9;
-TxMsg[5 * 3 + 1 + 1] = crc8(TxMsg, 5 * 3 + 1 + 1);
-WriteUartMessage(TxMsg, 5 * 3 + 1 + 1 + 1);
+TxMsg[5 * 4] = cType == SYNTH_TX ? SynthTxOper : SynthRxOper;
+TxMsg[5 * 4 + 1] = crc8(TxMsg, 5 * 4 + 1);
+WriteUartMessage(TxMsg, 5 * 4 + 1 + 1);
 }
 
-# 205
+# 212
 void SynthLdDetect(void)
 {
 

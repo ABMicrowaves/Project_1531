@@ -9202,32 +9202,42 @@ void FlashReadUart(char* data)
 
 
 {
-int j=0;
-int offset = 0;
 int16_t numOfSampleToRead = 0x0;
 INT_VAL val = GetIntFromUartData(10, data);
 
 int numOfSampleToRead = val.num;
 
-
 char TxMsg[(64) + (0x4) + 1];
 
-
 if (FLASH_IsWriteDone() == 0)
+
 {
 return;
 }
 
-
-if (readAddress < writeAddress)
+if(numOfValidateSamples == 0)
 {
-numOfSampleToRead = numOfSampleToRead >= numOfValidateSamples ? numOfValidateSamples : numOfSampleToRead;
-readAddress = writeAddress;
+SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_NO_SAMPLE_YET);
 }
 
 
-for (j=0; j<numOfSampleToRead; j++)
+numOfSampleToRead = numOfSampleToRead >= numOfValidateSamples ? numOfValidateSamples : numOfSampleToRead;
+
+
+readAddress = writeAddress;
+
+for (int j=0; j<numOfSampleToRead; j++)
 {
+
+if(readAddress > 0)
+{
+readAddress -= (64);
+}
+else
+{
+readAddress = 0x7FF0 - (64);
+}
+
 
 ZeroArray(TxMsg, (64) + (0x4) + 1);
 TxMsg[(0)] = (0x24);
@@ -9235,24 +9245,19 @@ TxMsg[(1)] = FLASH_MSG;
 TxMsg[(2)] = FLASH_SEND_RAW_DATA;
 TxMsg[(3)] = (64);
 
-
 for(int idx = 0; idx < (64); idx++)
 {
 TxMsg[(0x4) + idx] = FLASH_ReadByte(readAddress + idx);
 }
 
-readAddress -= (64);
-if (readAddress >= 0x7FF0)
-{
-readAddress = 0x4580;
-}
 TxMsg[(64) + (0x4)] = crc8(TxMsg, (64) + (0x4));
 
 WriteUartMessage(TxMsg, (64) + (0x4) + 1);
+_delay((unsigned long)((200)*(8000000/4000.0)));
 }
 }
 
-# 124
+# 129
 void FlashEreaseMem(void)
 {
 writeAddress = 0x4580;
@@ -9261,7 +9266,6 @@ numOfValidateSamples = 0;
 ZeroArray(sampleArray, (64)/sizeof(adc_result_t));
 SendAckMessage((MSG_GROUPS)FLASH_MSG, (MSG_REQUEST)FLASH_EREASE_MEMORY);
 }
-
 
 void FlashReadCondition(void)
 {
@@ -9296,7 +9300,7 @@ double precentage = ((double)(0x7FF0 - writeAddress) / 0x7FF0) * 100;
 return (precentage > 75) ? 1 : 0;
 }
 
-# 171
+# 175
 uint8_t EepromRead(uint8_t address)
 {
 return DATAEE_ReadByte(address);

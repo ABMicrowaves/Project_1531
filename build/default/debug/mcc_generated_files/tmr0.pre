@@ -8669,15 +8669,15 @@ TMR0H = timer0ReloadVal >> 8;
 TMR0L = (uint8_t) timer0ReloadVal;
 
 CountCallBack++;
-if ((CountCallBack % 240) == 0)
+if ((CountCallBack % 250) == 0)
 {
 Timer0_SynthLd = 1;
 }
-if ((CountCallBack % 100) == 0)
+if ((CountCallBack % 1300) == 0)
 {
 Timer0_Sampling = 1;
 }
-if ((CountCallBack % 200) == 0)
+if ((CountCallBack % 350) == 0)
 {
 Timer0_KeepAlive = 1;
 }

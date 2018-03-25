@@ -45,6 +45,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _BlinkErrorLeds `(v ~T0 @X0 0 ef1`E7150 ]
 "41 AdcApp.h
 [v _AdcConvert `(v ~T0 @X0 0 ef ]
+"50 SystemStatus.h
+[v _keepAliveSignalUart `(v ~T0 @X0 0 ef ]
+"78 SyntApp.h
+[v _SynthLdDetect `(v ~T0 @X0 0 ef ]
 [; ;SystemCommon.h: 13: typedef enum
 [; ;SystemCommon.h: 14: {
 [; ;SystemCommon.h: 15: SYNTH_TX = 0,
@@ -7269,6 +7273,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 50: {
 "50
 {
+[; ;main.c: 51: keepAliveSignalUart();
+"51
+[e ( _keepAliveSignalUart ..  ]
 [; ;main.c: 52: Timer0_KeepAlive = 0;
 "52
 [e = _Timer0_KeepAlive -> -> 0 `i `uc ]
@@ -7283,6 +7290,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 55: {
 "55
 {
+[; ;main.c: 56: SynthLdDetect();
+"56
+[e ( _SynthLdDetect ..  ]
 [; ;main.c: 57: Timer0_SynthLd = 0;
 "57
 [e = _Timer0_SynthLd -> -> 0 `i `uc ]
