@@ -2,10 +2,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "25 AdcApp.h
 [c E7061 4 5 6 7 8 9 10 13 25 29 30 31 .. ]
 [n E7061 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB2 ADC_RB3 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
-[v F7194 `(v ~T0 @X0 0 tf ]
+[v F7195 `(v ~T0 @X0 0 tf ]
 "28 MessageFunctions.h
-[c E7116 16 17 18 19 20 21 33 34 50 64 65 66 67 68 69 70 71 72 73 81 82 83 84 85 97 98 .. ]
-[n E7116 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION ADC_CHANNEL_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA SYNTH_REQ_ANTHER_TX_REG SYNTH_REQ_ANTHER_RX_REG FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE DAC_READ_VALUE  ]
+[c E7116 16 17 18 19 20 21 33 34 50 51 64 65 66 67 68 69 70 71 72 73 81 82 83 84 85 97 98 .. ]
+[n E7116 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION ADC_CHANNEL_MODE ADC_GET_SINGLE_SAMPLE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA SYNTH_REQ_ANTHER_TX_REG SYNTH_REQ_ANTHER_RX_REG FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE DAC_READ_VALUE  ]
 "18
 [v _GroupControlMcu `(v ~T0 @X0 0 ef2`E7116`*uc ]
 "19
@@ -19,10 +19,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "23
 [v _GroupDAC `(v ~T0 @X0 0 ef2`E7116`*uc ]
 "14 LedsApp.c
-[c E7594 3 .. ]
-[n E7594 . OK_START_SYSTEM  ]
-[c E7597 2 2 2 2 .. ]
-[n E7597 . FAIL_UART_ACK_NOT_RECIEVE FAIL_FLASH_MORE_THEN_HELF FAIL_SYNTH_RX_LATCH FAIL_SYNTH_TX_LATCH  ]
+[c E7595 3 .. ]
+[n E7595 . OK_START_SYSTEM  ]
+[c E7598 1 2 3 4 .. ]
+[n E7598 . FAIL_UART_ACK_NOT_RECIEVE FAIL_FLASH_MORE_THEN_HELF FAIL_SYNTH_RX_LATCH FAIL_SYNTH_TX_LATCH  ]
 "7676 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f45k22.h
 [s S378 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S378 . LATB0 LATB1 LATB2 LATB3 LATB4 LATB5 LATB6 LATB7 ]
@@ -6754,24 +6754,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;GroupsCommon.h: 54: STATUS_MCU_RUN_TIME = 0x21,
 [; ;GroupsCommon.h: 55: STATUS_GET_MCU_FW_VERSION = 0x22,
 [; ;GroupsCommon.h: 58: ADC_CHANNEL_MODE = 0x32,
-[; ;GroupsCommon.h: 61: SYNTH_TX_INIT_SET = 0x40,
-[; ;GroupsCommon.h: 62: SYNTH_RX_INIT_SET = 0x41,
-[; ;GroupsCommon.h: 63: SYNTH_DOWN_SET = 0x42,
-[; ;GroupsCommon.h: 64: SYNTH_UP_SET = 0x43,
-[; ;GroupsCommon.h: 65: SYNTH_UP_OPER = 0x44,
-[; ;GroupsCommon.h: 66: SYNTH_DOWN_OPER = 0x45,
-[; ;GroupsCommon.h: 67: SYNTH_UP_READ_DATA = 0x46,
-[; ;GroupsCommon.h: 68: SYNTH_DOWN_READ_DATA = 0x47,
-[; ;GroupsCommon.h: 69: SYNTH_REQ_ANTHER_TX_REG = 0x48,
-[; ;GroupsCommon.h: 70: SYNTH_REQ_ANTHER_RX_REG = 0x49,
-[; ;GroupsCommon.h: 73: FLASH_EREASE_MEMORY = 0x51,
-[; ;GroupsCommon.h: 74: FLASH_READ_CONDITION = 0x52,
-[; ;GroupsCommon.h: 75: FLASH_REQUEST_RAW_DATA = 0x53,
-[; ;GroupsCommon.h: 76: FLASH_SEND_RAW_DATA = 0x54,
-[; ;GroupsCommon.h: 77: FLASH_NO_SAMPLE_YET = 0x55,
-[; ;GroupsCommon.h: 80: DAC_SET_VALUE = 0x61,
-[; ;GroupsCommon.h: 81: DAC_READ_VALUE = 0x62,
-[; ;GroupsCommon.h: 82: }MSG_REQUEST;
+[; ;GroupsCommon.h: 59: ADC_GET_SINGLE_SAMPLE = 0x33,
+[; ;GroupsCommon.h: 62: SYNTH_TX_INIT_SET = 0x40,
+[; ;GroupsCommon.h: 63: SYNTH_RX_INIT_SET = 0x41,
+[; ;GroupsCommon.h: 64: SYNTH_DOWN_SET = 0x42,
+[; ;GroupsCommon.h: 65: SYNTH_UP_SET = 0x43,
+[; ;GroupsCommon.h: 66: SYNTH_UP_OPER = 0x44,
+[; ;GroupsCommon.h: 67: SYNTH_DOWN_OPER = 0x45,
+[; ;GroupsCommon.h: 68: SYNTH_UP_READ_DATA = 0x46,
+[; ;GroupsCommon.h: 69: SYNTH_DOWN_READ_DATA = 0x47,
+[; ;GroupsCommon.h: 70: SYNTH_REQ_ANTHER_TX_REG = 0x48,
+[; ;GroupsCommon.h: 71: SYNTH_REQ_ANTHER_RX_REG = 0x49,
+[; ;GroupsCommon.h: 74: FLASH_EREASE_MEMORY = 0x51,
+[; ;GroupsCommon.h: 75: FLASH_READ_CONDITION = 0x52,
+[; ;GroupsCommon.h: 76: FLASH_REQUEST_RAW_DATA = 0x53,
+[; ;GroupsCommon.h: 77: FLASH_SEND_RAW_DATA = 0x54,
+[; ;GroupsCommon.h: 78: FLASH_NO_SAMPLE_YET = 0x55,
+[; ;GroupsCommon.h: 81: DAC_SET_VALUE = 0x61,
+[; ;GroupsCommon.h: 82: DAC_READ_VALUE = 0x62,
+[; ;GroupsCommon.h: 83: }MSG_REQUEST;
 [; ;SystemStatus.h: 45: void GetMcuFwVersion();;
 [; ;SystemStatus.h: 47: void SetMcuRunTime();
 [; ;SystemStatus.h: 48: void GetMcuRunTime();
@@ -6835,21 +6836,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 22: void GroupFlashMemory(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 23: void GroupDAC(MSG_REQUEST request, char* data);
 "26 MessageFunctions.h
-[v _groupsArray `*F7194 ~T0 @X0 -> 6 `i e ]
+[v _groupsArray `*F7195 ~T0 @X0 -> 6 `i e ]
 [i _groupsArray
 :U ..
 "28
--> &U _GroupControlMcu `*F7194
+-> &U _GroupControlMcu `*F7195
 "29
--> &U _GroupStatusAndVersion `*F7194
+-> &U _GroupStatusAndVersion `*F7195
 "30
--> &U _GroupAdc `*F7194
+-> &U _GroupAdc `*F7195
 "31
--> &U _GroupSynthesizers `*F7194
+-> &U _GroupSynthesizers `*F7195
 "32
--> &U _GroupFlashMemory `*F7194
+-> &U _GroupFlashMemory `*F7195
 "33
--> &U _GroupDAC `*F7194
+-> &U _GroupDAC `*F7195
 ..
 ]
 [; ;MessageFunctions.h: 26: void (*groupsArray[(6)])() =
@@ -6862,7 +6863,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 33: GroupDAC,
 [; ;MessageFunctions.h: 34: };
 "27 SyntApp.h
-[v _SYNTH_REGS `Cul ~T0 @X0 -> 13 `i e ]
+[v _SYNTH_REGS `Cul ~T0 @X0 -> 14 `i e ]
 [i _SYNTH_REGS
 :U ..
 "29
@@ -6893,7 +6894,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 2098816 `l `ul
 ..
 ]
-[; ;SyntApp.h: 27: const uint32_t SYNTH_REGS[13] =
+[; ;SyntApp.h: 27: const uint32_t SYNTH_REGS[14] =
 [; ;SyntApp.h: 28: {
 [; ;SyntApp.h: 29: 0x1041C,
 [; ;SyntApp.h: 30: 0x61300B,
@@ -6910,7 +6911,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 41: 0x200680
 [; ;SyntApp.h: 42: };
 "44
-[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 13 `i e ]
+[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 14 `i e ]
 [i _SYNTH_ADDRES
 :U ..
 "47
@@ -6936,12 +6937,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "57
 -> -> 24 `i `uc
 "58
--> -> 0 `i `uc
+-> -> 28 `i `uc
 "59
 -> -> 0 `i `uc
 ..
 ]
-[; ;SyntApp.h: 44: const uint8_t SYNTH_ADDRES[13] =
+[; ;SyntApp.h: 44: const uint8_t SYNTH_ADDRES[14] =
 [; ;SyntApp.h: 45: {
 [; ;SyntApp.h: 47: 0x4,
 [; ;SyntApp.h: 48: 0x8,
@@ -6954,7 +6955,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 55: 0x00,
 [; ;SyntApp.h: 56: 0x00,
 [; ;SyntApp.h: 57: 0x18,
-[; ;SyntApp.h: 58: 0x00,
+[; ;SyntApp.h: 58: 0x1C,
 [; ;SyntApp.h: 59: 0x00,
 [; ;SyntApp.h: 60: };
 [; ;SyntApp.h: 62: typedef enum
@@ -7176,29 +7177,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SystemCommon.h: 72: void ResetCpld(void);
 [; ;SystemCommon.h: 73: void SendSystemStartAck(void);
 [; ;LedsApp.h: 22: typedef enum
-[; ;LedsApp.h: 24: {
-[; ;LedsApp.h: 25: OK_START_SYSTEM = 0x3,
-[; ;LedsApp.h: 26: } LED_OK_INTICATION;
-[; ;LedsApp.h: 28: typedef enum
-[; ;LedsApp.h: 30: {
-[; ;LedsApp.h: 31: FAIL_UART_ACK_NOT_RECIEVE = 0x2,
-[; ;LedsApp.h: 32: FAIL_FLASH_MORE_THEN_HELF = 0x2,
-[; ;LedsApp.h: 33: FAIL_SYNTH_RX_LATCH = 0x2,
-[; ;LedsApp.h: 34: FAIL_SYNTH_TX_LATCH = 0x2,
-[; ;LedsApp.h: 35: } LED_ERR_INTICATION;
-[; ;LedsApp.h: 37: void testLeds();
-[; ;LedsApp.h: 38: void BlinkErrorLeds(LED_OK_INTICATION state);
-[; ;LedsApp.h: 39: void BlinkOkLeds(LED_ERR_INTICATION state);
-[; ;LedsApp.h: 40: void keepAliveSignalLed(void);
+[; ;LedsApp.h: 25: {
+[; ;LedsApp.h: 26: OK_START_SYSTEM = 0x3,
+[; ;LedsApp.h: 27: } LED_OK_INTICATION;
+[; ;LedsApp.h: 29: typedef enum
+[; ;LedsApp.h: 31: {
+[; ;LedsApp.h: 32: FAIL_UART_ACK_NOT_RECIEVE = 0x1,
+[; ;LedsApp.h: 33: FAIL_FLASH_MORE_THEN_HELF = 0x2,
+[; ;LedsApp.h: 34: FAIL_SYNTH_RX_LATCH = 0x3,
+[; ;LedsApp.h: 35: FAIL_SYNTH_TX_LATCH = 0x4,
+[; ;LedsApp.h: 36: } LED_ERR_INTICATION;
+[; ;LedsApp.h: 38: void testLeds();
+[; ;LedsApp.h: 39: void BlinkErrorLeds(LED_OK_INTICATION state);
+[; ;LedsApp.h: 40: void BlinkOkLeds(LED_ERR_INTICATION state);
+[; ;LedsApp.h: 41: void keepAliveSignalLed(void);
 "13 LedsApp.c
-[v _BlinkErrorLeds `(v ~T0 @X0 1 ef1`E7594 ]
+[v _BlinkErrorLeds `(v ~T0 @X0 1 ef1`E7595 ]
 "14
 {
 [; ;LedsApp.c: 13: void BlinkErrorLeds (LED_ERR_INTICATION state)
 [; ;LedsApp.c: 14: {
 [e :U _BlinkErrorLeds ]
 "13
-[v _state `E7597 ~T0 @X0 1 r1 ]
+[v _state `E7598 ~T0 @X0 1 r1 ]
 "14
 [f ]
 [; ;LedsApp.c: 15: for(int idx = 0; idx < state; idx++)
@@ -7238,14 +7239,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 852 ]
 }
 "24
-[v _BlinkOkLeds `(v ~T0 @X0 1 ef1`E7597 ]
+[v _BlinkOkLeds `(v ~T0 @X0 1 ef1`E7598 ]
 "25
 {
 [; ;LedsApp.c: 24: void BlinkOkLeds (LED_OK_INTICATION state)
 [; ;LedsApp.c: 25: {
 [e :U _BlinkOkLeds ]
 "24
-[v _state `E7594 ~T0 @X0 1 r1 ]
+[v _state `E7595 ~T0 @X0 1 r1 ]
 "25
 [f ]
 [; ;LedsApp.c: 26: for(int idx = 0; idx < state; idx++)

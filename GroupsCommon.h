@@ -56,7 +56,8 @@ typedef enum
 
     // ADC
     ADC_CHANNEL_MODE            = 0x32,
-    
+    ADC_GET_SINGLE_SAMPLE       = 0x33,
+            
     // Synthesizer (Up / Down):
     SYNTH_TX_INIT_SET           = 0x40,
     SYNTH_RX_INIT_SET           = 0x41,

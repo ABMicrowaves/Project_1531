@@ -3,51 +3,41 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/DacApp.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/EusartApp.c</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/ftmul.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/pin_manager.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/DacApp.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/LedsApp.h</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/float.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/memory.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/memory.c</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/ftadd.c</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/evalpoly.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SwSpiApp.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/EusartApp.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SytstemSettings.h</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/strtol.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/adc.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SwSpiApp.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/LedsApp.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/AdcApp.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/AdcApp.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/tmr0.h</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/lwmod.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/main.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/eusart1.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SystemSettings.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/GroupsCommon.h</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/include/pic18f45k22.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/tmr0.c</file>
             <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SyntApp.c</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/exp.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SyntApp.h</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/llmod.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SystemStatus.c</file>
-            <file>file:/C:/Program%20Files%20(x86)/Microchip/xc8/v1.45/sources/common/ftdiv.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/FlashApp.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/Porject_1631_mcc_config.mc3</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SwSpiApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/AdcApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/main.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/EusartApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/eusart1.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/DacApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SwSpiApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/pin_manager.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SystemSettings.c</file>
             <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/interrupt_manager.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/MessageFunctions.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SyntApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/DacApp.h</file>
             <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SystemCommon.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/FlashApp.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SystemStatus.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/MessageFunctions.h</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SevenSegmentApp.c</file>
-            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/mcc.c</file>
             <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SystemCommon.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SystemStatus.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/EusartApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SevenSegmentApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/LedsApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/FlashApp.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/memory.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/MessageFunctions.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/FlashApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/GroupsCommon.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/mcc.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/LedsApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/AdcApp.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/MessageFunctions.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SystemStatus.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/Porject_1631_mcc_config.mc3</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/tmr0.c</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/tmr0.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/SytstemSettings.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/adc.h</file>
+            <file>file:/C:/Software_projects/ABMicrowaves/Projects/PIC/Project_1531/mcc_generated_files/memory.h</file>
         </group>
     </open-files>
 </project-private>

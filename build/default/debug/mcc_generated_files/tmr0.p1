@@ -6828,9 +6828,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 [e :U 853 ]
 [; ;tmr0.c: 148: }
-[; ;tmr0.c: 149: if ((CountCallBack % 1300) == 0)
+[; ;tmr0.c: 149: if ((CountCallBack % 800) == 0)
 "149
-[e $ ! == % F7016 -> -> 1300 `i `ui -> -> 0 `i `ui 854  ]
+[e $ ! == % F7016 -> -> 800 `i `ui -> -> 0 `i `ui 854  ]
 [; ;tmr0.c: 150: {
 "150
 {

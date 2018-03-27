@@ -69,7 +69,7 @@ void AdcConvert()
     {
         adc_result_t _adcResult = ADC_GetConversion(channelArr[channel]);
         adcRes = (_adcResult/pow(2,ADC_BIT_SIZE))*VDD;
-        FlashSampleWrite(adcRes, 1);
+        
     }
 }
 // </editor-fold>

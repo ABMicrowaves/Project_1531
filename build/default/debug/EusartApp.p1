@@ -2,10 +2,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 "25 AdcApp.h
 [c E7146 4 5 6 7 8 9 10 13 25 29 30 31 .. ]
 [n E7146 . ADC_RA5 ADC_RE0 ADC_RE1 ADC_RE2 ADC_RB2 ADC_RB3 ADC_RB1 ADC_RB5 ADC_RD5 channel_CTMU channel_DAC channel_FVRBuf2  ]
-[v F7295 `(v ~T0 @X0 0 tf ]
+[v F7296 `(v ~T0 @X0 0 tf ]
 "28 MessageFunctions.h
-[c E7201 16 17 18 19 20 21 33 34 50 64 65 66 67 68 69 70 71 72 73 81 82 83 84 85 97 98 .. ]
-[n E7201 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION ADC_CHANNEL_MODE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA SYNTH_REQ_ANTHER_TX_REG SYNTH_REQ_ANTHER_RX_REG FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE DAC_READ_VALUE  ]
+[c E7201 16 17 18 19 20 21 33 34 50 51 64 65 66 67 68 69 70 71 72 73 81 82 83 84 85 97 98 .. ]
+[n E7201 . CONTROL_SYSTEM_START CONTROL_RESET_MCU CONTROL_PA1_SET CONTROL_PA2_SET CONTROL_TEST_LEDS CONTROL_KEEP_ALIVE STATUS_MCU_RUN_TIME STATUS_GET_MCU_FW_VERSION ADC_CHANNEL_MODE ADC_GET_SINGLE_SAMPLE SYNTH_TX_INIT_SET SYNTH_RX_INIT_SET SYNTH_DOWN_SET SYNTH_UP_SET SYNTH_UP_OPER SYNTH_DOWN_OPER SYNTH_UP_READ_DATA SYNTH_DOWN_READ_DATA SYNTH_REQ_ANTHER_TX_REG SYNTH_REQ_ANTHER_RX_REG FLASH_EREASE_MEMORY FLASH_READ_CONDITION FLASH_REQUEST_RAW_DATA FLASH_SEND_RAW_DATA FLASH_NO_SAMPLE_YET DAC_SET_VALUE DAC_READ_VALUE  ]
 "18
 [v _GroupControlMcu `(v ~T0 @X0 0 ef2`E7201`*uc ]
 "19
@@ -19,8 +19,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 "23
 [v _GroupDAC `(v ~T0 @X0 0 ef2`E7201`*uc ]
 "15 EusartApp.c
-[c E7590 0 1 2 3 4 5 6 7 .. ]
-[n E7590 . START_RX_MESSAGE_READ FIND_MAGIC READ_GROUP READ_REQUEST READ_DATA_SIZE READ_DATA CHECK_CRC JUMP_FUNCTION  ]
+[c E7591 0 1 2 3 4 5 6 7 .. ]
+[n E7591 . START_RX_MESSAGE_READ FIND_MAGIC READ_GROUP READ_REQUEST READ_DATA_SIZE READ_DATA CHECK_CRC JUMP_FUNCTION  ]
 "16
 [c E7193 1 2 3 4 5 6 .. ]
 [n E7193 . CONTROL_MSG MCU_STATUS_VERSION_MSG ADC_MSG SYNTH_MSG FLASH_MSG DAC_MSG  ]
@@ -6763,44 +6763,45 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;GroupsCommon.h: 54: STATUS_MCU_RUN_TIME = 0x21,
 [; ;GroupsCommon.h: 55: STATUS_GET_MCU_FW_VERSION = 0x22,
 [; ;GroupsCommon.h: 58: ADC_CHANNEL_MODE = 0x32,
-[; ;GroupsCommon.h: 61: SYNTH_TX_INIT_SET = 0x40,
-[; ;GroupsCommon.h: 62: SYNTH_RX_INIT_SET = 0x41,
-[; ;GroupsCommon.h: 63: SYNTH_DOWN_SET = 0x42,
-[; ;GroupsCommon.h: 64: SYNTH_UP_SET = 0x43,
-[; ;GroupsCommon.h: 65: SYNTH_UP_OPER = 0x44,
-[; ;GroupsCommon.h: 66: SYNTH_DOWN_OPER = 0x45,
-[; ;GroupsCommon.h: 67: SYNTH_UP_READ_DATA = 0x46,
-[; ;GroupsCommon.h: 68: SYNTH_DOWN_READ_DATA = 0x47,
-[; ;GroupsCommon.h: 69: SYNTH_REQ_ANTHER_TX_REG = 0x48,
-[; ;GroupsCommon.h: 70: SYNTH_REQ_ANTHER_RX_REG = 0x49,
-[; ;GroupsCommon.h: 73: FLASH_EREASE_MEMORY = 0x51,
-[; ;GroupsCommon.h: 74: FLASH_READ_CONDITION = 0x52,
-[; ;GroupsCommon.h: 75: FLASH_REQUEST_RAW_DATA = 0x53,
-[; ;GroupsCommon.h: 76: FLASH_SEND_RAW_DATA = 0x54,
-[; ;GroupsCommon.h: 77: FLASH_NO_SAMPLE_YET = 0x55,
-[; ;GroupsCommon.h: 80: DAC_SET_VALUE = 0x61,
-[; ;GroupsCommon.h: 81: DAC_READ_VALUE = 0x62,
-[; ;GroupsCommon.h: 82: }MSG_REQUEST;
+[; ;GroupsCommon.h: 59: ADC_GET_SINGLE_SAMPLE = 0x33,
+[; ;GroupsCommon.h: 62: SYNTH_TX_INIT_SET = 0x40,
+[; ;GroupsCommon.h: 63: SYNTH_RX_INIT_SET = 0x41,
+[; ;GroupsCommon.h: 64: SYNTH_DOWN_SET = 0x42,
+[; ;GroupsCommon.h: 65: SYNTH_UP_SET = 0x43,
+[; ;GroupsCommon.h: 66: SYNTH_UP_OPER = 0x44,
+[; ;GroupsCommon.h: 67: SYNTH_DOWN_OPER = 0x45,
+[; ;GroupsCommon.h: 68: SYNTH_UP_READ_DATA = 0x46,
+[; ;GroupsCommon.h: 69: SYNTH_DOWN_READ_DATA = 0x47,
+[; ;GroupsCommon.h: 70: SYNTH_REQ_ANTHER_TX_REG = 0x48,
+[; ;GroupsCommon.h: 71: SYNTH_REQ_ANTHER_RX_REG = 0x49,
+[; ;GroupsCommon.h: 74: FLASH_EREASE_MEMORY = 0x51,
+[; ;GroupsCommon.h: 75: FLASH_READ_CONDITION = 0x52,
+[; ;GroupsCommon.h: 76: FLASH_REQUEST_RAW_DATA = 0x53,
+[; ;GroupsCommon.h: 77: FLASH_SEND_RAW_DATA = 0x54,
+[; ;GroupsCommon.h: 78: FLASH_NO_SAMPLE_YET = 0x55,
+[; ;GroupsCommon.h: 81: DAC_SET_VALUE = 0x61,
+[; ;GroupsCommon.h: 82: DAC_READ_VALUE = 0x62,
+[; ;GroupsCommon.h: 83: }MSG_REQUEST;
 [; ;SystemStatus.h: 45: void GetMcuFwVersion();;
 [; ;SystemStatus.h: 47: void SetMcuRunTime();
 [; ;SystemStatus.h: 48: void GetMcuRunTime();
 [; ;SystemStatus.h: 49: void ClearMcuRunTime();
 [; ;SystemStatus.h: 50: void keepAliveSignalUart(void);
 [; ;LedsApp.h: 22: typedef enum
-[; ;LedsApp.h: 24: {
-[; ;LedsApp.h: 25: OK_START_SYSTEM = 0x3,
-[; ;LedsApp.h: 26: } LED_OK_INTICATION;
-[; ;LedsApp.h: 28: typedef enum
-[; ;LedsApp.h: 30: {
-[; ;LedsApp.h: 31: FAIL_UART_ACK_NOT_RECIEVE = 0x2,
-[; ;LedsApp.h: 32: FAIL_FLASH_MORE_THEN_HELF = 0x2,
-[; ;LedsApp.h: 33: FAIL_SYNTH_RX_LATCH = 0x2,
-[; ;LedsApp.h: 34: FAIL_SYNTH_TX_LATCH = 0x2,
-[; ;LedsApp.h: 35: } LED_ERR_INTICATION;
-[; ;LedsApp.h: 37: void testLeds();
-[; ;LedsApp.h: 38: void BlinkErrorLeds(LED_OK_INTICATION state);
-[; ;LedsApp.h: 39: void BlinkOkLeds(LED_ERR_INTICATION state);
-[; ;LedsApp.h: 40: void keepAliveSignalLed(void);
+[; ;LedsApp.h: 25: {
+[; ;LedsApp.h: 26: OK_START_SYSTEM = 0x3,
+[; ;LedsApp.h: 27: } LED_OK_INTICATION;
+[; ;LedsApp.h: 29: typedef enum
+[; ;LedsApp.h: 31: {
+[; ;LedsApp.h: 32: FAIL_UART_ACK_NOT_RECIEVE = 0x1,
+[; ;LedsApp.h: 33: FAIL_FLASH_MORE_THEN_HELF = 0x2,
+[; ;LedsApp.h: 34: FAIL_SYNTH_RX_LATCH = 0x3,
+[; ;LedsApp.h: 35: FAIL_SYNTH_TX_LATCH = 0x4,
+[; ;LedsApp.h: 36: } LED_ERR_INTICATION;
+[; ;LedsApp.h: 38: void testLeds();
+[; ;LedsApp.h: 39: void BlinkErrorLeds(LED_OK_INTICATION state);
+[; ;LedsApp.h: 40: void BlinkOkLeds(LED_ERR_INTICATION state);
+[; ;LedsApp.h: 41: void keepAliveSignalLed(void);
 [; ;AdcApp.h: 18: typedef enum
 [; ;AdcApp.h: 19: {
 [; ;AdcApp.h: 20: CIRCULAR = 0x0,
@@ -6859,21 +6860,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 22: void GroupFlashMemory(MSG_REQUEST request, char* data);
 [; ;MessageFunctions.h: 23: void GroupDAC(MSG_REQUEST request, char* data);
 "26 MessageFunctions.h
-[v _groupsArray `*F7295 ~T0 @X0 -> 6 `i e ]
+[v _groupsArray `*F7296 ~T0 @X0 -> 6 `i e ]
 [i _groupsArray
 :U ..
 "28
--> &U _GroupControlMcu `*F7295
+-> &U _GroupControlMcu `*F7296
 "29
--> &U _GroupStatusAndVersion `*F7295
+-> &U _GroupStatusAndVersion `*F7296
 "30
--> &U _GroupAdc `*F7295
+-> &U _GroupAdc `*F7296
 "31
--> &U _GroupSynthesizers `*F7295
+-> &U _GroupSynthesizers `*F7296
 "32
--> &U _GroupFlashMemory `*F7295
+-> &U _GroupFlashMemory `*F7296
 "33
--> &U _GroupDAC `*F7295
+-> &U _GroupDAC `*F7296
 ..
 ]
 [; ;MessageFunctions.h: 26: void (*groupsArray[(6)])() =
@@ -6886,7 +6887,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 33: GroupDAC,
 [; ;MessageFunctions.h: 34: };
 "27 SyntApp.h
-[v _SYNTH_REGS `Cul ~T0 @X0 -> 13 `i e ]
+[v _SYNTH_REGS `Cul ~T0 @X0 -> 14 `i e ]
 [i _SYNTH_REGS
 :U ..
 "29
@@ -6917,7 +6918,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 2098816 `l `ul
 ..
 ]
-[; ;SyntApp.h: 27: const uint32_t SYNTH_REGS[13] =
+[; ;SyntApp.h: 27: const uint32_t SYNTH_REGS[14] =
 [; ;SyntApp.h: 28: {
 [; ;SyntApp.h: 29: 0x1041C,
 [; ;SyntApp.h: 30: 0x61300B,
@@ -6934,7 +6935,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 41: 0x200680
 [; ;SyntApp.h: 42: };
 "44
-[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 13 `i e ]
+[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 14 `i e ]
 [i _SYNTH_ADDRES
 :U ..
 "47
@@ -6960,12 +6961,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 "57
 -> -> 24 `i `uc
 "58
--> -> 0 `i `uc
+-> -> 28 `i `uc
 "59
 -> -> 0 `i `uc
 ..
 ]
-[; ;SyntApp.h: 44: const uint8_t SYNTH_ADDRES[13] =
+[; ;SyntApp.h: 44: const uint8_t SYNTH_ADDRES[14] =
 [; ;SyntApp.h: 45: {
 [; ;SyntApp.h: 47: 0x4,
 [; ;SyntApp.h: 48: 0x8,
@@ -6978,7 +6979,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 55: 0x00,
 [; ;SyntApp.h: 56: 0x00,
 [; ;SyntApp.h: 57: 0x18,
-[; ;SyntApp.h: 58: 0x00,
+[; ;SyntApp.h: 58: 0x1C,
 [; ;SyntApp.h: 59: 0x00,
 [; ;SyntApp.h: 60: };
 [; ;SyntApp.h: 62: typedef enum
@@ -7173,9 +7174,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;EusartApp.h: 33: void WriteUartMessage(char* dataBuf, int dataSize);
 [; ;EusartApp.h: 34: void SendAckMessage(MSG_GROUPS inGroup, MSG_REQUEST inRequest);
 "15 EusartApp.c
-[v _cState `E7590 ~T0 @X0 1 s ]
+[v _cState `E7591 ~T0 @X0 1 s ]
 [i _cState
-. `E7590 0
+. `E7591 0
 ]
 [; ;EusartApp.c: 15: static UART_READ_STATE cState = START_RX_MESSAGE_READ;
 "16
@@ -7253,7 +7254,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;EusartApp.c: 39: cState = FIND_MAGIC;
 "39
-[e = _cState . `E7590 1 ]
+[e = _cState . `E7591 1 ]
 "40
 }
 [e :U 856 ]
@@ -7290,7 +7291,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;EusartApp.c: 53: cState = READ_GROUP;
 "53
-[e = _cState . `E7590 2 ]
+[e = _cState . `E7591 2 ]
 "54
 }
 [e :U 859 ]
@@ -7307,7 +7308,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;EusartApp.c: 58: cState = START_RX_MESSAGE_READ;
 "58
-[e = _cState . `E7590 0 ]
+[e = _cState . `E7591 0 ]
 "59
 }
 [e :U 860 ]
@@ -7332,7 +7333,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = *U + &U _rxMsgQueue * -> -> -> 1 `i `ui `ux -> -> # *U &U _rxMsgQueue `ui `ux -> _group `uc ]
 [; ;EusartApp.c: 69: cState = READ_REQUEST;
 "69
-[e = _cState . `E7590 3 ]
+[e = _cState . `E7591 3 ]
 "70
 }
 [e :U 862 ]
@@ -7357,7 +7358,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = *U + &U _rxMsgQueue * -> -> -> 2 `i `ui `ux -> -> # *U &U _rxMsgQueue `ui `ux -> _request `uc ]
 [; ;EusartApp.c: 79: cState = READ_DATA_SIZE;
 "79
-[e = _cState . `E7590 4 ]
+[e = _cState . `E7591 4 ]
 "80
 }
 [e :U 864 ]
@@ -7388,7 +7389,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;EusartApp.c: 90: cState = CHECK_CRC;
 "90
-[e = _cState . `E7590 6 ]
+[e = _cState . `E7591 6 ]
 "91
 }
 [; ;EusartApp.c: 91: }
@@ -7401,7 +7402,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;EusartApp.c: 94: cState = READ_DATA;
 "94
-[e = _cState . `E7590 5 ]
+[e = _cState . `E7591 5 ]
 "95
 }
 [e :U 868 ]
@@ -7456,7 +7457,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;EusartApp.c: 112: }
 [; ;EusartApp.c: 114: cState = CHECK_CRC;
 "114
-[e = _cState . `E7590 6 ]
+[e = _cState . `E7591 6 ]
 "115
 }
 [e :U 870 ]
@@ -7487,7 +7488,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;EusartApp.c: 126: cState = JUMP_FUNCTION;
 "126
-[e = _cState . `E7590 7 ]
+[e = _cState . `E7591 7 ]
 "127
 }
 [; ;EusartApp.c: 127: }
@@ -7500,7 +7501,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;EusartApp.c: 130: cState = START_RX_MESSAGE_READ;
 "130
-[e = _cState . `E7590 0 ]
+[e = _cState . `E7591 0 ]
 "131
 }
 [e :U 878 ]
@@ -7520,7 +7521,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( *U *U + &U _groupsArray * -> -> - -> _group `i -> 1 `i `ui `ux -> -> # *U &U _groupsArray `ui `ux , -> _request `i &U _rxMsgData ]
 [; ;EusartApp.c: 137: cState = START_RX_MESSAGE_READ;
 "137
-[e = _cState . `E7590 0 ]
+[e = _cState . `E7591 0 ]
 [; ;EusartApp.c: 138: break;
 "138
 [e $U 853  ]
@@ -7530,14 +7531,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 853  ]
 "32
 [e :U 854 ]
-[e [\ _cState , $ . `E7590 0 855
- , $ . `E7590 1 857
- , $ . `E7590 2 861
- , $ . `E7590 3 863
- , $ . `E7590 4 865
- , $ . `E7590 5 869
- , $ . `E7590 6 875
- , $ . `E7590 7 879
+[e [\ _cState , $ . `E7591 0 855
+ , $ . `E7591 1 857
+ , $ . `E7591 2 861
+ , $ . `E7591 3 863
+ , $ . `E7591 4 865
+ , $ . `E7591 5 869
+ , $ . `E7591 6 875
+ , $ . `E7591 7 879
  853 ]
 "139
 [e :U 853 ]

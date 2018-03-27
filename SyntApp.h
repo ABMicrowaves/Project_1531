@@ -12,12 +12,12 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #include "SystemCommon.h"
 
 #define SYNTH_DELAY_BETWEEN_WORDS_MSEC      250
-#define NUM_OF_TOTAL_REGISTERS              13
-#define NUM_OF_UPDATE_REGISTERS             7
-#define NUM_SYNTH_FREQ_DATA_REGISTERS       6
-#define NUM_OF_UART_TX_UPDATE_REGS          4
+#define NUM_OF_TOTAL_REGISTERS              14
+#define NUM_OF_UPDATE_CYCLES                0x9
+
+#define NUM_OF_UART_TX_UPDATE_REGS          5
 #define NUM_OF_BYTES_UART_TX_UPDATE_REGS    5
-#define IDX_SYNTH_OPER_STATE_PLACE          NUM_OF_BYTES_UART_TX_UPDATE_REGS * NUM_OF_UART_TX_UPDATE_REGS
+#define IDX_SYNTH_OPER_STATE_PLACE          NUM_OF_BYTES_UART_TX_UPDATE_REGS * NUM_OF_UART_TX_UPDATE_REGS + 2
 
 #define SYNTH_READ_CONDITION_MAX_DATA_SIZE  IDX_SYNTH_OPER_STATE_PLACE - MSG_DATA_LOCATION
 #define SYNTH_READ_CONDITION_PACKET_SIZE    IDX_SYNTH_OPER_STATE_PLACE + 1 
@@ -34,7 +34,7 @@ const uint32_t SYNTH_REGS[NUM_OF_TOTAL_REGISTERS] =
     0x120000E7,     /* R07  */
     0x35006076,     /* R06  */
     0x800025,       /* R05  */
-    0x800BF84,     /* R04  */
+    0x800BF84,      /* R04  */
     0x3,            /* R03  */
     0x12,           /* R02  */
     0xC000001,      /* R01  */
@@ -55,7 +55,7 @@ const uint8_t SYNTH_ADDRES[NUM_OF_TOTAL_REGISTERS] =
     0x00,       // Reserved place  for REG 8
     0x00,       // Reserved place  for REG 9
     0x18,       // REG 10
-    0x00,       // Reserved place  for REG 11
+    0x1C,       // Store fRf value
     0x00,       // Reserved place  for REG 12
 };
 

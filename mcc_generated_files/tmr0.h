@@ -66,7 +66,7 @@
 */
 
 #define TMR0_INTERVAL_TIME_ONE_SEC_CLOCK        10
-#define TMR0_INTERVAL_TIME_SAMPLING             1300        // 1300 = 1.50 min
+#define TMR0_INTERVAL_TIME_SAMPLING             800        // 1300 = 1.50 min
 #define TMR0_INTERVAL_TIME_SYNTH_LOCK_DETECT    250         // 120 Sec
 #define TMR0_INTERVAL_TIME_KEEP_ALIVE           350         // 30 Sec.
 #define TMR0_MAX_TIME_TO_MEASURE                35000

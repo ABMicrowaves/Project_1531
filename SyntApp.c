@@ -74,9 +74,7 @@ void InitSynth(SPI_PERIPHERAL cType)
                 {
                     SWSPI_send_word(cType, EepromVal,3);
                 }
-            }
-            
-            
+            }    
         }
         else
         {
@@ -96,7 +94,7 @@ void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data)
     
     if(cType == SYNTH_TX)
     {
-        if(cntRegUpdateTx < NUM_OF_UPDATE_REGISTERS)
+        if(cntRegUpdateTx < NUM_OF_UPDATE_CYCLES)
         {        
             SWSPI_send_word(cType, retVal.num, 3);
             StoreIntInEeprom(retVal.num, EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[retVal.con], 4);
@@ -111,7 +109,7 @@ void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data)
     }
     else if(cType == SYNTH_RX)
     {
-        if(cntRegUpdateRx < NUM_OF_UPDATE_REGISTERS)
+        if(cntRegUpdateRx < NUM_OF_UPDATE_CYCLES)
         {
             SWSPI_send_word(cType, retVal.num, 3);
             StoreIntInEeprom(retVal.num, EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[retVal.con], 4);
@@ -180,6 +178,7 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data)
         eepromDataArray[1] = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[1], 4);
         eepromDataArray[2] = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[2], 4);
         eepromDataArray[3] = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[4], 4);
+        eepromDataArray[4] = ReadIntFromEeprom(EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[0xb], 4); // Get F_RF Value.
     }
     else if (cType == SYNTH_RX)
     {
@@ -188,6 +187,7 @@ void SynthReadData(SPI_PERIPHERAL cType, char* data)
         eepromDataArray[1] = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[1], 4);
         eepromDataArray[2] = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[2], 4);
         eepromDataArray[3] = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[4], 4);
+        eepromDataArray[4] = ReadIntFromEeprom(EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[0xb], 4); // Get F_RF Value.
     }
     
     for(regNum = 0; regNum < NUM_OF_UART_TX_UPDATE_REGS; regNum++)

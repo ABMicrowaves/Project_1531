@@ -8759,6 +8759,7 @@ STATUS_GET_MCU_FW_VERSION = 0x22,
 
 
 ADC_CHANNEL_MODE = 0x32,
+ADC_GET_SINGLE_SAMPLE = 0x33,
 
 
 SYNTH_TX_INIT_SET = 0x40,
@@ -8795,6 +8796,7 @@ void keepAliveSignalUart(void);
 # 22 "LedsApp.h"
 typedef enum
 
+
 {
 OK_START_SYSTEM = 0x3,
 } LED_OK_INTICATION;
@@ -8802,10 +8804,10 @@ OK_START_SYSTEM = 0x3,
 typedef enum
 
 {
-FAIL_UART_ACK_NOT_RECIEVE = 0x2,
+FAIL_UART_ACK_NOT_RECIEVE = 0x1,
 FAIL_FLASH_MORE_THEN_HELF = 0x2,
-FAIL_SYNTH_RX_LATCH = 0x2,
-FAIL_SYNTH_TX_LATCH = 0x2,
+FAIL_SYNTH_RX_LATCH = 0x3,
+FAIL_SYNTH_TX_LATCH = 0x4,
 } LED_ERR_INTICATION;
 
 void testLeds();
@@ -9096,7 +9098,7 @@ void ResetCpld(void);
 void SendSystemStartAck(void);
 
 # 27 "SyntApp.h"
-const uint32_t SYNTH_REGS[13] =
+const uint32_t SYNTH_REGS[14] =
 {
 0x1041C,
 0x61300B,
@@ -9113,7 +9115,7 @@ const uint32_t SYNTH_REGS[13] =
 0x200680
 };
 
-const uint8_t SYNTH_ADDRES[13] =
+const uint8_t SYNTH_ADDRES[14] =
 {
 
 0x4,
@@ -9127,7 +9129,7 @@ const uint8_t SYNTH_ADDRES[13] =
 0x00,
 0x00,
 0x18,
-0x00,
+0x1C,
 0x00,
 };
 
@@ -9184,9 +9186,9 @@ uint8_t regNum = 0;
 uint32_t EepromVal = 0x0;
 
 
-for(uint8_t idx = 0; idx < 13; idx++)
+for(uint8_t idx = 0; idx < 14; idx++)
 {
-regNum = 13 - idx - 1;
+regNum = 14 - idx - 1;
 if(regNum == 0x0 || regNum == 0x1 || regNum == 0x2 || regNum == 0x4 || regNum == 0x6 || regNum == 0xA)
 {
 if(cType == SYNTH_TX)
@@ -9215,8 +9217,6 @@ else
 SWSPI_send_word(cType, EepromVal,3);
 }
 }
-
-
 }
 else
 {
@@ -9236,7 +9236,7 @@ retVal = GetIntFromUartData(10, data);
 
 if(cType == SYNTH_TX)
 {
-if(cntRegUpdateTx < 7)
+if(cntRegUpdateTx < 0x9)
 {
 SWSPI_send_word(cType, retVal.num, 3);
 StoreIntInEeprom(retVal.num, (0) | SYNTH_ADDRES[retVal.con], 4);
@@ -9251,7 +9251,7 @@ SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
 }
 else if(cType == SYNTH_RX)
 {
-if(cntRegUpdateRx < 7)
+if(cntRegUpdateRx < 0x9)
 {
 SWSPI_send_word(cType, retVal.num, 3);
 StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
@@ -9302,16 +9302,16 @@ SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_UP_OPER);
 
 void SynthReadData(SPI_PERIPHERAL cType, char* data)
 {
-uint32_t eepromDataArray[4];
+uint32_t eepromDataArray[5];
 ZeroArray(eepromDataArray, sizeof(eepromDataArray));
 uint8_t regNum = 0, byteNum = 0;
-char TxMsg[5 * 4 + 1 + 1];
-ZeroArray(TxMsg, 5 * 4 + 1 + 1);
+char TxMsg[5 * 5 + 2 + 1 + 1];
+ZeroArray(TxMsg, 5 * 5 + 2 + 1 + 1);
 
 
 TxMsg[(0)] = (0x24);
 TxMsg[(1)] = SYNTH_MSG;
-TxMsg[(3)] = 5 * 4 - (0x4);
+TxMsg[(3)] = 5 * 5 + 2 - (0x4);
 
 if(cType == SYNTH_TX)
 {
@@ -9320,6 +9320,7 @@ eepromDataArray[0] = ReadIntFromEeprom((0) | SYNTH_ADDRES[0], 4);
 eepromDataArray[1] = ReadIntFromEeprom((0) | SYNTH_ADDRES[1], 4);
 eepromDataArray[2] = ReadIntFromEeprom((0) | SYNTH_ADDRES[2], 4);
 eepromDataArray[3] = ReadIntFromEeprom((0) | SYNTH_ADDRES[4], 4);
+eepromDataArray[4] = ReadIntFromEeprom((0) | SYNTH_ADDRES[0xb], 4);
 }
 else if (cType == SYNTH_RX)
 {
@@ -9328,20 +9329,21 @@ eepromDataArray[0] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[0], 4);
 eepromDataArray[1] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[1], 4);
 eepromDataArray[2] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[2], 4);
 eepromDataArray[3] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[4], 4);
+eepromDataArray[4] = ReadIntFromEeprom((0x20) | SYNTH_ADDRES[0xb], 4);
 }
 
-for(regNum = 0; regNum < 4; regNum++)
+for(regNum = 0; regNum < 5; regNum++)
 {
 for(byteNum = 0; byteNum < (5); byteNum++)
 {
 uint8_t data = make8(eepromDataArray[regNum], byteNum);
-TxMsg[(0x4) + (4)*regNum + byteNum] = data;
+TxMsg[(0x4) + (5)*regNum + byteNum] = data;
 }
 }
 
-TxMsg[5 * 4] = cType == SYNTH_TX ? SynthTxOper : SynthRxOper;
-TxMsg[5 * 4 + 1] = crc8(TxMsg, 5 * 4 + 1);
-WriteUartMessage(TxMsg, 5 * 4 + 1 + 1);
+TxMsg[5 * 5 + 2] = cType == SYNTH_TX ? SynthTxOper : SynthRxOper;
+TxMsg[5 * 5 + 2 + 1] = crc8(TxMsg, 5 * 5 + 2 + 1);
+WriteUartMessage(TxMsg, 5 * 5 + 2 + 1 + 1);
 }
 
 # 212

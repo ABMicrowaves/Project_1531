@@ -8759,6 +8759,7 @@ STATUS_GET_MCU_FW_VERSION = 0x22,
 
 
 ADC_CHANNEL_MODE = 0x32,
+ADC_GET_SINGLE_SAMPLE = 0x33,
 
 
 SYNTH_TX_INIT_SET = 0x40,
@@ -8795,6 +8796,7 @@ void keepAliveSignalUart(void);
 # 22 "LedsApp.h"
 typedef enum
 
+
 {
 OK_START_SYSTEM = 0x3,
 } LED_OK_INTICATION;
@@ -8802,10 +8804,10 @@ OK_START_SYSTEM = 0x3,
 typedef enum
 
 {
-FAIL_UART_ACK_NOT_RECIEVE = 0x2,
+FAIL_UART_ACK_NOT_RECIEVE = 0x1,
 FAIL_FLASH_MORE_THEN_HELF = 0x2,
-FAIL_SYNTH_RX_LATCH = 0x2,
-FAIL_SYNTH_TX_LATCH = 0x2,
+FAIL_SYNTH_RX_LATCH = 0x3,
+FAIL_SYNTH_TX_LATCH = 0x4,
 } LED_ERR_INTICATION;
 
 void testLeds();
@@ -8859,7 +8861,7 @@ GroupDAC,
 };
 
 # 27 "SyntApp.h"
-const uint32_t SYNTH_REGS[13] =
+const uint32_t SYNTH_REGS[14] =
 {
 0x1041C,
 0x61300B,
@@ -8876,7 +8878,7 @@ const uint32_t SYNTH_REGS[13] =
 0x200680
 };
 
-const uint8_t SYNTH_ADDRES[13] =
+const uint8_t SYNTH_ADDRES[14] =
 {
 
 0x4,
@@ -8890,7 +8892,7 @@ const uint8_t SYNTH_ADDRES[13] =
 0x00,
 0x00,
 0x18,
-0x00,
+0x1C,
 0x00,
 };
 

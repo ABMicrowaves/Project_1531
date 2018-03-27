@@ -20,6 +20,7 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #define GREEN_LED LATCbits.LATC0
 
 typedef enum
+
 // OK system operation state:
 {    
     OK_START_SYSTEM             = 0x3,            
@@ -28,10 +29,10 @@ typedef enum
 typedef enum
 // Fail system operation state:
 {
-    FAIL_UART_ACK_NOT_RECIEVE   = 0x2,
+    FAIL_UART_ACK_NOT_RECIEVE   = 0x1,
     FAIL_FLASH_MORE_THEN_HELF   = 0x2,
-    FAIL_SYNTH_RX_LATCH         = 0x2,
-    FAIL_SYNTH_TX_LATCH         = 0x2,
+    FAIL_SYNTH_RX_LATCH         = 0x3,
+    FAIL_SYNTH_TX_LATCH         = 0x4,
 } LED_ERR_INTICATION;
 
 void testLeds();

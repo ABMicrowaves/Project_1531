@@ -8673,7 +8673,7 @@ if ((CountCallBack % 250) == 0)
 {
 Timer0_SynthLd = 1;
 }
-if ((CountCallBack % 1300) == 0)
+if ((CountCallBack % 800) == 0)
 {
 Timer0_Sampling = 1;
 }
