@@ -92,6 +92,11 @@ void UpdateSynthFreq(SPI_PERIPHERAL cType, char* data)
     
     retVal = GetIntFromUartData(10, data);
     
+    if(retVal.con == 0xb)
+    {
+        if(cType == SYNTH_TX) StoreIntInEeprom(retVal.num, EEPROM_SYNTH_TX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[retVal.con], 4);
+        else if(cType == SYNTH_RX) StoreIntInEeprom(retVal.num, EEPROM_SYNTH_RX_REGS_ADDRESS_OFSEET | SYNTH_ADDRES[retVal.con], 4);
+    }
     if(cType == SYNTH_TX)
     {
         if(cntRegUpdateTx < NUM_OF_UPDATE_CYCLES)

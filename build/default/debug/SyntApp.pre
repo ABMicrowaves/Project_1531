@@ -9098,7 +9098,7 @@ void ResetCpld(void);
 void SendSystemStartAck(void);
 
 # 27 "SyntApp.h"
-const uint32_t SYNTH_REGS[14] =
+const uint32_t SYNTH_REGS[13] =
 {
 0x1041C,
 0x61300B,
@@ -9115,7 +9115,7 @@ const uint32_t SYNTH_REGS[14] =
 0x200680
 };
 
-const uint8_t SYNTH_ADDRES[14] =
+const uint8_t SYNTH_ADDRES[13] =
 {
 
 0x4,
@@ -9186,9 +9186,9 @@ uint8_t regNum = 0;
 uint32_t EepromVal = 0x0;
 
 
-for(uint8_t idx = 0; idx < 14; idx++)
+for(uint8_t idx = 0; idx < 13; idx++)
 {
-regNum = 14 - idx - 1;
+regNum = 13 - idx - 1;
 if(regNum == 0x0 || regNum == 0x1 || regNum == 0x2 || regNum == 0x4 || regNum == 0x6 || regNum == 0xA)
 {
 if(cType == SYNTH_TX)
@@ -9234,9 +9234,14 @@ INT_VAL retVal;
 
 retVal = GetIntFromUartData(10, data);
 
+if(retVal.con == 0xb)
+{
+if(cType == SYNTH_TX) StoreIntInEeprom(retVal.num, (0) | SYNTH_ADDRES[retVal.con], 4);
+else if(cType == SYNTH_RX) StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
+}
 if(cType == SYNTH_TX)
 {
-if(cntRegUpdateTx < 0x9)
+if(cntRegUpdateTx < 0x7)
 {
 SWSPI_send_word(cType, retVal.num, 3);
 StoreIntInEeprom(retVal.num, (0) | SYNTH_ADDRES[retVal.con], 4);
@@ -9251,7 +9256,7 @@ SendAckMessage((MSG_GROUPS)SYNTH_MSG, (MSG_REQUEST)SYNTH_DOWN_SET);
 }
 else if(cType == SYNTH_RX)
 {
-if(cntRegUpdateRx < 0x9)
+if(cntRegUpdateRx < 0x7)
 {
 SWSPI_send_word(cType, retVal.num, 3);
 StoreIntInEeprom(retVal.num, (0x20) | SYNTH_ADDRES[retVal.con], 4);
@@ -9346,7 +9351,7 @@ TxMsg[5 * 5 + 2 + 1] = crc8(TxMsg, 5 * 5 + 2 + 1);
 WriteUartMessage(TxMsg, 5 * 5 + 2 + 1 + 1);
 }
 
-# 212
+# 217
 void SynthLdDetect(void)
 {
 

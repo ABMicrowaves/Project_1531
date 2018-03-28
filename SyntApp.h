@@ -12,8 +12,8 @@ Author: RoeeZ (Comm-IT).                                                    ****
 #include "SystemCommon.h"
 
 #define SYNTH_DELAY_BETWEEN_WORDS_MSEC      250
-#define NUM_OF_TOTAL_REGISTERS              14
-#define NUM_OF_UPDATE_CYCLES                0x9
+#define NUM_OF_TOTAL_REGISTERS              13
+#define NUM_OF_UPDATE_CYCLES                0x7
 
 #define NUM_OF_UART_TX_UPDATE_REGS          5
 #define NUM_OF_BYTES_UART_TX_UPDATE_REGS    5

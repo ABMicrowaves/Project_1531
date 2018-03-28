@@ -8823,7 +8823,7 @@ void InitAdcApplicationMgr();
 void AdcConvert();
 
 # 27 "SyntApp.h"
-const uint32_t SYNTH_REGS[14] =
+const uint32_t SYNTH_REGS[13] =
 {
 0x1041C,
 0x61300B,
@@ -8840,7 +8840,7 @@ const uint32_t SYNTH_REGS[14] =
 0x200680
 };
 
-const uint8_t SYNTH_ADDRES[14] =
+const uint8_t SYNTH_ADDRES[13] =
 {
 
 0x4,

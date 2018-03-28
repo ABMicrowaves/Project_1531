@@ -6860,7 +6860,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;MessageFunctions.h: 33: GroupDAC,
 [; ;MessageFunctions.h: 34: };
 "27 SyntApp.h
-[v _SYNTH_REGS `Cul ~T0 @X0 -> 14 `i e ]
+[v _SYNTH_REGS `Cul ~T0 @X0 -> 13 `i e ]
 [i _SYNTH_REGS
 :U ..
 "29
@@ -6891,7 +6891,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 2098816 `l `ul
 ..
 ]
-[; ;SyntApp.h: 27: const uint32_t SYNTH_REGS[14] =
+[; ;SyntApp.h: 27: const uint32_t SYNTH_REGS[13] =
 [; ;SyntApp.h: 28: {
 [; ;SyntApp.h: 29: 0x1041C,
 [; ;SyntApp.h: 30: 0x61300B,
@@ -6908,7 +6908,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;SyntApp.h: 41: 0x200680
 [; ;SyntApp.h: 42: };
 "44
-[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 14 `i e ]
+[v _SYNTH_ADDRES `Cuc ~T0 @X0 -> 13 `i e ]
 [i _SYNTH_ADDRES
 :U ..
 "47
@@ -6939,7 +6939,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ..
 ]
-[; ;SyntApp.h: 44: const uint8_t SYNTH_ADDRES[14] =
+[; ;SyntApp.h: 44: const uint8_t SYNTH_ADDRES[13] =
 [; ;SyntApp.h: 45: {
 [; ;SyntApp.h: 47: 0x4,
 [; ;SyntApp.h: 48: 0x8,

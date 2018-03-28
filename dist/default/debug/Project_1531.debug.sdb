@@ -356,7 +356,7 @@ SYNTH_TX 0
 SYNTH_RX 1
 EXT_DAC 2
 ]
-"102
+"107
 [e E7108 . `uc
 CONTROL_MSG 1
 MCU_STATUS_VERSION_MSG 2
@@ -365,7 +365,7 @@ SYNTH_MSG 4
 FLASH_MSG 5
 DAC_MSG 6
 ]
-"225
+"230
 [e E7151 . `uc
 OK_START_SYSTEM 3
 ]
@@ -375,7 +375,7 @@ FAIL_FLASH_MORE_THEN_HELF 2
 FAIL_SYNTH_RX_LATCH 3
 FAIL_SYNTH_TX_LATCH 4
 ]
-"227
+"232
 [e E7591 . `uc
 UNLOCK 0
 LOCK 1
@@ -917,11 +917,11 @@ OK_START_SYSTEM 3
 [v _InitSynth InitSynth `(v  1 e 1 0 ]
 "89
 [v _UpdateSynthFreq UpdateSynthFreq `(v  1 e 1 0 ]
-"130
+"135
 [v _SetSynthOper SetSynthOper `(v  1 e 1 0 ]
-"161
+"166
 [v _SynthReadData SynthReadData `(v  1 e 1 0 ]
-"212
+"217
 [v _SynthLdDetect SynthLdDetect `(v  1 e 1 0 ]
 "13 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemCommon.c
 [v _crc8 crc8 `(uc  1 e 1 0 ]
@@ -1521,9 +1521,9 @@ OK_START_SYSTEM 3
 "24
 [v _synthLdTxArrayCnt synthLdTxArrayCnt `uc  1 e 1 0 ]
 "27 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.h
-[v _SYNTH_REGS SYNTH_REGS `C[14]ul  1 e 56 0 ]
+[v _SYNTH_REGS SYNTH_REGS `C[13]ul  1 e 52 0 ]
 "44
-[v _SYNTH_ADDRES SYNTH_ADDRES `C[14]uc  1 e 14 0 ]
+[v _SYNTH_ADDRES SYNTH_ADDRES `C[13]uc  1 e 13 0 ]
 "70
 [v _synthLdRxArray synthLdRxArray `VE[12]uc  1 e 12 0 ]
 "71
@@ -1613,36 +1613,36 @@ OK_START_SYSTEM 3
 [v UpdateSynthFreq@data data `*.2uc  1 p 2 42 ]
 "93
 [v UpdateSynthFreq@cType cType `E1  1 a 1 44 ]
-"125
+"130
 } 0
-"161
+"166
 [v _SynthReadData SynthReadData `(v  1 e 1 0 ]
 {
 [v SynthReadData@cType cType `E1  1 a 1 wreg ]
-"196
+"201
 [v SynthReadData@data_987 data `uc  1 a 1 29 ]
-"166
+"171
 [v SynthReadData@TxMsg TxMsg `[29]uc  1 a 29 0 ]
-"163
+"168
 [v SynthReadData@eepromDataArray eepromDataArray `[5]ul  1 a 20 32 ]
-"165
+"170
 [v SynthReadData@byteNum byteNum `uc  1 a 1 54 ]
 [v SynthReadData@regNum regNum `uc  1 a 1 53 ]
-"161
+"166
 [v SynthReadData@cType cType `E1  1 a 1 wreg ]
 [v SynthReadData@data data `*.2uc  1 p 2 104 ]
-"164
+"169
 [v SynthReadData@cType cType `E1  1 a 1 52 ]
-"205
+"210
 } 0
-"130
+"135
 [v _SetSynthOper SetSynthOper `(v  1 e 1 0 ]
 {
 [v SetSynthOper@cType cType `E1  1 a 1 wreg ]
 [v SetSynthOper@cType cType `E1  1 a 1 wreg ]
-"132
+"137
 [v SetSynthOper@cType cType `E1  1 a 1 111 ]
-"158
+"163
 } 0
 "68 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SystemStatus.c
 [v _GetMcuRunTime GetMcuRunTime `(v  1 e 1 0 ]
@@ -1859,10 +1859,10 @@ OK_START_SYSTEM 3
 {
 "38
 } 0
-"212 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
+"217 C:\Software_projects\ABMicrowaves\Projects\PIC\Project_1531\SyntApp.c
 [v _SynthLdDetect SynthLdDetect `(v  1 e 1 0 ]
 {
-"257
+"262
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\common\awmod.c
 [v ___awmod __awmod `(i  1 e 2 0 ]
