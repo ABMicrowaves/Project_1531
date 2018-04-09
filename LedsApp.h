@@ -23,7 +23,7 @@ typedef enum
 
 // OK system operation state:
 {    
-    OK_START_SYSTEM             = 0x3,            
+    OK_START_SYSTEM             = 0x3,
 } LED_OK_INTICATION;
 
 typedef enum
@@ -41,4 +41,3 @@ void BlinkOkLeds(LED_ERR_INTICATION state);
 void keepAliveSignalLed(void);
 
 #endif	/* LEDSAPP_H */
-
